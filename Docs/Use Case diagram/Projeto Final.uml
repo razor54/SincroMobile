@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_pHS3YDTOEeiztekli-76ig" name="Projeto Final">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_pdzS4DTOEeiztekli-76ig">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_Kh4tUDUbEeiOQ9nGrchEdg" name="Cidadão"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_VuYlgDUcEeiOQ9nGrchEdg" name="Polícia"/>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_H2dhgDUeEeiOQ9nGrchEdg" name="Excesso de Velocidade"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_S7t-sDUeEeiOQ9nGrchEdg" client="_Kh4tUDUbEeiOQ9nGrchEdg" supplier="_H2dhgDUeEeiOQ9nGrchEdg"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_YBPuEDUeEeiOQ9nGrchEdg" name="Sistema Da rede Sincro">
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_ibYxsDUeEeiOQ9nGrchEdg" name="Evento"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_LoMRQDUfEeiOQ9nGrchEdg" name="comunica" client="_ibYxsDUeEeiOQ9nGrchEdg" supplier="_D61kADUfEeiOQ9nGrchEdg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_qJfF0DUeEeiOQ9nGrchEdg" name="Gera" client="_H2dhgDUeEeiOQ9nGrchEdg" supplier="_ibYxsDUeEeiOQ9nGrchEdg"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_vJHokDUeEeiOQ9nGrchEdg" name="Confirma" client="_VuYlgDUcEeiOQ9nGrchEdg" supplier="_ibYxsDUeEeiOQ9nGrchEdg"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_xzlDsDUeEeiOQ9nGrchEdg" name="Sistema Do Projeto(SINCRO Mobile)">
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_D61kADUfEeiOQ9nGrchEdg" name="Gerir o evento"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_W-c-4DUfEeiOQ9nGrchEdg" name="Envio" client="_Tu1oQDUfEeiOQ9nGrchEdg" supplier="_D61kADUfEeiOQ9nGrchEdg"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_h9CMUDUfEeiOQ9nGrchEdg" name="Paga"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_BWh-wDUgEeiOQ9nGrchEdg" name="Envio do pagamento" client="_h9CMUDUfEeiOQ9nGrchEdg" supplier="_4TDMEDUfEeiOQ9nGrchEdg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:UseCase" xmi:id="_Tu1oQDUfEeiOQ9nGrchEdg" name="Envio da notificação"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_abl0IDUfEeiOQ9nGrchEdg" name="Recebe" client="_Tu1oQDUfEeiOQ9nGrchEdg" supplier="_Kh4tUDUbEeiOQ9nGrchEdg"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_kL2NQDUfEeiOQ9nGrchEdg" client="_Kh4tUDUbEeiOQ9nGrchEdg" supplier="_h9CMUDUfEeiOQ9nGrchEdg"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_6LR5ADUfEeiOQ9nGrchEdg" name="Entidade Governamental">
+    <packagedElement xmi:type="uml:Actor" xmi:id="_4TDMEDUfEeiOQ9nGrchEdg" name="Governo"/>
+  </packagedElement>
+</uml:Model>
