@@ -1,2 +1,2 @@
-# project_server
+# project_repo
 Final Project Repository
