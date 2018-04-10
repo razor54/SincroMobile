@@ -1,2 +1,2 @@
-# project_repo
-Final Project Repository
+# SINCRO Mobile App
+![](README/18AD366F-A33A-4B9B-957B-48557194E72A.png)
