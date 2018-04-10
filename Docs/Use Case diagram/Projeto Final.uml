@@ -6,14 +6,14 @@
   <packagedElement xmi:type="uml:Actor" xmi:id="_Kh4tUDUbEeiOQ9nGrchEdg" name="Citizen"/>
   <packagedElement xmi:type="uml:Actor" xmi:id="_VuYlgDUcEeiOQ9nGrchEdg" name="SINCRO"/>
   <packagedElement xmi:type="uml:Package" xmi:id="_1hdXoDazEei6r4Ko5QkWdQ" name="SINCRO Mobile">
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_BED4IDa0Eei6r4Ko5QkWdQ" name="Receive Notification"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_WSvcYDa0Eei6r4Ko5QkWdQ" name="Sign In"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_eZp5IDa0Eei6r4Ko5QkWdQ" name="Add Car"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="__P_dADa0Eei6r4Ko5QkWdQ" name="Share Car"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_dPAOcDa1Eei6r4Ko5QkWdQ" name="Access Event History"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_7YwuwDkPEeiWFa1h7zijnA" name="Pay Event"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_BED4IDa0Eei6r4Ko5QkWdQ" name="RF01 - Notificação de Contraordenações&#xA;"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_WSvcYDa0Eei6r4Ko5QkWdQ" name="RF05 - Registar Cidadão"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_eZp5IDa0Eei6r4Ko5QkWdQ" name="RF03 - Subscrever Veículo&#xA;"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="__P_dADa0Eei6r4Ko5QkWdQ" name="RF02 - Delegar Matrícula&#xA;"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_dPAOcDa1Eei6r4Ko5QkWdQ" name="RF04 - Histórico de Contraordenações"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_7YwuwDkPEeiWFa1h7zijnA" name="RF06 - Pagamento de Contraordenações"/>
+    <packagedElement xmi:type="uml:UseCase" xmi:id="_pjpLADy3EeiBQ4r1R3SwoQ" name="CopyOf_RF05 - Registar_6"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Actor" xmi:id="_zOQwgDa0Eei6r4Ko5QkWdQ" name="ASNR"/>
   <packagedElement xmi:type="uml:Association" xmi:id="_h0JFADkPEeiWFa1h7zijnA" memberEnd="_h0PysDkPEeiWFa1h7zijnA _h0SO8DkPEeiWFa1h7zijnA">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_h0OkkDkPEeiWFa1h7zijnA" source="org.eclipse.papyrus">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_h0OkkTkPEeiWFa1h7zijnA" key="nature" value="UML_Nature"/>
@@ -49,19 +49,12 @@
     <ownedEnd xmi:type="uml:Property" xmi:id="_kuadwjkPEeiWFa1h7zijnA" name="share car" type="__P_dADa0Eei6r4Ko5QkWdQ" association="_kuZ2sDkPEeiWFa1h7zijnA"/>
     <ownedEnd xmi:type="uml:Property" xmi:id="_kubE0DkPEeiWFa1h7zijnA" name="citizen" type="_Kh4tUDUbEeiOQ9nGrchEdg" association="_kuZ2sDkPEeiWFa1h7zijnA"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_3EW6UDkPEeiWFa1h7zijnA" name="Send Event" memberEnd="_3EXhYjkPEeiWFa1h7zijnA _3EYIcDkPEeiWFa1h7zijnA">
+  <packagedElement xmi:type="uml:Association" xmi:id="_3EW6UDkPEeiWFa1h7zijnA" memberEnd="_3EXhYjkPEeiWFa1h7zijnA _3EYIcDkPEeiWFa1h7zijnA">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_3EXhYDkPEeiWFa1h7zijnA" source="org.eclipse.papyrus">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_3EXhYTkPEeiWFa1h7zijnA" key="nature" value="UML_Nature"/>
     </eAnnotations>
     <ownedEnd xmi:type="uml:Property" xmi:id="_3EXhYjkPEeiWFa1h7zijnA" name="sincro" type="_VuYlgDUcEeiOQ9nGrchEdg" association="_3EW6UDkPEeiWFa1h7zijnA"/>
     <ownedEnd xmi:type="uml:Property" xmi:id="_3EYIcDkPEeiWFa1h7zijnA" name="receive notification" type="_BED4IDa0Eei6r4Ko5QkWdQ" association="_3EW6UDkPEeiWFa1h7zijnA"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_34-1MDkPEeiWFa1h7zijnA" name="Verify Event" memberEnd="_34_cQjkPEeiWFa1h7zijnA _34_cQzkPEeiWFa1h7zijnA">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_34_cQDkPEeiWFa1h7zijnA" source="org.eclipse.papyrus">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_34_cQTkPEeiWFa1h7zijnA" key="nature" value="UML_Nature"/>
-    </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_34_cQjkPEeiWFa1h7zijnA" name="asnr" type="_zOQwgDa0Eei6r4Ko5QkWdQ" association="_34-1MDkPEeiWFa1h7zijnA"/>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_34_cQzkPEeiWFa1h7zijnA" name="receive notification" type="_BED4IDa0Eei6r4Ko5QkWdQ" association="_34-1MDkPEeiWFa1h7zijnA"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_AlIF8DkQEeiWFa1h7zijnA" memberEnd="_AlItAjkQEeiWFa1h7zijnA _AlItAzkQEeiWFa1h7zijnA">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_AlItADkQEeiWFa1h7zijnA" source="org.eclipse.papyrus">
@@ -69,12 +62,5 @@
     </eAnnotations>
     <ownedEnd xmi:type="uml:Property" xmi:id="_AlItAjkQEeiWFa1h7zijnA" name="pay event" type="_7YwuwDkPEeiWFa1h7zijnA" association="_AlIF8DkQEeiWFa1h7zijnA"/>
     <ownedEnd xmi:type="uml:Property" xmi:id="_AlItAzkQEeiWFa1h7zijnA" name="citizen" type="_Kh4tUDUbEeiOQ9nGrchEdg" association="_AlIF8DkQEeiWFa1h7zijnA"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_g35pwDkQEeiWFa1h7zijnA" name="Receive Payment" memberEnd="_g36Q0jkQEeiWFa1h7zijnA _g36Q0zkQEeiWFa1h7zijnA">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_g36Q0DkQEeiWFa1h7zijnA" source="org.eclipse.papyrus">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_g36Q0TkQEeiWFa1h7zijnA" key="nature" value="UML_Nature"/>
-    </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_g36Q0jkQEeiWFa1h7zijnA" name="asnr" type="_zOQwgDa0Eei6r4Ko5QkWdQ" association="_g35pwDkQEeiWFa1h7zijnA"/>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_g36Q0zkQEeiWFa1h7zijnA" name="pay event" type="_7YwuwDkPEeiWFa1h7zijnA" association="_g35pwDkQEeiWFa1h7zijnA"/>
   </packagedElement>
 </uml:Model>
