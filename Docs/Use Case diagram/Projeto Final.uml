@@ -3,7 +3,7 @@
   <packageImport xmi:type="uml:PackageImport" xmi:id="_pdzS4DTOEeiztekli-76ig">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
-  <packagedElement xmi:type="uml:Actor" xmi:id="_Kh4tUDUbEeiOQ9nGrchEdg" name="Citizen"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_Kh4tUDUbEeiOQ9nGrchEdg" name="Cidadão"/>
   <packagedElement xmi:type="uml:Actor" xmi:id="_VuYlgDUcEeiOQ9nGrchEdg" name="SINCRO"/>
   <packagedElement xmi:type="uml:Package" xmi:id="_1hdXoDazEei6r4Ko5QkWdQ" name="SINCRO Mobile">
     <packagedElement xmi:type="uml:UseCase" xmi:id="_BED4IDa0Eei6r4Ko5QkWdQ" name="RF01 - Notificação de Contraordenações&#xA;"/>
@@ -12,7 +12,6 @@
     <packagedElement xmi:type="uml:UseCase" xmi:id="__P_dADa0Eei6r4Ko5QkWdQ" name="RF02 - Delegar Matrícula&#xA;"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_dPAOcDa1Eei6r4Ko5QkWdQ" name="RF04 - Histórico de Contraordenações"/>
     <packagedElement xmi:type="uml:UseCase" xmi:id="_7YwuwDkPEeiWFa1h7zijnA" name="RF06 - Pagamento de Contraordenações"/>
-    <packagedElement xmi:type="uml:UseCase" xmi:id="_pjpLADy3EeiBQ4r1R3SwoQ" name="CopyOf_RF05 - Registar_6"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_h0JFADkPEeiWFa1h7zijnA" memberEnd="_h0PysDkPEeiWFa1h7zijnA _h0SO8DkPEeiWFa1h7zijnA">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_h0OkkDkPEeiWFa1h7zijnA" source="org.eclipse.papyrus">
