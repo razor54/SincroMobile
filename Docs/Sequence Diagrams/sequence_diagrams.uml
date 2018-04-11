@@ -14,4 +14,67 @@
     <message xmi:type="uml:Message" xmi:id="_c6op8D2lEeikQ_N-tpZqwA" name="Envia notificação do evento de contraordenação" receiveEvent="_c6xM0T2lEeikQ_N-tpZqwA" sendEvent="_c6xM0D2lEeikQ_N-tpZqwA"/>
     <message xmi:type="uml:Message" xmi:id="_qMJjUD2lEeikQ_N-tpZqwA" name="Utilizador é notificado sobre o evento" receiveEvent="_qMLYgD2lEeikQ_N-tpZqwA" sendEvent="_qMKxcD2lEeikQ_N-tpZqwA"/>
   </packagedElement>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_8dHR4D2oEeibVusbgidWpA" name="Interaction3">
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_aOhsMD2pEeibVusbgidWpA" name="Cidadão" coveredBy="_1tBzQD2qEeibVusbgidWpA _ho12wD2rEeibVusbgidWpA"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_hthNUD2pEeibVusbgidWpA" name="SINCRO Mobile" coveredBy="_1tCaUD2qEeibVusbgidWpA _4aUDcD2rEeibVusbgidWpA __KhzAT2rEeibVusbgidWpA _ho1PsD2rEeibVusbgidWpA"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_09RU0D2rEeibVusbgidWpA" name="Portal das Finanças ?" coveredBy="_4aUqgD2rEeibVusbgidWpA __KhzAD2rEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_1tBzQD2qEeibVusbgidWpA" name="Message3SendEvent" covered="_aOhsMD2pEeibVusbgidWpA" message="_1s_-ED2qEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_1tCaUD2qEeibVusbgidWpA" name="Message3ReceiveEvent" covered="_hthNUD2pEeibVusbgidWpA" message="_1s_-ED2qEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_4aUDcD2rEeibVusbgidWpA" name="Message10SendEvent" covered="_hthNUD2pEeibVusbgidWpA" message="_4aSOQD2rEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_4aUqgD2rEeibVusbgidWpA" name="Message10ReceiveEvent" covered="_09RU0D2rEeibVusbgidWpA" message="_4aSOQD2rEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="__KhzAD2rEeibVusbgidWpA" name="Message13SendEvent" covered="_09RU0D2rEeibVusbgidWpA" message="__Kgk4D2rEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="__KhzAT2rEeibVusbgidWpA" name="Message13ReceiveEvent" covered="_hthNUD2pEeibVusbgidWpA" message="__Kgk4D2rEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_ho1PsD2rEeibVusbgidWpA" name="Message6SendEvent" covered="_hthNUD2pEeibVusbgidWpA" message="_ho0ooD2rEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_ho12wD2rEeibVusbgidWpA" name="Message6ReceiveEvent" covered="_aOhsMD2pEeibVusbgidWpA" message="_ho0ooD2rEeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_1s_-ED2qEeibVusbgidWpA" name="Registo de utilizador" messageSort="asynchCall" receiveEvent="_1tCaUD2qEeibVusbgidWpA" sendEvent="_1tBzQD2qEeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_ho0ooD2rEeibVusbgidWpA" name="Confirmação" messageSort="asynchCall" receiveEvent="_ho12wD2rEeibVusbgidWpA" sendEvent="_ho1PsD2rEeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_4aSOQD2rEeibVusbgidWpA" name="Autenticação do Cidadão" messageSort="asynchCall" receiveEvent="_4aUqgD2rEeibVusbgidWpA" sendEvent="_4aUDcD2rEeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="__Kgk4D2rEeibVusbgidWpA" name="Confirmação de identidade" messageSort="asynchCall" receiveEvent="__KhzAT2rEeibVusbgidWpA" sendEvent="__KhzAD2rEeibVusbgidWpA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_WTockD2sEeibVusbgidWpA" name="Interaction4">
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_cwWBUD2sEeibVusbgidWpA" name="Cidadão" coveredBy="_eV4mUD2tEeibVusbgidWpA _4VF6UD2tEeibVusbgidWpA"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_d9oT0D2sEeibVusbgidWpA" name="SINCRO Mobile" coveredBy="_eV5NYD2tEeibVusbgidWpA _Ku90oD2uEeibVusbgidWpA _QxHkUD2uEeibVusbgidWpA _4VFTQD2tEeibVusbgidWpA"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_fQKSsD2sEeibVusbgidWpA" name="SINCRO" coveredBy="_Ku_CwD2uEeibVusbgidWpA _QxG9QD2uEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_eV4mUD2tEeibVusbgidWpA" name="Message4SendEvent" covered="_cwWBUD2sEeibVusbgidWpA" message="_eV078D2tEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_eV5NYD2tEeibVusbgidWpA" name="Message4ReceiveEvent" covered="_d9oT0D2sEeibVusbgidWpA" message="_eV078D2tEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Ku90oD2uEeibVusbgidWpA" name="Message10SendEvent" covered="_d9oT0D2sEeibVusbgidWpA" message="_Ku7YYD2uEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Ku_CwD2uEeibVusbgidWpA" name="Message10ReceiveEvent" covered="_fQKSsD2sEeibVusbgidWpA" message="_Ku7YYD2uEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_QxG9QD2uEeibVusbgidWpA" name="Message13SendEvent" covered="_fQKSsD2sEeibVusbgidWpA" message="_QxCr0D2uEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_QxHkUD2uEeibVusbgidWpA" name="Message13ReceiveEvent" covered="_d9oT0D2sEeibVusbgidWpA" message="_QxCr0D2uEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_4VFTQD2tEeibVusbgidWpA" name="Message7SendEvent" covered="_d9oT0D2sEeibVusbgidWpA" message="_4VEFID2tEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_4VF6UD2tEeibVusbgidWpA" name="Message7ReceiveEvent" covered="_cwWBUD2sEeibVusbgidWpA" message="_4VEFID2tEeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_eV078D2tEeibVusbgidWpA" name="Pedido de obtenção do histórico de contraordenações" messageSort="asynchCall" receiveEvent="_eV5NYD2tEeibVusbgidWpA" sendEvent="_eV4mUD2tEeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_4VEFID2tEeibVusbgidWpA" name="O utilizador recebe o histórico" messageSort="asynchCall" receiveEvent="_4VF6UD2tEeibVusbgidWpA" sendEvent="_4VFTQD2tEeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_Ku7YYD2uEeibVusbgidWpA" name="Será que se pode fazer o pedido de obtenção de historico ao SINCRO?" messageSort="asynchCall" receiveEvent="_Ku_CwD2uEeibVusbgidWpA" sendEvent="_Ku90oD2uEeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_QxCr0D2uEeibVusbgidWpA" name="Se sim retorna o historico de contraordenações" messageSort="asynchCall" receiveEvent="_QxHkUD2uEeibVusbgidWpA" sendEvent="_QxG9QD2uEeibVusbgidWpA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_lRw94D2uEeibVusbgidWpA" name="Interaction5">
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_TTxVAD2zEeibVusbgidWpA" name="Cidadão" coveredBy="_3IsJ4D2zEeibVusbgidWpA _BbHb8D20EeibVusbgidWpA _GNHyYD20EeibVusbgidWpA _NhD6ED20EeibVusbgidWpA _Th2X0D20EeibVusbgidWpA _ZskNoT20EeibVusbgidWpA"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_VWxukD2zEeibVusbgidWpA" name="SINCRO Mobile" coveredBy="_3Isw8D2zEeibVusbgidWpA _BbG04D20EeibVusbgidWpA _GNHyYT20EeibVusbgidWpA _NhDTAD20EeibVusbgidWpA _Th2-4D20EeibVusbgidWpA _VPQ74D20EeibVusbgidWpA _W4duUT20EeibVusbgidWpA _ZskNoD20EeibVusbgidWpA"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_W-ky0D2zEeibVusbgidWpA" name="Entidade de Pagamento" coveredBy="_VPQ74T20EeibVusbgidWpA _W4duUD20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_3IsJ4D2zEeibVusbgidWpA" name="Message4SendEvent" covered="_TTxVAD2zEeibVusbgidWpA" message="_3Iri0D2zEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_3Isw8D2zEeibVusbgidWpA" name="Message4ReceiveEvent" covered="_VWxukD2zEeibVusbgidWpA" message="_3Iri0D2zEeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_BbG04D20EeibVusbgidWpA" name="Message7SendEvent" covered="_VWxukD2zEeibVusbgidWpA" message="_BbGN0D20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_BbHb8D20EeibVusbgidWpA" name="Message7ReceiveEvent" covered="_TTxVAD2zEeibVusbgidWpA" message="_BbGN0D20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GNHyYD20EeibVusbgidWpA" name="Message10SendEvent" covered="_TTxVAD2zEeibVusbgidWpA" message="_GNHLUD20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_GNHyYT20EeibVusbgidWpA" name="Message10ReceiveEvent" covered="_VWxukD2zEeibVusbgidWpA" message="_GNHLUD20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_NhDTAD20EeibVusbgidWpA" name="Message13SendEvent" covered="_VWxukD2zEeibVusbgidWpA" message="_NhCr8D20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_NhD6ED20EeibVusbgidWpA" name="Message13ReceiveEvent" covered="_TTxVAD2zEeibVusbgidWpA" message="_NhCr8D20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Th2X0D20EeibVusbgidWpA" name="Message16SendEvent" covered="_TTxVAD2zEeibVusbgidWpA" message="_Th1wwD20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Th2-4D20EeibVusbgidWpA" name="Message16ReceiveEvent" covered="_VWxukD2zEeibVusbgidWpA" message="_Th1wwD20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_VPQ74D20EeibVusbgidWpA" name="Message19SendEvent" covered="_VWxukD2zEeibVusbgidWpA" message="_VPPtwD20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_VPQ74T20EeibVusbgidWpA" name="Message19ReceiveEvent" covered="_W-ky0D2zEeibVusbgidWpA" message="_VPPtwD20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_W4duUD20EeibVusbgidWpA" name="Message22SendEvent" covered="_W-ky0D2zEeibVusbgidWpA" message="_W4dHQD20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_W4duUT20EeibVusbgidWpA" name="Message22ReceiveEvent" covered="_VWxukD2zEeibVusbgidWpA" message="_W4dHQD20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_ZskNoD20EeibVusbgidWpA" name="Message25SendEvent" covered="_VWxukD2zEeibVusbgidWpA" message="_ZsjmkD20EeibVusbgidWpA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_ZskNoT20EeibVusbgidWpA" name="Message25ReceiveEvent" covered="_TTxVAD2zEeibVusbgidWpA" message="_ZsjmkD20EeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_3Iri0D2zEeibVusbgidWpA" name="Pedido por parte do cidadão da realizaçao do pagamento" messageSort="asynchCall" receiveEvent="_3Isw8D2zEeibVusbgidWpA" sendEvent="_3IsJ4D2zEeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_BbGN0D20EeibVusbgidWpA" name="Pedir ao utilizador a escolha do metodo de pagamento" messageSort="asynchCall" receiveEvent="_BbHb8D20EeibVusbgidWpA" sendEvent="_BbG04D20EeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_GNHLUD20EeibVusbgidWpA" name="Confirmação do metodo de pagamento pelo cidadão" messageSort="asynchCall" receiveEvent="_GNHyYT20EeibVusbgidWpA" sendEvent="_GNHyYD20EeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_NhCr8D20EeibVusbgidWpA" name="Apresentação do formulário de pagamento" messageSort="asynchCall" receiveEvent="_NhD6ED20EeibVusbgidWpA" sendEvent="_NhDTAD20EeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_Th1wwD20EeibVusbgidWpA" name="Confirmaçao" messageSort="asynchCall" receiveEvent="_Th2-4D20EeibVusbgidWpA" sendEvent="_Th2X0D20EeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_VPPtwD20EeibVusbgidWpA" name="Envio do pagamento" messageSort="asynchCall" receiveEvent="_VPQ74T20EeibVusbgidWpA" sendEvent="_VPQ74D20EeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_W4dHQD20EeibVusbgidWpA" name="Confirmação" messageSort="asynchCall" receiveEvent="_W4duUT20EeibVusbgidWpA" sendEvent="_W4duUD20EeibVusbgidWpA"/>
+    <message xmi:type="uml:Message" xmi:id="_ZsjmkD20EeibVusbgidWpA" name="Confirmação do pagamento é enviada ao cidadão" messageSort="reply" receiveEvent="_ZskNoT20EeibVusbgidWpA" sendEvent="_ZskNoD20EeibVusbgidWpA"/>
+  </packagedElement>
 </uml:Model>
