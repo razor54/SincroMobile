@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_Ej2iwD2ZEeikQ_N-tpZqwA" name="sequence_diagrams">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_E3tS4D2ZEeikQ_N-tpZqwA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_IxCU4D2ZEeikQ_N-tpZqwA" name="Interaction2">
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_TLTUUD2ZEeikQ_N-tpZqwA" name="Cidadão" coveredBy="_qMLYgD2lEeikQ_N-tpZqwA"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_jsaWMD2ZEeikQ_N-tpZqwA" name="SINCRO Mobile" coveredBy="_c6xM0T2lEeikQ_N-tpZqwA _qMKxcD2lEeikQ_N-tpZqwA"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_om7vcD2ZEeikQ_N-tpZqwA" name="SINCRO" coveredBy="_c6xM0D2lEeikQ_N-tpZqwA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_c6xM0D2lEeikQ_N-tpZqwA" name="Message4SendEvent" covered="_om7vcD2ZEeikQ_N-tpZqwA" message="_c6op8D2lEeikQ_N-tpZqwA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_c6xM0T2lEeikQ_N-tpZqwA" name="Message4ReceiveEvent" covered="_jsaWMD2ZEeikQ_N-tpZqwA" message="_c6op8D2lEeikQ_N-tpZqwA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_qMKxcD2lEeikQ_N-tpZqwA" name="Message7SendEvent" covered="_jsaWMD2ZEeikQ_N-tpZqwA" message="_qMJjUD2lEeikQ_N-tpZqwA"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_qMLYgD2lEeikQ_N-tpZqwA" name="Message7ReceiveEvent" covered="_TLTUUD2ZEeikQ_N-tpZqwA" message="_qMJjUD2lEeikQ_N-tpZqwA"/>
+    <message xmi:type="uml:Message" xmi:id="_c6op8D2lEeikQ_N-tpZqwA" name="Envia notificação do evento de contraordenação" receiveEvent="_c6xM0T2lEeikQ_N-tpZqwA" sendEvent="_c6xM0D2lEeikQ_N-tpZqwA"/>
+    <message xmi:type="uml:Message" xmi:id="_qMJjUD2lEeikQ_N-tpZqwA" name="Utilizador é notificado sobre o evento" receiveEvent="_qMLYgD2lEeikQ_N-tpZqwA" sendEvent="_qMKxcD2lEeikQ_N-tpZqwA"/>
+  </packagedElement>
+</uml:Model>

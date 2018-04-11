@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/papyrus/infra/gmfdiag/style" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_OTaYUD2ZEeikQ_N-tpZqwA" type="PapyrusUMLSequenceDiagram" name="RF01-notificação de contraordenações" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_OTaYUT2ZEeikQ_N-tpZqwA" type="Interaction_Shape">
+    <children xmi:type="notation:DecorationNode" xmi:id="_OTaYUj2ZEeikQ_N-tpZqwA" type="Interaction_NameLabel"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_OTaYUz2ZEeikQ_N-tpZqwA" type="Interaction_SubfragmentCompartment">
+      <children xmi:type="notation:Shape" xmi:id="_TLh90D2ZEeikQ_N-tpZqwA" type="Lifeline_Shape">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TLik4D2ZEeikQ_N-tpZqwA" type="Lifeline_NameLabel"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_TMSy0D2ZEeikQ_N-tpZqwA" type="compartment_shape_display">
+          <styles xmi:type="notation:TitleStyle" xmi:id="_TMSy0T2ZEeikQ_N-tpZqwA"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TMSy0j2ZEeikQ_N-tpZqwA"/>
+        </children>
+        <element xmi:type="uml:Lifeline" href="sequence_diagrams.uml#_TLTUUD2ZEeikQ_N-tpZqwA"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TLh90T2ZEeikQ_N-tpZqwA" x="14" y="10"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_jshD4D2ZEeikQ_N-tpZqwA" type="Lifeline_Shape">
+        <children xmi:type="notation:DecorationNode" xmi:id="_jshq8D2ZEeikQ_N-tpZqwA" type="Lifeline_NameLabel"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_jsoYoD2ZEeikQ_N-tpZqwA" type="compartment_shape_display">
+          <styles xmi:type="notation:TitleStyle" xmi:id="_jsoYoT2ZEeikQ_N-tpZqwA"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jsoYoj2ZEeikQ_N-tpZqwA"/>
+        </children>
+        <element xmi:type="uml:Lifeline" href="sequence_diagrams.uml#_jsaWMD2ZEeikQ_N-tpZqwA"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jshD4T2ZEeikQ_N-tpZqwA" x="274" y="10"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_onBPAD2ZEeikQ_N-tpZqwA" type="Lifeline_Shape">
+        <children xmi:type="notation:DecorationNode" xmi:id="_onB2ED2ZEeikQ_N-tpZqwA" type="Lifeline_NameLabel"/>
+        <element xmi:type="uml:Lifeline" href="sequence_diagrams.uml#_om7vcD2ZEeikQ_N-tpZqwA"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_onBPAT2ZEeikQ_N-tpZqwA" x="514" y="10"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_YCWFUD2lEeikQ_N-tpZqwA" type="Note" fontName=".AppleSystemUIFont" description="Text" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_YCWFUT2lEeikQ_N-tpZqwA" source="specificStyles">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YCWFUj2lEeikQ_N-tpZqwA" key="verticalAlignment" value="8"/>
+        </eAnnotations>
+        <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_YCX6gD2lEeikQ_N-tpZqwA" source="PapyrusCSSForceValue">
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YCX6gT2lEeikQ_N-tpZqwA" key="lineColor" value="true"/>
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YCX6gj2lEeikQ_N-tpZqwA" key="fontHeight" value="true"/>
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YCX6gz2lEeikQ_N-tpZqwA" key="bold" value="true"/>
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YCYhkD2lEeikQ_N-tpZqwA" key="italic" value="true"/>
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YCYhkT2lEeikQ_N-tpZqwA" key="fontColor" value="true"/>
+          <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_YCYhkj2lEeikQ_N-tpZqwA" key="fillColor" value="true"/>
+        </eAnnotations>
+        <children xmi:type="notation:BasicDecorationNode" xmi:id="_YCYhkz2lEeikQ_N-tpZqwA" type="DiagramName">
+          <element xsi:nil="true"/>
+        </children>
+        <children xmi:type="notation:BasicDecorationNode" xmi:id="_YCZIoD2lEeikQ_N-tpZqwA" type="Description">
+          <element xsi:nil="true"/>
+        </children>
+        <styles xmi:type="notation:TextStyle" xmi:id="_YCWFUz2lEeikQ_N-tpZqwA" textAlignment="Center"/>
+        <styles xmi:type="notation:LineTypeStyle" xmi:id="_YCWsYD2lEeikQ_N-tpZqwA"/>
+        <element xsi:nil="true"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YCWsYT2lEeikQ_N-tpZqwA" x="374" y="80"/>
+      </children>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OTaYVD2ZEeikQ_N-tpZqwA"/>
+    </children>
+    <element xmi:type="uml:Interaction" href="sequence_diagrams.uml#_IxCU4D2ZEeikQ_N-tpZqwA"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_OTaYVT2ZEeikQ_N-tpZqwA"/>
+  </children>
+  <styles xmi:type="notation:StringValueStyle" xmi:id="_OTaYVj2ZEeikQ_N-tpZqwA" name="diagram_compatibility_version" stringValue="1.3.0"/>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_OTaYVz2ZEeikQ_N-tpZqwA"/>
+  <styles xmi:type="style:PapyrusDiagramStyle" xmi:id="_OTaYWD2ZEeikQ_N-tpZqwA" diagramKindId="org.eclipse.papyrus.uml.diagram.sequence">
+    <owner xmi:type="uml:Model" href="sequence_diagrams.uml#_Ej2iwD2ZEeikQ_N-tpZqwA"/>
+  </styles>
+  <element xmi:type="uml:Interaction" href="sequence_diagrams.uml#_IxCU4D2ZEeikQ_N-tpZqwA"/>
+  <edges xmi:type="notation:Connector" xmi:id="_c65IoD2lEeikQ_N-tpZqwA" type="Message_SynchEdge" source="_onBPAD2ZEeikQ_N-tpZqwA" target="_jshD4D2ZEeikQ_N-tpZqwA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_c65Ioz2lEeikQ_N-tpZqwA" type="Message_SynchNameLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_c65vsD2lEeikQ_N-tpZqwA" x="1" y="-13"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_c65vsT2lEeikQ_N-tpZqwA" type="Message_SynchStereotypeLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_c65vsj2lEeikQ_N-tpZqwA" x="1" y="-33"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_c65IoT2lEeikQ_N-tpZqwA"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_c6690D2lEeikQ_N-tpZqwA"/>
+    <element xmi:type="uml:Message" href="sequence_diagrams.uml#_c6op8D2lEeikQ_N-tpZqwA"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_c65Ioj2lEeikQ_N-tpZqwA" points="[0, 0, 240, 0]$[-240, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_c7gzsD2lEeikQ_N-tpZqwA" id="(0.5,0.1)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_c7gzsT2lEeikQ_N-tpZqwA" id="(0.5,0.1)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_qMSGMD2lEeikQ_N-tpZqwA" type="Message_SynchEdge" source="_jshD4D2ZEeikQ_N-tpZqwA" target="_TLh90D2ZEeikQ_N-tpZqwA">
+    <children xmi:type="notation:DecorationNode" xmi:id="_qMSGMz2lEeikQ_N-tpZqwA" type="Message_SynchNameLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_qMStQD2lEeikQ_N-tpZqwA" x="1" y="-13"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_qMStQT2lEeikQ_N-tpZqwA" type="Message_SynchStereotypeLabel">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_qMStQj2lEeikQ_N-tpZqwA" x="1" y="-33"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_qMSGMT2lEeikQ_N-tpZqwA"/>
+    <styles xmi:type="notation:LineStyle" xmi:id="_qMStQz2lEeikQ_N-tpZqwA"/>
+    <element xmi:type="uml:Message" href="sequence_diagrams.uml#_qMJjUD2lEeikQ_N-tpZqwA"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_qMSGMj2lEeikQ_N-tpZqwA" points="[0, 0, 260, 0]$[-260, 0, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_qMh90D2lEeikQ_N-tpZqwA" id="(0.5,0.18571428571428572)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_qMh90T2lEeikQ_N-tpZqwA" id="(0.5,0.18571428571428572)"/>
+  </edges>
+</notation:Diagram>
