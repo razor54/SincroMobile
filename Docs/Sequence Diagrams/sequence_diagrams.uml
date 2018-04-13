@@ -3,7 +3,7 @@
   <packageImport xmi:type="uml:PackageImport" xmi:id="_E3tS4D2ZEeikQ_N-tpZqwA">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
-  <packagedElement xmi:type="uml:Interaction" xmi:id="_IxCU4D2ZEeikQ_N-tpZqwA" name="Interaction2">
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_IxCU4D2ZEeikQ_N-tpZqwA" name="RF01">
     <lifeline xmi:type="uml:Lifeline" xmi:id="_TLTUUD2ZEeikQ_N-tpZqwA" name="Cidadão" coveredBy="_qMLYgD2lEeikQ_N-tpZqwA"/>
     <lifeline xmi:type="uml:Lifeline" xmi:id="_jsaWMD2ZEeikQ_N-tpZqwA" name="SINCRO Mobile" coveredBy="_c6xM0T2lEeikQ_N-tpZqwA _qMKxcD2lEeikQ_N-tpZqwA"/>
     <lifeline xmi:type="uml:Lifeline" xmi:id="_om7vcD2ZEeikQ_N-tpZqwA" name="SINCRO" coveredBy="_c6xM0D2lEeikQ_N-tpZqwA"/>
@@ -14,7 +14,7 @@
     <message xmi:type="uml:Message" xmi:id="_c6op8D2lEeikQ_N-tpZqwA" name="Envia notificação do evento de contraordenação" receiveEvent="_c6xM0T2lEeikQ_N-tpZqwA" sendEvent="_c6xM0D2lEeikQ_N-tpZqwA"/>
     <message xmi:type="uml:Message" xmi:id="_qMJjUD2lEeikQ_N-tpZqwA" name="Utilizador é notificado sobre o evento" receiveEvent="_qMLYgD2lEeikQ_N-tpZqwA" sendEvent="_qMKxcD2lEeikQ_N-tpZqwA"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Interaction" xmi:id="_8dHR4D2oEeibVusbgidWpA" name="Interaction3">
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_8dHR4D2oEeibVusbgidWpA" name="RF05">
     <lifeline xmi:type="uml:Lifeline" xmi:id="_aOhsMD2pEeibVusbgidWpA" name="Cidadão" coveredBy="_1tBzQD2qEeibVusbgidWpA _ho12wD2rEeibVusbgidWpA"/>
     <lifeline xmi:type="uml:Lifeline" xmi:id="_hthNUD2pEeibVusbgidWpA" name="SINCRO Mobile" coveredBy="_1tCaUD2qEeibVusbgidWpA _4aUDcD2rEeibVusbgidWpA __KhzAT2rEeibVusbgidWpA _ho1PsD2rEeibVusbgidWpA"/>
     <lifeline xmi:type="uml:Lifeline" xmi:id="_09RU0D2rEeibVusbgidWpA" name="Portal das Finanças ?" coveredBy="_4aUqgD2rEeibVusbgidWpA __KhzAD2rEeibVusbgidWpA"/>
@@ -31,7 +31,7 @@
     <message xmi:type="uml:Message" xmi:id="_4aSOQD2rEeibVusbgidWpA" name="Autenticação do Cidadão" messageSort="asynchCall" receiveEvent="_4aUqgD2rEeibVusbgidWpA" sendEvent="_4aUDcD2rEeibVusbgidWpA"/>
     <message xmi:type="uml:Message" xmi:id="__Kgk4D2rEeibVusbgidWpA" name="Confirmação de identidade" messageSort="asynchCall" receiveEvent="__KhzAT2rEeibVusbgidWpA" sendEvent="__KhzAD2rEeibVusbgidWpA"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Interaction" xmi:id="_WTockD2sEeibVusbgidWpA" name="Interaction4">
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_WTockD2sEeibVusbgidWpA" name="RF04">
     <lifeline xmi:type="uml:Lifeline" xmi:id="_cwWBUD2sEeibVusbgidWpA" name="Cidadão" coveredBy="_eV4mUD2tEeibVusbgidWpA _4VF6UD2tEeibVusbgidWpA"/>
     <lifeline xmi:type="uml:Lifeline" xmi:id="_d9oT0D2sEeibVusbgidWpA" name="SINCRO Mobile" coveredBy="_eV5NYD2tEeibVusbgidWpA _Ku90oD2uEeibVusbgidWpA _QxHkUD2uEeibVusbgidWpA _4VFTQD2tEeibVusbgidWpA"/>
     <lifeline xmi:type="uml:Lifeline" xmi:id="_fQKSsD2sEeibVusbgidWpA" name="SINCRO" coveredBy="_Ku_CwD2uEeibVusbgidWpA _QxG9QD2uEeibVusbgidWpA"/>
@@ -48,7 +48,7 @@
     <message xmi:type="uml:Message" xmi:id="_Ku7YYD2uEeibVusbgidWpA" name="Será que se pode fazer o pedido de obtenção de historico ao SINCRO?" messageSort="asynchCall" receiveEvent="_Ku_CwD2uEeibVusbgidWpA" sendEvent="_Ku90oD2uEeibVusbgidWpA"/>
     <message xmi:type="uml:Message" xmi:id="_QxCr0D2uEeibVusbgidWpA" name="Se sim retorna o historico de contraordenações" messageSort="asynchCall" receiveEvent="_QxHkUD2uEeibVusbgidWpA" sendEvent="_QxG9QD2uEeibVusbgidWpA"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Interaction" xmi:id="_lRw94D2uEeibVusbgidWpA" name="Interaction5">
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_lRw94D2uEeibVusbgidWpA" name="RF06">
     <lifeline xmi:type="uml:Lifeline" xmi:id="_TTxVAD2zEeibVusbgidWpA" name="Cidadão" coveredBy="_3IsJ4D2zEeibVusbgidWpA _BbHb8D20EeibVusbgidWpA _GNHyYD20EeibVusbgidWpA _NhD6ED20EeibVusbgidWpA _Th2X0D20EeibVusbgidWpA _ZskNoT20EeibVusbgidWpA"/>
     <lifeline xmi:type="uml:Lifeline" xmi:id="_VWxukD2zEeibVusbgidWpA" name="SINCRO Mobile" coveredBy="_3Isw8D2zEeibVusbgidWpA _BbG04D20EeibVusbgidWpA _GNHyYT20EeibVusbgidWpA _NhDTAD20EeibVusbgidWpA _Th2-4D20EeibVusbgidWpA _VPQ74D20EeibVusbgidWpA _W4duUT20EeibVusbgidWpA _ZskNoD20EeibVusbgidWpA"/>
     <lifeline xmi:type="uml:Lifeline" xmi:id="_W-ky0D2zEeibVusbgidWpA" name="Entidade de Pagamento" coveredBy="_VPQ74T20EeibVusbgidWpA _W4duUD20EeibVusbgidWpA"/>
@@ -76,5 +76,49 @@
     <message xmi:type="uml:Message" xmi:id="_VPPtwD20EeibVusbgidWpA" name="Envio do pagamento" messageSort="asynchCall" receiveEvent="_VPQ74T20EeibVusbgidWpA" sendEvent="_VPQ74D20EeibVusbgidWpA"/>
     <message xmi:type="uml:Message" xmi:id="_W4dHQD20EeibVusbgidWpA" name="Confirmação" messageSort="asynchCall" receiveEvent="_W4duUT20EeibVusbgidWpA" sendEvent="_W4duUD20EeibVusbgidWpA"/>
     <message xmi:type="uml:Message" xmi:id="_ZsjmkD20EeibVusbgidWpA" name="Confirmação do pagamento é enviada ao cidadão" messageSort="reply" receiveEvent="_ZskNoT20EeibVusbgidWpA" sendEvent="_ZskNoD20EeibVusbgidWpA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_uWAXgD8MEeigKbhv83y0Jw" name="RF02">
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_zuYKYD8MEeigKbhv83y0Jw" name="Cidadão" coveredBy="_IYS0sD8NEeigKbhv83y0Jw _CVGRQT8PEeigKbhv83y0Jw"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_0xaUsD8MEeigKbhv83y0Jw" name="SINCRO Mobile" coveredBy="_IYS0sT8NEeigKbhv83y0Jw _4TYxMD8NEeigKbhv83y0Jw _ScOiUT8OEeigKbhv83y0Jw _CVGRQD8PEeigKbhv83y0Jw _apXtcD8PEeigKbhv83y0Jw _zRb6QD8NEeigKbhv83y0Jw"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_4IHx0D8MEeigKbhv83y0Jw" name="Cidadão 2" coveredBy="_4TYxMT8NEeigKbhv83y0Jw _ScOiUD8OEeigKbhv83y0Jw _apXtcT8PEeigKbhv83y0Jw _zRchUD8NEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_IYS0sD8NEeigKbhv83y0Jw" name="Message4SendEvent" covered="_zuYKYD8MEeigKbhv83y0Jw" message="_IYN8MD8NEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_IYS0sT8NEeigKbhv83y0Jw" name="Message4ReceiveEvent" covered="_0xaUsD8MEeigKbhv83y0Jw" message="_IYN8MD8NEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_4TYxMD8NEeigKbhv83y0Jw" name="Message12SendEvent" covered="_0xaUsD8MEeigKbhv83y0Jw" message="_4TYKID8NEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_4TYxMT8NEeigKbhv83y0Jw" name="Message12ReceiveEvent" covered="_4IHx0D8MEeigKbhv83y0Jw" message="_4TYKID8NEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_ScOiUD8OEeigKbhv83y0Jw" name="Message15SendEvent" covered="_4IHx0D8MEeigKbhv83y0Jw" message="_ScN7QD8OEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_ScOiUT8OEeigKbhv83y0Jw" name="Message15ReceiveEvent" covered="_0xaUsD8MEeigKbhv83y0Jw" message="_ScN7QD8OEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_CVGRQD8PEeigKbhv83y0Jw" name="Message18SendEvent" covered="_0xaUsD8MEeigKbhv83y0Jw" message="_CVFqMD8PEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_CVGRQT8PEeigKbhv83y0Jw" name="Message18ReceiveEvent" covered="_zuYKYD8MEeigKbhv83y0Jw" message="_CVFqMD8PEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_apXtcD8PEeigKbhv83y0Jw" name="Message21SendEvent" covered="_0xaUsD8MEeigKbhv83y0Jw" message="_apWfUD8PEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_apXtcT8PEeigKbhv83y0Jw" name="Message21ReceiveEvent" covered="_4IHx0D8MEeigKbhv83y0Jw" message="_apWfUD8PEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_zRb6QD8NEeigKbhv83y0Jw" name="Message10SendEvent" covered="_0xaUsD8MEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_zRchUD8NEeigKbhv83y0Jw" name="Message10ReceiveEvent" covered="_4IHx0D8MEeigKbhv83y0Jw"/>
+    <message xmi:type="uml:Message" xmi:id="_IYN8MD8NEeigKbhv83y0Jw" name="Delega matrícula para o cicadão 2" receiveEvent="_IYS0sT8NEeigKbhv83y0Jw" sendEvent="_IYS0sD8NEeigKbhv83y0Jw"/>
+    <message xmi:type="uml:Message" xmi:id="_ZICvgD8NEeigKbhv83y0Jw" name="CopyOf_Delega matrícula para o cicadão 2_6" receiveEvent="_IYS0sT8NEeigKbhv83y0Jw" sendEvent="_IYS0sD8NEeigKbhv83y0Jw"/>
+    <message xmi:type="uml:Message" xmi:id="_ZiOKED8NEeigKbhv83y0Jw" name="CopyOf_Delega matrícula para o cicadão 2_7" receiveEvent="_IYS0sT8NEeigKbhv83y0Jw" sendEvent="_IYS0sD8NEeigKbhv83y0Jw"/>
+    <message xmi:type="uml:Message" xmi:id="_ZplWUD8NEeigKbhv83y0Jw" name="CopyOf_Delega matrícula para o cicadão 2_8" receiveEvent="_IYS0sT8NEeigKbhv83y0Jw" sendEvent="_IYS0sD8NEeigKbhv83y0Jw"/>
+    <message xmi:type="uml:Message" xmi:id="_4TYKID8NEeigKbhv83y0Jw" name="Pedido para aceitar responsabilidade da matrícula" receiveEvent="_4TYxMT8NEeigKbhv83y0Jw" sendEvent="_4TYxMD8NEeigKbhv83y0Jw"/>
+    <message xmi:type="uml:Message" xmi:id="_ScN7QD8OEeigKbhv83y0Jw" name="Aceita/Recusa responsabilidade" receiveEvent="_ScOiUT8OEeigKbhv83y0Jw" sendEvent="_ScOiUD8OEeigKbhv83y0Jw"/>
+    <message xmi:type="uml:Message" xmi:id="_CVFqMD8PEeigKbhv83y0Jw" name="Cidadão é notificado com o estado da responsabilidade" receiveEvent="_CVGRQT8PEeigKbhv83y0Jw" sendEvent="_CVGRQD8PEeigKbhv83y0Jw"/>
+    <message xmi:type="uml:Message" xmi:id="_apWfUD8PEeigKbhv83y0Jw" name="Cidadão 2 é notificado com o estado da responsabilidade" receiveEvent="_apXtcT8PEeigKbhv83y0Jw" sendEvent="_apXtcD8PEeigKbhv83y0Jw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_1W3q0D8PEeigKbhv83y0Jw" name="RF03">
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_TeipAD8QEeigKbhv83y0Jw" name="Cidadão" coveredBy="_emvFcD8QEeigKbhv83y0Jw _tLy04T8REeigKbhv83y0Jw"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_VN1cYD8QEeigKbhv83y0Jw" name="SINCRO Mobile" coveredBy="_emvFcT8QEeigKbhv83y0Jw _tpD1ID8QEeigKbhv83y0Jw _Qa5cYT8REeigKbhv83y0Jw _tLy04D8REeigKbhv83y0Jw _QbX9gD8REeigKbhv83y0Jw"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_oY3t4D8QEeigKbhv83y0Jw" name="ANSR" coveredBy="_tpEcMD8QEeigKbhv83y0Jw _Qa5cYD8REeigKbhv83y0Jw _QbX9gT8REeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_emvFcD8QEeigKbhv83y0Jw" name="Message3SendEvent" covered="_TeipAD8QEeigKbhv83y0Jw" message="_emueYD8QEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_emvFcT8QEeigKbhv83y0Jw" name="Message3ReceiveEvent" covered="_VN1cYD8QEeigKbhv83y0Jw" message="_emueYD8QEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_tpD1ID8QEeigKbhv83y0Jw" name="Message7SendEvent" covered="_VN1cYD8QEeigKbhv83y0Jw" message="_tpDOED8QEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_tpEcMD8QEeigKbhv83y0Jw" name="Message7ReceiveEvent" covered="_oY3t4D8QEeigKbhv83y0Jw" message="_tpDOED8QEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Qa5cYD8REeigKbhv83y0Jw" name="Message10SendEvent" covered="_oY3t4D8QEeigKbhv83y0Jw" message="_Qa41UD8REeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Qa5cYT8REeigKbhv83y0Jw" name="Message10ReceiveEvent" covered="_VN1cYD8QEeigKbhv83y0Jw" message="_Qa41UD8REeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_tLy04D8REeigKbhv83y0Jw" name="Message15SendEvent" covered="_VN1cYD8QEeigKbhv83y0Jw" message="_tLxmwD8REeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_tLy04T8REeigKbhv83y0Jw" name="Message15ReceiveEvent" covered="_TeipAD8QEeigKbhv83y0Jw" message="_tLxmwD8REeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_QbX9gD8REeigKbhv83y0Jw" name="Message15SendEvent" covered="_VN1cYD8QEeigKbhv83y0Jw"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_QbX9gT8REeigKbhv83y0Jw" name="Message15ReceiveEvent" covered="_oY3t4D8QEeigKbhv83y0Jw"/>
+    <message xmi:type="uml:Message" xmi:id="_emueYD8QEeigKbhv83y0Jw" name="Coloca dados do automóvel a adicionar" receiveEvent="_emvFcT8QEeigKbhv83y0Jw" sendEvent="_emvFcD8QEeigKbhv83y0Jw"/>
+    <message xmi:type="uml:Message" xmi:id="_tpDOED8QEeigKbhv83y0Jw" name="Verifica se o Cidadão é o proprietário da matrícula" receiveEvent="_tpEcMD8QEeigKbhv83y0Jw" sendEvent="_tpD1ID8QEeigKbhv83y0Jw"/>
+    <message xmi:type="uml:Message" xmi:id="_Qa41UD8REeigKbhv83y0Jw" name="Se sim adiciona matrícula à lista de automóveis do cidadão" receiveEvent="_Qa5cYT8REeigKbhv83y0Jw" sendEvent="_Qa5cYD8REeigKbhv83y0Jw"/>
+    <message xmi:type="uml:Message" xmi:id="_tLxmwD8REeigKbhv83y0Jw" name="Cidadão é notificado com o sucesso da adicão da matrícula" receiveEvent="_tLy04T8REeigKbhv83y0Jw" sendEvent="_tLy04D8REeigKbhv83y0Jw"/>
   </packagedElement>
 </uml:Model>
