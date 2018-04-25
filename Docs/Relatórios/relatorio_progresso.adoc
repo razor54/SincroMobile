@@ -1,0 +1,160 @@
+= Gestão de Eventos de Contraordenação Por Excesso de Velocidade
+
+---
+
+image::./adoc_images/isel_logo.png[]
+
+
+**Realizado por:** +
+André Gaudêncio, nº 42204 +
+Nuno Conceição, nº 42195
+
+**Orientadores:** +
+Engenheiro Luís Osório, lo@isel.ipl.pt +
+Paulo Borges, pborges@deetc.isel.ipl.pt
+
+---
+
+Relatório de progresso realizado no âmbito de Projecto e Seminário, do curso de licenciatura em Engenharia Informática e de Computadores Semestre de Verão 2017/2018
+
+Abril de 2018 
+
+<<<
+
+==== Resumo
+O foco deste projeto é o desenvolvimento de um protótipo de um serviço que permite ao cidadão o acesso imediato a um evento de excesso de velocidade. Os eventos são gerados através dos cinemó-metros pertencentes à Rede Nacional de Controlo de Velocidade, SINCRO. Uma vez infringida a velo-cidade extipulada no local onde se encontra um cinemómetro, os dados do evento irão ser armazena-dos, para posteriormente serem enviados e avaliados pelo sistema informático da ANSR (Autoridade Nacional de Segurança Rodoviária). Uma vez decorrido este processo e validados os eventos de trânsi-to, caso exista excesso de velocidade, o dono do veículo deverá ser notificado via dispositivo móvel sobre os detalhes do evento.
+
+image::./adoc_images/general_picture.png[]
+
+
+Atualmente o sistema de notificação de contraordenações por excesso de velocidade é feito manualmente através de correio. Com este projeto deverá ser possível ao cidadão subscrever os seus veículos através do seu dispositivo móvel, possibilitando ser notificado de quaisquer eventos que ocorram nos veículos registados. Este projeto é motivado sobre a informação do evento de controlo de passagem de excesso de velocidade, na expetativa que haja a redução de situações de violação do excesso de velocidade. Através de uma plataforma móvel acreditamos que seja possível que o condutor fique mais atento à sua condução, dado que os alertas recebidos são visualizados num espaço de tempo reduzido. 
+
+<<<
+
+==== Análise
+Requisitos
+Para este projeto será necessário a criação de um Servidor. Este vai ser responsável por emitir notificações de eventos para os dispositivos móveis, bem como processar pedidos sobre informações relativas ao utilizador do dispositivo. +
+O Servidor terá a responsabilidade de trabalhar dados provenientes do Sistema Informático SINCRO. Só assim é possível ter acesso aos eventos gerados pelos cinemómetro e já corretamente avaliados e autorizados a serem notificados. +
+Também será necessária a realização da Componente Móvel (telemóvel, ou outro dispositivo equivalente) através do qual o utilizador realizará os pedidos ao servidor e receberá as notificações sobre eventos de trânsito.
+
+==== Ferramentas
+A figura 1 apresenta uma vista geral sobre o projeto. +
+O servidor irá ser criado numa linguagem que dê suporte para aplicações servidoras (Java, Node.js, .NET, etc.). Relativamente aos dispositivos móveis iremos usar uma linguagem que dê suporte a multiplataforma (React Native, Xamarin, Native Script).
+
+==== Problemas
+A bateria limitada nos dispositivos móveis é algo a ter em conta na realização deste projeto. Uma aplicação que utilize em grandes quantidades a energia de um dispositivo pode ser facilmente posta em causa e possivelmente desinstalada. +
+A quantidade e variedade de dispositivos móveis existentes no mercado é também um dos problemas a considerar no projeto. Deverá ser desenvolvida uma aplicação passível de ser utilizada por qualquer condutor proprietário de um automóvel.
+
+
+
+[cols="5,14",options="header"]
+|=========================================================
+|Problemas |Possíveis Soluções
+
+|Poupança Bateria
+|Utilização de notificações ‘Push’
+|Variedade de Dispositivos Móveis
+|Utilizar uma linguagem que possibilite a redução de código nativo, linguagem multiplataforma
+|=========================================================
+<<<
+
+
+
+==== Requisitos Funcionais
+
+image::./adoc_images/use_case.png[]
+<<<
+
+===== RF01 - Notificação de Contraordenações
+O proprietário do veículo recebe a notificação acerca do evento no seu telemóvel. As informações sobre o evento são enviadas pelo sistema SINCRO.
+
+image::./adoc_images/sequence/rf01.png[]
+<<<
+
+===== RF02 - Delegar Matrícula
+Permite o utilizador delegar o seu veículo a outro utilizador, já registado no sistema, que aceite esta responsabilidade.
+
+image::./adoc_images/sequence/rf02.png[]
+<<<
+
+
+===== RF03 - Subscrever Veículo
+Depois de registado, o utilizador poderá subscrever as suas viaturas, bem como viaturas delega-das por outros utilizadores. Passando a ser o responsável por quaisquer futuros eventos.
+
+image::./adoc_images/sequence/rf03.png[]
+<<<
+
+
+===== RF04 - Histórico de Contraordenações
+É disponibilizada uma lista de contraordenações com os últimos eventos ocorridos. O utilizador poderá visualizar os mesmos e aceder à sua informação.
+
+image::./adoc_images/sequence/rf04.png[]
+<<<
+
+===== RF05 - Registar Cidadão
+Para ter acesso a quaisquer funcionalidades é necessário o cidadão se registar no sistema através do seu cartão de cidadão e do seu contacto telefónico de forma a ser identificável pelo sistema.
+
+image::./adoc_images/sequence/rf05.png[]
+<<<
+
+===== RF06 - Pagamento de Contraordenações
+Será disponibilizado para qualquer contraordenação a possibilidade de pagamento do valor respe-tivo da mesma. 
+
+image::./adoc_images/sequence/rf06.png[]
+<<<
+
+
+
+
+
+
+<<<
+
+==== Requisitos Não Funcionais
+
+===== RNF01 - Escalabilidade
+O sistema irá ser desenhado de forma a suportar múltiplos acessos por vários utilizadores. Serão utilizadas técnicas como o balanceamento de carga e distribuição de operações de forma a resul-tar num melhor desempenho para o cidadão.
+
+===== RNF02 - Segurança
+Dada a importância deste tipo de informação apresentado na aplicação, irão ser usadas formas de possibilitar a máxima segurança no sistema.
+
+===== RNF03 - Tolerância a falhas
+O cidadão irá usar o nosso sistema para efetuar pagamentos e aceder a informação importante. Deverá ser garantido o bom funcionamento da nossa aplicação e irá ser dado suporte para possí-veis falhas.
+
+===== RNF04 - Rapidez de Entrega
+Uma vez que o sistema funcionará todo através de sistemas informáticos, vai ser possível uma entrega ao utilizador mais rápida.
+
+
+<<<
+
+==== Arquitetura do projeto
+
+image::./adoc_images/block_diagram.png[]
+
+
+===== Módulo Principal
+O módulo principal irá ser responsável por implementar todas as funcionalidades disponíveis no SINCRO Mobile.
+
+===== Persistência de Dados
+A componente de Persistência de Dados tem a responsabilidade de garantir a segurança dos dados, bem como o controlo do acesso aos mesmos. +
+Como está presente na imagem, o Módulo principal irá efetuar o acesso a dados e a alteração dos mesmos. Quanto ao Componente de Interação com o sistema SINCRO, este irá apenas realizar alteração dos dados.
+
+<<<
+
+===== Interface Humana
+Esta componente é constituída por duas componentes internas. Uma componente aplicacional realizada para dispositívos móveis e outra componente para web. +
+A Aplicação Móvel irá funcionar como interface para o cidadão utilizador das funcionalidades presentes no sistema SINCRO Mobile. No caso da Aplicação Web, esta será construída com o propósito de disponibilizar informação interna passível de ser utilizada para consulta de _mensagens de log_. 
+
+===== Interação com SINCRO
+
+
+===== Interface SINCRO
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_N5XuEEjFEeiMUaZiGUPOBA" name="block_diagram">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_OAVRsEjFEeiMUaZiGUPOBA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Component" xmi:id="_S5KzcEjGEeiMUaZiGUPOBA" name="SINCRO">
+    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_mfPwQEjIEeiMUaZiGUPOBA" client="_S5KzcEjGEeiMUaZiGUPOBA" supplier="_U8Oa4EjHEeiMUaZiGUPOBA" contract="_U8Oa4EjHEeiMUaZiGUPOBA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Component" xmi:id="_mESkgEjGEeiMUaZiGUPOBA" name="SINCRO Mobile">
+    <packagedElement xmi:type="uml:Component" xmi:id="_WFSmoEjFEeiMUaZiGUPOBA" name="Módulo Principal">
+      <generalization xmi:type="uml:Generalization" xmi:id="_wbU0UEjHEeiMUaZiGUPOBA" general="_eKX3YEjFEeiMUaZiGUPOBA"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_2DDR0EjHEeiMUaZiGUPOBA" general="_g9jwsEjFEeiMUaZiGUPOBA"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_EqTPEEjIEeiMUaZiGUPOBA" general="_PinR4EjHEeiMUaZiGUPOBA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_g9jwsEjFEeiMUaZiGUPOBA" name="Interface Humana">
+      <generalization xmi:type="uml:Generalization" xmi:id="_MWq6UEjHEeiMUaZiGUPOBA" general="_WFSmoEjFEeiMUaZiGUPOBA"/>
+      <packagedElement xmi:type="uml:Component" xmi:id="_lxh2AEjFEeiMUaZiGUPOBA" name="Aplicação Móvel"/>
+      <packagedElement xmi:type="uml:Component" xmi:id="_okuWYEjFEeiMUaZiGUPOBA" name="Aplicação Web" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_eKX3YEjFEeiMUaZiGUPOBA" name="Persistência de Dados">
+      <generalization xmi:type="uml:Generalization" xmi:id="_xsoEIEjHEeiMUaZiGUPOBA" general="_WFSmoEjFEeiMUaZiGUPOBA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Component" xmi:id="_PinR4EjHEeiMUaZiGUPOBA" name="Interação com SINCRO">
+      <generalization xmi:type="uml:Generalization" xmi:id="_u9vcAEjHEeiMUaZiGUPOBA" general="_eKX3YEjFEeiMUaZiGUPOBA"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_F7wP4EjIEeiMUaZiGUPOBA" general="_WFSmoEjFEeiMUaZiGUPOBA"/>
+      <generalization xmi:type="uml:Generalization" xmi:id="_WSa8UEjIEeiMUaZiGUPOBA" general="_U8Oa4EjHEeiMUaZiGUPOBA"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_U8Oa4EjHEeiMUaZiGUPOBA" name="Interface SINCRO">
+    <generalization xmi:type="uml:Generalization" xmi:id="_W3mF8EjIEeiMUaZiGUPOBA" general="_PinR4EjHEeiMUaZiGUPOBA"/>
+  </packagedElement>
+</uml:Model>
