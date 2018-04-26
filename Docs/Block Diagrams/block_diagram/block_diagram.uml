@@ -6,7 +6,7 @@
   <packagedElement xmi:type="uml:Component" xmi:id="_S5KzcEjGEeiMUaZiGUPOBA" name="SINCRO">
     <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_mfPwQEjIEeiMUaZiGUPOBA" client="_S5KzcEjGEeiMUaZiGUPOBA" supplier="_U8Oa4EjHEeiMUaZiGUPOBA" contract="_U8Oa4EjHEeiMUaZiGUPOBA"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Component" xmi:id="_mESkgEjGEeiMUaZiGUPOBA" name="SINCRO Mobile">
+  <packagedElement xmi:type="uml:Component" xmi:id="_mESkgEjGEeiMUaZiGUPOBA" name="SINCRO Mobile" visibility="public" isIndirectlyInstantiated="false">
     <packagedElement xmi:type="uml:Component" xmi:id="_WFSmoEjFEeiMUaZiGUPOBA" name="Módulo Principal">
       <generalization xmi:type="uml:Generalization" xmi:id="_wbU0UEjHEeiMUaZiGUPOBA" general="_eKX3YEjFEeiMUaZiGUPOBA"/>
       <generalization xmi:type="uml:Generalization" xmi:id="_2DDR0EjHEeiMUaZiGUPOBA" general="_g9jwsEjFEeiMUaZiGUPOBA"/>
