@@ -1,2 +1,0 @@
-. Aumentar tamanho da imagem da vista geral
-. Descrever cada diagrama de sequência 
