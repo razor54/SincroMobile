@@ -1,13 +1,12 @@
-:isel_logo: Figura 1
-:general_picture: Figura 2
-:use_case: Figura 3
-:rf01: Figura 4
-:rf02: Figura 5
-:rf03: Figura 6
-:rf04: Figura 7
-:rf05: Figura 8
-:rf06: Figura 9
-:arquiteture: Figura 10
+:general_picture: Figura 1
+:use_case: Figura 2
+:rf01: Figura 3
+:rf02: Figura 4
+:rf03: Figura 5
+:rf04: Figura 6
+:rf05: Figura 7
+:rf06: Figura 8
+:arquiteture: Figura 9
 
 
 
@@ -41,7 +40,6 @@ Uma vez infringida a velocidade extipulada no local onde se encontra um cinemóm
 
 
 .Imagem Geral
-[caption="Figura 2: "]
 image::./adoc_images/general_picture.png[]
 
 
@@ -81,7 +79,6 @@ A quantidade e variedade de dispositivos móveis existentes no mercado é també
 No sistema SINCRO Mobile footnoteref:[sincro_mobile,Sistema de Gestão de Eventos de Contrarodenação Por Excesso de Velocidade] serão implementados os seguintes requisitos funcionais, presentes na {use_case}. Cada requisito funcional foi idêntificado com o indentificador RF footnote:[Requisito Funcional] seguido pelo respetivo número.
 
 .Diagrama Caso de Uso
-[caption="Figura 3: "]
 image::./adoc_images/use_case.png[]
 
 Para efetuar os mesmos será necessário a comunicação com a entidade SINCRO footnoteref:[sincro]. Quanto ao cidadão, este terá acesso a todas as funcionalidades. +
@@ -94,7 +91,6 @@ Para efetuar os mesmos será necessário a comunicação com a entidade SINCRO f
 O proprietário do veículo recebe a notificação acerca do evento no seu telemóvel. As informações sobre o evento são enviadas pelo sistema SINCRO footnoteref:[sincro].
 
 .Requisito Funcional I
-[caption="Figura 4: "]
 image::./adoc_images/sequence/rf01.png[]
 
 . O evento de contraordenação é enviado do sistema SINCRO footnoteref:[sincro] para o SINCRO Mobile footnoteref:[sincro_mobile], onde irá ser guardado. +
@@ -106,7 +102,6 @@ image::./adoc_images/sequence/rf01.png[]
 Permite o utilizador delegar o seu veículo a outro utilizador, já registado no sistema, que aceite esta responsabilidade.
 
 .Requisito Funcional II
-[caption="Figura 5: "]
 image::./adoc_images/sequence/rf02.png[]
 
 . Envio do pedido de delegação por parte do Proprietário. Onde irá constar a respetiva matrícula e o Cidadão a quem delega a responsabilidade.
@@ -122,7 +117,6 @@ image::./adoc_images/sequence/rf02.png[]
 Depois de registado, o utilizador poderá subscrever as suas viaturas, bem como viaturas delegadas por outros utilizadores. Passando a ser o responsável por quaisquer futuros eventos.
 
 .Requisito Funcional III
-[caption="Figura 6: "]
 image::./adoc_images/sequence/rf03.png[]
 
 . Envio da matrícula e dados que possam identificar o veículo a subscrever.
@@ -137,7 +131,6 @@ image::./adoc_images/sequence/rf03.png[]
 É disponibilizada uma lista de contraordenações com os últimos eventos ocorridos. O utilizador poderá visualizar os eventos de contraordenação e aceder à sua informação.
 
 .Requisito Funcional IV
-[caption="Figura 7: "]
 image::./adoc_images/sequence/rf04.png[]
 
 . Pedido de histórico do Cidadão
@@ -151,7 +144,6 @@ image::./adoc_images/sequence/rf04.png[]
 Para ter acesso a quaisquer funcionalidades é necessário o cidadão se registar no sistema através do seu cartão de cidadão e do seu contacto telefónico de forma a ser identificável pelo sistema.
 
 .Requisito Funcional V
-[caption="Figura 8: "]
 image::./adoc_images/sequence/rf05.png[]
 
 . Envio dos dados do Cidadão (nome,cartão de cidadão, morada, número, etc).
@@ -166,7 +158,6 @@ image::./adoc_images/sequence/rf05.png[]
 Será disponibilizado para qualquer contraordenação a possibilidade de pagamento do valor respetivo da mesma. 
 
 .Requisito Funcional VI
-[caption="Figura 9: "]
 image::./adoc_images/sequence/rf06.png[]
 
 . Envio do pedido de pagamento.
@@ -207,7 +198,6 @@ Uma vez que o sistema funcionará todo através de sistemas informáticos, vai s
 Com base no objetivo do sistema SINCRO Mobile footnoteref:[sincro_mobile] foi necessário desenhar uma arquitura precisa do projeto.
 
 .Arquitetura do Projeto
-[caption="Figura 10: "]
 image::./adoc_images/block_diagram.png[]
 
 Na {arquiteture} é possível visualizar os componentes presentes na arquitura e as interligações das mesmas.
