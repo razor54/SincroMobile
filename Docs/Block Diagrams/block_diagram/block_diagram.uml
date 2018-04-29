@@ -12,7 +12,7 @@
       <generalization xmi:type="uml:Generalization" xmi:id="_2DDR0EjHEeiMUaZiGUPOBA" general="_g9jwsEjFEeiMUaZiGUPOBA"/>
       <generalization xmi:type="uml:Generalization" xmi:id="_EqTPEEjIEeiMUaZiGUPOBA" general="_PinR4EjHEeiMUaZiGUPOBA"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Component" xmi:id="_g9jwsEjFEeiMUaZiGUPOBA" name="Interface Humana">
+    <packagedElement xmi:type="uml:Component" xmi:id="_g9jwsEjFEeiMUaZiGUPOBA" name="Interface do Utilizador">
       <generalization xmi:type="uml:Generalization" xmi:id="_MWq6UEjHEeiMUaZiGUPOBA" general="_WFSmoEjFEeiMUaZiGUPOBA"/>
       <packagedElement xmi:type="uml:Component" xmi:id="_lxh2AEjFEeiMUaZiGUPOBA" name="Aplicação Móvel"/>
       <packagedElement xmi:type="uml:Component" xmi:id="_okuWYEjFEeiMUaZiGUPOBA" name="Aplicação Web" visibility="public"/>

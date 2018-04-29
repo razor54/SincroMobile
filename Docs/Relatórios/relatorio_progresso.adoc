@@ -1,10 +1,8 @@
 = Gestão de Eventos de Contraordenação Por Excesso de Velocidade
 
-
 ---
 
 image::./adoc_images/isel_logo.png[]
-
 
 **Realizado por:** +
 André Gaudêncio, nº 42204 +
@@ -16,20 +14,20 @@ Paulo Borges, pborges@deetc.isel.ipl.pt
 
 ---
 
-Relatório de progresso realizado no âmbito de Projecto e Seminário, do curso de licenciatura em Engenharia Informática e de Computadores Semestre de Verão 2017/2018
+Relatório de progresso realizado no âmbito de Projeto e Seminário, do curso de licenciatura em Engenharia Informática e de Computadores Semestre de Verão 2017/2018
 
-Abril de 2018 
+Abril de 2018
 
 <<<
 
 == Resumo
-O foco deste projeto é o desenvolvimento de um protótipo de um serviço que permite ao cidadão o acesso imediato a um evento de excesso de velocidade. Os eventos são gerados através dos cinemózetros pertencentes à SINCRO footnoteref:[sincro,Rede Nacional de Controlo de Velocidade]. +
+O foco deste projeto é o desenvolvimento de um protótipo de um serviço que permite ao cidadão o acesso imediato a um evento de excesso de velocidade. Os eventos são gerados através dos cinemómetros pertencentes à SINCRO footnoteref:[sincro,Rede Nacional de Controlo de Velocidade]. +
 Uma vez infringida a velocidade extipulada no local onde se encontra um cinemómetro, os dados do evento irão ser armazenados, para posteriormente serem enviados e avaliados pelo sistema informático da ANSR footnoteref:[ansr,Autoridade Nacional de Segurança Rodoviária]. Uma vez decorrido este processo e validados os eventos de trânsito, caso exista excesso de velocidade, o dono do veículo deverá ser notificado via dispositivo móvel sobre os detalhes do evento.
 
 
 .Imagem Geral
 [#big_picture]
-image::./adoc_images/general_picture.png[]
+image::./adoc_images/general_picture.png[400,400]
 
 
 Atualmente o sistema de notificação de contraordenações por excesso de velocidade é feito manualmente através de correio. Com este projeto deverá ser possível ao cidadão subscrever os seus veículos através do seu dispositivo móvel, possibilitando ser notificado de quaisquer eventos que ocorram nos veículos registados. Este projeto é motivado sobre a informação do evento de controlo de passagem de excesso de velocidade, na expetativa que haja a redução de situações de violação do excesso de velocidade. Através de uma plataforma móvel acreditamos que seja possível que o condutor fique mais atento à sua condução, dado que os alertas recebidos são visualizados num espaço de tempo reduzido.
@@ -38,7 +36,7 @@ Atualmente o sistema de notificação de contraordenações por excesso de veloc
 
 == Análise 
 Para este projeto será necessário a criação de um Servidor. Este vai ser responsável por emitir notificações de eventos para os dispositivos móveis, bem como processar pedidos sobre informações relativas ao utilizador do dispositivo. +
-O Servidor terá a responsabilidade de trabalhar dados provenientes do Sistema Informático SINCRO footnoteref:[sincro]. Só assim é possível ter acesso aos eventos gerados pelos cinemómetro e já corretamente avaliados e autorizados a serem notificados. +
+O Servidor terá a responsabilidade de trabalhar dados provenientes do sistema informático SINCRO footnoteref:[sincro]. Só assim é possível ter acesso aos eventos gerados pelos cinemómetro e já corretamente avaliados e autorizados a serem notificados. +
 Também será necessária a realização da Componente Móvel (telemóvel, ou outro dispositivo equivalente) através do qual o utilizador realizará os pedidos ao servidor e receberá as notificações sobre eventos de trânsito.
 
 == Ferramentas
@@ -65,13 +63,13 @@ A quantidade e variedade de dispositivos móveis existentes no mercado é també
 
 
 == Requisitos Funcionais
-No sistema SINCRO Mobile footnoteref:[sincro_mobile,Sistema de Gestão de Eventos de Contrarodenação Por Excesso de Velocidade] serão implementados os seguintes requisitos funcionais, presentes no <<use_case>>. Cada requisito funcional foi idêntificado com o indentificador RF footnote:[Requisito Funcional] seguido pelo respetivo número.
+No sistema SINCRO Mobile footnoteref:[sincro_mobile,Sistema de Gestão de Eventos de Contraordenação Por Excesso de Velocidade] serão implementados os seguintes requisitos funcionais, presentes no <<use_case>>. Cada requisito funcional foi identificado com o indentificador RF footnote:[Requisito Funcional] seguido pelo respetivo número.
 
 .Diagrama Caso de Uso
 [#use_case]
 image::./adoc_images/use_case.png[]
 
-Para efetuar os mesmos será necessário a comunicação com a entidade SINCRO footnoteref:[sincro]. Quanto ao cidadão, este terá acesso a todas as funcionalidades. +
+Para efetuar os mesmos será necessário a comunicação com a entidade SINCRO footnoteref:[sincro]. Quanto ao cidadão, este terá acesso a todas as funcionalidades.
 
 
 
@@ -84,7 +82,7 @@ O proprietário do veículo recebe a notificação acerca do evento no seu telem
 [#rf01]
 image::./adoc_images/sequence/rf01.png[]
 
-. O evento de contraordenação é enviado do sistema SINCRO footnoteref:[sincro] para o SINCRO Mobile footnoteref:[sincro_mobile], onde irá ser guardado. +
+. O evento de contraordenação é enviado do sistema SINCRO footnoteref:[sincro] para o SINCRO Mobile footnoteref:[sincro_mobile] onde irá ser guardado. +
 . Posteriormente irá ser enviada uma notificação ao Cidadão com as informações sobre o respetivo evento.
 
 <<<
@@ -98,7 +96,7 @@ image::./adoc_images/sequence/rf02.png[]
 
 . Envio do pedido de delegação por parte do Proprietário. Onde irá constar a respetiva matrícula e o Cidadão a quem delega a responsabilidade.
 . O Cidadão irá receber um pedido para aceitar a responsabilidade do veículo.
-. O Cidadão envia decisão face a responsabiliade.
+. O Cidadão envia decisão face a responsabilidade.
 . Se o Cidadão aceitar a responsabilidade (3), deverá ser entregue ao proprietário uma notificação de sucesso. Caso contrário irá receber uma notificação de insucesso.
 . Se o Cidadão aceitar a responsabilidade (3), o mesmo irá receber uma notificação sobre o veículo e respetiva matrícula pelo qual é responsável. Caso contrário a notificação não terá efeito.
 
@@ -127,9 +125,9 @@ image::./adoc_images/sequence/rf03.png[]
 [#rf04]
 image::./adoc_images/sequence/rf04.png[]
 
-. Pedido de histórico do Cidadão
-. Envio do pedido (1) para o sistema SINCRO footnoteref:[sincro]
-. É devolvido ao SINCRO Mobile footnoteref:[sincro_mobile] o histórico do Cidadão
+. Pedido de histórico do Cidadão.
+. Envio do pedido (1) para o sistema SINCRO footnoteref:[sincro].
+. É devolvido ao SINCRO Mobile footnoteref:[sincro_mobile] o histórico do Cidadão.
 . Cidadão recebe histórico de contraordenações.
 
 <<<
@@ -141,7 +139,7 @@ Para ter acesso a quaisquer funcionalidades é necessário o cidadão se regista
 [#rf05]
 image::./adoc_images/sequence/rf05.png[]
 
-. Envio dos dados do Cidadão (nome,cartão de cidadão, morada, número, etc).
+. Envio dos dados do Cidadão (nome, cartão de cidadão, morada, número, etc).
 . Verificação da validade da identidade do Cidadão.
 . Se a identidade for verificada com sucesso pelo sistema SINCRO footnoteref:[sincro] é adicionado um novo utilizador. Em caso de insucesso não ocorre alteração nenhuma.
 . Cidadão recebe confirmação do seu registo. Caso o passo (3) tenha resultado em insucesso, o seu registo é rejeitado.
@@ -159,7 +157,7 @@ image::./adoc_images/sequence/rf06.png[]
 . Envio do pedido de pagamento.
 . São disponibilizadas as formas de pagamento que o Cidadão poderá escolher.
 . É confirmado o método de pagamento
-. Envio do formulário de pagamento. No qual o utilizador poderá verificar os valores de pagamento e a respetiva contrardenação que pretende saldar.
+. Envio do formulário de pagamento. No qual o utilizador poderá verificar os valores de pagamento e a respetiva contraordenação que pretende saldar.
 . Confirmação de pagamento é enviada.
 . Transação monetária é feita através do sistema SINCRO footnoteref:[sincro].
 . Confirmação é enviada em caso de sucesso da transação (6).
@@ -191,13 +189,13 @@ Uma vez que o sistema funcionará todo através de sistemas informáticos, vai s
 <<<
 
 == Arquitetura do Projeto
-Com base no objetivo do sistema SINCRO Mobile footnoteref:[sincro_mobile] foi necessário desenhar uma arquitura precisa do projeto.
+Com base no objetivo do sistema SINCRO Mobile footnoteref:[sincro_mobile] foi necessário desenhar uma arquitetura precisa do projeto.
 
 .Arquitetura do Projeto
 [#arquiteture]
 image::./adoc_images/block_diagram.png[]
 
-Na <<arquiteture>> é possível visualizar os componentes presentes na arquitura e as interligações das mesmas.
+Na <<arquiteture>> é possível visualizar os componentes presentes na arquitetura e as interligações das mesmas.
 
 <<<
 
@@ -209,8 +207,8 @@ Todos os componentes envolvidos no sistema irão desempenhar funções com base 
 A componente de Persistência de Dados tem a responsabilidade de garantir a segurança dos dados, bem como o controlo do acesso aos mesmos. +
 Como está presente na imagem, o Módulo principal irá efetuar o acesso a dados e a alteração dos mesmos. Quanto ao componente de Interação com o sistema SINCRO footnoteref:[sincro], este irá apenas realizar alteração dos dados.
 
-=== Interface Humana
-Esta componente, Interface Humana, é constituída por duas componentes internas. Uma componente aplicacional realizada para dispositívos móveis e outra componente para web. +
+=== Interface do Utilizador
+Esta componente é constituída por duas componentes internas. Uma componente aplicacional realizada para dispositivos móveis e outra componente para web. +
 A Aplicação Móvel irá funcionar como interface para o cidadão utilizador das funcionalidades presentes no sistema SINCRO Mobile footnoteref:[sincro_mobile]. +
 A componente Aplicação Web vai ser de realização opcional. Será construída com o propósito de disponibilizar informação interna passível de ser utilizada para consulta de _mensagens de log_.
 
@@ -223,7 +221,7 @@ Tem como função principal interagir com o sistema SINCRO footnoteref:[sincro] 
 O sistema SINCRO footnoteref:[sincro] contém informações das quais não poderemos ter acesso. Será necessário criar esta interface para que seja possível simular a comunição com o mesmo. + 
 A mesma irá ser bastante útil na realização de testes e bom funcionamento do sistema SINCRO Mobile footnoteref:[sincro_mobile].
 
-
+<<<
 
 
 
