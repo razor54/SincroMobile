@@ -1,3 +1,8 @@
+:toc: macro
+:toc-placement!:
+:doctype: article
+:pdf-page-size: A4
+
 = Gestão de Eventos de Contraordenação Por Excesso de Velocidade
 
 ---
@@ -20,8 +25,12 @@ Abril de 2018
 
 <<<
 
+[title=Índice]
+toc::[]
+
+<<<
 == Introdução
-O projeto tem por objetivo o desenvolvimento de um serviço que permite ao cidadão o acesso imediato a um evento de excesso de velocidade. Os eventos são gerados através dos cinemómetros pertencentes à rede SINCRO footnoteref:[sincro,Rede Nacional de Controlo de Velocidade]. +
+O projeto tem por objetivo o desenvolvimento de um serviço que permite ao cidadão o acesso imediato a um evento de excesso de velocidade. Os eventos são gerados através dos cinemómetros pertencentes à rede SINCRO footnoteref:[sincro,Rede Nacional de Controlo de Velocidade], como mostrado na <<big_picture>> +
 Uma vez infringida a velocidade extipulada no local onde se encontra um cinemómetro, os dados do evento são armazenados, para posteriormente serem enviados e avaliados pelo sistema informático da ANSR footnoteref:[ansr]. Uma vez decorrido este processo e validados os eventos de trânsito, caso exista excesso de velocidade, o dono do veículo deverá ser notificado via dispositivo móvel sobre os detalhes do evento.
 
 .Imagem Geral
@@ -37,6 +46,7 @@ Dado a complexidade e diferentes aspetos presentes no objetivo deste projeto, fo
 
 ---
 
+/todo/ reler análise e reescrever
 === Análise 
 Para este projeto será necessário a criação de um Sistema Informático. Este vai ser responsável por emitir notificações de eventos para os dispositivos móveis, bem como processar pedidos sobre informações relativas ao utilizador do dispositivo. +
 O Sistema Informático terá a responsabilidade de trabalhar dados provenientes do sistema informático SINCRO footnoteref:[sincro]. Só assim é possível ter acesso aos eventos gerados pelos cinemómetro e já corretamente avaliados e autorizados a serem notificados. +
@@ -227,7 +237,7 @@ A camada de negócio é referente ao Sistema Central, a camada de dados à Persi
 
 ---
 
-=== Sistema Central
+=== Módulo Principal
 - <<Java>> +
 É uma técnologia amplamente utilizada. O seu código é compilado para _bytecode_ e executado numa máquina virtual, a JVM o que fornece uma camada de abstação independente da plataforma onde corre.
 
@@ -271,6 +281,8 @@ Dado o desenvolvimento do nosso projeto ter evoluído como esperado, apresentamo
 image::./adoc_images/cronograma_dates.png[cronograma,1750]
 
 ---
+==== Tarefas
+/inserir percentagens/
 
 . Levantamento e análise de requisitos funcionais e não funcionais.
 . Desenho da arquitetura do sistema a desenvolver.
@@ -291,12 +303,16 @@ image::./adoc_images/cronograma_dates.png[cronograma,1750]
 
 [bibliography]
 == Referências
+/referencias
+
 - [[[Java]]] https://www.java.com
 - [[[FrameworkHybernate]]] http://hibernate.org
 - [[[Spring]]] https://spring.io/
 - [[[ReactNative]]] https://facebook.github.io/react-native/
 
+---
 
+autor, título, link
 
 
 
