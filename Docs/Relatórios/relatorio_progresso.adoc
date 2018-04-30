@@ -20,35 +20,37 @@ Abril de 2018
 
 <<<
 
-== Resumo
-O foco deste projeto é o desenvolvimento de um protótipo de um serviço que permite ao cidadão o acesso imediato a um evento de excesso de velocidade. Os eventos são gerados através dos cinemómetros pertencentes à SINCRO footnoteref:[sincro,Rede Nacional de Controlo de Velocidade]. +
-Uma vez infringida a velocidade extipulada no local onde se encontra um cinemómetro, os dados do evento irão ser armazenados, para posteriormente serem enviados e avaliados pelo sistema informático da ANSR footnoteref:[ansr,Autoridade Nacional de Segurança Rodoviária]. Uma vez decorrido este processo e validados os eventos de trânsito, caso exista excesso de velocidade, o dono do veículo deverá ser notificado via dispositivo móvel sobre os detalhes do evento.
-
+== Introdução
+O projeto tem por objetivo o desenvolvimento de um serviço que permite ao cidadão o acesso imediato a um evento de excesso de velocidade. Os eventos são gerados através dos cinemómetros pertencentes à rede SINCRO footnoteref:[sincro,Rede Nacional de Controlo de Velocidade]. +
+Uma vez infringida a velocidade extipulada no local onde se encontra um cinemómetro, os dados do evento são armazenados, para posteriormente serem enviados e avaliados pelo sistema informático da ANSR footnoteref:[ansr]. Uma vez decorrido este processo e validados os eventos de trânsito, caso exista excesso de velocidade, o dono do veículo deverá ser notificado via dispositivo móvel sobre os detalhes do evento.
 
 .Imagem Geral
 [#big_picture]
-image::./adoc_images/general_picture.png[400,400]
+image::./adoc_images/general_picture.png[]
 
-
-Atualmente o sistema de notificação de contraordenações por excesso de velocidade é feito manualmente através de correio. Com este projeto deverá ser possível ao cidadão subscrever os seus veículos através do seu dispositivo móvel, possibilitando ser notificado de quaisquer eventos que ocorram nos veículos registados. Este projeto é motivado sobre a informação do evento de controlo de passagem de excesso de velocidade, na expetativa que haja a redução de situações de violação do excesso de velocidade. Através de uma plataforma móvel acreditamos que seja possível que o condutor fique mais atento à sua condução, dado que os alertas recebidos são visualizados num espaço de tempo reduzido.
+Atualmente o sistema de notificação de contraordenações por excesso de velocidade é feito manualmente através de correio. Com este projeto deverá ser possível ao cidadão subscrever os seus veículos através do seu dispositivo móvel, possibilitando ser notificado de quaisquer eventos que ocorram nos veículos registados. Este projeto é motivado sobre a informação do evento de controlo de passagem de excesso de velocidade, na expetativa que haja a redução de situações de violação do excesso de velocidade. Através de uma plataforma móvel acreditamos ser possível que o condutor fique mais atento à sua condução, dado que os alertas recebidos são visualizados num espaço de tempo reduzido.
 
 <<<
 
-== Análise 
-Para este projeto será necessário a criação de um Servidor. Este vai ser responsável por emitir notificações de eventos para os dispositivos móveis, bem como processar pedidos sobre informações relativas ao utilizador do dispositivo. +
-O Servidor terá a responsabilidade de trabalhar dados provenientes do sistema informático SINCRO footnoteref:[sincro]. Só assim é possível ter acesso aos eventos gerados pelos cinemómetro e já corretamente avaliados e autorizados a serem notificados. +
-Também será necessária a realização da Componente Móvel (telemóvel, ou outro dispositivo equivalente) através do qual o utilizador realizará os pedidos ao servidor e receberá as notificações sobre eventos de trânsito.
+== Análise do Problema e Modelos
+Dado a complexidade e diferentes aspetos presentes no objetivo deste projeto, foi necessário fazer uma análise geral, uma investigação das ferramentas a serem utilizadas e o estudo dos possíveis problemas.
 
-== Ferramentas
-A figura 1 apresenta uma vista geral sobre o projeto. +
-O servidor irá ser criado numa linguagem que dê suporte para aplicações servidoras (Java, Node.js, .NET, etc.). Relativamente aos dispositivos móveis iremos usar uma linguagem que dê suporte a multiplataforma (React Native, Xamarin, Native Script).
+---
 
-== Problemas
+=== Análise 
+Para este projeto será necessário a criação de um Sistema Informático. Este vai ser responsável por emitir notificações de eventos para os dispositivos móveis, bem como processar pedidos sobre informações relativas ao utilizador do dispositivo. +
+O Sistema Informático terá a responsabilidade de trabalhar dados provenientes do sistema informático SINCRO footnoteref:[sincro]. Só assim é possível ter acesso aos eventos gerados pelos cinemómetro e já corretamente avaliados e autorizados a serem notificados. +
+Também será necessária a realização da Componente Móvel (telemóvel, ou outro dispositivo equivalente) através do qual o utilizador realizará subscrição de eventos de contraordenação, de forma a receber as devidas notificações dos mesmos.
+
+=== Ferramentas
+A <<big_picture>> apresenta uma vista geral sobre o projeto. +
+O Sistema Informático irá ser criado numa linguagem que dê suporte para aplicações servidoras (Java, Node.js, .NET, etc.). Relativamente aos dispositivos móveis iremos usar uma linguagem que dê suporte a multiplataforma (React Native, Xamarin, Native Script).
+
+<<<
+
+=== Problemas
 A bateria limitada nos dispositivos móveis é algo a ter em conta na realização deste projeto. Uma aplicação que utilize em grandes quantidades a energia de um dispositivo pode ser facilmente posta em causa e possivelmente desinstalada. +
-A quantidade e variedade de dispositivos móveis existentes no mercado é também um dos problemas a considerar no projeto. Deverá ser desenvolvida uma aplicação passível de ser utilizada por qualquer condutor proprietário de um automóvel.
-
-
-
+A quantidade e variedade de dispositivos móveis existentes no mercado é também um dos problemas a considerar no projeto. Deverá ser desenvolvida uma aplicação móvel (App) passível de ser utilizada por qualquer condutor proprietário de um automóvel.
 [cols="5,14",options="header"]
 |=============================
 |Problemas |Possíveis Soluções
@@ -58,9 +60,8 @@ A quantidade e variedade de dispositivos móveis existentes no mercado é també
 |Variedade de Dispositivos Móveis
 |Utilizar uma linguagem que possibilite a redução de código nativo, linguagem multiplataforma
 |=============================
+
 <<<
-
-
 
 == Requisitos Funcionais
 No sistema SINCRO Mobile footnoteref:[sincro_mobile,Sistema de Gestão de Eventos de Contraordenação Por Excesso de Velocidade] serão implementados os seguintes requisitos funcionais, presentes no <<use_case>>. Cada requisito funcional foi identificado com o indentificador RF footnote:[Requisito Funcional] seguido pelo respetivo número.
@@ -168,7 +169,6 @@ image::./adoc_images/sequence/rf06.png[]
 
 
 == Requisitos Não Funcionais
-
 Todas as garantias necessárias de realizar de forma possibilitar a implementação dos requisitos não funcionais são do nosso interesse. Contudo não nos comprometemos com a realização das mesmas. 
 
 ---
@@ -197,7 +197,7 @@ image::./adoc_images/block_diagram.png[]
 
 Na <<arquiteture>> é possível visualizar os componentes presentes na arquitetura e as interligações das mesmas.
 
-<<<
+---
 
 === Módulo Principal
 O Módulo Principal irá ser responsável por implementar todas as funcionalidades disponíveis no SINCRO Mobile footnoteref:[sincro_mobile].
@@ -212,8 +212,6 @@ Esta componente é constituída por duas componentes internas. Uma componente ap
 A Aplicação Móvel irá funcionar como interface para o cidadão utilizador das funcionalidades presentes no sistema SINCRO Mobile footnoteref:[sincro_mobile]. +
 A componente Aplicação Web vai ser de realização opcional. Será construída com o propósito de disponibilizar informação interna passível de ser utilizada para consulta de _mensagens de log_.
 
-<<<
-
 === Interação com SINCRO 
 Tem como função principal interagir com o sistema SINCRO footnoteref:[sincro] para a realização de funcionalidades presentes no nosso sistema que exijam funcionalidades presentes na interface SINCRO.
 
@@ -222,6 +220,82 @@ O sistema SINCRO footnoteref:[sincro] contém informações das quais não poder
 A mesma irá ser bastante útil na realização de testes e bom funcionamento do sistema SINCRO Mobile footnoteref:[sincro_mobile].
 
 <<<
+
+== Implementação do Sistema SINCRO Mobile
+Nesta secção são descritas as técnologias utilizadas no desenvolvimento do SINCRO Mobile bem como a razão da sua adoção, discriminando as ditas técnologias por camada aplicacional: dados, negócio e cliente. +
+A camada de negócio é referente ao Sistema Central, a camada de dados à Persistencia de dados, e o cliente à Interface Humana.
+
+---
+
+=== Sistema Central
+- <<Java>> +
+É uma técnologia amplamente utilizada. O seu código é compilado para _bytecode_ e executado numa máquina virtual, a JVM o que fornece uma camada de abstação independente da plataforma onde corre.
+
+=== Camada de dados
+A camada de dados baseia-se num sistema de gestão de base de dados (SGBD).
+Neste projeto, o sistema de gestão de base de dados a ser usado deverá ser o _PostgreSQL Server_, sendo um dos motivos para a sua escolha o facto de estar disponível na comunidade OpenSource. +
+
+- <<FrameworkHybernate>> +
+O _Hybernate_ é uma biblioteca desenvolvida para Java com o intuito de forncer uma _framework_ que permitisse mapear objetos pertencentes ao _modelo de dominio_ em objetos equivalentes no respetivo _modelo relacional_. 
+
+=== Camada de negócio
+A camada de negócio representa o _core_ do sistema.
+Nesta camada é usada a __framework Spring__.
+
+- <<Spring>> +
+O _Spring_ é uma _framework_ desenvolvida para java, sendo constituida por diversos módulos que oferecem uma gama de serviços abrangente.
+
+<<<
+
+=== Camada Cliente
+A camada cliente representa a componente aplicacional, que neste caso é uma aplicação móvel.
+
+- <<ReactNative>> +
+O _React Navtie_ é uma tecnologia de desenvolvimento de aplicações móveis nativas para multiplataforma (Android e iOS) em que práticamente todo o o código é partilhado entre as duas versões. É usado _javascript_ para o desenvolvimento de aplicações nesta técnlogia bem como um _framework_ baseado em _React_ .
+
+
+<<<
+
+== Conclusão
+Neste documento é descrito um sistema cujo objetivo é futuramente ser de alguma forma integrado na rede ANSR, pelo que é necessário que a sua implementação seja de certo modo visada na sua futura manutenção. Por essa razão é necessário um cuidado acrescido na legibilidade do código desenvolvido, bem como a facilidade da sua alteração.
+
+<<<
+
+== Anexos
+
+=== Cronograma
+Dado o desenvolvimento do nosso projeto ter evoluído como esperado, apresentamos novamente o cronograma com as devidas alterações.
+
+.Cronograma do Projeto
+[#cronograma]
+image::./adoc_images/cronograma_dates.png[cronograma,1750]
+
+---
+
+. Levantamento e análise de requisitos funcionais e não funcionais.
+. Desenho da arquitetura do sistema a desenvolver.
+. Especificação do sistema a desenvolver.
+. Avaliação do quadro tecnológico a utilizar.
+. Desenvolvimento dos elementos do sistema.
+. Testes do sistema desenvolvido.
+. Desenvolvimento da aplicação móvel.
+. Testes funcionais da aplicação móvel.
+. Entrega da versão beta.
+. Resolução de _bugs_ e melhoria de código.
+. Melhoria de aspetos não funcionais da aplicação.
+. Resolução de aspetos específicos dos sistemas operativos móveis.
+. Interface de pagamento (Opcional).
+
+
+<<<
+
+[bibliography]
+== Referências
+- [[[Java]]] https://www.java.com
+- [[[FrameworkHybernate]]] http://hibernate.org
+- [[[Spring]]] https://spring.io/
+- [[[ReactNative]]] https://facebook.github.io/react-native/
+
 
 
 
