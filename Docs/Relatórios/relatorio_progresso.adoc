@@ -46,9 +46,9 @@ Dado a complexidade e diferentes aspetos presentes no objetivo deste projeto, fo
 
 ---
 
-/todo/ reler análise e reescrever
+
 === Análise 
-Para este projeto será necessário a criação de um Sistema Informático. Este vai ser responsável por emitir notificações de eventos para os dispositivos móveis, bem como processar pedidos sobre informações relativas ao utilizador do dispositivo. +
+O projeto irá consistir num Sistema Informático responsável por emitir notificações de eventos para os dispositivos móveis, bem como processar pedidos sobre informações relativas ao utilizador do dispositivo. +
 O Sistema Informático terá a responsabilidade de trabalhar dados provenientes do sistema informático SINCRO footnoteref:[sincro]. Só assim é possível ter acesso aos eventos gerados pelos cinemómetro e já corretamente avaliados e autorizados a serem notificados. +
 Também será necessária a realização da Componente Móvel (telemóvel, ou outro dispositivo equivalente) através do qual o utilizador realizará subscrição de eventos de contraordenação, de forma a receber as devidas notificações dos mesmos.
 
@@ -274,7 +274,7 @@ Neste documento é descrito um sistema cujo objetivo é futuramente ser de algum
 == Anexos
 
 === Cronograma
-Dado o desenvolvimento do nosso projeto ter evoluído como esperado, apresentamos novamente o cronograma com as devidas alterações.
+O desenvolvimento do projeto está a decorrer da forma prevista, estando portanto a cumprir o cronograma proposto. Na <<cronograma>> é apresentado o progresso em relação às tarefas propostas que já foram realizadas ou estão ainda por realizar. 
 
 .Cronograma do Projeto
 [#cronograma]
@@ -282,13 +282,17 @@ image::./adoc_images/cronograma_dates.png[cronograma,1750]
 
 ---
 ==== Tarefas
-/inserir percentagens/
 
 . Levantamento e análise de requisitos funcionais e não funcionais.
+* Tarefa realizada a 100%.
 . Desenho da arquitetura do sistema a desenvolver.
+* Tarefa realizada a 100%, mas poderão ocurrer alterações ao longo do decorrer do projeto.
 . Especificação do sistema a desenvolver.
+* Tarefa realizada a 100%.
 . Avaliação do quadro tecnológico a utilizar.
+* Tarefa realizada a 100%.
 . Desenvolvimento dos elementos do sistema.
+* Tarefa iniciada.
 . Testes do sistema desenvolvido.
 . Desenvolvimento da aplicação móvel.
 . Testes funcionais da aplicação móvel.
@@ -303,7 +307,7 @@ image::./adoc_images/cronograma_dates.png[cronograma,1750]
 
 [bibliography]
 == Referências
-/referencias
+
 
 - [[[Java]]] https://www.java.com
 - [[[FrameworkHybernate]]] http://hibernate.org
@@ -312,7 +316,6 @@ image::./adoc_images/cronograma_dates.png[cronograma,1750]
 
 ---
 
-autor, título, link
 
 
 
