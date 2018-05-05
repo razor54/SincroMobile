@@ -5,7 +5,7 @@ export default{
 
   base: {
     flex: 1,
-    backgroundColor: theme.base.backgroundColor,
+    backgroundColor: '#fffdfd',
   },
 
   statusBar: {
@@ -25,6 +25,30 @@ export default{
   wrapper: {
     flex: 1,
   },
+
+  button: {
+    backgroundColor: theme.actionable.activeColor,
+    width: 300,
+    height: 45,
+    borderColor: 'transparent',
+    borderWidth: 0,
+    borderRadius: 5,
+  },
+  containerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 20,
+    backgroundColor: '#ffffff',
+    flexWrap: 'wrap',
+  },
+  textBtn: {
+    // alignItems: 'center',
+    backgroundColor: '#FFF',
+    // foregroundColor: theme.actionable.activeColor,
+    // padding: 10
+  },
+
   container: {
     flex: 1,
     alignItems: 'center',
@@ -51,6 +75,12 @@ export default{
     backgroundColor: '#fffdfd',
     paddingLeft: 40,
     paddingRight: 40,
+  },
+  textRight: {
+    justifyContent: 'flex-end',
+    fontSize: 20,
+    backgroundColor: '#fffdfd',
+
   },
   btn: {
     alignSelf: 'stretch',

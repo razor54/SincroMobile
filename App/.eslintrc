@@ -8,7 +8,7 @@
   },
   // We can add/overwrite custom rules here
   "rules": {
-    // React Native has JSX in JS files
+    // React Native has JSX onLogin JS files
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     // React Native includes images via require('../images/example.png')
     "global-require": "off"

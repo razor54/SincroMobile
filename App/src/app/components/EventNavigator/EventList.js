@@ -5,7 +5,7 @@ import { ListItem } from 'react-native-elements';
 
 
 type Props = {};
-export default class Login extends Component<Props> {
+export default class extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {

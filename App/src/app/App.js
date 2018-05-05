@@ -3,19 +3,45 @@ import React, { Component } from 'react';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-
 import Events from './screens/Events';
 import Me from './screens/Me';
 import About from './screens/About';
+import Login from './components/Authentication/Login';
 
 
 type Props = {}
 export default class extends Component<Props> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLogin: false,
+    };
+    this.onLogin = this.onLogin.bind(this);
+  }
+
+  onLogin() {
+    this.setState(() => ({ isLogin: true }));
+  }
+
   render() {
-    return (<Application />);
+    return (
+      // <View >
+      (this.state.isLogin) ?
+        <Application /> :
+
+        <Login screenProps={{ onLogin: this.onLogin }} />
+    // </View>
+
+    );
   }
 }
-
+/*
+{this.state.isLogin ?
+    <Application />
+    :
+    <Login />
+}
+*/
 const Application = TabNavigator(
   {
 

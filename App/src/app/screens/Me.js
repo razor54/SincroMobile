@@ -3,14 +3,16 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  KeyboardAvoidingView,
+  KeyboardAvoidingView, TouchableOpacity,
 } from 'react-native';
-
-import { Avatar } from 'react-native-elements';
+import { StackNavigator } from 'react-navigation';
+import { Avatar, Button } from 'react-native-elements';
 import styles from '../config/styles';
+import navigationHeaderStyle from '../config/NavigationOptionsThemed';
+
 
 type Props = {};
-export default class Login extends Component<Props> {
+class Profile extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {};
@@ -18,9 +20,9 @@ export default class Login extends Component<Props> {
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
+      <View behavior="padding" style={styles.wrapper}>
 
-        <View style={styles.container}>
+        <View style={styles.containerRow}>
           <Avatar
             source={require('../../../public/image/user-1808597_1280.png')}
             large
@@ -30,15 +32,35 @@ export default class Login extends Component<Props> {
             onPress={() => alert('Works!')}
             activeOpacity={0.7}
           />
+
           <Text style={styles.textCenter}>
-                        User
+              User Name
           </Text>
+
+
+          <Button
+            title="Info"
+            buttonStyle={styles.textBtn}
+            color="rgba(78, 116, 289, 1)"
+            onPress={() => alert('More info')}
+          >
+                Info
+          </Button>
 
 
         </View>
 
-      </KeyboardAvoidingView>
+      </View>
     );
   }
 }
 
+export default StackNavigator({
+
+  List: {
+    screen: Profile,
+
+    navigationOptions: navigationHeaderStyle('User Profile'),
+  },
+
+});
