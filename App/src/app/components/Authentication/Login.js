@@ -1,4 +1,4 @@
-/*import React, { Component } from 'react';
+/* import React, { Component } from 'react';
 import {
     Platform,
     StyleSheet,
@@ -11,10 +11,8 @@ import {
 } from 'react-native';
 
 
-
 type Props = {};
 export default class Login extends Component<Props> {
-
 
 
     constructor(props) {
@@ -64,8 +62,6 @@ export default class Login extends Component<Props> {
     };
 
 
-
-
     render() {
         return (
             <KeyboardAvoidingView behavior = 'padding' style={styles.wrapper}>
@@ -73,14 +69,13 @@ export default class Login extends Component<Props> {
                 <View style={styles.container}>
 
 
-
                     <Text style={styles.header}>
                         Login Page
                     </Text>
 
-                    <TextInput style={styles.textInput} placeholder = 'Username' onChangeText = {(username)=> this.setState({username})} underlineColorAndroid = 'transparent'/>
+                    <TextInput style={styles.textStretch} placeholder = 'Username' onChangeText = {(username)=> this.setState({username})} underlineColorAndroid = 'transparent'/>
 
-                    <TextInput style={styles.textInput} placeholder = 'Password' onChangeText = {(password)=> this.setState({password})} underlineColorAndroid = 'transparent'/>
+                    <TextInput style={styles.textStretch} placeholder = 'Password' onChangeText = {(password)=> this.setState({password})} underlineColorAndroid = 'transparent'/>
 
                     <TouchableOpacity style = {styles.btn} onPress = {this.login}>
                         <Text style = {styles.btnText}>LOGIN</Text>
@@ -98,9 +93,6 @@ export default class Login extends Component<Props> {
 
 
 }
-
-
-
 
 
 const styles = StyleSheet.create({
@@ -121,7 +113,7 @@ const styles = StyleSheet.create({
         color:'#000000',
         fontWeight: 'bold',
     },
-    textInput:{
+    textStretch:{
         alignSelf:'stretch',
         padding:16,
         marginBottom:20,
