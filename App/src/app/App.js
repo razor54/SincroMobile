@@ -90,7 +90,7 @@ const Application = TabNavigator(
 
     }),
     tabBarOptions: {
-      activeTintColor: 'tomato',
+      activeTintColor: 'blue',
       inactiveTintColor: 'gray',
     },
     tabBarComponent: TabBarBottom,

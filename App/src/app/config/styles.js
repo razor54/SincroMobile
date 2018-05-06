@@ -17,7 +17,7 @@ export default{
   },
   navBar: {
     headerStyle: {
-      backgroundColor: '#f4511e',
+      backgroundColor: '#3a99d8',
     },
     headerTintColor: '#fff',
   },
