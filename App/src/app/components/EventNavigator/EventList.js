@@ -1,10 +1,16 @@
-/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
 
 
-type Props = {};
+type Props = {
+    navigation:{
+        state:{
+            params:any
+        },
+        navigate: any
+    }
+};
 export default class extends Component<Props> {
   constructor(props) {
     super(props);
@@ -27,8 +33,8 @@ export default class extends Component<Props> {
     this.onPress = this.onPress.bind(this);
   }
 
-  onPress() {
-    this.props.navigation.navigate('Element');
+  onPress(data) {
+    this.props.navigation.navigate('Element', { data });
   }
 
     renderItem = ({ item }) =>
@@ -36,7 +42,7 @@ export default class extends Component<Props> {
         key={item.key}
         title={item.name}
         subtitle={item.date}
-        onPress={this.onPress}
+        onPress={() => this.onPress(item)}
       />);
 
 
