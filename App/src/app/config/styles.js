@@ -1,7 +1,6 @@
-
 import theme from './theme';
 
-export default{
+export default {
 
   base: {
     flex: 1,
@@ -17,7 +16,7 @@ export default{
   },
   navBar: {
     headerStyle: {
-      backgroundColor: '#3a99d8',
+      backgroundColor: '#1a1c39',
     },
     headerTintColor: '#fff',
   },

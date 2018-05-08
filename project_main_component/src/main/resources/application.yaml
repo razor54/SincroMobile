@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: main component SICNRO Mobile
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/sincro_mobile_database?createDatabaseIfNotExist=true
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+     ddl-auto: update
+
+    show-sql: true
+
+    database: postgresql
+
+    properties:
+     hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      temp:
+       use_jdbc_metadata_defaults: false
+
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    open-in-view: true
+  resources:
+      add-mappings: true
+
+server:
+  port: 9000
+

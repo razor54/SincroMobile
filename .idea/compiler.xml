@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="ps1718v-ps1718v-g41_main" target="1.8" />
+      <module name="ps1718v-ps1718v-g41_test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
