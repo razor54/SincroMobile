@@ -21,7 +21,7 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 
 type Props = {
-    // onLogin : any;
+  // onLogin : any;
 };
 
 class Login extends Component<Props> {
@@ -31,86 +31,114 @@ class Login extends Component<Props> {
       email: '',
       username: '',
       password: '',
+      nif: '',
+      emailValid: false,
+      usernameValid: false,
+      passwordValid: false,
+      nifValid: false,
+
     };
   }
 
 
-    setScreen = () => {
-      this.props.navigation.navigate('Menu');
-    };
+  setScreen = () => {
+    this.props.navigation.navigate('Menu');
+  };
 
-    login = () => {
-      /*
-        fetch(`http://127.0.0.1:5984/test/${this.state.username}`, {
-          method: 'PUT',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username: this.state.username,
-            password: this.state.password,
-          }),
-        })
-          .then(response => response.json())
-          .then((res) => {
-            if (res.ok) {
-              alert(res.id);
-            } else {
-              alert(res.error);
-            }
-          })
-          .done(); */
-
-
-      // this.props.navigation.navigate('Home');
-      this.props.screenProps.onLogin();
-    };
-
-
-    render() {
-      return (
-        <KeyboardAvoidingView style={styles.container}>
+  login = () => {
+    fetch('http://127.0.0.1:9000/register', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.state.username,
+        password: this.state.password,
+        email: this.state.email,
+        id: this.state.nif,
+      }),
+    })
+      .then(response => response.json())
+      .then((res) => {
+        if (res.id) {
+          alert('Ok');
+          this.props.screenProps.onLogin();
+        }
+        else{
+          alert('error');
+        }
+        // else shake button
+      })
+      .done();
 
 
-          <View style={styles.containerRow} />
-          <FormLabel>Email</FormLabel>
-          <FormInput
-            onChangeText={email => this.setState({ email })}
-              // containerStyle={{ width: '60%' }}
-            inputStyle={styles.inputStyle}
+    // this.props.navigation.navigate('Home');
+  };
+
+
+  render() {
+    const emailError =
+      this.state.emailValid ? '' : <FormValidationMessage>Invalid Email</FormValidationMessage>;
+
+    const nameError = this.state.username ? '' : <FormValidationMessage>Invalid username</FormValidationMessage>;
+
+    const passwordError = this.state.password ? '' : <FormValidationMessage>Invalid password</FormValidationMessage>;
+
+    const nifError = this.state.nif ? '' : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
+
+    return (
+      <KeyboardAvoidingView style={styles.container}>
+
+
+        <View style={styles.containerRow} />
+        <FormLabel>Email</FormLabel>
+        <FormInput
+          onChangeText={email => this.setState({ email })}
+          // containerStyle={{ width: '60%' }}
+          inputStyle={styles.inputStyle}
+        />
+        {emailError}
+
+        <FormLabel>Name</FormLabel>
+        <FormInput
+          onChangeText={username => this.setState({ username })}
+          // containerStyle={{ width: '60%' }}
+          inputStyle={styles.inputStyle}
+        />
+        {nameError}
+
+
+        <FormLabel>NIF</FormLabel>
+        <FormInput
+          onChangeText={nif => this.setState({ nif })}
+          // containerStyle={{ width: '60%' }}
+          inputStyle={styles.inputStyle}
+        />
+        {nifError}
+
+        <FormLabel>Password</FormLabel>
+        <FormInput
+          onChangeText={password => this.setState({ password })}
+          // containerStyle={{ width: '60%' }}
+          inputStyle={styles.inputStyle}
+        />
+        {passwordError}
+
+
+        <View />
+        <View style={{ marginTop: 50 }}>
+          <Button
+            onPress={this.login}
+            title="Login"
+            buttonStyle={styl.button}
           />
-          <FormValidationMessage>Error message</FormValidationMessage>
-          <FormLabel>Name</FormLabel>
-          <FormInput
-            onChangeText={username => this.setState({ username })}
-                  // containerStyle={{ width: '60%' }}
-            inputStyle={styles.inputStyle}
-          />
-          <FormValidationMessage>Error message</FormValidationMessage>
-
-          <FormLabel>Password</FormLabel>
-          <FormInput
-            onChangeText={password => this.setState({ password })}
-                  // containerStyle={{ width: '60%' }}
-            inputStyle={styles.inputStyle}
-          />
-          <FormValidationMessage>Error message</FormValidationMessage>
+        </View>
 
 
-          <View />
-          <View style={{ marginTop: 50 }}>
-            <Button
-              onPress={this.login}
-              title="Login"
-              buttonStyle={styl.button}
-            />
-          </View>
-
-
-        </KeyboardAvoidingView>
-      );
-    }
+      </KeyboardAvoidingView>
+    );
+  }
 }
 
 

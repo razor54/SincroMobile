@@ -5,7 +5,8 @@ import org.springframework.http.HttpStatus
 
 class UnauthorizedException : MyException() {
 
-    override val message = "To have access the requested data it's necessary to be logged"
+    override val message: String
+        get() = "To have access the requested data it's necessary to be logged"
 
     override fun error() = HttpStatus.FORBIDDEN
 

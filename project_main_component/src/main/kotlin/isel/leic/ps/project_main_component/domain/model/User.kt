@@ -7,5 +7,12 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "user", schema = "public")
-class User(@Id @NotNull val id: Int, @NotNull var email: String, @NotNull var name: String, var phoneNumber: Number) {
+class User() {
+
+    @Id
+    var id: Int = 0
+    @NotNull
+    lateinit var email: String
+    @NotNull
+    lateinit var name: String
 }
