@@ -16,6 +16,7 @@ import navigationHeaderStyle from '../../config/NavigationOptionsThemed';
 import App from '../../screens/Me';
 import styl from '../../config/styles';
 import Register from './Register';
+import networkSetting from '../../config/serverConnectionSettings';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -89,7 +90,8 @@ class Login extends Component<Props> {
       return alert('Please insert valid params');
     }
     this.setState({ isLoading: true });
-    fetch('http://127.0.0.1:9000/login', {
+
+    fetch(`${networkSetting.homepage}/login`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -111,15 +113,18 @@ class Login extends Component<Props> {
         }
         // else shake button
       })
-      .catch(() => { alert('There was an error'); })
+      .catch(() => {
+        this.setState({ isLoading: false });
+        alert('There was an error');
+      })
       .done();
   };
 
 
   render() {
-    const passwordError = this.state.passwordValid ? '' : <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
+    const passwordError = this.state.passwordValid ? null : <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
 
-    const nifError = this.state.nifValid ? '' : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
+    const nifError = this.state.nifValid ? null : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
 
     return (
       <KeyboardAvoidingView style={styles.container}>

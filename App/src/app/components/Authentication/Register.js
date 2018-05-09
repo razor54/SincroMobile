@@ -14,6 +14,7 @@ import { FormLabel, FormInput, FormValidationMessage, Input, Button } from 'reac
 
 
 import styl from '../../config/styles';
+import networkSetting from '../../config/serverConnectionSettings';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -103,7 +104,7 @@ export default class Register extends Component<Props> {
       return alert('Please insert valid params');
     }
     this.setState({ isLoading: true });
-    fetch('http://127.0.0.1:9000/register', {
+    fetch(`${networkSetting.homepage}/register`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -127,7 +128,10 @@ export default class Register extends Component<Props> {
         }
         // else shake button
       })
-      .catch(() => { alert('There was an error'); })
+      .catch(() => {
+        alert('There was an error');
+        this.setState({ isLoading: false });
+      })
       .done();
 
 
@@ -137,13 +141,13 @@ export default class Register extends Component<Props> {
 
   render() {
     const emailError =
-      this.state.emailValid ? '' : <FormValidationMessage>Invalid Email</FormValidationMessage>;
+      this.state.emailValid ? null : <FormValidationMessage>Invalid Email</FormValidationMessage>;
 
-    const nameError = this.state.usernameValid ? '' : <FormValidationMessage>Invalid username</FormValidationMessage>;
+    const nameError = this.state.usernameValid ? null : <FormValidationMessage>Invalid username</FormValidationMessage>;
 
-    const passwordError = this.state.passwordValid ? '' : <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
+    const passwordError = this.state.passwordValid ? null : <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
 
-    const nifError = this.state.nifValid ? '' : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
+    const nifError = this.state.nifValid ? null : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
 
     return (
       <KeyboardAvoidingView style={styles.container}>
