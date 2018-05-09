@@ -20,4 +20,19 @@ class Event() {
     @NotNull
     var verified: Boolean = false
 
+    @NotNull
+    lateinit var plate: String
+
+    @NotNull
+    lateinit var location: String
+
+    @NotNull
+    var gps_latitude: Double = 0.0
+
+    @NotNull
+    var gps_longitude: Double = 0.0
+
+    @NotNull
+    var driverId: Int = 0
+
 }
