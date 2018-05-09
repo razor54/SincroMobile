@@ -5,6 +5,7 @@ import isel.leic.ps.project_main_component.domain.model.User
 import isel.leic.ps.project_main_component.domain.model.Vehicle
 import isel.leic.ps.project_main_component.service.EventService
 import isel.leic.ps.project_main_component.service.UserService
+import isel.leic.ps.project_main_component.service.VehicleService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.util.concurrent.atomic.AtomicLong
@@ -27,13 +28,13 @@ class EventController {
     }
 
     @PostMapping("/event")
-    fun addEvent(@RequestBody event:Event) = eventService.addEvent(event);
+    fun addEvent(@RequestBody event:Event) = eventService.addEvent(event)
 
     @PostMapping("/vehicle")
-    fun addEvent(@RequestBody vehicle: Vehicle) = vehicleService.addVehicle(vehicle);
+    fun addVehicle(@RequestBody vehicle: Vehicle) = vehicleService.addVehicle(vehicle)
 
     @PostMapping("/user")
-    fun addEvent(@RequestBody user: User) = userService.addUser(user);
+    fun addUser(@RequestBody user: User) = userService.addUser(user)
 
 
 }
