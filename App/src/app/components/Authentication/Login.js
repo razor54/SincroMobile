@@ -1,4 +1,4 @@
-/* eslint-disable no-use-before-define,react/prop-types */
+/* eslint-disable no-use-before-define,eqeqeq */
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -15,6 +15,7 @@ import { FormLabel, FormInput, FormValidationMessage, Input, Button } from 'reac
 import navigationHeaderStyle from '../../config/NavigationOptionsThemed';
 import App from '../../screens/Me';
 import styl from '../../config/styles';
+import Register from './Register';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -22,40 +23,77 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 type Props = {
   // onLogin : any;
+  screenProps : {
+    onLogin : any
+  },
+  navigation:{
+    navigate:any
+  }
 };
 
 class Login extends Component<Props> {
+  // This function was based on
+  // https://pt.wikipedia.org/wiki/N%C3%BAmero_de_identifica%C3%A7%C3%A3o_fiscal
+  static validateNIF(nif) {
+    let comparator;
+    if (!['1', '2', '3', '5', '6', '8'].includes(nif.substr(0, 1)) &&
+      !['45', '70', '71', '72', '77', '79', '90', '91', '98', '99'].includes(nif.substr(0, 2))) {
+      return false;
+    }
+    // eslint-disable-next-line max-len,no-mixed-operators
+    const total = nif[0] * 9 + nif[1] * 8 + nif[2] * 7 + nif[3] * 6 + nif[4] * 5 + nif[5] * 4 + nif[6] * 3 + nif[7] * 2;
+    const modulo11 = (Number(total) % 11);
+    if (modulo11 == 1 || modulo11 == 0) {
+      comparator = 0;
+    } else {
+      comparator = 11 - modulo11;
+    }
+    if (nif[8] != comparator) {
+      return false;
+    }
+    return true;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      username: '',
+
       password: '',
       nif: '',
-      emailValid: false,
-      usernameValid: false,
+
+
       passwordValid: false,
       nifValid: false,
+      isLoading: false,
 
     };
+
+    this.handleNif = this.handleNif.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
   }
 
 
-  setScreen = () => {
-    this.props.navigation.navigate('Menu');
-  };
+  handleNif(nif) {
+    const test = /^[0-9]{7,10}$/;
+    this.setState({ nif, nifValid: test.test(nif) && Login.validateNIF(nif) });
+  }
+
+  handlePassword(password) {
+    const test = /^[\s\S]{8,}$/;
+    this.setState({ password, passwordValid: test.test(password) });
+  }
+
 
   login = () => {
-    fetch('http://127.0.0.1:9000/register', {
+    this.setState({ isLoading: true });
+    fetch('http://127.0.0.1:9000/login', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: this.state.username,
         password: this.state.password,
-        email: this.state.email,
         id: this.state.nif,
       }),
     })
@@ -64,76 +102,76 @@ class Login extends Component<Props> {
         if (res.id) {
           alert('Ok');
           this.props.screenProps.onLogin();
-        }
-        else{
+        } else {
           alert('error');
         }
         // else shake button
       })
+      .catch(() => { alert('There was an error'); })
+      .finally(() => this.setState({ isLoading: false }))
       .done();
-
-
-    // this.props.navigation.navigate('Home');
   };
 
 
   render() {
-    const emailError =
-      this.state.emailValid ? '' : <FormValidationMessage>Invalid Email</FormValidationMessage>;
+    const passwordError = this.state.passwordValid ? '' : <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
 
-    const nameError = this.state.username ? '' : <FormValidationMessage>Invalid username</FormValidationMessage>;
-
-    const passwordError = this.state.password ? '' : <FormValidationMessage>Invalid password</FormValidationMessage>;
-
-    const nifError = this.state.nif ? '' : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
+    const nifError = this.state.nifValid ? '' : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
 
     return (
       <KeyboardAvoidingView style={styles.container}>
 
-
-        <View style={styles.containerRow} />
-        <FormLabel>Email</FormLabel>
-        <FormInput
-          onChangeText={email => this.setState({ email })}
-          // containerStyle={{ width: '60%' }}
-          inputStyle={styles.inputStyle}
-        />
-        {emailError}
-
-        <FormLabel>Name</FormLabel>
-        <FormInput
-          onChangeText={username => this.setState({ username })}
-          // containerStyle={{ width: '60%' }}
-          inputStyle={styles.inputStyle}
-        />
-        {nameError}
-
-
         <FormLabel>NIF</FormLabel>
         <FormInput
-          onChangeText={nif => this.setState({ nif })}
-          // containerStyle={{ width: '60%' }}
+          onChangeText={this.handleNif}
           inputStyle={styles.inputStyle}
         />
         {nifError}
 
+
         <FormLabel>Password</FormLabel>
         <FormInput
-          onChangeText={password => this.setState({ password })}
-          // containerStyle={{ width: '60%' }}
+          onChangeText={this.handlePassword}
           inputStyle={styles.inputStyle}
+          secureTextEntry
         />
         {passwordError}
 
 
         <View />
         <View style={{ marginTop: 50 }}>
-          <Button
-            onPress={this.login}
-            title="Login"
-            buttonStyle={styl.button}
-          />
+          {
+
+
+            this.state.isLoading ?
+
+              <Button
+                onPress={this.login}
+                title="Login"
+                loading
+                buttonStyle={styl.button}
+              />
+
+              :
+
+              <Button
+                onPress={this.login}
+                title="Login"
+                buttonStyle={styl.button}
+              />
+
+
+          }
         </View>
+
+        <Button
+          title="Don't Have an account? Click Here"
+          buttonStyle={styl.textBtn}
+          color="rgba(78, 116, 289, 1)"
+          onPress={() => this.props.navigation.navigate('Register')}
+        >
+          Info
+        </Button>
 
 
       </KeyboardAvoidingView>
@@ -148,8 +186,9 @@ export default StackNavigator({
     screen: Login,
     navigationOptions: navigationHeaderStyle('Login Page'),
   },
-  Home: {
-    screen: App,
+  Register: {
+    screen: Register,
+    navigationOptions: navigationHeaderStyle('Register Page'),
   },
 
 });
