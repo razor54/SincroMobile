@@ -11,7 +11,15 @@ import styles from '../config/styles';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
 
 
-type Props = {};
+type Props = {
+  screenProps : {
+    user : {
+      id : number,
+      email : String,
+      name : String,
+    }
+  }
+};
 class Profile extends Component<Props> {
   constructor(props) {
     super(props);
@@ -19,6 +27,8 @@ class Profile extends Component<Props> {
   }
 
   render() {
+    const { user } = this.props.screenProps;
+
     return (
       <View behavior="padding" style={styles.wrapper}>
 
@@ -26,15 +36,17 @@ class Profile extends Component<Props> {
           <Avatar
             source={require('../../../public/image/user-1808597_1280.png')}
             large
+            title="MI"
             rounded
-            title="MT"
-              // eslint-disable-next-line no-undef,no-alert
             onPress={() => alert('Works!')}
             activeOpacity={0.7}
           />
 
           <Text style={styles.textCenter}>
-              User Name
+            {user.name} - {user.id}
+          </Text>
+          <Text style={styles.textCenter}>
+            {user.email}
           </Text>
 
 

@@ -104,7 +104,7 @@ class Login extends Component<Props> {
       .then((res) => {
         if (res.id) {
           alert('Ok');
-          this.props.screenProps.onLogin();
+          this.props.screenProps.onLogin(res);
         } else {
           alert('error');
           this.setState({ isLoading: false });

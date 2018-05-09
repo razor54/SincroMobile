@@ -15,19 +15,25 @@ export default class extends Component<Props> {
     super(props);
     this.state = {
       isLogin: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+
+      },
     };
     this.onLogin = this.onLogin.bind(this);
   }
 
-  onLogin() {
-    this.setState(() => ({ isLogin: true }));
+  onLogin(user) {
+    this.setState({ user: { id: user.id, name: user.name, email: user.email }, isLogin: true });
   }
 
   render() {
     return (
       // <View >
       (this.state.isLogin) ?
-        <Application /> :
+        <Application screenProps={{ user: this.state.user }} /> :
 
         <Login screenProps={{ onLogin: this.onLogin }} />
     // </View>

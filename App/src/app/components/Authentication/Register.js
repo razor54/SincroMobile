@@ -73,7 +73,8 @@ export default class Register extends Component<Props> {
   }
 
 
-  handleEmail(email) {
+  handleEmail(receivedEmail) {
+    const email = receivedEmail.toLowerCase();
     const test = /\S+@\S+\.\S+/;
     this.setState({ email, emailValid: test.test(email) });
   }
@@ -119,7 +120,7 @@ export default class Register extends Component<Props> {
       .then((res) => {
         if (res.id) {
           alert('Ok');
-          this.props.screenProps.onLogin();
+          this.props.screenProps.onLogin(res);
         } else {
           alert('error');
           this.setState({ isLoading: false });
@@ -152,7 +153,9 @@ export default class Register extends Component<Props> {
           onChangeText={this.handleEmail}
           // containerStyle={{ width: '60%' }}
           inputStyle={styles.inputStyle}
+          autoCapitalize="none"
         />
+
         {emailError}
 
         <FormLabel>Name</FormLabel>
