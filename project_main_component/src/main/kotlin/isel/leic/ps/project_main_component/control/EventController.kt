@@ -1,13 +1,16 @@
 package isel.leic.ps.project_main_component.control
 
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import isel.leic.ps.project_main_component.domain.model.Event
+import isel.leic.ps.project_main_component.service.EventService
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.*
 import java.util.concurrent.atomic.AtomicLong
 
 @RestController
 class EventController {
+
+    @Autowired
+    lateinit var eventService: EventService
 
     @GetMapping("/")
     fun getHomePage(): String {
@@ -15,19 +18,7 @@ class EventController {
     }
 
     @PostMapping("/event")
-    fun addEvent(){
-
-    }
-
-    val counter = AtomicLong()
-
-    @GetMapping("/greeting")
-    fun greeting(@RequestParam(value = "name", defaultValue = "World") name: String) =
-            Greeting(counter.incrementAndGet(), "Hello, $name")
-
-
+    fun addEvent(@RequestBody event:Event) = eventService.addEvent(event);
 
 
 }
-
-data class Greeting(val id: Long, val content: String)

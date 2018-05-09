@@ -5,8 +5,6 @@ import isel.leic.ps.project_main_component.domain.model.Vehicle
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
-
-
 @Repository
 interface VehicleRepository: CrudRepository<Vehicle, Int> {
 }

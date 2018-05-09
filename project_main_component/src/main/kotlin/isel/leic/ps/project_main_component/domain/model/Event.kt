@@ -8,7 +8,16 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "event", schema = "public")
-class Event(@Id @NotNull val id: Int, @NotNull val date: Date, @NotNull var verified: Boolean) {
+class Event() {
 
+    @Id
+    @NotNull
+    var id: Int = 0
+
+    @NotNull
+    lateinit var date: Date
+
+    @NotNull
+    var verified: Boolean = false
 
 }

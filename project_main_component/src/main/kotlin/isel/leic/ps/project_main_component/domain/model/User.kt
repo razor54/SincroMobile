@@ -11,10 +11,13 @@ class User() {
 
     @Id
     var id: Int = 0
+
     @NotNull
     lateinit var email: String
+
     @NotNull
     lateinit var name: String
+
     @NotNull
     lateinit var password: String
 }
