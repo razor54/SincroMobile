@@ -15,4 +15,6 @@ class User() {
     lateinit var email: String
     @NotNull
     lateinit var name: String
+    @NotNull
+    lateinit var password: String
 }

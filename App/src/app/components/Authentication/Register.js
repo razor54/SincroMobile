@@ -97,6 +97,10 @@ export default class Register extends Component<Props> {
 
 
   login = () => {
+    if (!this.state.nifValid || !this.state.passwordValid || !this.state.emailValid
+      || !this.state.usernameValid) {
+      return alert('Please insert valid params');
+    }
     this.setState({ isLoading: true });
     fetch('http://127.0.0.1:9000/register', {
       method: 'POST',
@@ -118,11 +122,11 @@ export default class Register extends Component<Props> {
           this.props.screenProps.onLogin();
         } else {
           alert('error');
+          this.setState({ isLoading: false });
         }
         // else shake button
       })
       .catch(() => { alert('There was an error'); })
-      .finally(() => this.setState({ isLoading: false }))
       .done();
 
 

@@ -85,6 +85,9 @@ class Login extends Component<Props> {
 
 
   login = () => {
+    if (!this.state.nifValid || !this.state.passwordValid) {
+      return alert('Please insert valid params');
+    }
     this.setState({ isLoading: true });
     fetch('http://127.0.0.1:9000/login', {
       method: 'POST',
@@ -104,11 +107,11 @@ class Login extends Component<Props> {
           this.props.screenProps.onLogin();
         } else {
           alert('error');
+          this.setState({ isLoading: false });
         }
         // else shake button
       })
       .catch(() => { alert('There was an error'); })
-      .finally(() => this.setState({ isLoading: false }))
       .done();
   };
 
