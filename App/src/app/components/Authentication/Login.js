@@ -11,12 +11,17 @@ import {
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { FormLabel, FormInput, FormValidationMessage, Input, Button } from 'react-native-elements';
-
 import navigationHeaderStyle from '../../config/NavigationOptionsThemed';
 import App from '../../screens/Me';
 import styl from '../../config/styles';
 import Register from './Register';
 import networkSetting from '../../config/serverConnectionSettings';
+
+const FBSDK = require('react-native-fbsdk');
+
+const {
+  LoginManager, LoginButton, AccessToken, GraphRequest, GraphRequestManager,
+} = FBSDK;
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -181,12 +186,45 @@ class Login extends Component<Props> {
           Info
         </Button>
 
+        <LoginButton
+
+          onLoginFinished={
+            (error, result) => {
+              if (error) {
+                alert(`Login failed with error: ${result.error}`);
+              } else if (result.isCancelled) {
+                alert('Login was cancelled');
+              } else {
+                alert(`Login was successful with permissions: ${result.grantedPermissions}`);
+
+                AccessToken.getCurrentAccessToken().then((data) => {
+                    const infoRequest = new GraphRequest(
+                      '/me?fields=name,picture',
+                      null,
+                      this._responseInfoCallback,
+                    );
+                    // Start the graph request.
+                    new GraphRequestManager().addRequest(infoRequest).start();
+                  });
+              }
+            }
+          }
+          onLogoutFinished={() => alert('User logged out')}
+        />
 
       </KeyboardAvoidingView>
     );
   }
+  // Create response callback.
+  _responseInfoCallback = (error, result) => {
+    if (error) {
+      alert(`Error fetching data: ${error.toString()}`);
+    } else {
+      alert(`Result Name: ${result.name}`);
+      console.warn(result);
+    }
+  };
 }
-
 
 export default StackNavigator({
 
