@@ -69,13 +69,14 @@ export default class Register extends Component<Props> {
 
   constructor(props) {
     super(props);
+    const { userProps } = this.props.navigation.state.params;
     this.state = {
-      email: '',
-      username: '',
+      email: userProps ? userProps.email : '',
+      username: userProps ? userProps.name : '',
       password: '',
       nif: '',
-      emailValid: false,
-      usernameValid: false,
+      emailValid: !!userProps,
+      usernameValid: !!userProps,
       passwordValid: false,
       nifValid: false,
       isLoading: false,
@@ -110,7 +111,6 @@ export default class Register extends Component<Props> {
     const test = /^[\s\S]{8,}$/;
     this.setState({ password, passwordValid: test.test(password) });
   }
-
 
   login = () => {
     if (!this.state.nifValid || !this.state.passwordValid || !this.state.emailValid
@@ -164,7 +164,7 @@ export default class Register extends Component<Props> {
 
     const nifError = this.state.nifValid ? null : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
     const { userProps } = this.props.navigation.state.params;
-    console.warn(this.props);
+
     return (
       <KeyboardAvoidingView style={styles.container}>
 
