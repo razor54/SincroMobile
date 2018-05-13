@@ -1,5 +1,6 @@
 package isel.leic.ps.project_main_component.domain.model
 
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
@@ -12,6 +13,7 @@ class User() {
     @Id
     var id: Int = 0
 
+    @Column(unique = true)
     @NotNull
     lateinit var email: String
 

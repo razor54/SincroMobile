@@ -36,5 +36,7 @@ class EventController {
     @PostMapping("/user")
     fun addUser(@RequestBody user: User) = userService.addUser(user)
 
+    @GetMapping("/user/{email}")
+    fun getUserByEmail(@PathVariable("email") email:String) = userService.getUser(email)
 
 }

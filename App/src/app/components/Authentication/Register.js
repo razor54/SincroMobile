@@ -12,9 +12,14 @@ import {
 import { StackNavigator } from 'react-navigation';
 import { FormLabel, FormInput, FormValidationMessage, Input, Button } from 'react-native-elements';
 
-
 import styl from '../../config/styles';
 import networkSetting from '../../config/serverConnectionSettings';
+
+const FBSDK = require('react-native-fbsdk');
+
+const {
+  LoginManager, LoginButton, AccessToken, GraphRequest, GraphRequestManager,
+} = FBSDK;
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -25,9 +30,18 @@ type Props = {
   screenProps : {
     onLogin : any
   },
-  navigation:{
-    navigate : any
-  }
+  navigation : {
+    navigate : any,
+    state:{
+      params:{
+          userProps:{
+              name : string,
+            email : string
+          }
+      }
+    }
+  },
+
 };
 
 export default class Register extends Component<Props> {
@@ -81,7 +95,7 @@ export default class Register extends Component<Props> {
   }
 
   handleUserName(username) {
-    const test = /^[a-zA-Z ]{2,30}$/;
+    const test = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
     this.setState({ username, usernameValid: test.test(username) });
   }
 
@@ -145,16 +159,19 @@ export default class Register extends Component<Props> {
 
     const nameError = this.state.usernameValid ? null : <FormValidationMessage>Invalid username</FormValidationMessage>;
 
-    const passwordError = this.state.passwordValid ? null : <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
+    const passwordError = this.state.passwordValid ? null :
+    <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
 
     const nifError = this.state.nifValid ? null : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
-
+    const { userProps } = this.props.navigation.state.params;
+    console.warn(this.props);
     return (
       <KeyboardAvoidingView style={styles.container}>
 
         <FormLabel>Email</FormLabel>
         <FormInput
           onChangeText={this.handleEmail}
+          value={userProps ? userProps.email : this.state.email}
           // containerStyle={{ width: '60%' }}
           inputStyle={styles.inputStyle}
           autoCapitalize="none"
@@ -164,6 +181,7 @@ export default class Register extends Component<Props> {
 
         <FormLabel>Name</FormLabel>
         <FormInput
+          value={userProps ? userProps.name : this.state.username}
           onChangeText={this.handleUserName}
           // containerStyle={{ width: '60%' }}
           inputStyle={styles.inputStyle}

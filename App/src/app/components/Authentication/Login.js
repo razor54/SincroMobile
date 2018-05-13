@@ -32,8 +32,8 @@ type Props = {
   screenProps : {
     onLogin : any
   },
-  navigation:{
-    navigate:any
+  navigation : {
+    navigate : any
   }
 };
 
@@ -127,7 +127,8 @@ class Login extends Component<Props> {
 
 
   render() {
-    const passwordError = this.state.passwordValid ? null : <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
+    const passwordError = this.state.passwordValid ? null :
+    <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
 
     const nifError = this.state.nifValid ? null : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
 
@@ -187,7 +188,7 @@ class Login extends Component<Props> {
         </Button>
 
         <LoginButton
-
+          readPermissions={['email', 'public_profile']}
           onLoginFinished={
             (error, result) => {
               if (error) {
@@ -195,17 +196,17 @@ class Login extends Component<Props> {
               } else if (result.isCancelled) {
                 alert('Login was cancelled');
               } else {
-                alert(`Login was successful with permissions: ${result.grantedPermissions}`);
+                // alert(`Login was successful with permissions: ${result.grantedPermissions}`);
 
                 AccessToken.getCurrentAccessToken().then((data) => {
-                    const infoRequest = new GraphRequest(
-                      '/me?fields=name,picture',
-                      null,
-                      this._responseInfoCallback,
-                    );
-                    // Start the graph request.
-                    new GraphRequestManager().addRequest(infoRequest).start();
-                  });
+                  const infoRequest = new GraphRequest(
+                    '/me?fields=name,picture,email,first_name,last_name',
+                    null,
+                    this._responseInfoCallback,
+                  );
+                  // Start the graph request.
+                  new GraphRequestManager().addRequest(infoRequest).start();
+                });
               }
             }
           }
@@ -215,15 +216,44 @@ class Login extends Component<Props> {
       </KeyboardAvoidingView>
     );
   }
+
   // Create response callback.
   _responseInfoCallback = (error, result) => {
     if (error) {
       alert(`Error fetching data: ${error.toString()}`);
     } else {
       alert(`Result Name: ${result.name}`);
-      console.warn(result);
+
+      const myInit = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+        },
+      };
+      fetch(`${networkSetting.homepage}/user/${result.email}`, myInit)
+        .then(data => data.json())
+        .then((user) => {
+          if (user.id) {
+            this.props.screenProps.onLogin(user);
+          } else {
+            this.props.navigation.navigate('Register', { userProps: { name: result.name, email: result.email } });
+          }
+        }).catch(() => alert('Network error'));
     }
   };
+
+  componentDidMount() {
+    AccessToken.getCurrentAccessToken().then((data) => {
+      if (data == null) return;
+      const infoRequest = new GraphRequest(
+        '/me?fields=name,picture,email,first_name,last_name',
+        null,
+        this._responseInfoCallback,
+      );
+      // Start the graph request.
+      new GraphRequestManager().addRequest(infoRequest).start();
+    });
+  }
 }
 
 export default StackNavigator({
