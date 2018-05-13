@@ -69,7 +69,11 @@ export default class Register extends Component<Props> {
 
   constructor(props) {
     super(props);
-    const { userProps } = this.props.navigation.state.params;
+    let userProps = null;
+    if (this.props.navigation.state.params) {
+      // eslint-disable-next-line prefer-destructuring
+      userProps = this.props.navigation.state.params.userProps;
+    }
     this.state = {
       email: userProps ? userProps.email : '',
       username: userProps ? userProps.name : '',
@@ -163,7 +167,12 @@ export default class Register extends Component<Props> {
     <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
 
     const nifError = this.state.nifValid ? null : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
-    const { userProps } = this.props.navigation.state.params;
+
+    let userProps = null;
+    if (this.props.navigation.state.params) {
+      // eslint-disable-next-line prefer-destructuring
+      userProps = this.props.navigation.state.params.userProps;
+    }
 
     return (
       <KeyboardAvoidingView style={styles.container}>
