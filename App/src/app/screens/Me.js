@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Avatar, Button } from 'react-native-elements';
-import { AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
+import { AccessToken, GraphRequest, GraphRequestManager, LoginButton } from 'react-native-fbsdk';
 import styles from '../config/styles';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
 import networkSetting from '../config/serverConnectionSettings';
@@ -65,6 +65,10 @@ class Profile extends Component<Props> {
 
 
         </View>
+
+        <LoginButton
+          onLogoutFinished={() => alert('User logged out')}
+        />
 
       </View>
     );
