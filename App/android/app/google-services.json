@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "197953981185",
+    "firebase_url": "https://sincro-mobile.firebaseio.com",
+    "project_id": "sincro-mobile",
+    "storage_bucket": "sincro-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197953981185:android:6f9b857bd20411a1",
+        "android_client_info": {
+          "package_name": "com.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197953981185-fpkpgpub1ffutf2bgo50f86h6jiv87tt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAT7NMQR5CvcRZUddbHE2ZtD6Z_f8abqQw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

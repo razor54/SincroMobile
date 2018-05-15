@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import OneSignal from 'react-native-onesignal';
 import Events from './screens/Events';
 import Me from './screens/Me';
 import About from './screens/About';
@@ -28,6 +28,51 @@ export default class extends Component<Props> {
   onLogin(user) {
     this.setState({ user: { id: user.id, name: user.name, email: user.email }, isLogin: true });
   }
+
+  componentWillMount() {
+    OneSignal.init('75a88678-2deb-40be-8a8c-3b05309761b8');
+    OneSignal.setSubscription(true);
+
+    OneSignal.setLocationShared(true);
+    OneSignal.inFocusDisplaying(2);
+    OneSignal.setLogLevel(7, 0);
+
+    OneSignal.getPermissionSubscriptionState((response) => {
+      console.warn( 'Received permission subscription state: ', response);
+    });
+  }
+
+  componentDidMount() {
+    this.onReceived = this.onReceived.bind(this);
+    this.onOpened = this.onOpened.bind(this);
+    this.onIds = this.onIds.bind(this);
+
+    OneSignal.addEventListener('received', this.onReceived);
+    OneSignal.addEventListener('opened', this.onOpened);
+    OneSignal.addEventListener('ids', this.onIds);
+  }
+
+  componentWillUnmount() {
+    OneSignal.removeEventListener('received', this.onReceived);
+    OneSignal.removeEventListener('opened', this.onOpened);
+    OneSignal.removeEventListener('ids', this.onIds);
+  }
+
+  onReceived(notification) {
+    console.warn('Notification received: ', notification);
+  }
+
+  onOpened(openResult) {
+    console.warn('Message: ', openResult.notification.payload.body);
+    console.warn('Data: ', openResult.notification.payload.additionalData);
+    console.warn('isActive: ', openResult.notification.isAppInFocus);
+    console.warn('openResult: ', openResult);
+  }
+
+  onIds(device) {
+    console.warn('Device info: ', device);
+  }
+
 
   render() {
     return (

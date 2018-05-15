@@ -16,6 +16,7 @@
     "react-native": "0.55.3",
     "react-native-elements": "^0.19.1",
     "react-native-fbsdk": "^0.7.0",
+    "react-native-onesignal": "^3.2.2",
     "react-native-vector-icons": "^4.6.0",
     "react-navigation": "^1.5.11",
     "xcode": "^1.0.0"
