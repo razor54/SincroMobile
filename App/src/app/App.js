@@ -38,7 +38,10 @@ export default class extends Component<Props> {
     OneSignal.setLogLevel(7, 0);
 
     OneSignal.getPermissionSubscriptionState((response) => {
-      console.warn( 'Received permission subscription state: ', response);
+      // console.warn('Received permission subscription state: ', response);
+      // TODO save on storage and then when user
+      // registers identification will be associated with him
+      // AND if user is on another devce decide if it will be default device
     });
   }
 

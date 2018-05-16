@@ -10,4 +10,6 @@ import java.util.*
 interface VehicleRepository: CrudRepository<Vehicle, String> {
 
     fun findByOwnerId(id:Int) : Optional<Vehicle>
+
+    fun findAllByOwnerId(id:Int):List<Vehicle>
 }

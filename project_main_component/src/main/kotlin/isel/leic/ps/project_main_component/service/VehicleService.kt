@@ -28,6 +28,10 @@ class VehicleService {
         }
     }
 
+    fun getUserVehicles(id:Int):List<Vehicle>{
+        return vehicleRepository.findAllByOwnerId(id)
+    }
+
     fun getVehicle(id: String): Vehicle {
 
         val vehicle = vehicleRepository.findById(id)

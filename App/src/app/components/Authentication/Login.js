@@ -222,7 +222,7 @@ class Login extends Component<Props> {
     if (error) {
       alert(`Error fetching data: ${error.toString()}`);
     } else {
-      alert(`Result Name: ${result.name}`);
+     // alert(`Result Name: ${result.name}`);
 
       const myInit = {
         method: 'GET',
