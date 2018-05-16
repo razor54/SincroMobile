@@ -7,12 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "adm-zip": "^0.4.9",
+    "adm-zip": "^0.4.11",
     "fastfall": "^1.5.1",
     "got": "^8.3.1",
     "plist": "^3.0.1",
     "progress": "^2.0.0",
-    "react": "16.3.1",
+    "react": "^16.3.1",
     "react-native": "0.55.3",
     "react-native-elements": "^0.19.1",
     "react-native-fbsdk": "^0.7.0",
@@ -29,7 +29,7 @@
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-react": "^7.8.2",
     "jest": "22.4.3",
     "prop-types": "latest",
     "react-test-renderer": "16.3.1"

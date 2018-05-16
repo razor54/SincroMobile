@@ -19,7 +19,7 @@ class VehicleService {
 
     fun addVehicle(vehicle: Vehicle): Vehicle {
         try {
-            System.out.println(isMatriculaRegex( vehicle.plate))
+            System.out.println(isMatriculaRegex(vehicle.plate))
             val save = vehicleRepository.save(vehicle)
 
             return save
@@ -50,25 +50,22 @@ class VehicleService {
         throw NoSuchVehicleException()
     }
 
-    fun subscribeVehicle(userId:Int,vehicleId:String){
+    fun subscribeVehicle(userId: Int, vehicleId: String) {
 
-        var vehicle:Vehicle
+        var vehicle: Vehicle
         try {
             val vehicleOpt = vehicleRepository.findById(vehicleId)
             vehicle = vehicleOpt.get()
-        }
-        catch (e:Exception){
-             throw  NoSuchVehicleException()
+        } catch (e: Exception) {
+            throw  NoSuchVehicleException()
         }
 
         try {
             vehicle.isSubscribed = true
             vehicleRepository.save(vehicle)
-        }
-        catch (e:Exception){
+        } catch (e: Exception) {
             //throw operation unsuccessful
         }
-
 
 
     }
