@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "user", schema = "public")
-class User() {
+class User {
 
     @Id
     var id: Int = 0

@@ -7,17 +7,14 @@ import isel.leic.ps.project_main_component.exceptions.FailedToAddUserException
 import isel.leic.ps.project_main_component.exceptions.NoSuchUserException
 import isel.leic.ps.project_main_component.repository.EventRepository
 import isel.leic.ps.project_main_component.repository.UserRepository
-import org.json.JSONArray
-import org.json.JSONObject
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-
 import java.net.HttpURLConnection
 import java.net.URL
-import jdk.nashorn.internal.runtime.ScriptingFunctions.readLine
 import java.io.InputStreamReader
 import java.io.BufferedReader
-import com.sun.xml.internal.ws.streaming.XMLStreamWriterUtil.getOutputStream
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.OutputStreamWriter
 import javax.net.ssl.HttpsURLConnection
 
@@ -65,7 +62,7 @@ class EventService {
 
             //display what returns the POST request
 
-            val sb = StringBuilder()
+
             val HttpResult = con.responseCode
             if (HttpResult == HttpURLConnection.HTTP_OK) {
 

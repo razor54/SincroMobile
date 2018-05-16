@@ -19,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
+      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+            <state relative-caret-position="442">
+              <caret line="26" column="90" selection-start-line="26" selection-start-column="90" selection-end-line="26" selection-end-column="90" />
             </state>
           </provider>
         </entry>
@@ -31,22 +31,27 @@
       <file leaf-file-name="module-info.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/module-info.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+            <state relative-caret-position="68">
+              <caret line="4" column="44" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Start.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Start.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/simulator/main/Start.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+            <state relative-caret-position="310">
+              <caret line="84" selection-start-line="84" selection-end-line="84" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Start.form" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/simulator/main/Start.form">
+          <provider selected="true" editor-type-id="ui-designer" />
         </entry>
       </file>
     </leaf>
@@ -242,9 +247,9 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="6104708338000" />
+        <entry key="$PROJECT_DIR$" value="6105880799000" />
         <entry key="$PROJECT_DIR$/.gradle" value="0" />
-        <entry key="$PROJECT_DIR$/build.gradle" value="2878997333" />
+        <entry key="$PROJECT_DIR$/build.gradle" value="2709768696" />
         <entry key="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" value="2083459160" />
         <entry key="$PROJECT_DIR$/settings.gradle" value="2139311247" />
       </map>
@@ -422,6 +427,8 @@
     </option>
     <option name="projectSyncType">
       <map>
+        <entry key="$USER_HOME$/Downloads/1718-2-LI61D-G1-master/spring_server" value="PREVIEW" />
+        <entry key="$USER_HOME$/Downloads/spring-boot-postgresql-database-thymeleaf-gradle-example" value="PREVIEW" />
         <entry key="$PROJECT_DIR$/../../../DAW/1617v-public-master/code/jvm/spring-boot-first" value="PREVIEW" />
         <entry key="$PROJECT_DIR$/../../../DAW/1617v-public-master/code/jvm/spring-di-examples" value="PREVIEW" />
         <entry key="$PROJECT_DIR$/../../../DAW/1718v-public/demos/demos-spring-boot-0" value="PREVIEW" />
@@ -430,8 +437,6 @@
         <entry key="$PROJECT_DIR$/../../../DAW/Trabalhos/1718-2-LI61D-G1/spring_server" value="PREVIEW" />
         <entry key="$PROJECT_DIR$/../project_main_component" value="PREVIEW" />
         <entry key="$PROJECT_DIR$" value="RE_IMPORT" />
-        <entry key="$USER_HOME$/Downloads/1718-2-LI61D-G1-master/spring_server" value="PREVIEW" />
-        <entry key="$USER_HOME$/Downloads/spring-boot-postgresql-database-thymeleaf-gradle-example" value="PREVIEW" />
       </map>
     </option>
   </component>
@@ -443,10 +448,10 @@
         <option value="$PROJECT_DIR$/src/module-info.java" />
         <option value="$PROJECT_DIR$/src/main/java/Start.java" />
         <option value="$PROJECT_DIR$/src/main/isel.leic.ps.grupo41/form/Start.java" />
+        <option value="$PROJECT_DIR$/src/main/java/simulator/main/main.java" />
         <option value="$PROJECT_DIR$/src/main/module-info.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/module-info.java" />
-        <option value="$PROJECT_DIR$/src/main/java/simulator/main/main.java" />
       </list>
     </option>
   </component>
@@ -456,7 +461,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="x" value="2" />
     <option name="y" value="23" />
     <option name="width" value="1267" />
@@ -467,8 +472,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -505,17 +508,25 @@
             </path>
             <path>
               <item name="simulator" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="simulator" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="Start" type="e9f4de52:FormNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Global Libraries" />
@@ -523,15 +534,15 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java" />
+      <recent name="$PROJECT_DIR$/src/main" />
+      <recent name="$PROJECT_DIR$/src/main/java/simulator/main" />
+      <recent name="$PROJECT_DIR$/src/main/isel.leic.ps.grupo41/form" />
+      <recent name="$PROJECT_DIR$/src/main/isel.leic.ps.grupo41" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/simulator/main" />
-      <recent name="$PROJECT_DIR$/src/main/java" />
-      <recent name="$PROJECT_DIR$/src/main/isel.leic.ps.grupo41/form" />
-      <recent name="$PROJECT_DIR$/src/main" />
-      <recent name="$PROJECT_DIR$/src/main/isel.leic.ps.grupo41" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -656,29 +667,33 @@
       <workItem from="1526233025124" duration="74000" />
       <workItem from="1526233108711" duration="32000" />
       <workItem from="1526240597135" duration="21000" />
+      <workItem from="1526477532038" duration="2439000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12089000" />
+    <option name="totallyTimeSpent" value="14528000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2" y="23" width="1267" height="741" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.328877" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32833582" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3275401" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15153907" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22578125" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.328877" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="Gradle" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -690,8 +705,6 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Build" order="7" weight="0.328877" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.328877" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -717,11 +730,47 @@
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/simulator/main/Start.java</url>
+          <line>77</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/simulator/main/Start.java</url>
+          <line>76</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="2" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/module-info.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulator/main/Start.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -858,27 +907,30 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/simulator/main/main.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/simulator/main/Start.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulator/main/Start.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="442">
+          <caret line="26" column="90" selection-start-line="26" selection-start-column="90" selection-end-line="26" selection-end-column="90" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/module-info.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+        <state relative-caret-position="68">
+          <caret line="4" column="44" selection-start-line="4" selection-start-column="44" selection-end-line="4" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/src/main/java/simulator/main/Start.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        <state relative-caret-position="310">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

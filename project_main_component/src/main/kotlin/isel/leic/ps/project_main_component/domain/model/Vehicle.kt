@@ -7,7 +7,7 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "vehicle", schema = "public")
-class Vehicle() {
+class Vehicle {
 
     @Id
     lateinit var plate: String
@@ -17,5 +17,9 @@ class Vehicle() {
     var isSubscribed: Boolean = false
 
     var ownerId: Int = 0
+
+    var isBorrowed = false
+
+    var borrowId: String? = null
 
 }

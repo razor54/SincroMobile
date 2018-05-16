@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "event", schema = "public")
-class Event() {
+class Event {
 
     @Id
     @NotNull

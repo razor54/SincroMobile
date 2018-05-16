@@ -32,7 +32,7 @@ class UserService {
     fun getUser(email:String):User{
         try {
             val user = userRepository.findByEmail(email)
-            return user;
+            return user
         }
         catch (e:Exception){
             throw NoSuchUserException()

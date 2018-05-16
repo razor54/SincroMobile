@@ -49,6 +49,7 @@ class Profile extends Component<Props> {
           <Text style={styles.textCenter}>
             {user.name} - {user.id}
           </Text>
+
           <Text style={styles.textCenter}>
             {user.email}
           </Text>
