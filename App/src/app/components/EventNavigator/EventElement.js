@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+
 import {
   Text,
   KeyboardAvoidingView,
-
+  Button,
 } from 'react-native';
+import { showLocation } from 'react-native-map-link';
 import styles from '../../config/styles';
+
 
 type Props = {
     navigation:{
@@ -19,19 +22,36 @@ type Props = {
 export default class extends Component<Props> {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.getMap = this.getMap.bind(this);
+
+    const { data } = this.props.navigation.state.params;
+
+    this.state = {
+      plate: data.plate,
+      location: data.location,
+      date: data.date,
+      longitude: data.gps_longitude,
+      latitude: data.gps_latitude,
+
+    };
+  }
+
+  getMap() {
+    showLocation({
+      latitude: this.state.latitude,
+      longitude: this.state.longitude,
+    });
   }
 
   render() {
-    const { data } = this.props.navigation.state.params;
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
-        <Text style={styles.header}>
-                    Event Item
-        </Text>
-        <Text style={styles.textStretch}> {data.name} </Text>
-        <Text style={styles.textStretch}> This event occurred on {data.date} </Text>
+        <Text style={styles.header}>Event Item</Text>
+        <Text style={styles.textStretch}> {this.state.plate} </Text>
+        <Text style={styles.textStretch}> Location - {this.state.location} </Text>
+        <Text style={styles.textStretch}> This event occurred on {this.state.date} </Text>
         <Text style={styles.textStretch}> Confirm that it was you? </Text>
+        <Button onPress={this.getMap} title="Show Map Location" />
 
       </KeyboardAvoidingView>
 

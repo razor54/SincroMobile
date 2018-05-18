@@ -27,10 +27,10 @@ class Event {
     lateinit var location: String
 
     @NotNull
-    var gps_latitude: Double = 0.0
+    lateinit var gps_latitude: String
 
     @NotNull
-    var gps_longitude: Double = 0.0
+    lateinit var gps_longitude: String
 
     @NotNull
     var driverId: Int = 0

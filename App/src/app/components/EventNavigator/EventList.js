@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
-
+import Settigns from '../../config/serverConnectionSettings';
+import eventListModel from '../../model/eventListModel';
 
 type Props = {
     navigation:{
@@ -9,47 +10,74 @@ type Props = {
             params:any
         },
         navigate: any
+    },
+
+    screenProps: {
+        user: {
+            id: number,
+            email: String,
+            name: String,
+        }
     }
-};
+}
 export default class extends Component<Props> {
   constructor(props) {
     super(props);
+
+    this.render = this.render.bind(this);
+    this.onPress = this.onPress.bind(this);
+    this.getList = this.getList.bind(this);
+
     this.state = {
-      list: [
-        {
-          key: '1',
-          name: 'event 1 ',
-          date: '10/12/1992',
-        },
-        {
-          key: '2',
-          name: 'event 2',
-          date: '9/2/1999',
-        },
-      ],
-
-
+      list: null, // [{id,name,date},{...}]
+      eventsUrl: `${Settigns.homepage}/user/event`,
+      id: props.screenProps.user.id,
+      refreshing: false,
     };
     this.onPress = this.onPress.bind(this);
   }
+
+
+  componentDidMount() {
+    this.getList();
+  }
+
 
   onPress(data) {
     this.props.navigation.navigate('Element', { data });
   }
 
-    renderItem = ({ item }) =>
-      (<ListItem
-        key={item.key}
-        title={item.name}
-        subtitle={item.date}
-        onPress={() => this.onPress(item)}
-      />);
 
+  getList = () => {
+    this.setState({ refreshing: true });
+    const data = {
+      body: JSON.stringify({ id: this.state.id }),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    };
 
-    render() {
-      return (
-        <FlatList renderItem={this.renderItem} data={this.state.list} />
-      );
-    }
+    fetch(this.state.eventsUrl, data)
+      .then(res => (res.ok ? res.json() : alert(res.status)))
+      .then(json => this.setState({ list: eventListModel(json).list }))
+      .then(() => this.setState({ refreshing: false }));
+  }
+
+  renderItem = ({ item }) => (
+    <ListItem
+      key={item.id}
+      title={item.plate}
+      subtitle={item.date.split('T')[0]}
+      onPress={() => this.onPress(item)}
+      selected={item.verified}
+    />);
+
+  render() {
+    return (<FlatList
+      renderItem={this.renderItem}
+      data={this.state.list}
+      onRefresh={this.getList}
+      refreshing={this.state.refreshing}
+    />);
+  }
 }
 

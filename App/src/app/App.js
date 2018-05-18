@@ -25,9 +25,6 @@ export default class extends Component<Props> {
     this.onLogin = this.onLogin.bind(this);
   }
 
-  onLogin(user) {
-    this.setState({ user: { id: user.id, name: user.name, email: user.email }, isLogin: true });
-  }
 
   componentWillMount() {
     OneSignal.init('75a88678-2deb-40be-8a8c-3b05309761b8');
@@ -61,6 +58,9 @@ export default class extends Component<Props> {
     OneSignal.removeEventListener('ids', this.onIds);
   }
 
+  onLogin(user) {
+    this.setState({ user: { id: user.id, name: user.name, email: user.email }, isLogin: true });
+  }
   onReceived(notification) {
     console.warn('Notification received: ', notification);
   }
@@ -79,23 +79,14 @@ export default class extends Component<Props> {
 
   render() {
     return (
-      // <View >
       (this.state.isLogin) ?
         <Application screenProps={{ user: this.state.user }} /> :
 
         <Login screenProps={{ onLogin: this.onLogin }} />
-    // </View>
-
     );
   }
 }
-/*
-{this.state.isLogin ?
-    <Application />
-    :
-    <Login />
-}
-*/
+
 const Application = TabNavigator(
   {
 

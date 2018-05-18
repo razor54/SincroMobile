@@ -7,6 +7,7 @@ import isel.leic.ps.project_main_component.exceptions.FailedToAddUserException
 import isel.leic.ps.project_main_component.exceptions.NoSuchUserException
 import isel.leic.ps.project_main_component.repository.EventRepository
 import isel.leic.ps.project_main_component.repository.UserRepository
+import org.hibernate.mapping.Array
 import org.json.JSONArray
 import org.json.JSONObject
 import org.springframework.beans.factory.annotation.Autowired
@@ -45,6 +46,12 @@ class EventService {
         throw NoSuchUserException()
 
     }
+
+
+    fun getUserEvents(id : Int) : List<Event>{
+        return eventRepository.findAll().filter { it.driverId == id }
+    }
+
 
     fun removeEvent(id: Int) {
         try {
