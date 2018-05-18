@@ -4,16 +4,18 @@ import {
   Text,
   View,
   KeyboardAvoidingView, TouchableOpacity,
-  StyleSheet, FlatList,
+  StyleSheet, FlatList, Dimensions, TextInput, ScrollView,
 } from 'react-native';
 import Modal from 'react-native-modal';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 import { StackNavigator } from 'react-navigation';
-import {Avatar, Button, CheckBox, FormInput, FormLabel, ListItem} from 'react-native-elements';
+import { Avatar, Button, CheckBox, FormInput, FormLabel, ListItem } from 'react-native-elements';
 import { AccessToken, GraphRequest, GraphRequestManager, LoginButton } from 'react-native-fbsdk';
 import theme_styles from '../config/styles';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
 import networkSetting from '../config/serverConnectionSettings';
 
+const SCREEN_WIDTH = Dimensions.get('window').width;
 
 type Props = {
     screenProps: {
@@ -36,6 +38,7 @@ class Profile extends Component<Props> {
       subscribe: false,
       date: null,
       list: null,
+      isDateTimePickerVisible: false,
 
     };
 
@@ -45,8 +48,13 @@ class Profile extends Component<Props> {
     this._responseInfoCallback = this._responseInfoCallback.bind(this);
     this.handleSubscribe = this.handleSubscribe.bind(this);
     this.handleAddVehicle = this.handleAddVehicle.bind(this);
+
     this._renderList = this._renderList.bind(this);
     this.renderItem = this.renderItem.bind(this);
+
+    this._handleDatePicked = this._handleDatePicked.bind(this);
+    this._hideDateTimePicker = this._hideDateTimePicker.bind(this);
+    this._showDateTimePicker = this._showDateTimePicker.bind(this);
   }
 
 
@@ -54,62 +62,64 @@ class Profile extends Component<Props> {
     const { user } = this.props.screenProps;
 
     return (
-      <View behavior="padding" style={theme_styles.wrapper}>
+      <ScrollView>
+        <View behavior="padding" style={theme_styles.wrapper}>
 
-        <View style={theme_styles.containerRow}>
-          <Avatar
-            source={this.state.userImage ? { uri: this.state.userImage } : require('../../../public/image/user-1808597_1280.png')}
-            large
-            title="MI"
-            rounded
-            onPress={() => alert('Works!')}
-            activeOpacity={0.7}
-          />
+          <View style={theme_styles.containerRow}>
+            <Avatar
+              source={this.state.userImage ? { uri: this.state.userImage } : require('../../../public/image/user-1808597_1280.png')}
+              large
+              title="MI"
+              rounded
+              onPress={() => alert('Works!')}
+              activeOpacity={0.7}
+            />
+
+            <Text style={theme_styles.textCenter}>
+              {user.name}
+            </Text>
+
+
+            <Button
+              title="Info"
+              buttonStyle={theme_styles.textBtn}
+              color="rgba(78, 116, 289, 1)"
+              onPress={() => alert('More info')}
+            >
+                        Info
+            </Button>
+
+
+          </View>
 
           <Text style={theme_styles.textCenter}>
-            {user.name}
+            {user.email}
           </Text>
+          <Text>Nif: {user.id} </Text>
 
+          <LoginButton
+            onLogoutFinished={() => alert('User logged out')}
+          />
+          {this._renderList()}
 
-          <Button
-            title="Info"
-            buttonStyle={theme_styles.textBtn}
-            color="rgba(78, 116, 289, 1)"
-            onPress={() => alert('More info')}
+          {this._renderButton('Register a Vehicle', () => this.setState({ visibleModal: true }))}
+
+          <Modal
+            isVisible={this.state.visibleModal}
+            backdropColor="black"
+            backdropOpacity={0.8}
+            animationIn="zoomInDown"
+            animationOut="zoomOutUp"
+            animationInTiming={1000}
+            animationOutTiming={1000}
+            backdropTransitionInTiming={1000}
+            backdropTransitionOutTiming={1000}
           >
-                        Info
-          </Button>
-
+            {this._renderModalContent()}
+          </Modal>
 
         </View>
-
-        <Text style={theme_styles.textCenter}>
-          {user.email}
-        </Text>
-        <Text>Nif: {user.id} </Text>
-
-        <LoginButton
-          onLogoutFinished={() => alert('User logged out')}
-        />
-        {this._renderList()}
-
-        {this._renderButton('Register a Vehicle', () => this.setState({ visibleModal: true }))}
-
-        <Modal
-          isVisible={this.state.visibleModal}
-          backdropColor="black"
-          backdropOpacity={0.8}
-          animationIn="zoomInDown"
-          animationOut="zoomOutUp"
-          animationInTiming={1000}
-          animationOutTiming={1000}
-          backdropTransitionInTiming={1000}
-          backdropTransitionOutTiming={1000}
-        >
-          {this._renderModalContent()}
-        </Modal>
-
-      </View>
+      </ScrollView>
     );
   }
 
@@ -128,6 +138,16 @@ class Profile extends Component<Props> {
     fetch(url).then(reply => reply.json())
       .then(list => this.setState({ list }));
   }
+
+
+  _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+
+  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+  _handleDatePicked = (date) => {
+    this.setState({ date });
+    this._hideDateTimePicker();
+  };
 
 
   renderItem = ({ item }) =>
@@ -220,9 +240,14 @@ class Profile extends Component<Props> {
 
 
       <FormLabel>Registration Date</FormLabel>
-      <FormInput
-        onChangeText={date => this.setState({ date })}
-        inputStyle={styles.inputStyle}
+
+      <TouchableOpacity onPress={this._showDateTimePicker}>
+        <Text style={styles.inputStyle}>PickDate</Text>
+      </TouchableOpacity>
+      <DateTimePicker
+        isVisible={this.state.isDateTimePickerVisible}
+        onConfirm={this._handleDatePicked}
+        onCancel={this._hideDateTimePicker}
       />
       <CheckBox
         title="Subscribed"
@@ -273,5 +298,13 @@ const styles = StyleSheet.create({
   bottomModal: {
     justifyContent: 'flex-end',
     margin: 0,
+  },
+  inputStyle: {
+    borderWidth: 2,
+    borderColor: 'lightgrey',
+    alignItems: 'center',
+    width: SCREEN_WIDTH - 100,
+    margin: 10,
+    paddingLeft: 10,
   },
 });

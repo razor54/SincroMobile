@@ -24,16 +24,16 @@ export default class extends Component<Props> {
   constructor(props) {
     super(props);
 
-    this.render = this.render.bind(this);
-    this.onPress = this.onPress.bind(this);
-    this.getList = this.getList.bind(this);
-
     this.state = {
       list: null, // [{id,name,date},{...}]
       eventsUrl: `${Settigns.homepage}/user/event`,
       id: props.screenProps.user.id,
       refreshing: false,
     };
+
+    this.render = this.render.bind(this);
+    this.onPress = this.onPress.bind(this);
+    this.getList = this.getList.bind(this);
     this.onPress = this.onPress.bind(this);
   }
 
@@ -59,8 +59,9 @@ export default class extends Component<Props> {
     fetch(this.state.eventsUrl, data)
       .then(res => (res.ok ? res.json() : alert(res.status)))
       .then(json => this.setState({ list: eventListModel(json).list }))
-      .then(() => this.setState({ refreshing: false }));
-  }
+      .catch(() => alert('Fetch event failed'))
+      .finally(() => this.setState({ refreshing: false }));
+  };
 
   renderItem = ({ item }) => (
     <ListItem
