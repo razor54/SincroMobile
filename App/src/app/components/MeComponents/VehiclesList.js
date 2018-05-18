@@ -5,7 +5,7 @@ import { ListItem } from 'react-native-elements';
 import networkSettings from '../../config/serverConnectionSettings';
 
 type Props = {
-    user : any,
+  user: any,
 }
 
 export default class VehiclesList extends Component<Props> {
@@ -32,18 +32,24 @@ export default class VehiclesList extends Component<Props> {
     const url = `${networkSettings.homepage}/vehicles/${this.state.userId}`;
     fetch(url).then(reply => reply.json())
       .then(list => this.setState({ list, refreshing: false }));
+    // catch
   }
 
   renderItem = ({ item }) =>
     (<ListItem
-            // key={item.plate}
       title={item.plate}
       subtitle={item.date}
     />);
 
 
   render() {
-    return (<FlatList renderItem={this.renderItem} data={this.state.list} keyExtractor={(item, index) => `${index}`} onRefresh={this.doRefresh} refreshing={this.state.refreshing} />
+    return (<FlatList
+      renderItem={this.renderItem}
+      data={this.state.list}
+      keyExtractor={(item, index) => `${index}`}
+      onRefresh={this.doRefresh}
+      refreshing={this.state.refreshing}
+    />
     );
   }
 }

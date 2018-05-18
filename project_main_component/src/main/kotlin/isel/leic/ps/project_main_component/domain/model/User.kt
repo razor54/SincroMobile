@@ -1,5 +1,6 @@
 package isel.leic.ps.project_main_component.domain.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -22,4 +23,8 @@ class User {
 
     @NotNull
     lateinit var password: String
+
+    // @NotNull User might not want to receive notification
+    // @JsonIgnore
+    var playerId: String? = null
 }

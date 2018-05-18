@@ -26,11 +26,14 @@ class EventService {
 
     @Autowired
     lateinit var eventRepository: EventRepository
+    @Autowired
+    lateinit var userService: UserService
 
     fun addEvent(event: Event): Event {
         try {
             val save = eventRepository.save(event)
-            sendNotification()
+            // TODO maybe based on vehicle and then get driver Id
+            sendNotification(event.driverId)
 
             return save
         } catch (e: Exception) {
@@ -48,8 +51,8 @@ class EventService {
     }
 
 
-    fun getUserEvents(id : Int) : List<Event>{
-        return eventRepository.findAll().filter { it.driverId == id }
+    fun getUserEvents(id: Int): List<Event> {
+        return eventRepository.findAllByDriverId(id)
     }
 
 
@@ -63,7 +66,7 @@ class EventService {
 
     fun updateEvent(event: Event) {
         try {
-            eventRepository.save(event);
+            eventRepository.save(event)
         } catch (e: Exception) {
 
         }
@@ -71,7 +74,14 @@ class EventService {
     }
 
 
-    private fun sendNotification() {
+    private fun sendNotification(driverId: Int) {
+
+        var user = userService.getUser(driverId)
+
+        val playerId = user.playerId
+
+        if(playerId ==null|| playerId.isEmpty())
+            return
 
         val url = URL("https://onesignal.com/api/v1/notifications")
         val con = url.openConnection() as HttpsURLConnection
@@ -86,17 +96,35 @@ class EventService {
         val app_id = JSONObject()
         app_id.put("app_id", "75a88678-2deb-40be-8a8c-3b05309761b8")
 
-        val segments = JSONArray()
-        segments.put("All")
-        app_id.put("included_segments", segments)
+        val playerIds = JSONArray()
+        playerIds.put(playerId)
+        app_id.put("include_player_ids", playerIds)
 
         val data = JSONObject()
         data.put("foo", "bar")
         app_id.put("data", data)
 
         val contents = JSONObject()
-        contents.put("en", "English Message")
+        contents.put("en", "You have a new event")
         app_id.put("contents", contents)
+
+        val headings = JSONObject()
+        headings.put("en", "New Event")
+        app_id.put("headings", headings)
+
+        val buttons =JSONArray()
+        val button1 = JSONObject()
+        button1.put("id","id1")
+        button1.put("text","Click here for details")
+        button1.put("icon","ic_menu_share")
+
+        val button2 = JSONObject()
+        button2.put("id","id2")
+        button2.put("text","Click here for even more details")
+
+        buttons.put(button1)
+        buttons.put(button2)
+        app_id.put("buttons",buttons)
 
         val wr = OutputStreamWriter(con.outputStream)
         wr.write(app_id.toString())

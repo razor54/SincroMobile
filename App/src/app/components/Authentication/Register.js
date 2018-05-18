@@ -8,12 +8,14 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   Dimensions,
+  AsyncStorage, ScrollView,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { FormLabel, FormInput, FormValidationMessage, Input, Button } from 'react-native-elements';
 
 import styl from '../../config/styles';
 import networkSetting from '../../config/serverConnectionSettings';
+import validateNIF from '../../util/NifVerify';
 
 const FBSDK = require('react-native-fbsdk');
 
@@ -45,28 +47,6 @@ type Props = {
 };
 
 export default class Register extends Component<Props> {
-  // This function was based on
-  // https://pt.wikipedia.org/wiki/N%C3%BAmero_de_identifica%C3%A7%C3%A3o_fiscal
-  static validateNIF(nif) {
-    let comparator;
-    if (!['1', '2', '3', '5', '6', '8'].includes(nif.substr(0, 1)) &&
-      !['45', '70', '71', '72', '77', '79', '90', '91', '98', '99'].includes(nif.substr(0, 2))) {
-      return false;
-    }
-    // eslint-disable-next-line max-len,no-mixed-operators
-    const total = nif[0] * 9 + nif[1] * 8 + nif[2] * 7 + nif[3] * 6 + nif[4] * 5 + nif[5] * 4 + nif[6] * 3 + nif[7] * 2;
-    const modulo11 = (Number(total) % 11);
-    if (modulo11 == 1 || modulo11 == 0) {
-      comparator = 0;
-    } else {
-      comparator = 11 - modulo11;
-    }
-    if (nif[8] != comparator) {
-      return false;
-    }
-    return true;
-  }
-
   constructor(props) {
     super(props);
     let userProps = null;
@@ -90,6 +70,7 @@ export default class Register extends Component<Props> {
     this.handleUserName = this.handleUserName.bind(this);
     this.handleNif = this.handleNif.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
+    this.saveUser = this.saveUser.bind(this);
   }
 
 
@@ -100,13 +81,13 @@ export default class Register extends Component<Props> {
   }
 
   handleUserName(username) {
-    const test = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
+    const test = /^(?=.*[a-z])(?=.*[A-Z]).+$/;
     this.setState({ username, usernameValid: test.test(username) });
   }
 
   handleNif(nif) {
     const test = /^[0-9]{7,10}$/;
-    this.setState({ nif, nifValid: test.test(nif) && Register.validateNIF(nif) });
+    this.setState({ nif, nifValid: test.test(nif) && validateNIF(nif) });
   }
 
   // Todo Limit the password for more secure test.
@@ -122,6 +103,14 @@ export default class Register extends Component<Props> {
       return alert('Please insert valid params');
     }
     this.setState({ isLoading: true });
+    AsyncStorage.getItem('player_id').then(this.saveUser)
+      .finally(() => AsyncStorage.removeItem('player_id'));
+
+    // this.props.navigation.navigate('Home');
+  };
+
+
+  saveUser(playerId) {
     fetch(`${networkSetting.homepage}/register`, {
       method: 'POST',
       headers: {
@@ -133,12 +122,12 @@ export default class Register extends Component<Props> {
         password: this.state.password,
         email: this.state.email,
         id: this.state.nif,
+        playerId,
       }),
     })
       .then(response => response.json())
       .then((res) => {
         if (res.id) {
-          alert('Ok');
           this.props.screenProps.onLogin(res);
         } else {
           alert('error');
@@ -151,22 +140,26 @@ export default class Register extends Component<Props> {
         this.setState({ isLoading: false });
       })
       .done();
-
-
-    // this.props.navigation.navigate('Home');
-  };
-
+  }
 
   render() {
     const emailError =
       this.state.emailValid ? null : <FormValidationMessage>Invalid Email</FormValidationMessage>;
 
-    const nameError = this.state.usernameValid ? null : <FormValidationMessage>Invalid username</FormValidationMessage>;
+    const nameError = this.state.usernameValid ?
+      null
+      :
+      <FormValidationMessage>Invalid username</FormValidationMessage>;
 
-    const passwordError = this.state.passwordValid ? null :
-    <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
+    const passwordError = this.state.passwordValid ?
+      null
+      :
+      <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
 
-    const nifError = this.state.nifValid ? null : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
+    const nifError = this.state.nifValid ?
+      null
+      :
+      <FormValidationMessage>Invalid NIF</FormValidationMessage>;
 
     let userProps = null;
     if (this.props.navigation.state.params) {
@@ -175,49 +168,50 @@ export default class Register extends Component<Props> {
     }
 
     return (
-      <KeyboardAvoidingView style={styles.container}>
+      <ScrollView>
+        <KeyboardAvoidingView style={styles.container}>
 
-        <FormLabel>Email</FormLabel>
-        <FormInput
-          onChangeText={this.handleEmail}
-          value={userProps ? userProps.email : this.state.email}
+          <FormLabel>Email</FormLabel>
+          <FormInput
+            onChangeText={this.handleEmail}
+            value={userProps ? userProps.email : this.state.email}
           // containerStyle={{ width: '60%' }}
-          inputStyle={styles.inputStyle}
-          autoCapitalize="none"
-        />
+            inputStyle={styles.inputStyle}
+            autoCapitalize="none"
+          />
 
-        {emailError}
+          {emailError}
 
-        <FormLabel>Name</FormLabel>
-        <FormInput
-          value={userProps ? userProps.name : this.state.username}
-          onChangeText={this.handleUserName}
+          <FormLabel>Name</FormLabel>
+          <FormInput
+            value={userProps ? userProps.name : this.state.username}
+            onChangeText={this.handleUserName}
           // containerStyle={{ width: '60%' }}
-          inputStyle={styles.inputStyle}
-        />
-        {nameError}
+            inputStyle={styles.inputStyle}
+          />
+          {nameError}
 
 
-        <FormLabel>NIF</FormLabel>
-        <FormInput
-          onChangeText={this.handleNif}
+          <FormLabel>NIF</FormLabel>
+          <FormInput
+            onChangeText={this.handleNif}
           // containerStyle={{ width: '60%' }}
-          inputStyle={styles.inputStyle}
-        />
-        {nifError}
+            inputStyle={styles.inputStyle}
+          />
+          {nifError}
 
-        <FormLabel>Password</FormLabel>
-        <FormInput
-          onChangeText={this.handlePassword}
+          <FormLabel>Password</FormLabel>
+          <FormInput
+            onChangeText={this.handlePassword}
           // containerStyle={{ width: '60%' }}
-          inputStyle={styles.inputStyle}
-          secureTextEntry
-        />
-        {passwordError}
+            inputStyle={styles.inputStyle}
+            secureTextEntry
+          />
+          {passwordError}
 
 
-        <View style={{ marginTop: 50 }}>
-          {
+          <View style={{ marginTop: 50 }}>
+            {
 
 
             this.state.isLoading ?
@@ -239,18 +233,19 @@ export default class Register extends Component<Props> {
 
 
           }
-        </View>
+          </View>
 
-        <Button
-          title="Already have an account? Click Here"
-          buttonStyle={styl.textBtn}
-          color="rgba(78, 116, 289, 1)"
-          onPress={() => this.props.navigation.navigate('Login')}
-        >
+          <Button
+            title="Already have an account? Click Here"
+            buttonStyle={styl.textBtn}
+            color="rgba(78, 116, 289, 1)"
+            onPress={() => this.props.navigation.navigate('Login')}
+          >
           Info
-        </Button>
+          </Button>
 
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      </ScrollView>
     );
   }
 }

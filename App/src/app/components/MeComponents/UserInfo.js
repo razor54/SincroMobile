@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* global alert:false */
 import { Avatar, Button } from 'react-native-elements';
 import React, { Component } from 'react';
@@ -24,7 +25,8 @@ export default class UserInfo extends Component<Props> {
 
 
   componentDidMount() {
-    AccessToken.getCurrentAccessToken().then(() => {
+    AccessToken.getCurrentAccessToken().then((token) => {
+      if (!token) return;
       const infoRequest = new GraphRequest(
         '/me?fields=picture.height(480)&redirect=false,public_profile',
         null,
@@ -35,7 +37,7 @@ export default class UserInfo extends Component<Props> {
     });
   }
   responseInfoCallback = (error, result) => {
-    if (error) alert(error.toString());
+    if (error) alert('An error fetching user image');
     else this.setState({ userImage: result.picture.data.url });
   };
 

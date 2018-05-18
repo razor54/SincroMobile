@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types,react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
+import { AsyncStorage } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import OneSignal from 'react-native-onesignal';
 import Events from './screens/Events';
@@ -39,6 +40,7 @@ export default class extends Component<Props> {
       // TODO save on storage and then when user
       // registers identification will be associated with him
       // AND if user is on another devce decide if it will be default device
+      AsyncStorage.setItem('player_id', response.userId);
     });
   }
 
