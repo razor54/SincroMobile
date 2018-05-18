@@ -1,8 +1,10 @@
+/* global fetch:false */
+/* global alert:false */
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import Settigns from '../../config/serverConnectionSettings';
-import eventListModel from '../../model/eventListModel';
+import settings from '../../config/serverConnectionSettings';
+
 
 type Props = {
     navigation:{
@@ -26,7 +28,7 @@ export default class extends Component<Props> {
 
     this.state = {
       list: null, // [{id,name,date},{...}]
-      eventsUrl: `${Settigns.homepage}/user/event`,
+      eventsUrl: `${settings.homepage}/user/event`,
       id: props.screenProps.user.id,
       refreshing: false,
     };
@@ -58,14 +60,13 @@ export default class extends Component<Props> {
 
     fetch(this.state.eventsUrl, data)
       .then(res => (res.ok ? res.json() : alert(res.status)))
-      .then(json => this.setState({ list: eventListModel(json).list }))
+      .then(jsonList => this.setState({ list: jsonList }))
       .catch(() => alert('Fetch event failed'))
       .finally(() => this.setState({ refreshing: false }));
   };
 
   renderItem = ({ item }) => (
     <ListItem
-      key={item.id}
       title={item.plate}
       subtitle={item.date.split('T')[0]}
       onPress={() => this.onPress(item)}
@@ -78,6 +79,7 @@ export default class extends Component<Props> {
       data={this.state.list}
       onRefresh={this.getList}
       refreshing={this.state.refreshing}
+      keyExtractor={(item, index) => `${index}`}
     />);
   }
 }

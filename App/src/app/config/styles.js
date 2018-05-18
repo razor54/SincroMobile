@@ -58,7 +58,8 @@ export default {
   },
   header: {
     fontSize: 50,
-    marginBottom: 60,
+    marginBottom: 10,
+    alignItems: 'center',
     color: '#000000',
     fontWeight: 'bold',
   },

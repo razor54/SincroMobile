@@ -11,6 +11,11 @@
     // React Native has JSX onLogin JS files
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     // React Native includes images via require('../images/example.png')
-    "global-require": "off"
+    "global-require": "off",
+
+    "globals": {
+      "fetch": false,
+      "alert": false
+    }
   }
 }
