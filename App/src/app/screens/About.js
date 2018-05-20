@@ -22,17 +22,17 @@ export default class extends Component<Props> {
           <Text style={styles.header}>
                         About
           </Text>
-          <Text style={styles.textCenter}>
+          <Text style={styles.header_left}>
                         Developed by
           </Text>
           <Text style={styles.textCenter}>
-                        Nuno Conceicao
+                        André Gaudêncio
           </Text>
           <Text style={styles.textCenter}>
                         &
           </Text>
           <Text style={styles.textCenter}>
-                        Andre Gaudencio
+                        Nuno Conceição
           </Text>
 
         </View>

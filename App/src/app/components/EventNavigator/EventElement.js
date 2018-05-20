@@ -46,11 +46,10 @@ export default class extends Component<Props> {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
-        <Text style={styles.header}>Event Item</Text>
-        <Text style={styles.textStretch}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> Location - {this.state.location} </Text>
+        <Text style={styles.header}> {this.state.plate} </Text>
         <Text style={styles.textStretch}> This event occurred on {this.state.date.split('T')[0]} </Text>
         <Text style={styles.textStretch}> Hours - {this.state.date.split('T')[1].split('.')[0]} </Text>
+        <Text style={styles.textStretch}> Location - {this.state.location} </Text>
         <Text style={styles.textStretch}> Confirm that it was you? </Text>
         <Button onPress={this.getMap} title="Show Map Location" />
 

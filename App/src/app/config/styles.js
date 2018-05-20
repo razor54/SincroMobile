@@ -60,6 +60,7 @@ export default {
     fontSize: 50,
     marginBottom: 10,
     alignItems: 'center',
+    textAlign: 'center',
     color: '#000000',
     fontWeight: 'bold',
   },
@@ -91,6 +92,26 @@ export default {
   btnText: {
     color: '#ffffff',
     fontSize: 24,
+    fontWeight: 'bold',
+  },
+
+  userIcon: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    padding: 20,
+
+  },
+
+  facebookButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  header_left: {
+    fontSize: 30,
+    marginBottom: 10,
+    color: '#000000',
     fontWeight: 'bold',
   },
 

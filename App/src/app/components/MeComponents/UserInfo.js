@@ -1,10 +1,11 @@
 /* eslint-disable no-alert */
 /* global alert:false */
-import { Avatar, Button } from 'react-native-elements';
+import { Avatar, CheckBox, FormInput, FormLabel } from 'react-native-elements';
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Button, Text, TouchableOpacity, View } from 'react-native';
 import { AccessToken, GraphRequest, GraphRequestManager, LoginButton } from 'react-native-fbsdk';
-import theme_styles from '../../config/styles';
+import Modal from 'react-native-modal';
+import styles from '../../config/styles';
 
 
 type Props = {
@@ -16,10 +17,13 @@ export default class UserInfo extends Component<Props> {
     super(props);
 
     this.responseInfoCallback = this.responseInfoCallback.bind(this);
+    this.showMoreInfo = this.showMoreInfo.bind(this);
+    this.closeMoreInfo = this.closeMoreInfo.bind(this);
 
     this.state = {
       user: props.user,
       userImage: null,
+      visibleModal: false,
     };
   }
 
@@ -36,51 +40,86 @@ export default class UserInfo extends Component<Props> {
       new GraphRequestManager().addRequest(infoRequest).start();
     });
   }
+
+  showMoreInfo() {
+    this.setState({ visibleModal: true });
+  }
+
+  closeMoreInfo() {
+    this.setState({ visibleModal: false });
+  }
+
+
   responseInfoCallback = (error, result) => {
     if (error) alert('An error fetching user image');
     else this.setState({ userImage: result.picture.data.url });
   };
 
 
+  renderModalContent = () => (
+    <View style={styles.modalContent} >
+
+      <View>
+        <Avatar
+          source={require('../../../../public/image/closebutton.png')}
+          xsmall
+          rounded
+          title="Close"
+          onPress={this.closeMoreInfo}
+          activeOpacity={2}
+        />
+      </View>
+
+      <View style={styles.userIcon}>
+        <Avatar
+          source={this.state.userImage ? { uri: this.state.userImage } : require('../../../../public/image/user-1808597_1280.png')}
+          xlarge
+          rounded
+          title="MI"
+          onPress={this.showMoreInfo}
+          activeOpacity={2}
+        />
+
+      </View>
+      <Text style={styles.textCenter}>{this.state.user.name}</Text>
+      <Text style={styles.textCenter}>{this.state.user.id} </Text>
+      <Text style={styles.textCenter}>{this.state.user.email}</Text>
+      <LoginButton style={styles.userIcon} onLogoutFinished={() => alert('User logged out')} />
+    </View>
+  );
+
+
   render() {
     return (
-      <View>
-        <View style={theme_styles.containerRow}>
-          <Avatar
-            source={this.state.userImage ? { uri: this.state.userImage } : require('../../../../public/image/user-1808597_1280.png')}
-            large
-            title="MI"
-            rounded
-            onPress={() => alert('Works!')}
-            activeOpacity={0.7}
-          />
-
-          <Text style={theme_styles.textCenter}>
-            {this.state.user.name}
-          </Text>
-
-
-          <Button
-            title="Info"
-            buttonStyle={theme_styles.textBtn}
-            color="rgba(78, 116, 289, 1)"
-            onPress={() => alert('More info')}
-          >
-              Info
-          </Button>
-
-
-        </View>
-
-        <Text style={theme_styles.textCenter}>
-          {this.state.user.email}
-        </Text>
-        <Text>Nif: {this.state.user.id} </Text>
-
-        <LoginButton
-          onLogoutFinished={() => alert('User logged out')}
+      <View style={styles.userIcon}>
+        <Avatar
+          source={this.state.userImage ? { uri: this.state.userImage } : require('../../../../public/image/user-1808597_1280.png')}
+          large
+          title="MI"
+          rounded
+          onPress={this.showMoreInfo}
+          activeOpacity={2}
         />
-      </View>);
+        <Modal
+          isVisible={this.state.visibleModal}
+          backdropColor="black"
+          backdropOpacity={0.8}
+          animationIn="zoomInDown"
+          animationOut="zoomOutUp"
+          animationInTiming={500}
+          animationOutTiming={500}
+          backdropTransitionInTiming={500}
+          backdropTransitionOutTiming={500}
+          onRequestClose={this.closeMoreInfo}
+        >
+          {this.renderModalContent()}
+        </Modal>
+      </View>
+    );
   }
 }
 
+
+/*
+
+         */

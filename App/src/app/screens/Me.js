@@ -1,9 +1,9 @@
 /* eslint-disable no-use-before-define */
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import {Text, View} from 'react-native';
 
 import { StackNavigator } from 'react-navigation';
-import theme_styles from '../config/styles';
+import styles from '../config/styles';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
 import VehiclesList from '../components/MeComponents/VehiclesList';
 import RegisterVehicleForm from '../components/MeComponents/RegisterVehicleForm';
@@ -23,19 +23,20 @@ type Props = {
 class Profile extends Component<Props> {
   constructor(props) {
     super(props);
+
     this.state = {
-      user: this.props.screenProps.user,
+      user: props.screenProps.user,
     };
   }
 
 
   componentDidMount() {}
 
-
   render() {
     return (
-      <View behavior="padding" style={theme_styles.wrapper}>
+      <View>
         <UserInfo user={this.state.user} />
+        <Text style={styles.header_left}> Your Vehicles </Text>
         <VehiclesList user={this.state.user} />
         <RegisterVehicleForm user={this.state.user} />
       </View>
@@ -44,11 +45,10 @@ class Profile extends Component<Props> {
 }
 
 export default StackNavigator({
-
   List: {
     screen: Profile,
 
-    navigationOptions: navigationHeaderStyle('User Profile'),
+    navigationOptions: navigationHeaderStyle('Profile'),
   },
 
 });
