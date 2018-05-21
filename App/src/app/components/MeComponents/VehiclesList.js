@@ -6,6 +6,7 @@ import networkSettings from '../../config/serverConnectionSettings';
 
 type Props = {
   user: any,
+  getCallback: any,
 }
 
 export default class VehiclesList extends Component<Props> {
@@ -14,6 +15,7 @@ export default class VehiclesList extends Component<Props> {
 
     this.doRefresh = this.doRefresh.bind(this);
     this.renderItem = this.renderItem.bind(this);
+    this.setCallback = props.getCallback.bind(this);
 
     this.state = {
       list: [],
@@ -24,6 +26,7 @@ export default class VehiclesList extends Component<Props> {
 
 
   componentDidMount() {
+    this.setCallback(this.doRefresh);
     this.doRefresh();
   }
 

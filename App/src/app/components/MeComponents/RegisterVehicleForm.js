@@ -1,8 +1,8 @@
 /* global fetch:false */
 /* global alert:false */
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions, Button } from 'react-native';
-import { Avatar, CheckBox, FormInput, FormLabel } from 'react-native-elements';
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { Avatar, CheckBox, FormInput, FormLabel, Button } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import networkSettings from '../../config/serverConnectionSettings';
@@ -10,8 +10,18 @@ import networkSettings from '../../config/serverConnectionSettings';
 
 type Props = {
     user : any,
+    callback: any,
 }
 const SCREEN_WIDTH = Dimensions.get('window').width;
+
+
+const addButtonIcon = {
+  name: 'add-circle',
+  type: 'ionicons',
+  color: 'black',
+  size: 35,
+};
+
 
 const styles = StyleSheet.create({
   container: {
@@ -59,7 +69,6 @@ export default class RegisterVehicleForm extends Component<Props> {
   constructor(props) {
     super(props);
 
-    this.renderButton = this.renderButton.bind(this);
     this.renderModalContent = this.renderModalContent.bind(this);
     this.handlePlate = this.handlePlate.bind(this);
     this.handleSubscribe = this.handleSubscribe.bind(this);
@@ -68,6 +77,7 @@ export default class RegisterVehicleForm extends Component<Props> {
     this.hideDateTimePicker = this.hideDateTimePicker.bind(this);
     this.showDateTimePicker = this.showDateTimePicker.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.callback = props.callback;
 
     this.state = {
       user: props.user,
@@ -112,13 +122,16 @@ export default class RegisterVehicleForm extends Component<Props> {
       })
         .then((response) => {
           if (response.status !== 200) alert('There was an error');
+          this.callback();
         })
         .catch(() => {
           // this.setState({ isLoading: false });
           alert('There was an error');
         })
+        .finally(() => {
+          this.setState({ visibleModal: false });
+        })
         .done();
-      this.setState({ visibleModal: false });
     }
 
 
@@ -187,21 +200,21 @@ export default class RegisterVehicleForm extends Component<Props> {
           />
           {null /* passwordError */}
 
-          {this.renderButton('Add', this.handleAddVehicle)}
+          <Button title="Add" onPress={this.handleAddVehicle} />
         </View>
       </View>
 
-    );
-
-    renderButton = (text, onPress) => (
-      <Button title={text} onPress={onPress} />
     );
 
 
     render() {
       return (
         <View >
-          {this.renderButton('Register Vehicle', () => this.setState({ visibleModal: true }))}
+          <Button
+            transparent
+            icon={addButtonIcon}
+            onPress={() => this.setState({ visibleModal: true })}
+          />
           <Modal
             isVisible={this.state.visibleModal}
             backdropColor="black"
