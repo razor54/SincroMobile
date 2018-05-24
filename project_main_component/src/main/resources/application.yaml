@@ -1,3 +1,4 @@
+
 spring:
   application:
     name: main component SICNRO Mobile
@@ -10,7 +11,7 @@ spring:
     hibernate:
      ddl-auto: update
 
-    show-sql: true
+    show-sql: false
 
     database: postgresql
 
@@ -27,4 +28,9 @@ spring:
 
 server:
   port: 9000
+
+logging:
+  level:
+    guru.springframework.controllers: DEBUG
+
 
