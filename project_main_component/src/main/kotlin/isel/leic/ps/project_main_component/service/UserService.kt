@@ -72,7 +72,6 @@ class UserService {
     }
 
     fun constainsUser(id: Int):Boolean{
-
         return userRepository.existsById(id)
     }
 

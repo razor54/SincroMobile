@@ -26,7 +26,6 @@ class VehicleService {
         logger.debug("Started to add vehicle")
 
         try {
-            System.out.println(isMatriculaRegex(vehicle.plate))
             val save = vehicleRepository.save(vehicle)
             logger.info("Method \"{}\" VehiclePlate \"{}\" ","Save Vehicle", vehicle.plate)
 

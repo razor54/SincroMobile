@@ -73,7 +73,6 @@ object NotificationHandler {
         wr.write(app_id.toString())
         wr.flush()
 
-        System.out.println(app_id.toString())
 
         //display what returns the POST request
 
