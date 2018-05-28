@@ -1,14 +1,19 @@
 package simulator.main;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import jdk.incubator.http.HttpClient;
 import jdk.incubator.http.HttpRequest;
 import jdk.incubator.http.HttpResponse;
+import simulator.main.model.EventDto;
+import simulator.main.model.EventListDto;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,9 +28,15 @@ public class Start {
     private JTextField dateTextBox;
     private JTextField locationTextBox;
     private JTextField idTextField;
+    private JButton simulate;
 
+    private URI eventPostUri = URI.create("http://localhost:9000/event");
+    private int counterId = 270;
 
     public Start() {
+
+
+
         simularEventoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -37,7 +48,7 @@ public class Start {
                     map.put("location", locationTextBox.getText());
                     map.put("plate", vehiclePlate.getText());
 
-                    postJSON(URI.create("http://localhost:9000/event"), map);
+                    postJSON(eventPostUri, map);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, "There was an error, try again", "InfoBox: Error", JOptionPane.INFORMATION_MESSAGE);
@@ -69,7 +80,39 @@ public class Start {
 
             }
         });
+        simulate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ev) {
+
+                InputStream inJson = EventListDto.class.getResourceAsStream("/events.json");
+                EventListDto sample = null;
+                try {
+                    sample = new ObjectMapper().readValue(inJson, EventListDto.class);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (sample != null) {
+                    sample.getEvents().forEach(Start.this::handleSimulateObj);
+                }
+            }
+        });
     }
+
+
+    private void handleSimulateObj(EventDto eventListDto){
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json = null;
+        try {
+            eventListDto.setId(++counterId);
+            json = ow.writeValueAsString(eventListDto);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        postRequest(eventPostUri,json);
+    }
+
 
     public CompletableFuture<Void> postJSON(URI uri,
                                             Map<String, String> map)
@@ -79,6 +122,11 @@ public class Start {
                 .writerWithDefaultPrettyPrinter()
                 .writeValueAsString(map);
 
+        return postRequest(uri, requestBody);
+
+    }
+
+    private CompletableFuture<Void> postRequest(URI uri, String requestBody) {
         HttpRequest request = HttpRequest.newBuilder(uri)
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyProcessor.fromString(requestBody))
@@ -88,7 +136,6 @@ public class Start {
                 .sendAsync(request, HttpResponse.BodyHandler.asString())
                 .thenApply(HttpResponse::statusCode)
                 .thenAccept(System.out::println);
-
     }
 
     public static void main(String... args) {
@@ -97,5 +144,6 @@ public class Start {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+
     }
 }

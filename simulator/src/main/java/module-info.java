@@ -1,5 +1,6 @@
 module simulator.main {
-   // exports simulator.main;
+    exports simulator.main;
+    exports simulator.main.model;
     requires jdk.incubator.httpclient;
     requires java.desktop;
     requires com.fasterxml.jackson.databind;
