@@ -7,6 +7,9 @@ import networkSettings from '../../config/serverConnectionSettings';
 type Props = {
   user: any,
   getCallback: any,
+  navigation: {
+    navigate: any,
+  }
 }
 
 export default class VehiclesList extends Component<Props> {
@@ -16,6 +19,7 @@ export default class VehiclesList extends Component<Props> {
     this.doRefresh = this.doRefresh.bind(this);
     this.renderItem = this.renderItem.bind(this);
     this.setCallback = props.getCallback.bind(this);
+    this.onPress = this.onPress.bind(this);
 
     this.state = {
       list: [],
@@ -30,6 +34,10 @@ export default class VehiclesList extends Component<Props> {
     this.doRefresh();
   }
 
+  onPress(data) {
+    this.props.navigation.navigate('VehicleElement', { data });
+  }
+
   doRefresh() {
     this.setState({ refreshing: true });
     const url = `${networkSettings.homepage}/vehicles/${this.state.userId}`;
@@ -41,6 +49,7 @@ export default class VehiclesList extends Component<Props> {
   renderItem = ({ item }) =>
     (<ListItem
       title={item.plate}
+      onPress={() => this.onPress(item)}
       subtitle={item.date}
     />);
 

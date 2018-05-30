@@ -42,4 +42,6 @@ class EventController {
     @PostMapping("/user/event")
     fun getEvent(@RequestBody user:User) = eventService.getUserEvents(user.id)
 
+    @PutMapping("/event")
+    fun updateEvent(@RequestBody event:Event) = eventService.updateEvent(event)
 }

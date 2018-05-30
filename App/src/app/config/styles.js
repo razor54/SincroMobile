@@ -64,6 +64,15 @@ export default {
     color: '#000000',
     fontWeight: 'bold',
   },
+
+  headerSplash: {
+    fontSize: 50,
+    marginBottom: 10,
+    alignItems: 'center',
+    textAlign: 'center',
+    color: '#7791aa',
+    fontWeight: 'bold',
+  },
   textStretch: {
     alignSelf: 'stretch',
     padding: 16,
@@ -115,4 +124,5 @@ export default {
     fontWeight: 'bold',
   },
 
+  logoutButton: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'center' },
 };

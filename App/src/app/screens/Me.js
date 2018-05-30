@@ -1,4 +1,4 @@
-/* eslint-disable no-use-before-define */
+/* eslint-disable no-use-before-define,max-len */
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 
@@ -8,6 +8,7 @@ import navigationHeaderStyle from '../config/NavigationOptionsThemed';
 import VehiclesList from '../components/MeComponents/VehiclesList';
 import RegisterVehicleForm from '../components/MeComponents/RegisterVehicleForm';
 import UserInfo from '../components/MeComponents/UserInfo';
+import VehicleElement from '../components/MeComponents/VehicleElement';
 
 
 type Props = {
@@ -17,7 +18,8 @@ type Props = {
             email: String,
             name: String,
         }
-    }
+    },
+    navigation : any
 };
 
 class Profile extends Component<Props> {
@@ -52,7 +54,7 @@ class Profile extends Component<Props> {
           <Text style={styles.header_left}> Your Vehicles </Text>
           <RegisterVehicleForm user={this.state.user} callback={this.registerCallback} />
         </View>
-        <VehiclesList user={this.state.user} getCallback={this.getCallback} />
+        <VehiclesList navigation={this.props.navigation} user={this.state.user} getCallback={this.getCallback} />
       </View>
     );
   }
@@ -61,9 +63,13 @@ class Profile extends Component<Props> {
 export default StackNavigator({
   List: {
     screen: Profile,
-
     navigationOptions: navigationHeaderStyle('Profile'),
   },
+  VehicleElement: {
+    screen: VehicleElement,
+    navigationOptions: navigationHeaderStyle('Vehicle Details'),
+  },
+
 
 });
 

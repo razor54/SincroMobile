@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types,react/prefer-stateless-function */
+/* eslint-disable react/prop-types,react/prefer-stateless-function,no-undef */
 import React, { Component } from 'react';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import { AsyncStorage } from 'react-native';
@@ -8,14 +8,27 @@ import Events from './screens/Events';
 import Me from './screens/Me';
 import About from './screens/About';
 import Login from './components/Authentication/Login';
+import SplashScreen from './SplashScreen';
+import networkSetting from './config/serverConnectionSettings';
+import NoConnectionScreen from './NoConnectionScreen';
 
 
 type Props = {}
 export default class extends Component<Props> {
   constructor(props) {
     super(props);
+
+    this.renderSplash = this.renderSplash.bind(this);
+    this.renderPage = this.renderPage.bind(this);
+    this.onReceived = this.onReceived.bind(this);
+    this.onOpened = this.onOpened.bind(this);
+    this.onIds = this.onIds.bind(this);
+    this.onLogin = this.onLogin.bind(this);
+    this.noInternet = this.noInternet.bind(this);
+
     this.state = {
       isLogin: false,
+      functionToRender: this.renderSplash,
       user: {
         id: '',
         name: '',
@@ -23,11 +36,22 @@ export default class extends Component<Props> {
 
       },
     };
-    this.onLogin = this.onLogin.bind(this);
   }
 
 
   componentWillMount() {
+
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      fetch(networkSetting.homepage, { method: 'GET' })
+        .then(res => (res.ok ?
+          this.setState({ functionToRender: this.renderPage }) :
+          this.setState({ functionToRender: this.noInternet })))
+        .catch(this.setState({ functionToRender: this.noInternet }));
+    }, 2500);
+
     OneSignal.init('75a88678-2deb-40be-8a8c-3b05309761b8');
     OneSignal.setSubscription(true);
 
@@ -42,12 +66,7 @@ export default class extends Component<Props> {
       // AND if user is on another devce decide if it will be default device
       if (response.userId) { AsyncStorage.setItem('player_id', response.userId); }
     });
-  }
 
-  componentDidMount() {
-    this.onReceived = this.onReceived.bind(this);
-    this.onOpened = this.onOpened.bind(this);
-    this.onIds = this.onIds.bind(this);
 
     OneSignal.addEventListener('received', this.onReceived);
     OneSignal.addEventListener('opened', this.onOpened);
@@ -82,13 +101,25 @@ export default class extends Component<Props> {
   }
 
 
-  render() {
+  noInternet() {
+    return (<NoConnectionScreen />);
+  }
+
+  renderSplash() {
+    return (<SplashScreen />);
+  }
+
+  renderPage() {
     return (
       (this.state.isLogin) ?
         <Application screenProps={{ user: this.state.user }} /> :
 
         <Login screenProps={{ onLogin: this.onLogin }} />
     );
+  }
+
+  render() {
+    return (this.state.functionToRender());
   }
 }
 
