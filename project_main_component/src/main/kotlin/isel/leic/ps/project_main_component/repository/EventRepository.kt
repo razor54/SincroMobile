@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface EventRepository : CrudRepository<Event,Int> {
 
-    fun findAllByDriverId(driverId:Int):List<Event>;
+    fun findAllByDriverId(driverId:Int):List<Event>
 }

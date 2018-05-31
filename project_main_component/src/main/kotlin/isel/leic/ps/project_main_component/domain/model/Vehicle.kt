@@ -25,6 +25,6 @@ class Vehicle {
     @NotNull
     var isBorrowed = false
 
-    var borrowId: String? = null
+    var borrowId: Int? = null
 
 }

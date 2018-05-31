@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {
   Text,
   KeyboardAvoidingView,
-  Button, Alert, View,
+  Button, Alert, View, AsyncStorage,
 } from 'react-native';
 import { showLocation } from 'react-native-map-link';
 import styles from '../../config/styles';
@@ -66,18 +66,24 @@ export default class extends Component<Props> {
   }
 
   confirmEvent() {
-    this.event.verified = true;
-    const data = {
-      body: JSON.stringify(this.event),
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-    };
+    AsyncStorage.getItem('token').then((t) => {
+      const token = JSON.parse(t);
 
-    const path = `${settings.homepage}/event`;
+      if (token != null) {
+        this.event.verified = true;
+        const data = {
+          body: JSON.stringify(this.event),
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', Authorization: `${token.token_type} ${token.access_token}` },
+        };
 
-    fetch(path, data)
-      .then(res => (res.ok ? this.setState({ verified: true }) : alert(res.status)))
-      .catch(() => alert('No Possible to Update Event'));
+        const path = `${settings.homepage}/event`;
+
+        fetch(path, data)
+          .then(res => (res.ok ? this.setState({ verified: true }) : alert(res.status)))
+          .catch(() => alert('No Possible to Update Event'));
+      }
+    });
   }
 
   checkVerified() {

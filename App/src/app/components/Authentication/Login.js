@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   Dimensions,
+  AsyncStorage,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { FormLabel, FormInput, FormValidationMessage, Input, Button } from 'react-native-elements';
@@ -88,8 +89,10 @@ class Login extends Component<Props> {
     })
       .then(response => response.json())
       .then((res) => {
-        if (res.id) {
-          this.props.screenProps.onLogin(res);
+        if (res.user) {
+          AsyncStorage.setItem('token', JSON.stringify(res.token)).then(() => {
+            this.props.screenProps.onLogin(res.user);
+          });
         } else {
           alert('error');
           this.setState({ isLoading: false });
@@ -221,6 +224,30 @@ class Login extends Component<Props> {
   };
 
   componentDidMount() {
+    AsyncStorage.getItem('token').then((t) => {
+      const token = JSON.parse(t);
+
+      if (token != null) {
+        const myInit = {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            Authorization: `${token.token_type} ${token.access_token}`,
+          },
+        };
+        fetch(`${networkSetting.homepage}/validate`, myInit).then(res => res.json())
+          .then((user) => {
+            console.warn(user);
+            if (user.id) {
+              this.props.screenProps.onLogin(user);
+            }
+          })
+          .catch(() => this.getFacebookUser());
+      }
+    });
+  }
+
+  getFacebookUser() {
     AccessToken.getCurrentAccessToken().then((data) => {
       if (data == null) return;
       const infoRequest = new GraphRequest(

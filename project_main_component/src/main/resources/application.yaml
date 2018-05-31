@@ -26,11 +26,11 @@ spring:
   resources:
       add-mappings: true
 
+
 server:
   port: 9000
 
 logging:
   level:
     guru.springframework.controllers: DEBUG
-
 

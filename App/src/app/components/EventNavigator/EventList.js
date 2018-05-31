@@ -1,7 +1,7 @@
 /* global fetch:false */
 /* global alert:false */
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, AsyncStorage } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import settings from '../../config/serverConnectionSettings';
 
@@ -52,17 +52,29 @@ export default class extends Component<Props> {
 
   getList = () => {
     this.setState({ refreshing: true });
-    const data = {
-      body: JSON.stringify({ id: this.state.id }),
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-    };
 
-    fetch(this.state.eventsUrl, data)
-      .then(res => (res.ok ? res.json() : alert(res.status)))
-      .then(jsonList => this.setState({ list: jsonList }))
-      .catch(() => alert('Fetch event failed'))
-      .finally(() => this.setState({ refreshing: false }));
+
+    AsyncStorage.getItem('token').then((token) => {
+      if (token == null) {
+        console.warn('null token');
+        // TODO return to login
+        throw Error('No token');
+      }
+      return JSON.parse(token);
+    }).then((token) => {
+      const data = {
+        body: JSON.stringify({ id: this.state.id }),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `${token.token_type} ${token.access_token}` },
+
+
+      };
+      fetch(this.state.eventsUrl, data)
+        .then(res => (res.ok ? res.json() : alert(res.status)/* TODO return login */))
+        .then(jsonList => this.setState({ list: jsonList }))
+        .catch(() => alert('Fetch event failed'))
+        .finally(() => this.setState({ refreshing: false }));
+    }).catch(e => console.warn(e));
   };
 
   renderItem = ({ item }) => (

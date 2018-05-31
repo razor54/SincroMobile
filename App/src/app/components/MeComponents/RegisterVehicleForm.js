@@ -1,7 +1,7 @@
 /* global fetch:false */
 /* global alert:false */
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
 import { Avatar, CheckBox, FormInput, FormLabel, Button } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import DateTimePicker from 'react-native-modal-datetime-picker';
@@ -106,32 +106,38 @@ export default class RegisterVehicleForm extends Component<Props> {
 
     handleAddVehicle() {
       const url = `${networkSettings.homepage}/vehicle`;
+      AsyncStorage.getItem('token').then((t) => {
+        const token = JSON.parse(t);
 
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          subscribed: this.state.subscribe,
-          plate: this.state.plate,
-          registryDate: this.state.date,
-          ownerId: this.state.userId,
-        }),
-      })
-        .then((response) => {
-          if (response.status !== 200) alert('There was an error');
-          this.callback();
-        })
-        .catch(() => {
-          // this.setState({ isLoading: false });
-          alert('There was an error');
-        })
-        .finally(() => {
-          this.setState({ visibleModal: false });
-        })
-        .done();
+        if (token != null) {
+          fetch(url, {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              Authorization: `${token.token_type} ${token.access_token}`,
+            },
+            body: JSON.stringify({
+              subscribed: this.state.subscribe,
+              plate: this.state.plate,
+              registryDate: this.state.date,
+              ownerId: this.state.userId,
+            }),
+          })
+            .then((response) => {
+              if (response.status !== 200) alert('There was an error');
+              this.callback();
+            })
+            .catch(() => {
+              // this.setState({ isLoading: false });
+              alert('There was an error');
+            })
+            .finally(() => {
+              this.setState({ visibleModal: false });
+            })
+            .done();
+        }
+      });
     }
 
 

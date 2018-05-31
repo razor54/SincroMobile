@@ -1,6 +1,6 @@
 /* global fetch:false */
 import React, { Component } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, AsyncStorage } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import networkSettings from '../../config/serverConnectionSettings';
 
@@ -40,10 +40,23 @@ export default class VehiclesList extends Component<Props> {
 
   doRefresh() {
     this.setState({ refreshing: true });
-    const url = `${networkSettings.homepage}/vehicles/${this.state.userId}`;
-    fetch(url).then(reply => reply.json())
-      .then(list => this.setState({ list, refreshing: false }));
-    // catch
+    AsyncStorage.getItem('token').then((t) => {
+      const token = JSON.parse(t);
+
+      if (token != null) {
+        const data = {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            Authorization: `${token.token_type} ${token.access_token}`,
+          },
+        };
+        const url = `${networkSettings.homepage}/vehicles/${this.state.userId}`;
+        fetch(url, data).then(reply => reply.json())
+          .then(list => this.setState({ list, refreshing: false }))
+          .catch(e => alert(e));
+      }
+    });
   }
 
   renderItem = ({ item }) =>

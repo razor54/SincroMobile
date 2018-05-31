@@ -5,7 +5,6 @@ import isel.leic.ps.project_main_component.domain.model.Vehicle
 import isel.leic.ps.project_main_component.exceptions.FailedToAddUserException
 import isel.leic.ps.project_main_component.exceptions.NoSuchUserException
 import isel.leic.ps.project_main_component.exceptions.NoSuchVehicleException
-import isel.leic.ps.project_main_component.repository.UserRepository
 import isel.leic.ps.project_main_component.repository.VehicleRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -18,9 +17,9 @@ class VehicleService {
     var logger : Logger = LoggerFactory.getLogger(EventService::class.simpleName)
 
     @Autowired
-    lateinit var vehicleRepository: VehicleRepository
+    private lateinit var vehicleRepository: VehicleRepository
     @Autowired
-    lateinit var userService: UserService
+    private lateinit var userService: UserService
 
     fun addVehicle(vehicle: Vehicle): Vehicle {
         logger.debug("Started to add vehicle")
@@ -40,7 +39,7 @@ class VehicleService {
         logger.debug("Started to get user vehicle")
 
 
-        if(!userService.constainsUser(id)){
+        if(!userService.containsUser(id)){
             logger.warn("Method \"{}\" UserId \"{}\" ","Get User Vehicles", id)
             throw NoSuchUserException()
         }
@@ -125,7 +124,19 @@ class VehicleService {
 
     }
 
-    fun isMatriculaRegex(matricula: String): Boolean {
+    fun plateDelegation(user: User,vehicle:Vehicle ){
+
+        vehicle.isSubscribed = true
+        vehicle.isBorrowed = true
+        vehicle.borrowId = user.id
+
+        vehicleRepository.save(vehicle)
+
+
+    }
+
+
+    private fun isMatriculaRegex(matricula: String): Boolean {
         // pattern:
         // \A                                    - início da string
         //    (    \d{2}\-\d{2}\-[A-Z]{2}        - NN-NN-XX

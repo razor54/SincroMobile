@@ -1,6 +1,7 @@
 package isel.leic.ps.project_main_component.domain.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonProperty
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -22,6 +23,7 @@ class User {
     lateinit var name: String
 
     @NotNull
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     lateinit var password: String
 
     // @NotNull User might not want to receive notification

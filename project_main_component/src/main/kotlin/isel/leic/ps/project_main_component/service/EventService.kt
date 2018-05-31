@@ -6,14 +6,8 @@ import isel.leic.ps.project_main_component.exceptions.FailedToAddEventException
 import isel.leic.ps.project_main_component.exceptions.FailedToUpdateEventException
 import isel.leic.ps.project_main_component.exceptions.NoSuchUserException
 import isel.leic.ps.project_main_component.repository.EventRepository
-import org.json.JSONArray
-import org.json.JSONObject
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.io.OutputStreamWriter
-import java.net.HttpURLConnection
-import java.net.URL
-import javax.net.ssl.HttpsURLConnection
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -76,7 +70,7 @@ class EventService {
     fun getUserEvents(id: Int): List<Event> {
         logger.debug("Started to get user events")
 
-        if(!userService.constainsUser(id)){
+        if(!userService.containsUser(id)){
             logger.warn("Method \"{}\" UserId \"{}\" ","Get User Events", id)
             throw NoSuchUserException()
         }

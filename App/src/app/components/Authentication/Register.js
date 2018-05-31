@@ -127,8 +127,9 @@ export default class Register extends Component<Props> {
     })
       .then(response => response.json())
       .then((res) => {
-        if (res.id) {
-          this.props.screenProps.onLogin(res);
+        if (res.user) {
+          AsyncStorage.setItem('token', JSON.stringify(res.token)).then(() =>
+            this.props.screenProps.onLogin(res.user));
         } else {
           alert('error');
           this.setState({ isLoading: false });
