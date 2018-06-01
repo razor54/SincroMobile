@@ -9,6 +9,7 @@ import VehiclesList from '../components/MeComponents/VehiclesList';
 import RegisterVehicleForm from '../components/MeComponents/RegisterVehicleForm';
 import UserInfo from '../components/MeComponents/UserInfo';
 import VehicleElement from '../components/MeComponents/VehicleElement';
+import ShareForm from '../components/MeComponents/ShareForm';
 
 
 type Props = {
@@ -68,6 +69,10 @@ export default StackNavigator({
   VehicleElement: {
     screen: VehicleElement,
     navigationOptions: navigationHeaderStyle('Vehicle Details'),
+  },
+  Share: {
+    screen: ShareForm,
+    navigationOptions: navigationHeaderStyle('Share Vehicle'),
   },
 
 

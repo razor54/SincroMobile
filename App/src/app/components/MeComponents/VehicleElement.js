@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-/* global alert:false */
 
 import React, { Component } from 'react';
 
@@ -33,7 +32,7 @@ export default class extends Component<Props> {
     this.state = {
       plate: data.plate,
       subscribed: data.subscribed,
-      owner: data.ownerId,
+      ownerId: data.ownerId,
       date: data.registryDate,
       borrowId: data.borrowId,
       borrowed: data.borrowed,
@@ -45,7 +44,7 @@ export default class extends Component<Props> {
   }
 
   borrow() {
-    alert('car borrowed');
+    this.props.navigation.navigate('Share', { plate: this.state.plate, ownerId: this.state.ownerId });
   }
 
   checkSubscription = () => {
@@ -66,7 +65,7 @@ export default class extends Component<Props> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
         <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> Owner Identification - {this.state.owner} </Text>
+        <Text style={styles.textStretch}> Owner Identification - {this.state.ownerId} </Text>
         <Text style={styles.textStretch}> This vehicle was registered on {this.state.date.split('T')[0]} </Text>
         {this.checkSubscription()}
         {this.checkBorrow()}
