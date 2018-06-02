@@ -1,5 +1,6 @@
 package isel.leic.ps.project_main_component.control
 
+import isel.leic.ps.project_main_component.domain.model.DelegateRequest
 import isel.leic.ps.project_main_component.domain.model.Vehicle
 import isel.leic.ps.project_main_component.handlers.NotificationHandler
 import isel.leic.ps.project_main_component.service.UserService
@@ -30,20 +31,15 @@ class VehicleController{
     }
 
     @PostMapping("/delegate/")
-    fun delegatePlate(@RequestParam("plate")plate:String, @RequestParam("owner_id")owner_id:Int,
-                      @RequestParam("other_user_id") other_user_id:Int){
+    fun delegatePlate(@RequestBody request: DelegateRequest){
 
-        var vehicle = vehicleService.getVehicle(plate)
+        var vehicle = vehicleService.getVehicle(request.plate)
 
-        var owner = userService.getUser(owner_id)
+        var owner = userService.getUser(request.owner_id)
 
-        var user = userService.getUser(other_user_id)
+        var user = userService.getUser(request.other_user_id)
 
         NotificationHandler.vehicleBorrowNotification(user)
-
-
-
-
     }
 
     @PostMapping("/delegate/response")

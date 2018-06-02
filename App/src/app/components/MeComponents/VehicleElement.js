@@ -44,7 +44,7 @@ export default class extends Component<Props> {
   }
 
   borrow() {
-    this.props.navigation.navigate('Share', { plate: this.state.plate, ownerId: this.state.ownerId });
+    this.props.navigation.navigate('Share', { data: { plate: this.state.plate, ownerId: this.state.ownerId } });
   }
 
   checkSubscription = () => {

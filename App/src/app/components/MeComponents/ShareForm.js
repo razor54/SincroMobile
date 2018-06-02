@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 import {
   KeyboardAvoidingView,
-  Button, Alert,
+  Button, Alert, AsyncStorage, Text,
 } from 'react-native';
 import { FormInput, FormLabel } from 'react-native-elements';
 import styles from '../../config/styles';
@@ -30,42 +30,53 @@ export default class extends Component<Props> {
 
     const { data } = this.props.navigation.state.params;
 
+    this.showErrorMessage = this.showErrorMessage.bind(this);
+    this.borrow = this.borrow.bind(this);
+
     this.state = {
       plate: data.plate,
       ownerId: data.ownerId,
-      borrowId: 0,
+      borrowId: null,
     };
   }
 
   borrow() {
-    const url = `${networkSettings.homepage}/delegate}`;
-    const data = {
-      body: {
-        plate: this.state.plate,
-        owner_id: this.state.ownerId,
-        other_user_id: this.state.borrowId,
-      },
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `${token.token_type} ${token.access_token}`,
-      },
-    };
+    AsyncStorage.getItem('token').then((t) => {
+      const token = JSON.parse(t);
 
-    fetch(url, data)
-      .then(res => (res.ok ?
-        this.props.navigation.pop('Share') :
-        this.showErrorMessage('InvalidUser')))
-      .catch(error => this.showErrorMessage(error.message));
+      if (token != null) {
+        const url = `${networkSettings.homepage}/vehicles/delegate/`;
+        const data = {
+          body: JSON.stringify({
+            plate: this.state.plate,
+            owner_id: this.state.ownerId,
+            other_user_id: this.state.borrowId,
+          }),
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `${token.token_type} ${token.access_token}`,
+          },
+        };
+
+        fetch(url, data)
+          .then((res) => {
+            if (res.ok) this.props.navigation.pop(1, 'Share');
+            else this.showErrorMessage('Not Valid User');
+          });
+      } else {
+        // redirect to login screen
+      }
+    });
   }
 
-  showErrorMessage(message) {
+  showErrorMessage(error) {
     Alert.alert(
       'Error',
-      message,
+      error,
       [
         { text: 'Try Again', onPress: () => {} },
-        { text: 'Cancel', onPress: () => this.props.navigation.pop('Share') },
+        { text: 'Cancel', onPress: () => this.props.navigation.pop(1, 'Share') },
       ],
       { cancelable: false },
     );
@@ -74,13 +85,16 @@ export default class extends Component<Props> {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
-        <FormLabel>Sharing User NIF</FormLabel>
+        <Text style={styles.textStretch}> Your Identification - {this.state.ownerId} </Text>
+        <Text style={styles.textStretch}> Vehicle Plate - {this.state.plate} </Text>
+        <FormLabel>Sharing user identification</FormLabel>
         <FormInput
           onChangeText={borrowId => this.setState({ borrowId })}
+          value={this.state.borrowId}
           inputStyle={styles.inputStyle}
         />
         <Button onPress={this.borrow} title="Share Vehicle" />
-
+        <Text style={styles.textStretch}>This process needs to be accepted by the pretended user, and can be canceled any time!</Text>
       </KeyboardAvoidingView>
 
     );
