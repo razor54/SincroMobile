@@ -40,8 +40,8 @@ export default class extends Component<Props> {
       plate: data.plate,
       location: data.location,
       date: data.date,
-      longitude: data.gps_longitude,
-      latitude: data.gps_latitude,
+      longitude: data.gpsLongitude,
+      latitude: data.gpsLatitude,
       verified: data.verified,
     };
   }

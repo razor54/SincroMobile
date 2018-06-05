@@ -1,5 +1,6 @@
 package isel.leic.ps.project_main_component.domain.model
 
+import org.hibernate.annotations.Check
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -23,8 +24,6 @@ class Vehicle {
     var ownerId: Int = 0
 
     @NotNull
-    var isBorrowed = false
-
-    var borrowId: Int? = null
-
+    @Check(constraints = "False OR True OR Pending")
+    var delegateState : String = "False"
 }

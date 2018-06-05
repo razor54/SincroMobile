@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define,eqeqeq */
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -237,7 +236,6 @@ class Login extends Component<Props> {
         };
         fetch(`${networkSetting.homepage}/validate`, myInit).then(res => res.json())
           .then((user) => {
-            console.warn(user);
             if (user.id) {
               this.props.screenProps.onLogin(user);
             }

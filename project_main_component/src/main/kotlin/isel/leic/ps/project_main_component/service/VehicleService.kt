@@ -1,16 +1,20 @@
 package isel.leic.ps.project_main_component.service
 
-import isel.leic.ps.project_main_component.domain.model.User
+import isel.leic.ps.project_main_component.domain.model.DelegateRequest
+import isel.leic.ps.project_main_component.domain.model.DelegatedVehicle
 import isel.leic.ps.project_main_component.domain.model.Vehicle
 import isel.leic.ps.project_main_component.exceptions.FailedToAddUserException
 import isel.leic.ps.project_main_component.exceptions.NoSuchUserException
 import isel.leic.ps.project_main_component.exceptions.NoSuchVehicleException
+import isel.leic.ps.project_main_component.repository.DelegateRequestRepository
+import isel.leic.ps.project_main_component.repository.DelegatedVehicleRepository
 import isel.leic.ps.project_main_component.repository.VehicleRepository
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.regex.Pattern
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import javax.transaction.Transactional
 
 @Service
 class VehicleService {
@@ -20,6 +24,10 @@ class VehicleService {
     private lateinit var vehicleRepository: VehicleRepository
     @Autowired
     private lateinit var userService: UserService
+    @Autowired
+    private lateinit var delegateRequestRepository:DelegateRequestRepository
+    @Autowired
+    private lateinit var delegatedVehicleRepository: DelegatedVehicleRepository
 
     fun addVehicle(vehicle: Vehicle): Vehicle {
         logger.debug("Started to add vehicle")
@@ -124,14 +132,29 @@ class VehicleService {
 
     }
 
-    fun plateDelegation(user: User,vehicle:Vehicle ){
+    //TODO transaction
+    @Transactional
+    fun plateDelegation(request: DelegateRequest){
 
-        vehicle.isSubscribed = true
-        vehicle.isBorrowed = true
-        vehicle.borrowId = user.id
+
+        val vehicle = getVehicle(request.plate)
+        vehicle.delegateState="Pending"
 
         vehicleRepository.save(vehicle)
+        delegateRequestRepository.save(request)
 
+    }
+
+
+    fun borrowingVehicles(borrowId: Int): List<DelegatedVehicle> {
+
+        try{
+            return delegatedVehicleRepository.findAllByUserBorrowId(borrowId)
+        }
+        catch (e:Exception){
+            //TODO explicit exception for this case
+            throw Exception()
+        }
 
     }
 
@@ -146,6 +169,19 @@ class VehicleService {
         val pattern = Pattern.compile("\\d{2}-\\d{2}-[A-Z]{2}|\\d{2}-[A-Z]{2}-\\d{2}|[A-Z]{2}-\\d{2}-\\d{2}")
         val matcher = pattern.matcher(matricula)
         return matcher.find()
+    }
+
+    fun delegatedVehicles(userId: Int): List<Vehicle> {
+
+        try{
+            val vehicles = vehicleRepository.findAllByOwnerId(userId)
+
+            return vehicles.filter { it.delegateState == "True" }
+        }
+        catch (e:Exception){
+            //TODO explicit exception for this case
+            throw Exception()
+        }
     }
 
 }

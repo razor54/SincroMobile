@@ -1,6 +1,8 @@
 package isel.leic.ps.project_main_component.control
 
 import isel.leic.ps.project_main_component.domain.model.DelegateRequest
+import isel.leic.ps.project_main_component.domain.model.DelegateResponse
+import isel.leic.ps.project_main_component.domain.model.DelegatedVehicle
 import isel.leic.ps.project_main_component.domain.model.Vehicle
 import isel.leic.ps.project_main_component.handlers.NotificationHandler
 import isel.leic.ps.project_main_component.service.UserService
@@ -30,36 +32,34 @@ class VehicleController{
         return vehicleService.getUserVehicles(userId)
     }
 
-    @PostMapping("/delegate/")
+    @PostMapping("/delegate")
     fun delegatePlate(@RequestBody request: DelegateRequest){
+
+        var userBorrow = userService.getUser(request.userBorrowId)
 
         var vehicle = vehicleService.getVehicle(request.plate)
 
-        var owner = userService.getUser(request.owner_id)
+        var owner = userService.getUser(request.ownerId)
 
-        var user = userService.getUser(request.other_user_id)
 
-        NotificationHandler.vehicleBorrowNotification(user)
+        NotificationHandler.vehicleBorrowNotification(userBorrow)
+
+        vehicleService.plateDelegation(request)
     }
 
     @PostMapping("/delegate/response")
-    fun handleDelegation(@RequestParam("plate")plate:String, @RequestParam("owner_id")owner_id:Int,
-                         @RequestParam("other_user_id") other_user_id:Int, @RequestParam("accept")accept:Boolean){
-        var vehicle = vehicleService.getVehicle(plate)
+    fun handleDelegation(@RequestBody delegateResponse: DelegateResponse){
 
-        var owner = userService.getUser(owner_id)
+        var vehicle = vehicleService.getVehicle(delegateResponse.plate)
 
-        var user = userService.getUser(other_user_id)
+        var userBorrowing = userService.getUser(delegateResponse.userBorrowId)
 
-        if(!accept){
+        if(!delegateResponse.accept){
 
            return
         }
 
-        vehicleService.plateDelegation(user,vehicle)
-
-
-
+        //vehicleService.plateDelegation(owner,user,vehicle)
 
     }
 
@@ -68,9 +68,20 @@ class VehicleController{
 
     }
 
-    @GetMapping("/borrowed")
-    fun getBorrowedVehicles(){
+    @GetMapping("/borrowing/{borrowId}")
+    fun getBorrowingVehicles(@PathVariable("borrowId") borrowId: Int): List<DelegatedVehicle> {
 
+        var owner = userService.getUser(borrowId) // checks if user exists in data base
+
+        return vehicleService.borrowingVehicles(borrowId); //returns borrowing vehicles
+    }
+
+    @GetMapping("/delegated/{userId}")
+    fun getDelegatedVehicles(@PathVariable("userId") userId: Int): List<Vehicle> {
+
+        var owner = userService.getUser(userId) // checks if user exists in data base
+
+        return vehicleService.delegatedVehicles(userId); //returns delegated vehicles
     }
 
 

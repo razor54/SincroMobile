@@ -5,10 +5,14 @@ import { ListItem } from 'react-native-elements';
 import networkSettings from '../../config/serverConnectionSettings';
 
 type Props = {
-  user: any,
-  getCallback: any,
   navigation: {
     navigate: any,
+    state:{
+      params:{
+        url: string,
+        screen:string,
+      }
+    }
   }
 }
 
@@ -18,24 +22,23 @@ export default class VehiclesList extends Component<Props> {
 
     this.doRefresh = this.doRefresh.bind(this);
     this.renderItem = this.renderItem.bind(this);
-    this.setCallback = props.getCallback.bind(this);
     this.onPress = this.onPress.bind(this);
 
     this.state = {
       list: [],
-      userId: props.user.id,
+      url: props.navigation.state.params.url,
+      screen: props.navigation.state.params.screen,
       refreshing: false,
     };
   }
 
 
   componentDidMount() {
-    this.setCallback(this.doRefresh);
     this.doRefresh();
   }
 
   onPress(data) {
-    this.props.navigation.navigate('VehicleElement', { data });
+    this.props.navigation.navigate(this.state.screen, { data });
   }
 
   doRefresh() {
@@ -51,7 +54,7 @@ export default class VehiclesList extends Component<Props> {
             Authorization: `${token.token_type} ${token.access_token}`,
           },
         };
-        const url = `${networkSettings.homepage}/vehicles/${this.state.userId}`;
+        const url = this.state.url;
         fetch(url, data).then(reply => reply.json())
           .then(list => this.setState({ list, refreshing: false }))
           .catch(e => alert(e));

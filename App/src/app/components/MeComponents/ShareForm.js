@@ -49,8 +49,8 @@ export default class extends Component<Props> {
         const data = {
           body: JSON.stringify({
             plate: this.state.plate,
-            owner_id: this.state.ownerId,
-            other_user_id: this.state.borrowId,
+            ownerId: this.state.ownerId,
+            otherUserId: this.state.borrowId,
           }),
           method: 'POST',
           headers: {

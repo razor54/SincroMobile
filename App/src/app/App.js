@@ -64,7 +64,7 @@ export default class extends Component<Props> {
       // TODO save on storage and then when user
       // registers identification will be associated with him
       // AND if user is on another devce decide if it will be default device
-      if (response.userId) { AsyncStorage.setItem('player_id', response.userId); }
+      if (response.userId) { AsyncStorage.setItem('playerId', response.userId); }
     });
 
 
@@ -95,8 +95,8 @@ export default class extends Component<Props> {
 
   onIds(device) {
     console.warn('Device info: ', device);
-    AsyncStorage.get('player_id').then((value) => {
-      if (value == null)AsyncStorage.setItem('player_id', device.userId);
+    AsyncStorage.get('playerId').then((value) => {
+      if (value == null)AsyncStorage.setItem('playerId', device.userId);
     });
   }
 

@@ -2,16 +2,20 @@ package isel.leic.ps.project_main_component.domain.model
 
 import javax.persistence.*
 
+
 @Entity
-@Table(name = "vehicle_borrows", schema = "public")
-class BorrowedVehicle {
+@Table(name = "delegate_requests", schema = "public")
+class DelegateRequest {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0
 
-    var userId: Int = 0
+    lateinit var plate: String
 
-    lateinit var vehicleId: String
+    var ownerId: Int = 0
+
+    var userBorrowId: Int = 0
 
 }

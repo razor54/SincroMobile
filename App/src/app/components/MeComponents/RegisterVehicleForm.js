@@ -10,7 +10,6 @@ import networkSettings from '../../config/serverConnectionSettings';
 
 type Props = {
     user : any,
-    callback: any,
 }
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -77,7 +76,6 @@ export default class RegisterVehicleForm extends Component<Props> {
     this.hideDateTimePicker = this.hideDateTimePicker.bind(this);
     this.showDateTimePicker = this.showDateTimePicker.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.callback = props.callback;
 
     this.state = {
       user: props.user,
@@ -126,7 +124,6 @@ export default class RegisterVehicleForm extends Component<Props> {
           })
             .then((response) => {
               if (response.status !== 200) alert('There was an error');
-              this.callback();
             })
             .catch(() => {
               // this.setState({ isLoading: false });

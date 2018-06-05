@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import {
   Text,
   KeyboardAvoidingView,
-  Button,
+  Button, View,
 } from 'react-native';
 import styles from '../../config/styles';
 
@@ -34,8 +34,7 @@ export default class extends Component<Props> {
       subscribed: data.subscribed,
       ownerId: data.ownerId,
       date: data.registryDate,
-      borrowId: data.borrowId,
-      borrowed: data.borrowed,
+      delegateState: data.delegateState,
     };
   }
 
@@ -55,10 +54,18 @@ export default class extends Component<Props> {
   };
 
   checkBorrow = () => {
-    if (this.state.borrowed) {
-      return <Text style={styles.textStretch}> This vehicle is borrowed to following identity - {this.state.borrowId} </Text>;
+    switch (this.state.delegateState) {
+      case 'True': return <Text style={styles.textStretch}> This vehicle is borrowed </Text>;
+
+      case 'Pending': return <Text style={styles.textStretch}> This vehicle waiting for borrow confirmation</Text>;
+
+      default: return (
+        <View>
+          <Text style={styles.textStretch}> This vehicle is not borrowed </Text>;
+          <Button onPress={this.borrow} title="Share Vehicle" />
+        </View>
+      );
     }
-    return <Text style={styles.textStretch}> This vehicle is not borrowed </Text>;
   };
 
   render() {
@@ -69,8 +76,6 @@ export default class extends Component<Props> {
         <Text style={styles.textStretch}> This vehicle was registered on {this.state.date.split('T')[0]} </Text>
         {this.checkSubscription()}
         {this.checkBorrow()}
-        <Button onPress={this.borrow} title="Share Vehicle" />
-
       </KeyboardAvoidingView>
 
     );
