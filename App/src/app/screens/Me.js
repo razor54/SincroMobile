@@ -9,6 +9,7 @@ import VehiclesList from '../components/MeComponents/VehiclesList';
 import RegisterVehicleForm from '../components/MeComponents/RegisterVehicleForm';
 import UserInfo from '../components/MeComponents/UserInfo';
 import VehicleElement from '../components/MeComponents/VehicleElement';
+import BorrowingVehicle from '../components/MeComponents/BorrowingVehicle';
 import ShareForm from '../components/MeComponents/ShareForm';
 import networkSettings from '../config/serverConnectionSettings';
 
@@ -30,6 +31,7 @@ class Profile extends Component<Props> {
 
     this.getMyVehicles = this.getMyVehicles.bind(this);
     this.getDelegatedVehicles = this.getDelegatedVehicles.bind(this);
+    this.getBorrowingVehicles = this.getBorrowingVehicles.bind(this);
 
     this.state = {
       user: props.screenProps.user,
@@ -48,6 +50,10 @@ class Profile extends Component<Props> {
     this.props.navigation.navigate('DelegatedVehicles', { url: `${networkSettings.homepage}/vehicles/delegated/${this.state.user.id}`, screen: 'VehicleElement' });
   }
 
+  getBorrowingVehicles() {
+    this.props.navigation.navigate('BorrowingVehicles', { url: `${networkSettings.homepage}/vehicles/borrowing/${this.state.user.id}`, screen: 'BorrowingVehicle' });
+  }
+
   render() {
     return (
       <View style={{ justifyContent: 'flex-end' }}>
@@ -58,6 +64,7 @@ class Profile extends Component<Props> {
         </View>
         <Button onPress={this.getMyVehicles} title="My Vehicles" />
         <Button onPress={this.getDelegatedVehicles} title="Delegated Vehicles" />
+        <Button onPress={this.getBorrowingVehicles} title="Borrowing Vehicles" />
       </View>
     );
   }
@@ -76,8 +83,16 @@ export default StackNavigator({
     screen: VehiclesList,
     navigationOptions: navigationHeaderStyle('Delegated Vehicles'),
   },
+  BorrowingVehicles: {
+    screen: VehiclesList,
+    navigationOptions: navigationHeaderStyle('Borrowing Vehicles'),
+  },
   VehicleElement: {
     screen: VehicleElement,
+    navigationOptions: navigationHeaderStyle('Vehicle Details'),
+  },
+  BorrowingVehicle: {
+    screen: BorrowingVehicle,
     navigationOptions: navigationHeaderStyle('Vehicle Details'),
   },
   Share: {

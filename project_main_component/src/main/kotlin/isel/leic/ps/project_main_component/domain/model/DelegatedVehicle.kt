@@ -12,5 +12,5 @@ class DelegatedVehicle {
 
     var userBorrowId: Int = 0
 
-    lateinit var vehicleId: String
+    lateinit var plate: String
 }

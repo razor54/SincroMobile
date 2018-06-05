@@ -54,8 +54,8 @@ export default class VehiclesList extends Component<Props> {
             Authorization: `${token.token_type} ${token.access_token}`,
           },
         };
-        const url = this.state.url;
-        fetch(url, data).then(reply => reply.json())
+
+        fetch(this.state.url, data).then(reply => reply.json())
           .then(list => this.setState({ list, refreshing: false }))
           .catch(e => alert(e));
       }

@@ -26,6 +26,7 @@ export default class extends Component<Props> {
     this.checkBorrow = this.checkBorrow.bind(this);
     this.checkSubscription = this.checkSubscription.bind(this);
     this.borrow = this.borrow.bind(this);
+    this.removeVehicle = this.removeVehicle.bind(this);
 
     const { data } = this.props.navigation.state.params;
 
@@ -36,10 +37,6 @@ export default class extends Component<Props> {
       date: data.registryDate,
       delegateState: data.delegateState,
     };
-  }
-
-  componentDidMount() {
-    // console.warn(this.props.navigation.state.params.data);
   }
 
   borrow() {
@@ -68,6 +65,10 @@ export default class extends Component<Props> {
     }
   };
 
+  removeVehicle() {
+    // todo remove from vehicles
+  }
+
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
@@ -76,6 +77,8 @@ export default class extends Component<Props> {
         <Text style={styles.textStretch}> This vehicle was registered on {this.state.date.split('T')[0]} </Text>
         {this.checkSubscription()}
         {this.checkBorrow()}
+        <Button onPress={this.removeVehicle} title="Remove Vehicle" />
+
       </KeyboardAvoidingView>
 
     );

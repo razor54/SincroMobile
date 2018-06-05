@@ -1,9 +1,6 @@
 package isel.leic.ps.project_main_component.control
 
-import isel.leic.ps.project_main_component.domain.model.DelegateRequest
-import isel.leic.ps.project_main_component.domain.model.DelegateResponse
-import isel.leic.ps.project_main_component.domain.model.DelegatedVehicle
-import isel.leic.ps.project_main_component.domain.model.Vehicle
+import isel.leic.ps.project_main_component.domain.model.*
 import isel.leic.ps.project_main_component.handlers.NotificationHandler
 import isel.leic.ps.project_main_component.service.UserService
 import isel.leic.ps.project_main_component.service.VehicleService
@@ -83,6 +80,12 @@ class VehicleController{
 
         return vehicleService.delegatedVehicles(userId); //returns delegated vehicles
     }
+
+    @GetMapping("/{vehicleId}/info")
+    fun getVehicle(@PathVariable("vehicleId") plate: String): Vehicle {
+        return vehicleService.getVehicle(plate)
+    }
+
 
 
 }
