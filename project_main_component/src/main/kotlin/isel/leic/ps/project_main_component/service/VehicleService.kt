@@ -1,6 +1,7 @@
 package isel.leic.ps.project_main_component.service
 
 import isel.leic.ps.project_main_component.domain.model.DelegateRequest
+import isel.leic.ps.project_main_component.domain.model.DelegateResponse
 import isel.leic.ps.project_main_component.domain.model.DelegatedVehicle
 import isel.leic.ps.project_main_component.domain.model.Vehicle
 import isel.leic.ps.project_main_component.exceptions.FailedToAddUserException
@@ -77,6 +78,15 @@ class VehicleService {
         logger.debug("Started to remove vehicle")
 
         try {
+            //delete requests
+            val request = delegateRequestRepository.findByPlate(id)
+            if(request.isPresent) delegateRequestRepository.delete(request.get())
+
+            //delete delegations
+            val delegation = delegatedVehicleRepository.findByPlate(id)
+            if(delegation.isPresent) delegatedVehicleRepository.delete(delegation.get())
+
+            //delete vehicle
             vehicleRepository.deleteById(id)
             logger.info("Method \"{}\" VehiclePlate \"{}\" ","Remove Vehicle", id)
 
@@ -134,24 +144,100 @@ class VehicleService {
 
     //TODO transaction
     @Transactional
-    fun plateDelegation(request: DelegateRequest){
-
+    fun plateDelegationRequest(request: DelegateRequest){
 
         val vehicle = getVehicle(request.plate)
-        vehicle.delegateState="Pending"
 
-        vehicleRepository.save(vehicle)
-        delegateRequestRepository.save(request)
+        try {
+            vehicle.delegateState = "Pending"
+
+            vehicleRepository.save(vehicle)
+            delegateRequestRepository.save(request)
+
+            logger.info("Method \"{}\" VehicleId \"{}\" ","Plate Delegate Request", vehicle.plate)
+
+        }
+        catch (e:Exception){
+
+            logger.warn("Method \"{}\" VehicleId \"{}\" ","Plate Delegate Request", vehicle.plate)
+
+            //throw operation unsuccessful
+        }
 
     }
 
+    @Transactional
+    fun plateDelegationResponse(response: DelegateResponse){
+
+
+            val vehicle = getVehicle(response.plate)
+
+            val userBorrowing = userService.getUser(response.userBorrowId)
+
+        try {
+            if (response.accept) {
+
+                //change vehicle state to true
+                vehicle.delegateState = "True"
+                addVehicle(vehicle)
+
+                //add vehicle to delegated list, plus borrowing id
+                val delegatedVehicle = DelegatedVehicle()
+                delegatedVehicle.userBorrowId = userBorrowing.id
+                delegatedVehicle.plate = vehicle.plate
+                delegatedVehicleRepository.save(delegatedVehicle)
+
+
+
+            } else {
+                //change vehicle state to false
+                vehicle.delegateState = "False"
+                addVehicle(vehicle)
+            }
+
+            //remove request
+            delegateRequestRepository.deleteById(response.requestId)
+
+            logger.info("Method \"{}\" Vehicle State \"{}\" ","Plate Delegate Response", response.accept)
+
+        }
+        catch (e:Exception){
+            logger.warn("Method \"{}\" Vehicle State \"{}\" ","Plate Delegate Response", response.accept)
+        }
+    }
+
+    fun delegatedRequests(userId: Int) : List<DelegateRequest>{
+
+        try{
+            val requests =  delegateRequestRepository.findAllByOwnerId(userId)
+
+            logger.info("Method \"{}\" User Id \"{}\" ","Get Delegate Requests",userId)
+
+            return requests
+        }
+        catch (e:Exception){
+            //TODO explicit exception for this case
+
+            logger.warn("Method \"{}\" User Id \"{}\" ","Get Delegate Requests", userId)
+
+            throw Exception()
+        }
+    }
 
     fun borrowingVehicles(borrowId: Int): List<DelegatedVehicle> {
 
         try{
-            return delegatedVehicleRepository.findAllByUserBorrowId(borrowId)
+            val delegatedVehicles =  delegatedVehicleRepository.findAllByUserBorrowId(borrowId)
+
+            logger.info("Method \"{}\" Borrow Id \"{}\" ","Get Borrowing Vehicles",borrowId)
+
+            return delegatedVehicles
+
         }
         catch (e:Exception){
+
+            logger.warn("Method \"{}\" Borrow Id \"{}\" ","Get Borrowing Vehicles",borrowId)
+
             //TODO explicit exception for this case
             throw Exception()
         }

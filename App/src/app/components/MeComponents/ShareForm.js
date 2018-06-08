@@ -50,7 +50,7 @@ export default class extends Component<Props> {
           body: JSON.stringify({
             plate: this.state.plate,
             ownerId: this.state.ownerId,
-            otherUserId: this.state.borrowId,
+            userBorrowId: this.state.borrowId,
           }),
           method: 'POST',
           headers: {

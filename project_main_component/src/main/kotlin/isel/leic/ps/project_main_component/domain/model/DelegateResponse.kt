@@ -8,4 +8,6 @@ class DelegateResponse {
 
     var accept: Boolean =false
 
+    var requestId : Int = 0
+
 }
