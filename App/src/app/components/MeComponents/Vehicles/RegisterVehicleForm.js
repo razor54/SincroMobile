@@ -5,7 +5,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Dimensions, AsyncStorage } fr
 import { Avatar, CheckBox, FormInput, FormLabel, Button } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import networkSettings from '../../config/serverConnectionSettings';
+import networkSettings from '../../../config/serverConnectionSettings';
 
 
 type Props = {
@@ -162,7 +162,7 @@ export default class RegisterVehicleForm extends Component<Props> {
       <View>
         <View>
           <Avatar
-            source={require('../../../../public/image/closebutton.png')}
+            source={require('../../../../../public/image/closebutton.png')}
             xsmall
             rounded
             title="Close"

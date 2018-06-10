@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { FlatList, AsyncStorage } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import networkSettings from '../../config/serverConnectionSettings';
+import networkSettings from '../../../config/serverConnectionSettings';
 
 type Props = {
   navigation: {

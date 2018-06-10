@@ -22,6 +22,9 @@ class EventService {
     @Autowired
     lateinit var userService: UserService
 
+    @Autowired
+    lateinit var vehicleService:VehicleService
+
 
     fun addEvent(event: Event): Event {
         // TODO maybe based on vehicle and then get driver Id
@@ -34,15 +37,37 @@ class EventService {
         }
 
         try {
+            val plate = event.plate
 
-            val savedEvent = eventRepository.save(event)
+            val vehicle = vehicleService.getVehicle(plate)
+
+            val state = vehicle.delegateState
+
+
+
+
             logger.info("Method \"{}\" EventId \"{}\" ","Add Event", event.id)
+            var savedEvent = eventRepository.save(event)
 
-            val user = userService.getUser(savedEvent.driverId)
+            if (!vehicle.isSubscribed)
+                return savedEvent
+
+            val driverId:Int
+
+            driverId = if(state.equals("Pending")||state.equals("False")){
+                vehicle.ownerId
+            } else vehicleService.getCurrentDriverId(plate)
+
+            val user = userService.getUser(driverId)
             NotificationHandler.sendNotification(user)
 
 
+            event.driverId = driverId
+            savedEvent = eventRepository.save(event)
+
+
             return savedEvent
+
         } catch (e: Exception) {
 
             logger.warn("Method \"{}\" EventId \"{}\" ","Add Event", event.id)

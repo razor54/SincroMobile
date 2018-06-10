@@ -31,6 +31,11 @@ class VehicleController{
        return vehicleService.delegatedRequests(userId)
     }
 
+    @GetMapping("/borrow/{userId}/requests")
+    fun getBorrowRequests(@PathVariable("userId") userId: Int): List<DelegateRequest> {
+        return vehicleService.borrowRequests(userId)
+    }
+
     @GetMapping("/subscribed")
     fun getSubscribedVehicles(){
 
@@ -42,7 +47,7 @@ class VehicleController{
         // user validation
         userService.getUser(borrowId)
 
-        return vehicleService.borrowingVehicles(borrowId);
+        return vehicleService.borrowingVehicles(borrowId)
     }
 
     @GetMapping("/delegated/{userId}")
@@ -68,6 +73,7 @@ class VehicleController{
     fun subscribeVehicle(userId:Int, @PathVariable("vehicleId") vehicleId:String ){
         vehicleService.subscribeVehicle(userId,vehicleId)
     }
+
     @PostMapping("/delegate")
     fun delegatePlate(@RequestBody request: DelegateRequest){
 
@@ -85,7 +91,7 @@ class VehicleController{
     @PostMapping("/delegate/response")
     fun handleDelegation(@RequestBody delegateResponse: DelegateResponse){
 
-        vehicleService.plateDelegationResponse(delegateResponse);
+        vehicleService.plateDelegationResponse(delegateResponse)
     }
 
 }

@@ -5,6 +5,7 @@ import isel.leic.ps.project_main_component.domain.model.DelegateResponse
 import isel.leic.ps.project_main_component.domain.model.DelegatedVehicle
 import isel.leic.ps.project_main_component.domain.model.Vehicle
 import isel.leic.ps.project_main_component.exceptions.FailedToAddUserException
+import isel.leic.ps.project_main_component.exceptions.InvalidDelegationException
 import isel.leic.ps.project_main_component.exceptions.NoSuchUserException
 import isel.leic.ps.project_main_component.exceptions.NoSuchVehicleException
 import isel.leic.ps.project_main_component.repository.DelegateRequestRepository
@@ -19,14 +20,14 @@ import javax.transaction.Transactional
 
 @Service
 class VehicleService {
-    var logger : Logger = LoggerFactory.getLogger(EventService::class.simpleName)
+    var logger: Logger = LoggerFactory.getLogger(EventService::class.simpleName)
 
     @Autowired
     private lateinit var vehicleRepository: VehicleRepository
     @Autowired
     private lateinit var userService: UserService
     @Autowired
-    private lateinit var delegateRequestRepository:DelegateRequestRepository
+    private lateinit var delegateRequestRepository: DelegateRequestRepository
     @Autowired
     private lateinit var delegatedVehicleRepository: DelegatedVehicleRepository
 
@@ -35,26 +36,26 @@ class VehicleService {
 
         try {
             val save = vehicleRepository.save(vehicle)
-            logger.info("Method \"{}\" VehiclePlate \"{}\" ","Save Vehicle", vehicle.plate)
+            logger.info("Method \"{}\" VehiclePlate \"{}\" ", "Save Vehicle", vehicle.plate)
 
             return save
         } catch (e: Exception) {
-            logger.warn("Method \"{}\" VehiclePlate \"{}\" ","Save Vehicle", vehicle.plate)
+            logger.warn("Method \"{}\" VehiclePlate \"{}\" ", "Save Vehicle", vehicle.plate)
             throw FailedToAddUserException()
         }
     }
 
-    fun getUserVehicles(id:Int):List<Vehicle>{
+    fun getUserVehicles(id: Int): List<Vehicle> {
         logger.debug("Started to get user vehicle")
 
 
-        if(!userService.containsUser(id)){
-            logger.warn("Method \"{}\" UserId \"{}\" ","Get User Vehicles", id)
+        if (!userService.containsUser(id)) {
+            logger.warn("Method \"{}\" UserId \"{}\" ", "Get User Vehicles", id)
             throw NoSuchUserException()
         }
 
         val vehicles: List<Vehicle> = vehicleRepository.findAllByOwnerId(id)
-        logger.info("Method \"{}\" UserId \"{}\" ","Get User Vehicles", id)
+        logger.info("Method \"{}\" UserId \"{}\" ", "Get User Vehicles", id)
         return vehicles
     }
 
@@ -64,11 +65,11 @@ class VehicleService {
         val vehicle = vehicleRepository.findById(id)
         if (vehicle.isPresent) {
 
-            logger.info("Method \"{}\" VehiclePlate \"{}\" ","Get Vehicle", id)
+            logger.info("Method \"{}\" VehiclePlate \"{}\" ", "Get Vehicle", id)
 
             return vehicle.get()
         }
-        logger.warn("Method \"{}\" VehiclePlate \"{}\" ","Get Vehicle", id)
+        logger.warn("Method \"{}\" VehiclePlate \"{}\" ", "Get Vehicle", id)
 
         throw NoSuchUserException()
 
@@ -80,18 +81,18 @@ class VehicleService {
         try {
             //delete requests
             val request = delegateRequestRepository.findByPlate(id)
-            if(request.isPresent) delegateRequestRepository.delete(request.get())
+            if (request.isPresent) delegateRequestRepository.delete(request.get())
 
             //delete delegations
             val delegation = delegatedVehicleRepository.findByPlate(id)
-            if(delegation.isPresent) delegatedVehicleRepository.delete(delegation.get())
+            if (delegation.isPresent) delegatedVehicleRepository.delete(delegation.get())
 
             //delete vehicle
             vehicleRepository.deleteById(id)
-            logger.info("Method \"{}\" VehiclePlate \"{}\" ","Remove Vehicle", id)
+            logger.info("Method \"{}\" VehiclePlate \"{}\" ", "Remove Vehicle", id)
 
         } catch (e: Exception) {
-            logger.warn("Method \"{}\" VehiclePlate \"{}\" ","Remove Vehicle", id)
+            logger.warn("Method \"{}\" VehiclePlate \"{}\" ", "Remove Vehicle", id)
 
             throw NoSuchUserException()
         }
@@ -103,10 +104,10 @@ class VehicleService {
         val vehicle = vehicleRepository.findByOwnerId(id)
 
         if (vehicle.isPresent) {
-            logger.info("Method \"{}\" VehiclePlate \"{}\" ","Get Vehicle For User", id)
+            logger.info("Method \"{}\" VehiclePlate \"{}\" ", "Get Vehicle For User", id)
             return vehicle.get()
         }
-        logger.warn("Method \"{}\" VehiclePlate \"{}\" ","Get Vehicle For User", id)
+        logger.warn("Method \"{}\" VehiclePlate \"{}\" ", "Get Vehicle For User", id)
         throw NoSuchVehicleException()
     }
 
@@ -117,12 +118,12 @@ class VehicleService {
         try {
             val vehicleOpt = vehicleRepository.findById(vehicleId)
 
-            logger.info("Method \"{}\" VehicleId \"{}\" ","Subscribe Vehicle", vehicleId)
+            logger.info("Method \"{}\" VehicleId \"{}\" ", "Subscribe Vehicle", vehicleId)
 
             vehicle = vehicleOpt.get()
 
         } catch (e: Exception) {
-            logger.warn("Method \"{}\" VehicleId \"{}\" ","Subscribe Vehicle", vehicleId)
+            logger.warn("Method \"{}\" VehicleId \"{}\" ", "Subscribe Vehicle", vehicleId)
 
             throw  NoSuchVehicleException()
         }
@@ -131,10 +132,10 @@ class VehicleService {
             vehicle.isSubscribed = true
             vehicleRepository.save(vehicle)
 
-            logger.info("Method \"{}\" VehicleId \"{}\" ","Subscribe Vehicle", vehicleId)
+            logger.info("Method \"{}\" VehicleId \"{}\" ", "Subscribe Vehicle", vehicleId)
 
         } catch (e: Exception) {
-            logger.warn("Method \"{}\" VehicleId \"{}\" ","Subscribe Vehicle", vehicleId)
+            logger.warn("Method \"{}\" VehicleId \"{}\" ", "Subscribe Vehicle", vehicleId)
 
             //throw operation unsuccessful
         }
@@ -144,7 +145,7 @@ class VehicleService {
 
     //TODO transaction
     @Transactional
-    fun plateDelegationRequest(request: DelegateRequest){
+    fun plateDelegationRequest(request: DelegateRequest) {
 
         val vehicle = getVehicle(request.plate)
 
@@ -154,12 +155,11 @@ class VehicleService {
             vehicleRepository.save(vehicle)
             delegateRequestRepository.save(request)
 
-            logger.info("Method \"{}\" VehicleId \"{}\" ","Plate Delegate Request", vehicle.plate)
+            logger.info("Method \"{}\" VehicleId \"{}\" ", "Plate Delegate Request", vehicle.plate)
 
-        }
-        catch (e:Exception){
+        } catch (e: Exception) {
 
-            logger.warn("Method \"{}\" VehicleId \"{}\" ","Plate Delegate Request", vehicle.plate)
+            logger.warn("Method \"{}\" VehicleId \"{}\" ", "Plate Delegate Request", vehicle.plate)
 
             //throw operation unsuccessful
         }
@@ -167,18 +167,19 @@ class VehicleService {
     }
 
     @Transactional
-    fun plateDelegationResponse(response: DelegateResponse){
+    fun plateDelegationResponse(response: DelegateResponse) {
 
 
-            val vehicle = getVehicle(response.plate)
+        val vehicle = getVehicle(response.plate)
 
-            val userBorrowing = userService.getUser(response.userBorrowId)
+        val userBorrowing = userService.getUser(response.userBorrowId)
 
         try {
             if (response.accept) {
 
                 //change vehicle state to true
                 vehicle.delegateState = "True"
+                vehicle.isSubscribed = true
                 addVehicle(vehicle)
 
                 //add vehicle to delegated list, plus borrowing id
@@ -186,7 +187,6 @@ class VehicleService {
                 delegatedVehicle.userBorrowId = userBorrowing.id
                 delegatedVehicle.plate = vehicle.plate
                 delegatedVehicleRepository.save(delegatedVehicle)
-
 
 
             } else {
@@ -198,27 +198,42 @@ class VehicleService {
             //remove request
             delegateRequestRepository.deleteById(response.requestId)
 
-            logger.info("Method \"{}\" Vehicle State \"{}\" ","Plate Delegate Response", response.accept)
+            logger.info("Method \"{}\" Vehicle State \"{}\" ", "Plate Delegate Response", response.accept)
 
-        }
-        catch (e:Exception){
-            logger.warn("Method \"{}\" Vehicle State \"{}\" ","Plate Delegate Response", response.accept)
+        } catch (e: Exception) {
+            logger.warn("Method \"{}\" Vehicle State \"{}\" ", "Plate Delegate Response", response.accept)
         }
     }
 
-    fun delegatedRequests(userId: Int) : List<DelegateRequest>{
+    fun delegatedRequests(userId: Int): List<DelegateRequest> {
 
-        try{
-            val requests =  delegateRequestRepository.findAllByOwnerId(userId)
+        try {
+            val requests = delegateRequestRepository.findAllByOwnerId(userId)
 
-            logger.info("Method \"{}\" User Id \"{}\" ","Get Delegate Requests",userId)
+            logger.info("Method \"{}\" User Id \"{}\" ", "Get Delegate Requests", userId)
 
             return requests
-        }
-        catch (e:Exception){
+        } catch (e: Exception) {
             //TODO explicit exception for this case
 
-            logger.warn("Method \"{}\" User Id \"{}\" ","Get Delegate Requests", userId)
+            logger.warn("Method \"{}\" User Id \"{}\" ", "Get Delegate Requests", userId)
+
+            throw Exception()
+        }
+    }
+
+    fun borrowRequests(userId: Int): List<DelegateRequest> {
+
+        try {
+            val requests = delegateRequestRepository.findAllByUserBorrowId(userId)
+
+            logger.info("Method \"{}\" User Id \"{}\" ", "Get Borrow Requests", userId)
+
+            return requests
+        } catch (e: Exception) {
+            //TODO explicit exception for this case
+
+            logger.warn("Method \"{}\" User Id \"{}\" ", "Get Borrow Requests", userId)
 
             throw Exception()
         }
@@ -226,22 +241,42 @@ class VehicleService {
 
     fun borrowingVehicles(borrowId: Int): List<DelegatedVehicle> {
 
-        try{
-            val delegatedVehicles =  delegatedVehicleRepository.findAllByUserBorrowId(borrowId)
+        try {
+            val delegatedVehicles = delegatedVehicleRepository.findAllByUserBorrowId(borrowId)
 
-            logger.info("Method \"{}\" Borrow Id \"{}\" ","Get Borrowing Vehicles",borrowId)
+            logger.info("Method \"{}\" Borrow Id \"{}\" ", "Get Borrowing Vehicles", borrowId)
 
             return delegatedVehicles
 
-        }
-        catch (e:Exception){
+        } catch (e: Exception) {
 
-            logger.warn("Method \"{}\" Borrow Id \"{}\" ","Get Borrowing Vehicles",borrowId)
+            logger.warn("Method \"{}\" Borrow Id \"{}\" ", "Get Borrowing Vehicles", borrowId)
 
             //TODO explicit exception for this case
             throw Exception()
         }
 
+    }
+
+
+    fun delegatedVehicles(userId: Int): List<Vehicle> {
+
+        try {
+            val vehicles = vehicleRepository.findAllByOwnerId(userId)
+
+            return vehicles.filter { it.delegateState == "True" }
+        } catch (e: Exception) {
+            //TODO explicit exception for this case
+            throw Exception()
+        }
+    }
+
+    fun getCurrentDriverId(plate:String): Int {
+        val delegatedVehicle = delegatedVehicleRepository.findByPlate(plate)
+        if(delegatedVehicle.isPresent)
+            return delegatedVehicle.get().userBorrowId
+
+        else throw InvalidDelegationException()
     }
 
 
@@ -255,19 +290,6 @@ class VehicleService {
         val pattern = Pattern.compile("\\d{2}-\\d{2}-[A-Z]{2}|\\d{2}-[A-Z]{2}-\\d{2}|[A-Z]{2}-\\d{2}-\\d{2}")
         val matcher = pattern.matcher(matricula)
         return matcher.find()
-    }
-
-    fun delegatedVehicles(userId: Int): List<Vehicle> {
-
-        try{
-            val vehicles = vehicleRepository.findAllByOwnerId(userId)
-
-            return vehicles.filter { it.delegateState == "True" }
-        }
-        catch (e:Exception){
-            //TODO explicit exception for this case
-            throw Exception()
-        }
     }
 
 }

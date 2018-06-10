@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 import { FlatList, View } from 'react-native';
 import { AccessToken } from 'react-native-fbsdk';
 import Modal from 'react-native-modal';
-import styles from '../../config/styles';
-import networkSettings from '../../config/serverConnectionSettings';
+import styles from '../../../../config/styles';
+import networkSettings from '../../../../config/serverConnectionSettings';
 
 
 type Props = {
@@ -92,7 +92,7 @@ export default class UserInfo extends Component<Props> {
     return (
       <View style={styles.userIcon}>
         <Avatar
-          source={this.state.userImage ? { uri: this.state.userImage } : require('../../../../public/image/user-1808597_1280.png')}
+          source={this.state.userImage ? { uri: this.state.userImage } : require('../../../../../../public/image/user-1808597_1280.png')}
           large
           title="MI"
           rounded

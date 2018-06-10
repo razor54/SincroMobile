@@ -7,8 +7,8 @@ import {
   Button, Alert, AsyncStorage, Text,
 } from 'react-native';
 import { FormInput, FormLabel } from 'react-native-elements';
-import styles from '../../config/styles';
-import networkSettings from '../../config/serverConnectionSettings';
+import styles from '../../../../config/styles';
+import networkSettings from '../../../../config/serverConnectionSettings';
 
 
 type Props = {

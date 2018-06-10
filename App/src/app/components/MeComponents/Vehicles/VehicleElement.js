@@ -7,7 +7,7 @@ import {
   KeyboardAvoidingView,
   Button, View,
 } from 'react-native';
-import styles from '../../config/styles';
+import styles from '../../../config/styles';
 
 
 type Props = {
@@ -56,12 +56,13 @@ export default class extends Component<Props> {
 
       case 'Pending': return <Text style={styles.textStretch}> This vehicle waiting for borrow confirmation</Text>;
 
-      default: return (
+      case 'False': return (
         <View>
-          <Text style={styles.textStretch}> This vehicle is not borrowed </Text>;
+          <Text style={styles.textStretch}> This vehicle is not borrowed </Text>
           <Button onPress={this.borrow} title="Share Vehicle" />
         </View>
       );
+      default: return null;
     }
   };
 
@@ -80,6 +81,7 @@ export default class extends Component<Props> {
         <Button onPress={this.removeVehicle} title="Remove Vehicle" />
 
       </KeyboardAvoidingView>
+
 
     );
   }

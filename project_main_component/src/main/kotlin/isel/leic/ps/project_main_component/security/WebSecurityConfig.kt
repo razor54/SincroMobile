@@ -36,6 +36,7 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
                 //.antMatchers(HttpMethod.POST,"/**").authenticated()
                 .antMatchers("/").permitAll()
+                .antMatchers(HttpMethod.POST,"/event").permitAll()
                 .antMatchers(HttpMethod.POST,"/login").permitAll()
                 .antMatchers(HttpMethod.POST,"/register").permitAll()
                 .anyRequest().authenticated()

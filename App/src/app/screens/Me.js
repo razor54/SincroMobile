@@ -5,13 +5,15 @@ import { Button, Text, View } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import styles from '../config/styles';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
-import VehiclesList from '../components/MeComponents/VehiclesList';
-import RegisterVehicleForm from '../components/MeComponents/RegisterVehicleForm';
+import VehiclesList from '../components/MeComponents/Vehicles/VehiclesList';
+import RegisterVehicleForm from '../components/MeComponents/Vehicles/RegisterVehicleForm';
+import PendingBorrowReqForm from '../components/MeComponents/Vehicles/Share/PendingBorrowReqForm';
 import UserInfo from '../components/MeComponents/UserInfo';
-import VehicleElement from '../components/MeComponents/VehicleElement';
-import BorrowingVehicle from '../components/MeComponents/BorrowingVehicle';
-import ShareForm from '../components/MeComponents/ShareForm';
+import VehicleElement from '../components/MeComponents/Vehicles/VehicleElement';
+import BorrowingVehicle from '../components/MeComponents/Vehicles/Share/BorrowingVehicle';
+import ShareForm from '../components/MeComponents/Vehicles/Share/ShareForm';
 import networkSettings from '../config/serverConnectionSettings';
+import BorrowingRequest from "../components/MeComponents/Vehicles/Share/BorrowingRequest";
 
 
 type Props = {
@@ -32,6 +34,7 @@ class Profile extends Component<Props> {
     this.getMyVehicles = this.getMyVehicles.bind(this);
     this.getDelegatedVehicles = this.getDelegatedVehicles.bind(this);
     this.getBorrowingVehicles = this.getBorrowingVehicles.bind(this);
+    this.getBorrowingRequests = this.getBorrowingRequests.bind(this);
 
     this.state = {
       user: props.screenProps.user,
@@ -54,10 +57,28 @@ class Profile extends Component<Props> {
     this.props.navigation.navigate('BorrowingVehicles', { url: `${networkSettings.homepage}/vehicles/borrowing/${this.state.user.id}`, screen: 'BorrowingVehicle' });
   }
 
+  getBorrowingRequests() {
+    this.props.navigation.navigate('BorrowingRequests', { url: `${networkSettings.homepage}/vehicles/borrow/${this.state.user.id}/requests`, screen: 'BorrowingRequestElement' });
+  }
+
+
   render() {
     return (
       <View style={{ justifyContent: 'flex-end' }}>
-        <UserInfo user={this.state.user} />
+
+        <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+          <UserInfo user={this.state.user} />
+
+          <Button
+            color="black"
+            small
+            outline
+            rounded
+            title="10"
+            onPress={this.getBorrowingRequests}
+          />
+        </View>
+
         <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
           <Text style={styles.header_left}> Your Vehicles </Text>
           <RegisterVehicleForm user={this.state.user} />
@@ -86,6 +107,14 @@ export default StackNavigator({
   BorrowingVehicles: {
     screen: VehiclesList,
     navigationOptions: navigationHeaderStyle('Borrowing Vehicles'),
+  },
+  BorrowingRequests: {
+    screen: VehiclesList,
+    navigationOptions: navigationHeaderStyle('Borrowing Requests'),
+  },
+  BorrowingRequestElement: {
+    screen: BorrowingRequest,
+    navigationOptions: navigationHeaderStyle('Borrowing Request Element'),
   },
   VehicleElement: {
     screen: VehicleElement,
