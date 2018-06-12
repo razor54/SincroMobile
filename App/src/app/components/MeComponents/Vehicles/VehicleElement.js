@@ -5,9 +5,10 @@ import React, { Component } from 'react';
 import {
   Text,
   KeyboardAvoidingView,
-  Button, View,
+  Button, View, AsyncStorage,
 } from 'react-native';
 import styles from '../../../config/styles';
+import networkSettings from '../../../config/serverConnectionSettings';
 
 
 type Props = {
@@ -17,7 +18,8 @@ type Props = {
                 data:any
             }
         },
-        navigate: any
+        navigate: any,
+        pop: any,
     }
 };
 export default class extends Component<Props> {
@@ -68,6 +70,23 @@ export default class extends Component<Props> {
 
   removeVehicle() {
     // todo remove from vehicles
+    AsyncStorage.getItem('token').then((t) => {
+      const token = JSON.parse(t);
+
+      if (token != null) {
+        const data = {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            Authorization: `${token.token_type} ${token.access_token}`,
+          },
+        };
+
+        fetch(`${networkSettings.homepage}/vehicles/${this.state.plate}/unsubscribe`, data)
+          .then(() => this.props.navigation.pop(2))
+          .catch(e => alert(e));
+      }
+    });
   }
 
   render() {

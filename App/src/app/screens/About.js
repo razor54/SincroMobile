@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
+
 import { Avatar, Button } from 'react-native-elements';
 import {
   Text,
   View,
   KeyboardAvoidingView,
   Alert,
+  AsyncStorage,
 } from 'react-native';
 import styles from '../config/styles';
 
 type Props = {
     screenProps: {
-        user: {
-            id: number,
-            email: String,
-            name: String,
-        },
         isLogin: boolean
     },
+  navigation:{
+    navigate: any,
+  }
 };
 
 const buttonIcon = {
@@ -36,8 +36,6 @@ export default class extends Component<Props> {
 
 
     this.state = {
-      user: props.screenProps.user,
-      isLogin: props.screenProps.isLogin,
     };
   }
 
@@ -54,7 +52,7 @@ export default class extends Component<Props> {
   }
 
   logout() {
-    // todo
+    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
   }
 
 

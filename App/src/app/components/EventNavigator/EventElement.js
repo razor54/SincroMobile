@@ -110,8 +110,4 @@ export default class extends Component<Props> {
 
     );
   }
-
-  componentDidMount() {
-    // console.warn(this.props.navigation.state.params.data);
-  }
 }

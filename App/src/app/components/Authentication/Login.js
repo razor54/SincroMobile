@@ -53,6 +53,7 @@ class Login extends Component<Props> {
 
     };
 
+    this.onLogin = this.onLogin.bind(this);
     this.handleNif = this.handleNif.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
   }
@@ -68,6 +69,9 @@ class Login extends Component<Props> {
     this.setState({ password, passwordValid: test.test(password) });
   }
 
+  onLogin() {
+    this.props.navigation.navigate('Application');
+  }
 
   login = () => {
     if (!this.state.nifValid || !this.state.passwordValid) {
@@ -90,7 +94,8 @@ class Login extends Component<Props> {
       .then((res) => {
         if (res.user) {
           AsyncStorage.setItem('token', JSON.stringify(res.token)).then(() => {
-            this.props.screenProps.onLogin(res.user);
+            // this.props.screenProps.onLogin(res.user);
+            this.onLogin();
           });
         } else {
           alert('error');
@@ -214,7 +219,8 @@ class Login extends Component<Props> {
         .then(data => data.json())
         .then((user) => {
           if (user.id) {
-            this.props.screenProps.onLogin(user);
+            // this.props.screenProps.onLogin(user);
+            this.onLogin();
           } else {
             this.props.navigation.navigate('Register', { userProps: { name: result.name, email: result.email } });
           }
@@ -237,7 +243,7 @@ class Login extends Component<Props> {
         fetch(`${networkSetting.homepage}/validate`, myInit).then(res => res.json())
           .then((user) => {
             if (user.id) {
-              this.props.screenProps.onLogin(user);
+              this.onLogin();
             }
           })
           .catch(() => this.getFacebookUser());

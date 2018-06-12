@@ -23,7 +23,7 @@ export default class extends Component<Props> {
   }
 
   reloadHome() {
-    // todo
+    this.props.navigation.navigate('Loading');
   }
 
   render() {
@@ -33,7 +33,7 @@ export default class extends Component<Props> {
           <Button
             transparent
             icon={buttonIcon}
-            onPress={this.realoadHome}
+            onPress={this.reloadHome}
           />
           <Text style={styles.textCenter}>
                 No Internet Connection

@@ -34,11 +34,12 @@ type Props = {
   },
   navigation : {
     navigate : any,
+    pop: any,
     state:{
       params:{
           userProps:{
               name : string,
-            email : string
+              email : string
           }
       }
     }
@@ -129,7 +130,7 @@ export default class Register extends Component<Props> {
       .then((res) => {
         if (res.user) {
           AsyncStorage.setItem('token', JSON.stringify(res.token)).then(() =>
-            this.props.screenProps.onLogin(res.user));
+            this.props.navigation.navigate('Application'));
         } else {
           alert('error');
           this.setState({ isLoading: false });
@@ -240,7 +241,7 @@ export default class Register extends Component<Props> {
             title="Already have an account? Click Here"
             buttonStyle={styl.textBtn}
             color="rgba(78, 116, 289, 1)"
-            onPress={() => this.props.navigation.navigate('Login')}
+            onPress={() => this.props.navigation.pop(1, 'Login')}
           >
           Info
           </Button>

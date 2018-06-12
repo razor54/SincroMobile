@@ -173,6 +173,12 @@ class UserService {
         signup.put("password", user.password)
         signup.put("connection", "Username-Password-Authentication")
 
+        val userMetadata = JSONObject()
+        userMetadata.put("name",user.name)
+        userMetadata.put("nif",user.id.toString())
+
+        signup.put("user_metadata",userMetadata)
+
         val wr = OutputStreamWriter(con.outputStream)
         wr.write(signup.toString())
         wr.flush()

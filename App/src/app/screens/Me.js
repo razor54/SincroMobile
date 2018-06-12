@@ -1,6 +1,7 @@
-/* eslint-disable no-use-before-define,max-len */
+/* eslint-disable no-use-before-define,max-len,react/sort-comp */
 import React, { Component } from 'react';
-import { Button, Text, View } from 'react-native';
+import {ActivityIndicator, AsyncStorage, Text, View} from 'react-native';
+import { Button } from 'react-native-elements';
 
 import { StackNavigator } from 'react-navigation';
 import styles from '../config/styles';
@@ -13,17 +14,10 @@ import VehicleElement from '../components/MeComponents/Vehicles/VehicleElement';
 import BorrowingVehicle from '../components/MeComponents/Vehicles/Share/BorrowingVehicle';
 import ShareForm from '../components/MeComponents/Vehicles/Share/ShareForm';
 import networkSettings from '../config/serverConnectionSettings';
-import BorrowingRequest from "../components/MeComponents/Vehicles/Share/BorrowingRequest";
+import BorrowingRequest from '../components/MeComponents/Vehicles/Share/BorrowingRequest';
 
 
 type Props = {
-    screenProps: {
-        user: {
-            id: number,
-            email: String,
-            name: String,
-        }
-    },
     navigation : any
 };
 
@@ -35,16 +29,42 @@ class Profile extends Component<Props> {
     this.getDelegatedVehicles = this.getDelegatedVehicles.bind(this);
     this.getBorrowingVehicles = this.getBorrowingVehicles.bind(this);
     this.getBorrowingRequests = this.getBorrowingRequests.bind(this);
+    this.getUser = this.getUser.bind(this);
 
     this.state = {
-      user: props.screenProps.user,
+      user: null,
     };
   }
 
 
-  componentDidMount() {}
+  getUser() {
+    AsyncStorage.getItem('token').then((token) => {
+      if (token == null) {
+        console.warn('null token');
+        // TODO return to login
+        throw Error('No token');
+      }
+      return JSON.parse(token);
+    }).then((token) => {
+      const myInit = {
+        method: 'GET',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `${token.token_type} ${token.access_token}`,
+        },
+      };
+      fetch(`${networkSettings.homepage}/validate`, myInit).then(res => res.json())
+        .then((user) => {
+          if (user.id) {
+            this.setState({ user });
+          }
+        });
+    });
+  }
 
-
+  componentDidMount() {
+    this.getUser();
+  }
   getMyVehicles() {
     this.props.navigation.navigate('VehiclesList', { url: `${networkSettings.homepage}/vehicles/${this.state.user.id}`, screen: 'VehicleElement' });
   }
@@ -64,30 +84,41 @@ class Profile extends Component<Props> {
 
   render() {
     return (
-      <View style={{ justifyContent: 'flex-end' }}>
+      (this.state.user ?
+        (
+          <View style={{ justifyContent: 'flex-end' }}>
 
-        <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-          <UserInfo user={this.state.user} />
+            <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+              <UserInfo user={this.state.user} />
 
-          <Button
-            color="black"
-            small
-            outline
-            rounded
-            title="10"
-            onPress={this.getBorrowingRequests}
-          />
-        </View>
+              <Button
+                color="black"
+                small
+                outline
+                rounded
+                title="10"
+                onPress={this.getBorrowingRequests}
+              />
+            </View>
 
-        <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
-          <Text style={styles.header_left}> Your Vehicles </Text>
-          <RegisterVehicleForm user={this.state.user} />
-        </View>
-        <Button onPress={this.getMyVehicles} title="My Vehicles" />
-        <Button onPress={this.getDelegatedVehicles} title="Delegated Vehicles" />
-        <Button onPress={this.getBorrowingVehicles} title="Borrowing Vehicles" />
-      </View>
-    );
+            <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+              <Text style={styles.header_left}> Your Vehicles </Text>
+              <RegisterVehicleForm user={this.state.user} />
+            </View>
+            <Button onPress={this.getMyVehicles} title="My Vehicles" />
+            <Button onPress={this.getDelegatedVehicles} title="Delegated Vehicles" />
+            <Button onPress={this.getBorrowingVehicles} title="Borrowing Vehicles" />
+          </View>
+        )
+        :
+        (
+          <View style={styles.container}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )
+
+
+      ));
   }
 }
 
