@@ -8,7 +8,6 @@ import styles from '../config/styles';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
 import VehiclesList from '../components/MeComponents/Vehicles/VehiclesList';
 import RegisterVehicleForm from '../components/MeComponents/Vehicles/RegisterVehicleForm';
-import PendingBorrowReqForm from '../components/MeComponents/Vehicles/Share/PendingBorrowReqForm';
 import UserInfo from '../components/MeComponents/UserInfo';
 import VehicleElement from '../components/MeComponents/Vehicles/VehicleElement';
 import BorrowingVehicle from '../components/MeComponents/Vehicles/Share/BorrowingVehicle';
