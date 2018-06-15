@@ -94,14 +94,15 @@ export default class extends Component<Props> {
   }
 
   onReceived(notification) {
-    console.warn('Notification received: ', notification);
+    // console.warn('Notification received: ', notification);
   }
 
   onOpened(openResult) {
-    console.warn('Message: ', openResult.notification.payload.body);
+    /* console.warn('Message: ', openResult.notification.payload.body);
     console.warn('Data: ', openResult.notification.payload.additionalData);
     console.warn('isActive: ', openResult.notification.isAppInFocus);
     console.warn('openResult: ', openResult);
+    */
   }
 
   onIds(device) {

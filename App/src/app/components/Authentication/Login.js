@@ -172,32 +172,6 @@ class Login extends Component<Props> {
           Info
         </Button>
 
-        <LoginButton
-          readPermissions={['email', 'public_profile']}
-          onLoginFinished={
-            (error, result) => {
-              if (error) {
-                alert(`Login failed with error: ${result.error}`);
-              } else if (result.isCancelled) {
-                alert('Login was cancelled');
-              } else {
-                // alert(`Login was successful with permissions: ${result.grantedPermissions}`);
-
-                AccessToken.getCurrentAccessToken().then((data) => {
-                  const infoRequest = new GraphRequest(
-                    '/me?fields=name,picture,email,first_name,last_name',
-                    null,
-                    this._responseInfoCallback,
-                  );
-                  // Start the graph request.
-                  new GraphRequestManager().addRequest(infoRequest).start();
-                });
-              }
-            }
-          }
-          onLogoutFinished={() => alert('User logged out')}
-        />
-
       </KeyboardAvoidingView>
     );
   }

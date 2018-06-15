@@ -15,7 +15,8 @@ type Props = {
     navigation:{
         state:{
             params:{
-                data:any
+                data:any,
+                callback:any,
             }
         },
         navigate: any,
@@ -29,6 +30,9 @@ export default class extends Component<Props> {
     this.checkSubscription = this.checkSubscription.bind(this);
     this.borrow = this.borrow.bind(this);
     this.removeVehicle = this.removeVehicle.bind(this);
+    this.changeBorrow = this.changeBorrow.bind(this);
+
+    this.callback = this.props.navigation.state.params.callback;
 
     const { data } = this.props.navigation.state.params;
 
@@ -42,7 +46,12 @@ export default class extends Component<Props> {
   }
 
   borrow() {
-    this.props.navigation.navigate('Share', { data: { plate: this.state.plate, ownerId: this.state.ownerId } });
+    this.props.navigation.navigate('Share', { data: { plate: this.state.plate, ownerId: this.state.ownerId }, callback: this.changeBorrow });
+  }
+
+  changeBorrow(value) {
+    this.setState({ delegateState: value });
+    this.callback();
   }
 
   checkSubscription = () => {

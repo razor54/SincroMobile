@@ -38,7 +38,7 @@ export default class VehiclesList extends Component<Props> {
   }
 
   onPress(data) {
-    this.props.navigation.navigate(this.state.screen, { data });
+    this.props.navigation.navigate(this.state.screen, { data, callback: this.doRefresh });
   }
 
   doRefresh() {

@@ -18,7 +18,8 @@ type Props = {
         data:any
       }
     },
-    navigate: any
+    navigate: any,
+    pop: any,
   }
 };
 export default class extends Component<Props> {
@@ -58,7 +59,7 @@ export default class extends Component<Props> {
 
         fetch(url, data)
           .then((res) => {
-            if (res.ok) this.props.navigation.pop(1, 'BorrowingRequests');
+            if (res.ok) this.props.navigation.pop(2);
             else this.showErrorMessage('Not Valid User');
           });
       } else {

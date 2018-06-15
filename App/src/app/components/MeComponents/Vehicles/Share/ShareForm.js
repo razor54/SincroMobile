@@ -16,6 +16,7 @@ type Props = {
         state:{
             params: {
                 data: any,
+                callback: any,
             }
         },
         navigate: any,
@@ -32,6 +33,8 @@ export default class extends Component<Props> {
 
     this.showErrorMessage = this.showErrorMessage.bind(this);
     this.borrow = this.borrow.bind(this);
+
+    this.callback = this.props.navigation.state.params.callback;
 
     this.state = {
       plate: data.plate,
@@ -61,8 +64,13 @@ export default class extends Component<Props> {
 
         fetch(url, data)
           .then((res) => {
-            if (res.ok) this.props.navigation.pop(1, 'Share');
-            else this.showErrorMessage('Not Valid User');
+            if (res.ok) {
+              this.callback('Pending');
+              this.props.navigation.pop(1, 'Share');
+            } else {
+              this.callback('False');
+              this.showErrorMessage('Not Valid User');
+            }
           });
       } else {
         // redirect to login screen

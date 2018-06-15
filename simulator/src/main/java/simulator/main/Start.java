@@ -29,6 +29,8 @@ public class Start {
     private JTextField locationTextBox;
     private JTextField idTextField;
     private JButton simulate;
+    private JTextField gpsLatitude;
+    private JTextField gpsLongitude;
 
     private URI eventPostUri = URI.create("http://localhost:9000/event");
     private int counterId = 270;
@@ -47,6 +49,8 @@ public class Start {
                     map.put("verified", String.valueOf(verifiedCheckBox.isSelected()));
                     map.put("location", locationTextBox.getText());
                     map.put("plate", vehiclePlate.getText());
+                    map.put("gpsLatitude", gpsLatitude.getText());
+                    map.put("gpsLongitude", gpsLongitude.getText());
 
                     postJSON(eventPostUri, map);
 
@@ -145,5 +149,9 @@ public class Start {
         frame.pack();
         frame.setVisible(true);
 
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }

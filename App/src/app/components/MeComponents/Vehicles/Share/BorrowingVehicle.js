@@ -15,7 +15,8 @@ type Props = {
     navigation:{
         state:{
             params:{
-                data:any
+                data:any,
+                callback: any,
             }
         },
         navigate: any
