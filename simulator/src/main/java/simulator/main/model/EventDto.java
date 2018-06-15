@@ -17,9 +17,9 @@ public class EventDto {
 
     private String gps_location;
 
-    private String gps_longitude;
+    private String gpsLongitude;
 
-    private String gps_latitude;
+    private String gpsLatitude;
 
     private int driverId;
 
@@ -71,13 +71,6 @@ public class EventDto {
         this.gps_location = gps_location;
     }
 
-    public String getGps_longitude() {
-        return gps_longitude;
-    }
-
-    public void setGps_longitude(String gps_longitude) {
-        this.gps_longitude = gps_longitude;
-    }
 
     public int getDriverId() {
         return driverId;
@@ -88,11 +81,19 @@ public class EventDto {
     }
 
 
-    public String getGps_latitude() {
-        return gps_latitude;
+    public String getGpsLatitude() {
+        return gpsLatitude;
     }
 
-    public void setGps_latitude(String gps_latitude) {
-        this.gps_latitude = gps_latitude;
+    public void setGpsLatitude(String gpsLatitude) {
+        this.gpsLatitude = gpsLatitude;
+    }
+
+    public String getGpsLongitude() {
+        return gpsLongitude;
+    }
+
+    public void setGpsLongitude(String gpsLongitude) {
+        this.gpsLongitude = gpsLongitude;
     }
 }
