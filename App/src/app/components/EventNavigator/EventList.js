@@ -72,6 +72,11 @@ export default class extends Component<Props> {
     this.getUser();
   }
 
+  componentDidUpdate() {
+    if (this.state.id && !this.state.refreshing && !this.state.listRead) {
+      this.getList();
+    }
+  }
 
   onPress(data) {
     this.props.navigation.navigate('Element', { data });
@@ -102,14 +107,9 @@ export default class extends Component<Props> {
         .then(jsonList => this.setState({ list: jsonList }))
         .catch(() => alert('Fetch event failed'))
         .finally(() => this.setState({ refreshing: false, listRead: true }));
-    }).catch(e => console.warn(e));
+    });
   };
 
-  componentDidUpdate() {
-    if (this.state.id && !this.state.refreshing && !this.state.listRead) {
-      this.getList();
-    }
-  }
 
   renderItem = ({ item }) => (
     <ListItem

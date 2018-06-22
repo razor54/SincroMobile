@@ -1,25 +1,35 @@
 /* global fetch:false */
 /* global alert:false */
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions, AsyncStorage } from 'react-native';
-import { Avatar, CheckBox, FormInput, FormLabel, Button } from 'react-native-elements';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+  AsyncStorage,
+  KeyboardAvoidingView,
+  Button,
+  Alert,
+} from 'react-native';
+import { Avatar, CheckBox, FormInput, FormLabel } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import networkSettings from '../../../config/serverConnectionSettings';
+import networkSettings from '../../config/serverConnectionSettings';
 
 
 type Props = {
-    user : any,
+    navigation:{
+        state:{
+            params: {
+                user: any,
+            }
+        },
+        navigate: any,
+        pop: any
+    }
 }
 const SCREEN_WIDTH = Dimensions.get('window').width;
-
-
-const addButtonIcon = {
-  name: 'add-circle',
-  type: 'ionicons',
-  color: 'black',
-  size: 35,
-};
 
 
 const styles = StyleSheet.create({
@@ -68,21 +78,18 @@ export default class RegisterVehicleForm extends Component<Props> {
   constructor(props) {
     super(props);
 
-    this.renderModalContent = this.renderModalContent.bind(this);
     this.handlePlate = this.handlePlate.bind(this);
     this.handleSubscribe = this.handleSubscribe.bind(this);
     this.handleAddVehicle = this.handleAddVehicle.bind(this);
     this.handleDatePicked = this.handleDatePicked.bind(this);
     this.hideDateTimePicker = this.hideDateTimePicker.bind(this);
     this.showDateTimePicker = this.showDateTimePicker.bind(this);
-    this.closeModal = this.closeModal.bind(this);
+    this.showErrorMessage = this.showErrorMessage.bind(this);
+    this.showSuccessMessage = this.showSuccessMessage.bind(this);
 
     this.state = {
-      user: props.user,
-      userId: props.user.id,
-      visibleModal: false,
+      userId: props.navigation.state.params.user.id,
       plate: null,
-      isPlateValid: false,
       subscribe: false,
       date: new Date(),
       isDateTimePickerVisible: false,
@@ -108,6 +115,8 @@ export default class RegisterVehicleForm extends Component<Props> {
         const token = JSON.parse(t);
 
         if (token != null) {
+          if (!this.state.plate) return this.showErrorMessage('Not Valid Plate');
+
           fetch(url, {
             method: 'POST',
             headers: {
@@ -123,16 +132,13 @@ export default class RegisterVehicleForm extends Component<Props> {
             }),
           })
             .then((response) => {
-              if (response.status !== 200) alert('There was an error');
+              if (response.status !== 200) return this.showErrorMessage('Not Valid Plate');
+              return this.showSuccessMessage();
             })
             .catch(() => {
               // this.setState({ isLoading: false });
-              alert('There was an error');
-            })
-            .finally(() => {
-              this.setState({ visibleModal: false });
-            })
-            .done();
+              this.showErrorMessage('Not Valid Plate');
+            });
         }
       });
     }
@@ -140,6 +146,29 @@ export default class RegisterVehicleForm extends Component<Props> {
 
     handleSubscribe() {
       this.setState({ subscribe: !this.state.subscribe });
+    }
+
+    showSuccessMessage() {
+      Alert.alert(
+        'Register',
+        'Vehicle was registered successfully',
+        [
+          { text: 'Ok', onPress: () => this.props.navigation.pop(1, 'RegisterVehicleForm') },
+        ],
+        { cancelable: false },
+      );
+    }
+
+    showErrorMessage(error) {
+      Alert.alert(
+        'Error',
+        error,
+        [
+          { text: 'Try Again', onPress: () => this.setState({ plate: null }) },
+          { text: 'Cancel', onPress: () => this.props.navigation.pop(1, 'RegisterVehicleForm') },
+        ],
+        { cancelable: false },
+      );
     }
 
 
@@ -151,32 +180,17 @@ export default class RegisterVehicleForm extends Component<Props> {
       });
     }
 
-
-    closeModal() {
-      this.setState({ visibleModal: false });
-    }
-
-
-    // noinspection JSAnnotator
-    renderModalContent = () => (
-      <View>
-        <View>
-          <Avatar
-            source={require('../../../../../public/image/closebutton.png')}
-            xsmall
-            rounded
-            title="Close"
-            onPress={this.closeModal}
-            activeOpacity={2}
-          />
-        </View>
-        <View style={styles.modalContent}>
+    render() {
+      return (
+        <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
 
           <FormLabel>Plate</FormLabel>
-          <FormInput
-            onChangeText={this.handlePlate}
-            inputStyle={styles.inputStyle}
-          />
+          <View style={{ alignItems: 'center' }} >
+            <FormInput
+              onChangeText={this.handlePlate}
+              inputStyle={styles.inputStyle}
+            />
+          </View>
           {null /* plateError */ }
 
 
@@ -184,7 +198,7 @@ export default class RegisterVehicleForm extends Component<Props> {
 
           {null /* plateError */ }
 
-          <TouchableOpacity onPress={this.showDateTimePicker}>
+          <TouchableOpacity style={{ alignItems: 'center' }} onPress={this.showDateTimePicker}>
             <Text style={styles.inputStyle}>
               {this.state.date.getDate()} /
               {this.state.date.getMonth()} /
@@ -204,35 +218,8 @@ export default class RegisterVehicleForm extends Component<Props> {
           {null /* passwordError */}
 
           <Button title="Add" onPress={this.handleAddVehicle} />
-        </View>
-      </View>
+        </KeyboardAvoidingView>
 
-    );
-
-
-    render() {
-      return (
-        <View >
-          <Button
-            transparent
-            icon={addButtonIcon}
-            onPress={() => this.setState({ visibleModal: true })}
-          />
-          <Modal
-            isVisible={this.state.visibleModal}
-            backdropColor="black"
-            backdropOpacity={0.8}
-            animationIn="zoomInDown"
-            animationOut="zoomOutUp"
-            animationInTiming={500}
-            animationOutTiming={500}
-            backdropTransitionInTiming={500}
-            backdropTransitionOutTiming={500}
-            onRequestClose={this.closeModal}
-          >
-            {this.renderModalContent()}
-          </Modal>
-        </View>
       );
     }
 }

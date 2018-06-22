@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { FlatList, AsyncStorage } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import networkSettings from '../../../config/serverConnectionSettings';
 
 type Props = {
   navigation: {
@@ -57,7 +56,7 @@ export default class VehiclesList extends Component<Props> {
 
         fetch(this.state.url, data).then(reply => reply.json())
           .then(list => this.setState({ list, refreshing: false }))
-          .catch(e => alert(e));
+          .catch(this.setState({ refreshing: false }));
       }
     });
   }

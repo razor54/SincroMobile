@@ -40,6 +40,11 @@
 		2DCD954D1E0B4F2C00145EB5 /* AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AppTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		3D8B723EB76D4DCAB7EA5E48 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37E0DD6252834799A33DE391 /* Ionicons.ttf */; };
+		3EE874D820DD799500B86FDB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
+		3EE874D920DD799700B86FDB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
+		3EE874DA20DD799700B86FDB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
+		3EE874DB20DD7A8900B86FDB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		3EE874DC20DD7A8A00B86FDB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		6C0146B725FB4432AE74E281 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB54AB5BF98F45199DFB8968 /* EvilIcons.ttf */; };
 		6C582A1A923F47A2A7CCD4DE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B86C7F6ED5F44965948F074A /* FontAwesome.ttf */; };
@@ -1203,6 +1208,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE874D820DD799500B86FDB /* LaunchScreen.xib in Resources */,
+				3EE874DB20DD7A8900B86FDB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1230,6 +1237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE874D920DD799700B86FDB /* LaunchScreen.xib in Resources */,
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1238,6 +1246,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EE874DA20DD799700B86FDB /* LaunchScreen.xib in Resources */,
+				3EE874DC20DD7A8A00B86FDB /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,7 +4,7 @@ import { TabNavigator, TabBarBottom, SwitchNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Events from './screens/Events';
 import Me from './screens/Me';
-import About from './screens/About';
+import About from './screens/Options';
 import Login from './components/Authentication/Login';
 import SplashScreen from './SplashScreen';
 import NoConnectionScreen from './NoConnectionScreen';
@@ -33,7 +33,7 @@ const Application = TabNavigator(
     About: {
       screen: About,
       navigationOptions: {
-        tabBarLabel: 'About',
+        tabBarLabel: 'Options',
         tabBarIcon: ({ tintColor }) => <Ionicons name="ios-settings" size={35} color={tintColor} />,
       },
     },

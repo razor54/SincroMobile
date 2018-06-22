@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {
   Text,
   KeyboardAvoidingView,
-  Button, Alert, View, AsyncStorage,
+  Button, Alert, AsyncStorage,
 } from 'react-native';
 import { showLocation } from 'react-native-map-link';
 import styles from '../../config/styles';

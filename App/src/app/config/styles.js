@@ -33,6 +33,15 @@ export default {
     borderWidth: 0,
     borderRadius: 5,
   },
+
+  button2: {
+    backgroundColor: theme.actionable.activeColor,
+    width: 175,
+    height: 45,
+    borderColor: 'transparent',
+    borderRadius: 5,
+    borderWidth: 0,
+  },
   containerRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -99,9 +108,9 @@ export default {
     alignItems: 'center',
   },
   btnText: {
-    color: '#ffffff',
-    fontSize: 24,
-    fontWeight: 'bold',
+    color: '#000000',
+    fontSize: 15,
+    textAlign: 'center',
   },
 
   userIcon: {

@@ -7,8 +7,8 @@ import {
   KeyboardAvoidingView,
   Button, View, AsyncStorage,
 } from 'react-native';
-import styles from '../../../../config/styles';
-import networkSettings from '../../../../config/serverConnectionSettings';
+import styles from '../../../config/styles';
+import networkSettings from '../../../config/serverConnectionSettings';
 
 
 type Props = {

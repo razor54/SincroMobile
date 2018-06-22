@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
-  TextInput,
   KeyboardAvoidingView,
-  TouchableOpacity,
   Dimensions,
   AsyncStorage,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import { FormLabel, FormInput, FormValidationMessage, Input, Button } from 'react-native-elements';
+import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements';
 import navigationHeaderStyle from '../../config/NavigationOptionsThemed';
-import App from '../../screens/Me';
 import styl from '../../config/styles';
 import Register from './Register';
 import networkSetting from '../../config/serverConnectionSettings';

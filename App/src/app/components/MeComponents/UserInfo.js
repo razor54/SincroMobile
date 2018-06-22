@@ -1,9 +1,9 @@
 /* eslint-disable no-alert */
 /* global alert:false */
-import { Avatar, CheckBox, FormInput, FormLabel } from 'react-native-elements';
+import { Avatar } from 'react-native-elements';
 import React, { Component } from 'react';
-import { Button, Text, TouchableOpacity, View } from 'react-native';
-import { AccessToken, GraphRequest, GraphRequestManager, LoginButton } from 'react-native-fbsdk';
+import { Text, View } from 'react-native';
+import { AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 import Modal from 'react-native-modal';
 import styles from '../../config/styles';
 
@@ -84,7 +84,6 @@ export default class UserInfo extends Component<Props> {
       <Text style={styles.textCenter}>{this.state.user.name}</Text>
       <Text style={styles.textCenter}>{this.state.user.id} </Text>
       <Text style={styles.textCenter}>{this.state.user.email}</Text>
-      <LoginButton style={styles.userIcon} onLogoutFinished={() => alert('User logged out')} />
     </View>
   );
 
@@ -93,10 +92,11 @@ export default class UserInfo extends Component<Props> {
     return (
       <View style={styles.userIcon}>
         <Avatar
-          source={this.state.userImage ? { uri: this.state.userImage } : require('../../../../public/image/user-1808597_1280.png')}
+          source={this.state.userImage ? { uri: this.state.userImage } : require('../../../../public/image/user_icon.png')}
           large
           title="MI"
           rounded
+          overlayContainerStyle={{ backgroundColor: 'transparent' }}
           onPress={this.showMoreInfo}
           activeOpacity={2}
         />
