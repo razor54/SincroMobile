@@ -72,7 +72,7 @@ export default class UserInfo extends Component<Props> {
 
       <View style={styles.userIcon}>
         <Avatar
-          source={this.state.userImage ? { uri: this.state.userImage } : require('../../../../public/image/user-1808597_1280.png')}
+          source={this.state.userImage ? { uri: this.state.userImage } : require('../../../../public/image/user_icon.png')}
           xlarge
           rounded
           title="MI"

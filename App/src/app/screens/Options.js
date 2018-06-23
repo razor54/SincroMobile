@@ -6,7 +6,7 @@ import {
   KeyboardAvoidingView,
   Alert,
   AsyncStorage,
-  Button as Button2,
+  Button as Button2, ActivityIndicator,
 } from 'react-native';
 import styles from '../config/styles';
 import networkSettings from '../config/serverConnectionSettings';
@@ -120,47 +120,53 @@ class Options extends Component<Props> {
 
 
   render() {
-    return (
-      <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
+    return (this.state.user ?
+      (
+        <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
 
-        <View style={styles.userIcon}>
+          <View style={styles.userIcon}>
 
-          <Avatar
-            source={this.state.userImage ? { uri: this.state.userImage } : require('../../../public/image/user_icon.png')}
-            title="MI"
-            large
-            overlayContainerStyle={{ backgroundColor: 'transparent' }}
-            onPress={this.showMoreInfo}
-            activeOpacity={2}
+            <Avatar
+              source={this.state.userImage ? { uri: this.state.userImage } : require('../../../public/image/user_icon.png')}
+              title="MI"
+              large
+              overlayContainerStyle={{ backgroundColor: 'transparent' }}
+              onPress={this.showMoreInfo}
+              activeOpacity={2}
+            />
+          </View>
+
+          <Text style={styles.btnText}>{this.state.user.name}</Text>
+          <Text style={styles.btnText}>{this.state.user.id} </Text>
+          <Text style={{ ...styles.btnText }}>{this.state.user.email}</Text>
+          <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
+            <Button buttonStyle={styles.button2} rounded onPress={this.getMyVehicles} title="My Vehicles" />
+          </View>
+          <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
+            <Button buttonStyle={styles.button2} rounded onPress={this.getDelegatedVehicles} title="Delegated Vehicles" />
+          </View>
+          <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
+            <Button buttonStyle={styles.button2} rounded onPress={this.getBorrowingVehicles} title="Borrowing Vehicles" />
+          </View>
+          <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
+            <Button buttonStyle={styles.button2} rounded onPress={this.gotToAbout} title="About Us" />
+          </View>
+
+          <Button2
+            title="Logout"
+            onPress={this.showAlertDecision}
           />
-        </View>
 
-        <Text style={styles.btnText}>{this.state.user.name}</Text>
-        <Text style={styles.btnText}>{this.state.user.id} </Text>
-        <Text style={{ ...styles.btnText }}>{this.state.user.email}</Text>
-        <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
-          <Button buttonStyle={styles.button2} rounded onPress={this.getMyVehicles} title="My Vehicles" />
-        </View>
-        <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
-          <Button buttonStyle={styles.button2} rounded onPress={this.getDelegatedVehicles} title="Delegated Vehicles" />
-        </View>
-        <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
-          <Button buttonStyle={styles.button2} rounded onPress={this.getBorrowingVehicles} title="Borrowing Vehicles" />
-        </View>
-        <View style={{ alignItems: 'center', justifyContent: 'flex-end', paddingTop: 20 }}>
-          <Button buttonStyle={styles.button2} rounded onPress={this.gotToAbout} title="About Us" />
-        </View>
+          <View />
 
-        <Button2
-          title="Logout"
-          onPress={this.showAlertDecision}
-        />
+        </KeyboardAvoidingView>
 
-        <View />
-
-      </KeyboardAvoidingView>
-
-    );
+      ) :
+      (
+        <View style={styles.container}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      ));
   }
 }
 

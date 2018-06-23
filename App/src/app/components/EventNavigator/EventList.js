@@ -1,9 +1,9 @@
 /* global fetch:false */
-/* global alert:false */
 import React, { Component } from 'react';
 import { FlatList, AsyncStorage, View, ActivityIndicator, StyleSheet } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import settings from '../../config/serverConnectionSettings';
+import EmptyList from './EmptyList';
 
 
 type Props = {
@@ -33,7 +33,6 @@ export default class extends Component<Props> {
       refreshing: false,
       loading: true,
       user: null,
-      listRead: false,
     };
 
     this.getUser = this.getUser.bind(this);
@@ -43,10 +42,18 @@ export default class extends Component<Props> {
     this.onPress = this.onPress.bind(this);
   }
 
+  componentDidMount() {
+    this.getUser().then(this.getList);
+  }
+
+  onPress(data) {
+    this.props.navigation.navigate('Element', { data });
+  }
+
   getUser() {
-    AsyncStorage.getItem('token').then((token) => {
+    return AsyncStorage.getItem('token').then((token) => {
       if (token == null) {
-        console.warn('null token');
+        // console.warn('null token');
         // TODO return to login
         throw Error('No token');
       }
@@ -68,25 +75,9 @@ export default class extends Component<Props> {
     });
   }
 
-  componentDidMount() {
-    this.getUser();
-  }
 
-  componentDidUpdate() {
-    if (this.state.id && !this.state.refreshing && !this.state.listRead) {
-      this.getList();
-    }
-  }
-
-  onPress(data) {
-    this.props.navigation.navigate('Element', { data });
-  }
-
-
-  getList = () => {
+  getList() {
     this.setState({ refreshing: true });
-
-
     AsyncStorage.getItem('token').then((token) => {
       if (token == null) {
         console.warn('null token');
@@ -102,13 +93,14 @@ export default class extends Component<Props> {
 
 
       };
-      fetch(this.state.eventsUrl, data)
-        .then(res => (res.ok ? res.json() : alert(res.status)/* TODO return login */))
-        .then(jsonList => this.setState({ list: jsonList }))
-        .catch(() => alert('Fetch event failed'))
-        .finally(() => this.setState({ refreshing: false, listRead: true }));
+      return fetch(this.state.eventsUrl, data)
+        .then(res => res.json())
+        .then((jsonList) => {
+          if (jsonList[0]) this.setState({ list: jsonList });
+        })
+        .finally(() => this.setState({ refreshing: false }));
     });
-  };
+  }
 
 
   renderItem = ({ item }) => (
@@ -117,7 +109,8 @@ export default class extends Component<Props> {
       subtitle={item.date.split('T')[0]}
       onPress={() => this.onPress(item)}
       selected={item.verified}
-    />);
+    />
+  );
 
   render() {
     return (
@@ -133,7 +126,9 @@ export default class extends Component<Props> {
           onRefresh={this.getList}
           refreshing={this.state.refreshing}
           keyExtractor={(item, index) => `${index}`}
-        />)
+          ListEmptyComponent={EmptyList}
+        />
+      )
     );
   }
 }
