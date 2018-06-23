@@ -23,7 +23,7 @@ export default {
     backgroundColor: '#34495e',
   },
   actionable: {
-    activeColor: '#3498db',
+    activeColor: '#0089f6',
     passiveColor: '#2980b9',
   },
 };

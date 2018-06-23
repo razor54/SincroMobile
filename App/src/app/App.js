@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types,react/prefer-stateless-function,no-undef */
 import React from 'react';
-import { TabNavigator, TabBarBottom, SwitchNavigator } from 'react-navigation';
+import { TabNavigator,TabBarBottom, SwitchNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Events from './screens/Events';
 import Me from './screens/Me';
@@ -8,6 +8,7 @@ import About from './screens/Options';
 import Login from './components/Authentication/Login';
 import SplashScreen from './SplashScreen';
 import NoConnectionScreen from './NoConnectionScreen';
+import theme from './config/theme';
 
 
 const Application = TabNavigator(
@@ -40,13 +41,20 @@ const Application = TabNavigator(
   },
   {
     tabBarOptions: {
-      activeTintColor: 'blue',
+      style: {
+        backgroundColor: theme.main.backgroundColor,
+      },
+      indicatorStyle: {
+        backgroundColor: 'gray',
+      },
+      activeTintColor: 'darkblue',
       inactiveTintColor: 'gray',
+
+
     },
     tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     animationEnabled: true,
-    swipeEnabled: true,
   },
 );
 

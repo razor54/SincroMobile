@@ -4,6 +4,7 @@ import { FlatList, AsyncStorage, View, ActivityIndicator, StyleSheet } from 'rea
 import { ListItem } from 'react-native-elements';
 import settings from '../../config/serverConnectionSettings';
 import EmptyList from './EmptyList';
+import styles from '../../config/styles';
 
 
 type Props = {
@@ -97,9 +98,8 @@ export default class extends Component<Props> {
         .then(res => res.json())
         .then((jsonList) => {
           if (jsonList[0]) this.setState({ list: jsonList });
-        })
-        .finally(() => this.setState({ refreshing: false }));
-    });
+        });
+    }).finally(() => this.setState({ refreshing: false }));
   }
 
 
@@ -114,12 +114,7 @@ export default class extends Component<Props> {
 
   render() {
     return (
-      (this.state.loading && !this.state.refreshing ?
-      // eslint-disable-next-line no-use-before-define
-        <View style={styles.container}>
-          <ActivityIndicator size="large" color="#0000ff" />
-        </View>
-        :
+      <View style={styles.container}>
         <FlatList
           renderItem={this.renderItem}
           data={this.state.list}
@@ -128,18 +123,7 @@ export default class extends Component<Props> {
           keyExtractor={(item, index) => `${index}`}
           ListEmptyComponent={EmptyList}
         />
-      )
+      </View>
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  horizontal: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    padding: 10,
-  },
-});

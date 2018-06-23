@@ -21,6 +21,7 @@ type Props = {
         navigate: any
     }
 };
+
 export default class extends Component<Props> {
   constructor(props) {
     super(props);

@@ -28,7 +28,6 @@ export default {
   button: {
     backgroundColor: theme.actionable.activeColor,
     width: 300,
-    height: 45,
     borderColor: 'transparent',
     borderWidth: 0,
     borderRadius: 5,
@@ -37,7 +36,6 @@ export default {
   button2: {
     backgroundColor: theme.actionable.activeColor,
     width: 175,
-    height: 45,
     borderColor: 'transparent',
     borderRadius: 5,
     borderWidth: 0,
@@ -65,6 +63,19 @@ export default {
     paddingLeft: 40,
     paddingRight: 40,
   },
+
+  container_me: {
+    flex: 1,
+    backgroundColor: '#fffdfd',
+  },
+
+  container_me_activity: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+    backgroundColor: '#fffdfd',
+  },
+
   header: {
     fontSize: 50,
     marginBottom: 10,
@@ -72,6 +83,12 @@ export default {
     textAlign: 'center',
     color: '#000000',
     fontWeight: 'bold',
+  },
+
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
   },
 
   headerSplash: {

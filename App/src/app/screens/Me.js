@@ -70,7 +70,7 @@ class Profile extends Component<Props> {
     return (
       (this.state.user ?
         (
-          <View style={{ justifyContent: 'flex-end' }}>
+          <View style={styles.container_me}>
 
             <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
               <UserInfo user={this.state.user} />
@@ -93,10 +93,9 @@ class Profile extends Component<Props> {
               </View>
             </View>
 
-            <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between' }}>
+            <View style={styles.container_me_activity}>
               <Text style={styles.header_left}> Recent Activity </Text>
             </View>
-
           </View>
         )
         :
@@ -118,7 +117,7 @@ export default StackNavigator({
   },
   BorrowingRequests: {
     screen: VehiclesList,
-    navigationOptions: navigationHeaderStyle('Requests'),
+    navigationOptions: { navigationHeaderStyle: 'Requests', tabBarVisible: false },
   },
   BorrowingRequestElement: {
     screen: BorrowingRequest,

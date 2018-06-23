@@ -123,42 +123,43 @@ class Options extends Component<Props> {
     return (this.state.user ?
       (
         <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
-
-          <View style={styles.userIcon}>
-
-            <Avatar
-              source={this.state.userImage ? { uri: this.state.userImage } : require('../../../public/image/user_icon.png')}
-              title="MI"
-              large
-              overlayContainerStyle={{ backgroundColor: 'transparent' }}
-              onPress={this.showMoreInfo}
-              activeOpacity={2}
-            />
-          </View>
-
-          <Text style={styles.btnText}>{this.state.user.name}</Text>
-          <Text style={styles.btnText}>{this.state.user.id} </Text>
-          <Text style={{ ...styles.btnText }}>{this.state.user.email}</Text>
-          <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
-            <Button buttonStyle={styles.button2} rounded onPress={this.getMyVehicles} title="My Vehicles" />
-          </View>
-          <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
-            <Button buttonStyle={styles.button2} rounded onPress={this.getDelegatedVehicles} title="Delegated Vehicles" />
-          </View>
-          <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
-            <Button buttonStyle={styles.button2} rounded onPress={this.getBorrowingVehicles} title="Borrowing Vehicles" />
-          </View>
-          <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
-            <Button buttonStyle={styles.button2} rounded onPress={this.gotToAbout} title="About Us" />
-          </View>
-
           <Button2
-            title="Logout"
+            styles={{ flexDirection: 'row', alignSelf: 'flex-end', alignItems: 'flex-end' }}
+            title="Log Out"
             onPress={this.showAlertDecision}
           />
+          <View style={styles.container}>
 
-          <View />
+            <View style={styles.userIcon}>
 
+              <Avatar
+                source={this.state.userImage ? { uri: this.state.userImage } : require('../../../public/image/user_icon.png')}
+                title="MI"
+                large
+                overlayContainerStyle={{ backgroundColor: 'transparent' }}
+                onPress={this.showMoreInfo}
+                activeOpacity={2}
+              />
+
+            </View>
+
+            <Text style={styles.btnText}>{this.state.user.name}</Text>
+            <Text style={styles.btnText}>{this.state.user.id} </Text>
+            <Text style={{ ...styles.btnText }}>{this.state.user.email}</Text>
+            <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
+              <Button buttonStyle={styles.button2} rounded onPress={this.getMyVehicles} title="My Vehicles" />
+            </View>
+            <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
+              <Button buttonStyle={styles.button2} rounded onPress={this.getDelegatedVehicles} title="Delegated Vehicles" />
+            </View>
+            <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
+              <Button buttonStyle={styles.button2} rounded onPress={this.getBorrowingVehicles} title="Borrowing Vehicles" />
+            </View>
+            <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
+              <Button buttonStyle={styles.button2} rounded onPress={this.gotToAbout} title="About Us" />
+            </View>
+
+          </View>
         </KeyboardAvoidingView>
 
       ) :
