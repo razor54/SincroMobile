@@ -31,6 +31,7 @@ class VehicleService {
     @Autowired
     private lateinit var delegatedVehicleRepository: DelegatedVehicleRepository
 
+
     fun addVehicle(vehicle: Vehicle): Vehicle {
         logger.debug("Started to add vehicle")
 
@@ -54,6 +55,7 @@ class VehicleService {
             throw NoSuchUserException()
         }
 
+
         val vehicles: List<Vehicle> = vehicleRepository.findAllByOwnerId(id)
         logger.info("Method \"{}\" UserId \"{}\" ", "Get User Vehicles", id)
         return vehicles
@@ -71,7 +73,7 @@ class VehicleService {
         }
         logger.warn("Method \"{}\" VehiclePlate \"{}\" ", "Get Vehicle", id)
 
-        throw NoSuchUserException()
+        throw NoSuchVehicleException()
 
     }
 

@@ -72,7 +72,8 @@ class UserService {
             throw FailedToAddUserException()
         }
     }
-    fun getUserAuth(authorization:String):User{
+
+    fun getUserAuth(authorization: String): User {
 
         val url = URL(userInfo)
         val con = url.openConnection() as HttpsURLConnection
@@ -90,7 +91,7 @@ class UserService {
             var userStr = readFullyAsString(con.getInputStream(), "UTF-8")
             var objectMapper = ObjectMapper()
 
-            val userS:Auth0User = objectMapper.readValue(userStr,Auth0User::class.java)
+            val userS: Auth0User = objectMapper.readValue(userStr, Auth0User::class.java)
 
             return getUser(userS.email)
 
@@ -174,10 +175,10 @@ class UserService {
         signup.put("connection", "Username-Password-Authentication")
 
         val userMetadata = JSONObject()
-        userMetadata.put("name",user.name)
-        userMetadata.put("nif",user.id.toString())
+        userMetadata.put("name", user.name)
+        userMetadata.put("nif", user.id.toString())
 
-        signup.put("user_metadata",userMetadata)
+        signup.put("user_metadata", userMetadata)
 
         val wr = OutputStreamWriter(con.outputStream)
         wr.write(signup.toString())
@@ -198,7 +199,7 @@ class UserService {
         }
     }
 
-    fun getToken(user: User):String {
+    fun getToken(user: User): String {
 
         val url = URL(tokenURL)
         val con = url.openConnection() as HttpsURLConnection
@@ -230,7 +231,7 @@ class UserService {
         signup.put("audience", audience)
         signup.put("grant_type", "password")
         signup.put("username", user.email)
-        signup.put("scope","openid")
+        signup.put("scope", "openid")
 
         val wr = OutputStreamWriter(con.outputStream)
         wr.write(signup.toString())
@@ -260,7 +261,7 @@ class UserService {
     private fun readFully(inputStream: InputStream): ByteArrayOutputStream {
         val baos = ByteArrayOutputStream()
         val buffer = ByteArray(1024)
-        var length = 0
+        var length: Int
         do {
             length = inputStream.read(buffer)
             if (length == -1) break
@@ -272,9 +273,9 @@ class UserService {
 
     fun verifyUserPassword(id: Int, password: String): User {
 
-        var user = getUser(id)
+        val user = getUser(id)
 
-        if(bcrypt.matches(password, user.password))
+        if (bcrypt.matches(password, user.password))
             return user
 
         throw InvalidCredentialsException()

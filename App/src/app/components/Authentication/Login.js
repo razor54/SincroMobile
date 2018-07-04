@@ -5,6 +5,8 @@ import {
   KeyboardAvoidingView,
   Dimensions,
   AsyncStorage,
+  NativeModules,
+  Platform,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { FormLabel, FormInput, FormValidationMessage, Button } from 'react-native-elements';
@@ -52,6 +54,7 @@ class Login extends Component<Props> {
     this.onLogin = this.onLogin.bind(this);
     this.handleNif = this.handleNif.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
+    this.getLanguageCode = this.getLanguageCode.bind(this);
   }
 
 
@@ -219,6 +222,18 @@ class Login extends Component<Props> {
           .catch(() => this.getFacebookUser());
       }
     });
+    console.warn(this.getLanguageCode());
+  }
+
+  getLanguageCode() {
+    let systemLanguage = 'en';
+    if (Platform.OS === 'android') {
+      systemLanguage = NativeModules.I18nManager.localeIdentifier;
+    } else {
+      systemLanguage = NativeModules.SettingsManager.settings.AppleLocale;
+    }
+    const languageCode = systemLanguage.substring(0, 2);
+    return languageCode;
   }
 
   getFacebookUser() {

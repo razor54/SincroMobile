@@ -55,6 +55,7 @@ class AuthController {
 
     }
 
+
     private fun resolveAuthToken(user: User): AuthenticatedUser {
 
         try {
