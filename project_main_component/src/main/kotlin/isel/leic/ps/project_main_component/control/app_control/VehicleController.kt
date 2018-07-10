@@ -67,8 +67,18 @@ class VehicleController {
     fun getVehicle(@PathVariable("vehicleId") plate: String, auth: String): Vehicle {
 
         val vehicle = vehicleService.getVehicle(plate)
-        val ownerId = vehicle.ownerId
-        verifyUser(auth, ownerId)
+        var currentDriverId = vehicle.ownerId
+
+        if (vehicle.delegateState == "True")
+            currentDriverId = vehicleService.getCurrentDriverId(plate)
+
+        try {
+            verifyUser(auth, currentDriverId)
+        } catch (e: Exception) {
+            if (vehicle.ownerId != currentDriverId)
+                verifyUser(auth, vehicle.ownerId)
+        }
+
 
         return vehicle
     }
@@ -105,6 +115,15 @@ class VehicleController {
     fun handleDelegation(@RequestBody delegateResponse: DelegateResponse, auth: String) {
         verifyUser(auth, delegateResponse.userBorrowId)
         vehicleService.plateDelegationResponse(delegateResponse)
+    }
+
+    @PostMapping("/delegated/{vehicleId}/cancel")
+    fun cancelDelegation(@PathVariable("vehicleId") vehicleId: String,auth:String){
+        val vehicle = vehicleService.getVehicle(vehicleId)
+        verifyUser(auth,vehicle.ownerId)
+
+        vehicleService.cancelDelegation(vehicleId)
+
     }
 
     /*

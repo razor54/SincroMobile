@@ -170,4 +170,63 @@ object NotificationHandler {
             con!!.disconnect()
         }
     }
+
+    fun vehicleBorrowCancelNotification(user: User) {
+        logger.debug("Started to send borrow notification")
+        var con: HttpsURLConnection? = null
+        try {
+
+
+            val playerId = user.playerId
+
+            if (playerId == null || playerId.isEmpty())
+                return
+
+            val url = URL("https://onesignal.com/api/v1/notifications")
+            con = url.openConnection() as HttpsURLConnection
+            con.requestMethod = "POST"
+            con.doInput = true
+            con.doOutput = true
+            //con.setRequestProperty("Content-Type", "application/json")
+            con.setRequestProperty("Accept", "application/json")
+            con.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+            con.setRequestProperty("Authorization", "Basic NTZiM2RhNGUtNmZkYS00Yzc3LTg4M2ItZGNlNjY1ZjcwMTBj");
+
+            val app_id = JSONObject()
+            app_id.put("app_id", "75a88678-2deb-40be-8a8c-3b05309761b8")
+
+            val playerIds = JSONArray()
+            playerIds.put(playerId)
+            app_id.put("include_player_ids", playerIds)
+
+            val contents = JSONObject()
+            contents.put("en", "A vehicle you were borrowing is no longer your responsibility")
+            app_id.put("contents", contents)
+
+            val headings = JSONObject()
+            headings.put("en", "Vehicle Borrow Cancelled")
+            app_id.put("headings", headings)
+
+
+            val wr = OutputStreamWriter(con.outputStream)
+            wr.write(app_id.toString())
+            wr.flush()
+
+
+            //display what returns the POST request
+
+
+            val HttpResult = con.responseCode
+            if (HttpResult == HttpURLConnection.HTTP_OK) {
+                logger.info("Method \"{}\" UserID \"{}\" ", "Send Notification", user.id)
+
+            } else {
+                logger.warn("Method \"{}\" UserID \"{}\" ", "Send Notification", user.id)
+                System.out.println(con.responseMessage)
+            }
+        } catch (e: Exception) {
+        } finally {
+            con!!.disconnect()
+        }
+    }
 }

@@ -45,7 +45,7 @@ class AuthController {
 
 
     @PostMapping("/login")
-    fun LoginUser(@RequestBody user: User): AuthenticatedUser {
+    fun loginUser(@RequestBody user: User): AuthenticatedUser {
 
         var loggedUser = userService.verifyUserPassword(user.id, user.password)
 

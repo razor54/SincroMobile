@@ -31,6 +31,7 @@ export default class extends Component<Props> {
     this.borrow = this.borrow.bind(this);
     this.removeVehicle = this.removeVehicle.bind(this);
     this.changeBorrow = this.changeBorrow.bind(this);
+    this.cancelBorrow = this.cancelBorrow.bind(this);
 
     this.callback = this.props.navigation.state.params.callback;
 
@@ -63,7 +64,12 @@ export default class extends Component<Props> {
 
   checkBorrow = () => {
     switch (this.state.delegateState) {
-      case 'True': return <Text style={styles.textStretch}> This vehicle is borrowed </Text>;
+      case 'True': return (
+        <View>
+          <Text style={styles.textStretch}> This vehicle is borrowed </Text>
+          <Button onPress={this.cancelBorrow} title="Cancel Delegation" />
+        </View>
+      );
 
       case 'Pending': return <Text style={styles.textStretch}> This vehicle waiting for borrow confirmation</Text>;
 
@@ -92,6 +98,26 @@ export default class extends Component<Props> {
         };
 
         fetch(`${networkSettings.homepage}/vehicles/${this.state.plate}/unsubscribe`, data)
+          .then(() => this.props.navigation.pop(2))
+          .catch(e => alert(e));
+      }
+    });
+  }
+
+  cancelBorrow() {
+    AsyncStorage.getItem('token').then((t) => {
+      const token = JSON.parse(t);
+
+      if (token != null) {
+        const data = {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            Authorization: `${token.token_type} ${token.access_token}`,
+          },
+        };
+
+        fetch(`${networkSettings.homepage}/vehicles/delegated/${this.state.plate}/cancel`, data)
           .then(() => this.props.navigation.pop(2))
           .catch(e => alert(e));
       }

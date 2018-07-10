@@ -8,6 +8,7 @@ import isel.leic.ps.project_main_component.exceptions.FailedToAddUserException
 import isel.leic.ps.project_main_component.exceptions.InvalidDelegationException
 import isel.leic.ps.project_main_component.exceptions.NoSuchUserException
 import isel.leic.ps.project_main_component.exceptions.NoSuchVehicleException
+import isel.leic.ps.project_main_component.handlers.NotificationHandler
 import isel.leic.ps.project_main_component.repository.DelegateRequestRepository
 import isel.leic.ps.project_main_component.repository.DelegatedVehicleRepository
 import isel.leic.ps.project_main_component.repository.VehicleRepository
@@ -15,8 +16,8 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.regex.Pattern
-import javax.transaction.Transactional
 
 @Service
 class VehicleService {
@@ -279,6 +280,28 @@ class VehicleService {
             return delegatedVehicle.get().userBorrowId
 
         else throw InvalidDelegationException()
+    }
+
+
+    @Transactional(rollbackFor = [(Exception::class)])
+    fun cancelDelegation(vehicleId: String){
+
+        val vehicleOpt = vehicleRepository.findById(vehicleId)
+        val vehicle = vehicleOpt.get()
+
+        vehicle.delegateState = "False"
+        vehicleRepository.save(vehicle)
+
+        val delegatedVehicle = delegatedVehicleRepository.findByPlate(vehicleId).get()
+
+        val userBorrowId = delegatedVehicle.userBorrowId
+        val user  = userService.getUser(userBorrowId)
+        NotificationHandler.vehicleBorrowCancelNotification(user)
+
+        delegatedVehicleRepository.deleteById(delegatedVehicle.id)
+
+
+
     }
 
 
