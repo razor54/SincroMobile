@@ -36,8 +36,8 @@ class WebSecurityConfig : WebSecurityConfigurerAdapter() {
 
                 //.antMatchers(HttpMethod.POST,"/**").authenticated()
                 .antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.POST,"api/sincro/event").permitAll()
-                .antMatchers(HttpMethod.PUT,"api/sincro/event").permitAll()
+                .antMatchers(HttpMethod.POST,"/api/sincro/event").permitAll()
+                .antMatchers(HttpMethod.PUT,"/api/sincro/event").permitAll()
                 .antMatchers(HttpMethod.POST,"/login").permitAll()
                 .antMatchers(HttpMethod.POST,"/register").permitAll()
                 .anyRequest().authenticated()

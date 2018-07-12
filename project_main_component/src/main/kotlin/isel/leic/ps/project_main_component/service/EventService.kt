@@ -36,7 +36,7 @@ class EventService {
             throw EventAlreadyExistsException()
         }
 
-        lateinit var savedEvent : Event;
+        lateinit var savedEvent : Event
 
         try {
             val plate = event.plate
@@ -74,7 +74,7 @@ class EventService {
 
             logger.warn("Method \"{}\" EventId \"{}\" ","Add Event", event.id)
 
-            eventRepository.delete(savedEvent);
+            eventRepository.delete(savedEvent)
             throw FailedToAddEventException()
         }
     }
