@@ -64,6 +64,11 @@ export default {
     paddingRight: 40,
   },
 
+  containerList:{
+    flex: 1,
+    backgroundColor: '#fffdfd',
+  },
+
   container_me: {
     flex: 1,
     backgroundColor: '#fffdfd',

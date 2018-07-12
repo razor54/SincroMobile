@@ -44,7 +44,13 @@ export default class extends Component<Props> {
   }
 
   componentDidMount() {
-    this.getUser().then(this.getList);
+    this.getUser();
+  }
+
+  componentDidUpdate() {
+    if (!this.state.list && this.state.id && !this.state.refreshing) {
+      this.getList();
+    }
   }
 
   onPress(data) {
@@ -92,7 +98,6 @@ export default class extends Component<Props> {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `${token.token_type} ${token.access_token}` },
 
-
       };
       return fetch(this.state.eventsUrl, data)
         .then(res => res.json())
@@ -114,7 +119,7 @@ export default class extends Component<Props> {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.containerList}>
         <FlatList
           renderItem={this.renderItem}
           data={this.state.list}
