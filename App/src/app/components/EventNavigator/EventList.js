@@ -47,18 +47,13 @@ export default class extends Component<Props> {
     this.getUser();
   }
 
-  componentDidUpdate() {
-    if (!this.state.list && this.state.id && !this.state.refreshing) {
-      this.getList();
-    }
-  }
 
   onPress(data) {
     this.props.navigation.navigate('Element', { data });
   }
 
   getUser() {
-    return AsyncStorage.getItem('token').then((token) => {
+    AsyncStorage.getItem('token').then((token) => {
       if (token == null) {
         // console.warn('null token');
         // TODO return to login
@@ -77,6 +72,7 @@ export default class extends Component<Props> {
         .then((user) => {
           if (user.id) {
             this.setState({ user, id: user.id, loading: false });
+            this.getList();
           }
         });
     });
