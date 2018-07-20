@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types,react/prefer-stateless-function */
 import React, { Component } from 'react';
-import { Avatar } from 'react-native-elements';
-import { Text, Animated, AsyncStorage } from 'react-native';
+import { View, ActivityIndicator, AsyncStorage } from 'react-native';
 import OneSignal from 'react-native-onesignal';
 import styles from './config/styles';
 import networkSetting from './config/serverConnectionSettings';
@@ -12,7 +11,6 @@ export default class extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      fadeAnim: new Animated.Value(0), // Initial value for opacity: 0
       user: null,
       error: false,
       networkError: false,
@@ -27,26 +25,15 @@ export default class extends Component<Props> {
   }
 
   componentDidMount() {
-    setTimeout(() => {
-      fetch(networkSetting.homepage, { method: 'GET' })
-        .then((res) => {
-          if (res.ok) {
-            this.tryToken();
-          } else {
-            this.setState({ networkError: true });
-          }
-        })
-
-        .catch(() => this.setState({ networkError: true }));
-    }, 2000);
-
-    Animated.timing( // Animate over time
-      this.state.fadeAnim, // The animated value to drive
-      {
-        toValue: 1, // Animate to opacity: 1 (opaque)
-        duration: 2000, // Make it take a while
-      },
-    ).start(); // Starts the animation
+    fetch(networkSetting.homepage, { method: 'GET' })
+      .then((res) => {
+        if (res.ok) {
+          this.tryToken();
+        } else {
+          this.setState({ networkError: true });
+        }
+      })
+      .catch(() => this.setState({ networkError: true }));
 
     this.oneSignalStart();
   }
@@ -149,19 +136,10 @@ export default class extends Component<Props> {
 
 
   render() {
-    const { fadeAnim } = this.state;
     return (
-      <Animated.View style={{ ...styles.container, opacity: fadeAnim }}>
-        <Avatar
-          source={require('../../public/image/sincro_logo.png')}
-          xlarge
-          title="Close"
-          overlayContainerStyle={{ backgroundColor: 'transparent' }}
-        />
-        <Text style={styles.headerSplash}>
-            Mobile
-        </Text>
-      </Animated.View>
+      <View style={styles.container}>
+        <ActivityIndicator size="large" />
+      </View>
     );
   }
 }

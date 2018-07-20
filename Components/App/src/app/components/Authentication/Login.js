@@ -114,7 +114,8 @@ class Login extends Component<Props> {
     const passwordError = this.state.passwordValid ? null :
     <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
 
-    const nifError = this.state.nifValid ? null : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
+    const nifError = this.state.nifValid ?
+      null : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
 
     return (
       <KeyboardAvoidingView style={styles.container}>
@@ -222,7 +223,7 @@ class Login extends Component<Props> {
           .catch(() => this.getFacebookUser());
       }
     });
-    console.warn(this.getLanguageCode());
+    // console.warn(this.getLanguageCode());
   }
 
   getLanguageCode() {
