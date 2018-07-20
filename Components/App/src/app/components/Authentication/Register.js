@@ -13,12 +13,6 @@ import styl from '../../config/styles';
 import networkSetting from '../../config/serverConnectionSettings';
 import validateNIF from '../../util/NifVerify';
 
-const FBSDK = require('react-native-fbsdk');
-
-const {
-  LoginManager, LoginButton, AccessToken, GraphRequest, GraphRequestManager,
-} = FBSDK;
-
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 

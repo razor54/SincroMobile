@@ -16,15 +16,6 @@ import Register from './Register';
 import networkSetting from '../../config/serverConnectionSettings';
 import validateNIF from '../../util/NifVerify';
 
-const FBSDK = require('react-native-fbsdk');
-
-const {
-  LoginManager, LoginButton, AccessToken, GraphRequest, GraphRequestManager,
-} = FBSDK;
-
-const SCREEN_WIDTH = Dimensions.get('window').width;
-const SCREEN_HEIGHT = Dimensions.get('window').height;
-
 
 type Props = {
   // onLogin : any;
@@ -219,8 +210,7 @@ class Login extends Component<Props> {
             if (user.id) {
               this.onLogin();
             }
-          })
-          .catch(() => this.getFacebookUser());
+          });
       }
     });
     // console.warn(this.getLanguageCode());
@@ -236,19 +226,6 @@ class Login extends Component<Props> {
     const languageCode = systemLanguage.substring(0, 2);
     return languageCode;
   }
-
-  getFacebookUser() {
-    AccessToken.getCurrentAccessToken().then((data) => {
-      if (data == null) return;
-      const infoRequest = new GraphRequest(
-        '/me?fields=name,picture,email,first_name,last_name',
-        null,
-        this._responseInfoCallback,
-      );
-      // Start the graph request.
-      new GraphRequestManager().addRequest(infoRequest).start();
-    });
-  }
 }
 
 export default StackNavigator({
@@ -263,6 +240,10 @@ export default StackNavigator({
   },
 
 });
+
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const SCREEN_HEIGHT = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   wrapper: {
