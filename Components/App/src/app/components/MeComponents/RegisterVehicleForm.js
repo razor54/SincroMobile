@@ -12,8 +12,7 @@ import {
   Button,
   Alert,
 } from 'react-native';
-import { Avatar, CheckBox, FormInput, FormLabel } from 'react-native-elements';
-import Modal from 'react-native-modal';
+import { CheckBox, FormInput, FormLabel } from 'react-native-elements';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import networkSettings from '../../config/serverConnectionSettings';
 

@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import {
   Text,
   KeyboardAvoidingView,
-  Button, View, AsyncStorage,
+  Button, AsyncStorage,
 } from 'react-native';
 import styles from '../../../config/styles';
 import networkSettings from '../../../config/serverConnectionSettings';

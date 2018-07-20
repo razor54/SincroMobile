@@ -1,6 +1,6 @@
 /* global fetch:false */
 import React, { Component } from 'react';
-import { FlatList, AsyncStorage, View, ActivityIndicator, StyleSheet } from 'react-native';
+import { FlatList, AsyncStorage, View } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import settings from '../../config/serverConnectionSettings';
 import EmptyList from './EmptyList';
