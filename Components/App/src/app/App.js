@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types,react/prefer-stateless-function,no-undef */
 import React from 'react';
-import { TabNavigator,TabBarBottom, SwitchNavigator } from 'react-navigation';
+import { TabNavigator, TabBarBottom, SwitchNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Events from './screens/Events';
 import Me from './screens/Me';

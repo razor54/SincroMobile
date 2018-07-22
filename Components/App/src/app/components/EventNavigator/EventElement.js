@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {
   Text,
   KeyboardAvoidingView,
-  Button, Alert, AsyncStorage,
+  Button, Alert, AsyncStorage, View,
 } from 'react-native';
 import { showLocation } from 'react-native-map-link';
 import styles from '../../config/styles';
@@ -35,6 +35,7 @@ export default class extends Component<Props> {
     this.confirmation = this.confirmation.bind(this);
     this.confirmEvent = this.confirmEvent.bind(this);
     this.checkVerified = this.checkVerified.bind(this);
+    this.getPayment = this.getPayment.bind(this);
 
 
     this.state = {
@@ -52,6 +53,10 @@ export default class extends Component<Props> {
       latitude: this.state.latitude,
       longitude: this.state.longitude,
     });
+  }
+
+  getPayment() {
+    this.props.navigation.navigate('Payment', { data: this.state });
   }
 
   confirmation() {
@@ -94,7 +99,11 @@ export default class extends Component<Props> {
       );
     }
 
-    return <Text style={styles.textStretch}> This event is verified </Text>;
+    return (
+      <View>
+        <Text style={styles.textStretch}> This event is verified </Text>
+        <Button onPress={this.getPayment} title="Pay Event" />
+      </View>);
   }
 
   render() {
@@ -106,6 +115,7 @@ export default class extends Component<Props> {
         <Text style={styles.textStretch}> Location - {this.state.location} </Text>
         {this.checkVerified()}
         <Button onPress={this.getMap} title="Show Map Location" />
+
 
       </KeyboardAvoidingView>
 

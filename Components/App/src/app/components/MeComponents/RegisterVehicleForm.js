@@ -1,5 +1,4 @@
 /* global fetch:false */
-/* global alert:false */
 import React, { Component } from 'react';
 import {
   Text,

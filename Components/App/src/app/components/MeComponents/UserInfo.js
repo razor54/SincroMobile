@@ -3,7 +3,6 @@
 import { Avatar } from 'react-native-elements';
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import { AccessToken, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 import Modal from 'react-native-modal';
 import styles from '../../config/styles';
 
@@ -27,19 +26,6 @@ export default class UserInfo extends Component<Props> {
     };
   }
 
-
-  componentDidMount() {
-    AccessToken.getCurrentAccessToken().then((token) => {
-      if (!token) return;
-      const infoRequest = new GraphRequest(
-        '/me?fields=picture.height(480)&redirect=false,public_profile',
-        null,
-        this.responseInfoCallback,
-      );
-      // Start the graph request.
-      new GraphRequestManager().addRequest(infoRequest).start();
-    });
-  }
 
   showMoreInfo() {
     this.setState({ visibleModal: true });

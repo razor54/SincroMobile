@@ -1,7 +1,7 @@
 /* global fetch:false */
 import React, { Component } from 'react';
 import { FlatList, AsyncStorage, View } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { Avatar, ListItem } from 'react-native-elements';
 import settings from '../../config/serverConnectionSettings';
 import EmptyList from './EmptyList';
 import styles from '../../config/styles';
@@ -36,6 +36,7 @@ export default class extends Component<Props> {
       user: null,
     };
 
+    this.checkIcon = this.checkIcon.bind(this);
     this.getUser = this.getUser.bind(this);
     this.render = this.render.bind(this);
     this.onPress = this.onPress.bind(this);
@@ -103,13 +104,29 @@ export default class extends Component<Props> {
     }).finally(() => this.setState({ refreshing: false }));
   }
 
+  checkIcon(item) {
+    if (item.verified) {
+      return (<Avatar
+        overlayContainerStyle={{ backgroundColor: 'transparent' }}
+        source={require('../../../../public/image/green_car.png')}
+        title={item.plate}
+      />);
+    }
+
+    return (<Avatar
+      overlayContainerStyle={{ backgroundColor: 'transparent' }}
+      source={require('../../../../public/image/red_car.png')}
+      title={item.plate}
+    />);
+  }
+
 
   renderItem = ({ item }) => (
     <ListItem
       title={item.plate}
       subtitle={item.date.split('T')[0]}
       onPress={() => this.onPress(item)}
-      selected={item.verified}
+      avatar={this.checkIcon(item)}
     />
   );
 
