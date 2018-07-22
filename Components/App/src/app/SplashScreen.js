@@ -94,7 +94,7 @@ export default class extends Component<Props> {
   }
 
   onIds(device) {
-    console.warn('Device info: ', device);
+    // console.warn('Device info: ', device);
     AsyncStorage.getItem('playerId').then((value) => {
       if (value == null)AsyncStorage.setItem('playerId', device.userId);
     });
