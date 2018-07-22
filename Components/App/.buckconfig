@@ -1,7 +1,6 @@
 
 [android]
-  target = Google Inc.:Google APIs:26
-  build_tools_version = 26.0.1
+  target = Google Inc.:Google APIs:23
 
 [maven_repositories]
   central = https://repo1.maven.org/maven2

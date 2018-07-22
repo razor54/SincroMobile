@@ -5,6 +5,7 @@ import OneSignal from 'react-native-onesignal';
 import styles from './config/styles';
 import networkSetting from './config/serverConnectionSettings';
 
+const oneSignalId = '75a88678-2deb-40be-8a8c-3b05309761b8';
 
 type Props = {}
 export default class extends Component<Props> {
@@ -53,7 +54,7 @@ export default class extends Component<Props> {
 
   // Push Notifications
   oneSignalStart() {
-    OneSignal.init('75a88678-2deb-40be-8a8c-3b05309761b8');
+    OneSignal.init(oneSignalId);
     OneSignal.setSubscription(true);
 
     OneSignal.setLocationShared(true);
