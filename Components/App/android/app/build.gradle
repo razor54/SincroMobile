@@ -138,7 +138,6 @@ android {
 
 dependencies {
     compile project(':react-native-onesignal')
-    compile project(':react-native-fbsdk')
     compile project(':react-native-vector-icons')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:26.0.2'
