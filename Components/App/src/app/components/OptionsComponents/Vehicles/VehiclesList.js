@@ -1,7 +1,9 @@
 /* global fetch:false */
 import React, { Component } from 'react';
-import { FlatList, AsyncStorage } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { FlatList, AsyncStorage, View } from 'react-native';
+import { Avatar, ListItem } from 'react-native-elements';
+import EmptyCarList from './EmptyCarList';
+import styles from '../../../config/styles';
 
 type Props = {
   navigation: {
@@ -58,7 +60,30 @@ export default class VehiclesList extends Component<Props> {
           .then(list => this.setState({ list, refreshing: false }))
           .catch(this.setState({ refreshing: false }));
       }
-    });
+    }).catch(() => this.setState({ refreshing: false }));
+  }
+
+  checkIcon(item) {
+    if (!item.delegateState) {
+      return (<Avatar
+        overlayContainerStyle={{ backgroundColor: 'transparent' }}
+        source={require('../../../../../public/image/car_borrowed.png')}
+        title={item.plate}
+      />);
+    }
+    if (item.delegateState === 'True') {
+      return (<Avatar
+        overlayContainerStyle={{ backgroundColor: 'transparent' }}
+        source={require('../../../../../public/image/car_share.png')}
+        title={item.plate}
+      />);
+    }
+
+    return (<Avatar
+      overlayContainerStyle={{ backgroundColor: 'transparent' }}
+      source={require('../../../../../public/image/car.png')}
+      title={item.plate}
+    />);
   }
 
   renderItem = ({ item }) =>
@@ -66,17 +91,22 @@ export default class VehiclesList extends Component<Props> {
       title={item.plate}
       onPress={() => this.onPress(item)}
       subtitle={item.date}
+      avatar={this.checkIcon(item)}
     />);
 
 
   render() {
-    return (<FlatList
-      renderItem={this.renderItem}
-      data={this.state.list}
-      keyExtractor={(item, index) => `${index}`}
-      onRefresh={this.doRefresh}
-      refreshing={this.state.refreshing}
-    />
+    return (
+      <View style={styles.containerList}>
+        <FlatList
+          renderItem={this.renderItem}
+          data={this.state.list}
+          keyExtractor={(item, index) => `${index}`}
+          onRefresh={this.doRefresh}
+          refreshing={this.state.refreshing}
+          ListEmptyComponent={EmptyCarList}
+        />
+      </View>
     );
   }
 }

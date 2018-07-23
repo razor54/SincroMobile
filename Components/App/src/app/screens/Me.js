@@ -117,7 +117,7 @@ export default StackNavigator({
   },
   BorrowingRequests: {
     screen: VehiclesList,
-    navigationOptions: { navigationHeaderStyle: 'Requests', tabBarVisible: false },
+    navigationOptions: navigationHeaderStyle('Requests'),
   },
   BorrowingRequestElement: {
     screen: BorrowingRequest,
