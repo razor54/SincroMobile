@@ -48,10 +48,11 @@ class Options extends Component<Props> {
 
 
     this.state = {
+      userLoaded: false,
       user: {
-        name: '',
-        id: '',
-        email: '',
+        name: null,
+        id: null,
+        email: null,
       },
     };
   }
@@ -62,8 +63,6 @@ class Options extends Component<Props> {
   getUser() {
     AsyncStorage.getItem('token').then((token) => {
       if (token == null) {
-        console.warn('null token');
-        // TODO return to login
         throw Error('No token');
       }
       return JSON.parse(token);
@@ -76,12 +75,9 @@ class Options extends Component<Props> {
         },
       };
       fetch(`${networkSettings.homepage}/validate`, myInit).then(res => res.json())
-        .then((user) => {
-          if (user.id) {
-            this.setState({ user });
-          }
-        });
-    });
+        .then(user => this.setState({ user, userLoaded: true }))
+        .catch((err) => { throw Error(err); });
+    }).catch(this.logout);
   }
 
 
@@ -120,7 +116,7 @@ class Options extends Component<Props> {
 
 
   render() {
-    return (this.state.user ?
+    return (this.state.userLoaded ?
       (
         <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
           <Button2
@@ -165,7 +161,7 @@ class Options extends Component<Props> {
       ) :
       (
         <View style={styles.container}>
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator size="large" />
         </View>
       ));
   }

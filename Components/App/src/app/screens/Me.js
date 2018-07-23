@@ -26,6 +26,7 @@ class Profile extends Component<Props> {
     this.getVehicleForm = this.getVehicleForm.bind(this);
 
     this.state = {
+      userLoaded: false,
       user: null,
     };
   }
@@ -48,9 +49,7 @@ class Profile extends Component<Props> {
       };
       fetch(`${networkSettings.homepage}/validate`, myInit).then(res => res.json())
         .then((user) => {
-          if (user.id) {
-            this.setState({ user });
-          }
+          this.setState({ user, userLoaded: true });
         });
     });
   }
@@ -68,7 +67,7 @@ class Profile extends Component<Props> {
 
   render() {
     return (
-      (this.state.user ?
+      (this.state.userLoaded ?
         (
           <View style={styles.container_me}>
 
@@ -101,7 +100,7 @@ class Profile extends Component<Props> {
         :
         (
           <View style={styles.container}>
-            <ActivityIndicator size="large" color="#0000ff" />
+            <ActivityIndicator size="large" />
           </View>
         )
 

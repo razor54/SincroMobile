@@ -87,17 +87,18 @@ class UserService {
 
         val HttpResult = con.responseCode
         if (HttpResult == HttpURLConnection.HTTP_OK) {
-            logger.info("Method \"{}\" UserID \"{}\" ", "Successfully logged")
             var userStr = readFullyAsString(con.getInputStream(), "UTF-8")
             var objectMapper = ObjectMapper()
 
             val userS: Auth0User = objectMapper.readValue(userStr, Auth0User::class.java)
 
-            return getUser(userS.email)
+            val user : User = getUser(userS.email)
 
+            logger.info("Method \"{}\"  UserID \"{}\" ", "Authenticate User" ,user.id)
+            return user;
 
         } else {
-            logger.warn("Method \"{}\" UserID \"{}\" ", "Error while login ")
+            logger.warn("Method \"{}\" UserID \"{}\" ", "Authenticate User", "Invalid User")
             throw NoSuchUserException()
         }
 

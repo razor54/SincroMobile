@@ -36,7 +36,6 @@ export default class extends Component<Props> {
       user: null,
     };
 
-    this.checkIcon = this.checkIcon.bind(this);
     this.getUser = this.getUser.bind(this);
     this.render = this.render.bind(this);
     this.onPress = this.onPress.bind(this);
@@ -104,7 +103,7 @@ export default class extends Component<Props> {
     }).finally(() => this.setState({ refreshing: false }));
   }
 
-  checkIcon(item) {
+  getAvatar(item) {
     if (item.verified) {
       return (<Avatar
         overlayContainerStyle={{ backgroundColor: 'transparent' }}
@@ -126,7 +125,7 @@ export default class extends Component<Props> {
       title={item.plate}
       subtitle={item.date.split('T')[0]}
       onPress={() => this.onPress(item)}
-      avatar={this.checkIcon(item)}
+      avatar={this.getAvatar(item)}
     />
   );
 

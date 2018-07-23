@@ -22,11 +22,11 @@ export default class VehiclesList extends Component<Props> {
     super(props);
 
     this.doRefresh = this.doRefresh.bind(this);
-    this.renderItem = this.renderItem.bind(this);
     this.onPress = this.onPress.bind(this);
+    this.renderItem = this.renderItem.bind(this);
 
     this.state = {
-      list: [],
+      list: null,
       url: props.navigation.state.params.url,
       screen: props.navigation.state.params.screen,
       refreshing: false,
@@ -38,32 +38,16 @@ export default class VehiclesList extends Component<Props> {
     this.doRefresh();
   }
 
+  componentWillUnmount() {
+    this.setState({ refreshing: false });
+  }
+
   onPress(data) {
     this.props.navigation.navigate(this.state.screen, { data, callback: this.doRefresh });
   }
 
-  doRefresh() {
-    this.setState({ refreshing: true });
-    AsyncStorage.getItem('token').then((t) => {
-      const token = JSON.parse(t);
 
-      if (token != null) {
-        const data = {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            Authorization: `${token.token_type} ${token.access_token}`,
-          },
-        };
-
-        fetch(this.state.url, data).then(reply => reply.json())
-          .then(list => this.setState({ list, refreshing: false }))
-          .catch(this.setState({ refreshing: false }));
-      }
-    }).catch(() => this.setState({ refreshing: false }));
-  }
-
-  checkIcon(item) {
+  getAvatar(item) {
     if (!item.delegateState) {
       return (<Avatar
         overlayContainerStyle={{ backgroundColor: 'transparent' }}
@@ -71,6 +55,7 @@ export default class VehiclesList extends Component<Props> {
         title={item.plate}
       />);
     }
+
     if (item.delegateState === 'True') {
       return (<Avatar
         overlayContainerStyle={{ backgroundColor: 'transparent' }}
@@ -86,12 +71,36 @@ export default class VehiclesList extends Component<Props> {
     />);
   }
 
+
+  doRefresh() {
+    this.setState({ refreshing: true });
+    AsyncStorage.getItem('token').then((t) => {
+      const token = JSON.parse(t);
+
+      if (token != null) {
+        const data = {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            Authorization: `${token.token_type} ${token.access_token}`,
+          },
+        };
+
+        fetch(this.state.url, data)
+          .then(res => res.json())
+          .then((listJSON) => {
+            if (listJSON[0]) this.setState({ list: listJSON });
+          });
+      }
+    }).finally(() => this.setState({ refreshing: false }));
+  }
+
   renderItem = ({ item }) =>
     (<ListItem
       title={item.plate}
+      subtitle=""
       onPress={() => this.onPress(item)}
-      subtitle={item.date}
-      avatar={this.checkIcon(item)}
+      avatar={this.getAvatar(item)}
     />);
 
 
@@ -101,9 +110,9 @@ export default class VehiclesList extends Component<Props> {
         <FlatList
           renderItem={this.renderItem}
           data={this.state.list}
-          keyExtractor={(item, index) => `${index}`}
           onRefresh={this.doRefresh}
           refreshing={this.state.refreshing}
+          keyExtractor={(item, index) => `${index}`}
           ListEmptyComponent={EmptyCarList}
         />
       </View>
