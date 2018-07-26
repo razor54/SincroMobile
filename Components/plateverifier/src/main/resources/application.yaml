@@ -1,0 +1,36 @@
+
+spring:
+  application:
+    name: simulator Plate Verifier
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/plate_verifier_database?createDatabaseIfNotExist=true
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+     ddl-auto: update
+
+    show-sql: false
+
+    database: postgresql
+
+    properties:
+     hibernate:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      temp:
+       use_jdbc_metadata_defaults: false
+
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    open-in-view: true
+  resources:
+      add-mappings: true
+
+
+server:
+  port: 9001
+
+logging:
+  level:
+    guru.springframework.controllers: DEBUG
+
