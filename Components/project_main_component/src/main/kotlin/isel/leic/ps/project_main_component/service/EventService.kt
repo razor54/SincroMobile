@@ -41,7 +41,7 @@ class EventService {
         try {
             val plate = event.plate
 
-            val vehicle = vehicleService.getVehicle(plate)
+            val vehicle = vehicleService.getSubscribedVehicle(plate)
 
             val state = vehicle.delegateState
 

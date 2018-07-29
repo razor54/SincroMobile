@@ -1,5 +1,7 @@
 package isel.leic.ps.project_main_component.service
 
+import com.google.gson.Gson
+import com.google.gson.JsonArray
 import isel.leic.ps.project_main_component.domain.model.DelegateRequest
 import isel.leic.ps.project_main_component.domain.model.DelegateResponse
 import isel.leic.ps.project_main_component.domain.model.DelegatedVehicle
@@ -12,12 +14,15 @@ import isel.leic.ps.project_main_component.handlers.NotificationHandler
 import isel.leic.ps.project_main_component.repository.DelegateRequestRepository
 import isel.leic.ps.project_main_component.repository.DelegatedVehicleRepository
 import isel.leic.ps.project_main_component.repository.VehicleRepository
+import khttp.responses.Response
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.regex.Pattern
+import kotlin.reflect.full.defaultType
 
 @Service
 class VehicleService {
@@ -47,8 +52,8 @@ class VehicleService {
         }
     }
 
-    fun getUserVehicles(id: Int): List<Vehicle> {
-        logger.debug("Started to get user vehicle")
+    fun getUserVehicles(id:Int): List<Vehicle> {
+        logger.debug("Started to get user vehicles")
 
 
         if (!userService.containsUser(id)) {
@@ -56,13 +61,42 @@ class VehicleService {
             throw NoSuchUserException()
         }
 
+        val response : Response = khttp.get("http://localhost:9001/user/$id/vehicles")
+        if(response.statusCode!=200){
+            logger.warn("Method \"{}\" UserId \"{}\" ", "Get User Vehicles", id)
+            throw NoSuchUserException()
+        }
 
-        val vehicles: List<Vehicle> = vehicleRepository.findAllByOwnerId(id)
+        val vehicles : List<Vehicle> = response.jsonArray
+                .map { Gson().fromJson(it.toString(),Vehicle::class.java) }
+                .map{
+                    val subscribedVehicle = vehicleRepository.findById(it.plate)
+                    if(subscribedVehicle.isPresent) subscribedVehicle.get()
+                    else {
+                        it
+                    }
+                }
+
         logger.info("Method \"{}\" UserId \"{}\" ", "Get User Vehicles", id)
         return vehicles
     }
 
-    fun getVehicle(id: String): Vehicle {
+    fun getUserSubscribedVehicles(id: Int): List<Vehicle> {
+        logger.debug("Started to get user subscribed vehicles")
+
+
+        if (!userService.containsUser(id)) {
+            logger.warn("Method \"{}\" UserId \"{}\" ", "Get User Subscribed Vehicles", id)
+            throw NoSuchUserException()
+        }
+
+
+        val vehicles: List<Vehicle> = vehicleRepository.findAllByOwnerId(id)
+        logger.info("Method \"{}\" UserId \"{}\" ", "Get User Subscribed Vehicles", id)
+        return vehicles
+    }
+
+    fun getSubscribedVehicle(id: String): Vehicle {
         logger.debug("Started to get vehicle")
 
         val vehicle = vehicleRepository.findById(id)
@@ -101,56 +135,11 @@ class VehicleService {
         }
     }
 
-    fun getVehicleForUser(id: Int): Vehicle {
-        logger.debug("Started to get vehicle for user")
-
-        val vehicle = vehicleRepository.findByOwnerId(id)
-
-        if (vehicle.isPresent) {
-            logger.info("Method \"{}\" VehiclePlate \"{}\" ", "Get Vehicle For User", id)
-            return vehicle.get()
-        }
-        logger.warn("Method \"{}\" VehiclePlate \"{}\" ", "Get Vehicle For User", id)
-        throw NoSuchVehicleException()
-    }
-
-    fun subscribeVehicle(userId: Int, vehicleId: String) {
-        logger.debug("Started to subscribe vehicle")
-
-        var vehicle: Vehicle
-        try {
-            val vehicleOpt = vehicleRepository.findById(vehicleId)
-
-            logger.info("Method \"{}\" VehicleId \"{}\" ", "Subscribe Vehicle", vehicleId)
-
-            vehicle = vehicleOpt.get()
-
-        } catch (e: Exception) {
-            logger.warn("Method \"{}\" VehicleId \"{}\" ", "Subscribe Vehicle", vehicleId)
-
-            throw  NoSuchVehicleException()
-        }
-
-        try {
-            vehicle.isSubscribed = true
-            vehicleRepository.save(vehicle)
-
-            logger.info("Method \"{}\" VehicleId \"{}\" ", "Subscribe Vehicle", vehicleId)
-
-        } catch (e: Exception) {
-            logger.warn("Method \"{}\" VehicleId \"{}\" ", "Subscribe Vehicle", vehicleId)
-
-            //throw operation unsuccessful
-        }
-
-
-    }
-
     //TODO transaction
     @Transactional
     fun plateDelegationRequest(request: DelegateRequest) {
 
-        val vehicle = getVehicle(request.plate)
+        val vehicle = getSubscribedVehicle(request.plate)
 
         try {
             vehicle.delegateState = "Pending"
@@ -173,7 +162,7 @@ class VehicleService {
     fun plateDelegationResponse(response: DelegateResponse) {
 
 
-        val vehicle = getVehicle(response.plate)
+        val vehicle = getSubscribedVehicle(response.plate)
 
         val userBorrowing = userService.getUser(response.userBorrowId)
 

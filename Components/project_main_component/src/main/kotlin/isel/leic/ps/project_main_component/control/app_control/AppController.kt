@@ -11,10 +11,6 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class AppController {
 
-
-    @Autowired
-    lateinit var vehicleService: VehicleService
-
     @Autowired
     lateinit var userService: UserService
 
@@ -23,8 +19,7 @@ class AppController {
         return "ola"
     }
 
-    @PostMapping("/vehicle")
-    fun addVehicle(@RequestBody vehicle: Vehicle) = vehicleService.addVehicle(vehicle)
+
 
     @PostMapping("/user")
     fun addUser(@RequestBody user: User) = userService.addUser(user)

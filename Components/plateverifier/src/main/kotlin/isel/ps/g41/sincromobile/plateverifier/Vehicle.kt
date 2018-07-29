@@ -18,13 +18,8 @@ class Vehicle {
     @NotNull
     lateinit var registryDate: Date
 
-    @NotNull
-    var isSubscribed: Boolean = false
 
     @NotNull
     var ownerId: Int = 0
 
-    @NotNull
-    @Check(constraints = "False OR True OR Pending")
-    var delegateState : String = "False"
 }

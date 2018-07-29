@@ -7,10 +7,10 @@ import { StackNavigator } from 'react-navigation';
 import styles from '../config/styles';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
 import VehiclesList from '../components/OptionsComponents/Vehicles/VehiclesList';
-import RegisterVehicleForm from '../components/MeComponents/RegisterVehicleForm';
 import UserInfo from '../components/MeComponents/UserInfo';
 import networkSettings from '../config/serverConnectionSettings';
 import BorrowingRequest from '../components/MeComponents/Requests/BorrowingRequest';
+import Vehicle from '../components/MeComponents/Vehicle';
 
 
 type Props = {
@@ -62,7 +62,7 @@ class Profile extends Component<Props> {
     this.props.navigation.navigate('BorrowingRequests', { url: `${networkSettings.homepage}/vehicles/borrow/${this.state.user.id}/requests`, screen: 'BorrowingRequestElement' });
   }
   getVehicleForm() {
-    this.props.navigation.navigate('RegisterVehicleForm', { user: this.state.user });
+    this.props.navigation.navigate('RegisterVehicleList', { url: `${networkSettings.homepage}/vehicles/${this.state.user.id}`, screen: 'Vehicle' });
   }
 
   render() {
@@ -85,7 +85,7 @@ class Profile extends Component<Props> {
                 <View style={{ padding: 5 }}>
                   <Button
                     buttonStyle={styles.button2}
-                    title="Add Vehicle"
+                    title="Subscribe Vehicle"
                     onPress={this.getVehicleForm}
                   />
                 </View>
@@ -122,9 +122,13 @@ export default StackNavigator({
     screen: BorrowingRequest,
     navigationOptions: navigationHeaderStyle('Borrowing Request Element'),
   },
-  RegisterVehicleForm: {
-    screen: RegisterVehicleForm,
-    navigationOptions: navigationHeaderStyle('Register Vehicle'),
+  RegisterVehicleList: {
+    screen: VehiclesList,
+    navigationOptions: navigationHeaderStyle('Your Vehicles'),
+  },
+  Vehicle: {
+    screen: Vehicle,
+    navigationOptions: navigationHeaderStyle('Vehicle'),
   },
 
 });

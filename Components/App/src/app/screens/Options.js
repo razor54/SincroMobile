@@ -18,21 +18,10 @@ import ShareForm from '../components/OptionsComponents/Vehicles/ShareForm';
 import About from '../components/OptionsComponents/About';
 
 type Props = {
-    screenProps: {
-        isLogin: boolean
-    },
   navigation:{
     navigate: any,
   }
 };
-
-const buttonIcon = {
-  name: 'ios-log-out',
-  type: 'ionicon',
-  color: 'black',
-  size: 30,
-};
-
 
 class Options extends Component<Props> {
   constructor(props) {
@@ -82,7 +71,7 @@ class Options extends Component<Props> {
 
 
   getMyVehicles() {
-    this.props.navigation.navigate('VehiclesList', { url: `${networkSettings.homepage}/vehicles/${this.state.user.id}`, screen: 'VehicleElement' });
+    this.props.navigation.navigate('VehiclesList', { url: `${networkSettings.homepage}/vehicles/subscribed/${this.state.user.id}`, screen: 'VehicleElement' });
   }
 
   getDelegatedVehicles() {
@@ -143,7 +132,7 @@ class Options extends Component<Props> {
             <Text style={styles.btnText}>{this.state.user.id} </Text>
             <Text style={{ ...styles.btnText }}>{this.state.user.email}</Text>
             <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
-              <Button buttonStyle={styles.button2} rounded onPress={this.getMyVehicles} title="My Vehicles" />
+              <Button buttonStyle={styles.button2} rounded onPress={this.getMyVehicles} title="Subscribed Vehicles" />
             </View>
             <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
               <Button buttonStyle={styles.button2} rounded onPress={this.getDelegatedVehicles} title="Delegated Vehicles" />
@@ -175,7 +164,7 @@ export default StackNavigator({
   },
   VehiclesList: {
     screen: VehiclesList,
-    navigationOptions: navigationHeaderStyle('Vehicles'),
+    navigationOptions: navigationHeaderStyle('Subscribed'),
   },
   DelegatedVehicles: {
     screen: VehiclesList,

@@ -7,7 +7,6 @@ import isel.leic.ps.project_main_component.service.UserService
 import isel.leic.ps.project_main_component.service.VehicleService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import javax.websocket.server.PathParam
 
 @RestController
 @RequestMapping("/vehicles")
@@ -27,6 +26,12 @@ class VehicleController {
         return vehicleService.getUserVehicles(userId)
     }
 
+    @GetMapping("/subscribed/{userId}")
+    fun getSubscribedVehicles(@PathVariable("userId") userId: Int, auth: String): List<Vehicle> {
+        verifyUser(auth, userId)
+
+        return vehicleService.getUserSubscribedVehicles(userId)
+    }
 
     @GetMapping("/delegate/{userId}/requests")
     fun getDelegateRequests(@PathVariable("userId") userId: Int, auth: String): List<DelegateRequest> {
@@ -40,10 +45,7 @@ class VehicleController {
         return vehicleService.borrowRequests(userId)
     }
 
-    @GetMapping("/subscribed")
-    fun getSubscribedVehicles(auth: String) {
 
-    }
 
     @GetMapping("/borrowing/{borrowId}")
     fun getBorrowingVehicles(@PathVariable("borrowId") borrowId: Int, auth: String): List<DelegatedVehicle> {
@@ -66,7 +68,7 @@ class VehicleController {
     @GetMapping("/{vehicleId}/info")
     fun getVehicle(@PathVariable("vehicleId") plate: String, auth: String): Vehicle {
 
-        val vehicle = vehicleService.getVehicle(plate)
+        val vehicle = vehicleService.getSubscribedVehicle(plate)
         var currentDriverId = vehicle.ownerId
 
         if (vehicle.delegateState == "True")
@@ -83,18 +85,16 @@ class VehicleController {
         return vehicle
     }
 
-    @PostMapping("/{vehicleId}/unsubscribe")
-    fun removeVehicle(@PathVariable("vehicleId") vehicleId: String, auth: String) {
-        var vehicle = vehicleService.getVehicle(vehicleId)
-        verifyUser(auth, vehicle.ownerId)
-        vehicleService.removeVehicle(vehicleId)
+    @PostMapping("/subscribe")
+    fun subscribeVehicle(@RequestBody vehicle: Vehicle) {
+        vehicleService.addVehicle(vehicle)
     }
 
-    @PostMapping("subscription/{vehicleId}")
-    fun subscribeVehicle(userId: Int, @PathVariable("vehicleId") vehicleId: String, auth: String) {
-        var vehicle = vehicleService.getVehicle(vehicleId)
+    @PostMapping("/{vehicleId}/unsubscribe")
+    fun unsubscribeVehicle(@PathVariable("vehicleId") vehicleId: String, auth: String) {
+        var vehicle = vehicleService.getSubscribedVehicle(vehicleId)
         verifyUser(auth, vehicle.ownerId)
-        vehicleService.subscribeVehicle(userId, vehicleId)
+        vehicleService.removeVehicle(vehicleId)
     }
 
     @PostMapping("/delegate")
@@ -119,7 +119,7 @@ class VehicleController {
 
     @PostMapping("/delegated/{vehicleId}/cancel")
     fun cancelDelegation(@PathVariable("vehicleId") vehicleId: String,auth:String){
-        val vehicle = vehicleService.getVehicle(vehicleId)
+        val vehicle = vehicleService.getSubscribedVehicle(vehicleId)
         verifyUser(auth,vehicle.ownerId)
 
         vehicleService.cancelDelegation(vehicleId)

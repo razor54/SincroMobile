@@ -7,14 +7,10 @@ import isel.leic.ps.project_main_component.repository.VehicleRepository
 import isel.leic.ps.project_main_component.service.UserService
 import isel.leic.ps.project_main_component.service.VehicleService
 import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertThat
 
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.InjectMocks
-import org.mockito.Mock
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.boot.test.context.TestConfiguration
@@ -22,7 +18,6 @@ import org.springframework.context.annotation.Bean
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.springframework.boot.test.mock.mockito.MockBean
-import sun.jvm.hotspot.utilities.Assert
 import java.util.*
 
 
@@ -105,7 +100,7 @@ class VehiclesControllerTests {
 
         var plate = "11-AA-11"
 
-        var vehicles = vehicleService.getVehicle(plate)
+        var vehicles = vehicleService.getSubscribedVehicle(plate)
 
         assertNotNull(vehicles)
 
@@ -116,10 +111,10 @@ class VehiclesControllerTests {
 
 /*
     @Test
-    fun getUserVehicles() {
+    fun getUserSubscribedVehicles() {
         var id = 12345
 
-        var vehicles = vehicleService.getUserVehicles(id)
+        var vehicles = vehicleService.getUserSubscribedVehicles(id)
 
         assertNotNull(vehicles)
         assert(vehicles[0].ownerId == id)

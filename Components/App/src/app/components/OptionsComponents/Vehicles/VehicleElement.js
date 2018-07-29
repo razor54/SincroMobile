@@ -27,7 +27,6 @@ export default class extends Component<Props> {
   constructor(props) {
     super(props);
     this.checkBorrow = this.checkBorrow.bind(this);
-    this.checkSubscription = this.checkSubscription.bind(this);
     this.borrow = this.borrow.bind(this);
     this.removeVehicle = this.removeVehicle.bind(this);
     this.changeBorrow = this.changeBorrow.bind(this);
@@ -39,7 +38,6 @@ export default class extends Component<Props> {
 
     this.state = {
       plate: data.plate,
-      subscribed: data.subscribed,
       ownerId: data.ownerId,
       date: data.registryDate,
       delegateState: data.delegateState,
@@ -54,13 +52,6 @@ export default class extends Component<Props> {
     this.setState({ delegateState: value });
     this.callback();
   }
-
-  checkSubscription = () => {
-    if (this.state.subscribed) {
-      return <Text style={styles.textStretch}> This vehicle is subscribed </Text>;
-    }
-    return <Text style={styles.textStretch}> This vehicle is not subscribed </Text>;
-  };
 
   checkBorrow = () => {
     switch (this.state.delegateState) {
@@ -130,10 +121,8 @@ export default class extends Component<Props> {
         <Text style={styles.header}> {this.state.plate} </Text>
         <Text style={styles.textStretch}> Owner Identification - {this.state.ownerId} </Text>
         <Text style={styles.textStretch}> This vehicle was registered on {this.state.date.split('T')[0]} </Text>
-        {this.checkSubscription()}
         {this.checkBorrow()}
-        <Button onPress={this.removeVehicle} title="Remove Vehicle" />
-
+        <Button onPress={this.removeVehicle} title="Unsubscribe Vehicle" />
       </KeyboardAvoidingView>
 
 

@@ -3,8 +3,10 @@ buildscript {
 		kotlinVersion = '1.2.41'
 		springBootVersion = '2.0.1.RELEASE'
 	}
+
 	repositories {
 		mavenCentral()
+
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
@@ -36,13 +38,19 @@ compileTestKotlin {
 	}
 }
 
+
 repositories {
 	mavenCentral()
+	maven { url = "http://jcenter.bintray.com/" }
 }
+
+
+
 
 jar {
 	baseName = 'gs-rest-service'
 	version = '0.1.0'
+
 }
 
 dependencies {
@@ -53,11 +61,13 @@ dependencies {
 	compile("org.jetbrains.kotlin:kotlin-reflect")
 	compile 'org.json:json:20171018'
 	runtime('org.postgresql:postgresql')
+	compile ('khttp:khttp:0.1.0')
+	compile ('com.google.code.gson:gson:2.8.2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-
+	compile group: 'com.auth0', name: 'auth0-spring-security-api', version: '1.0.0'
 	// https://mvnrepository.com/artifact/com.auth0/auth0
 	//compile group: 'com.auth0', name: 'auth0', version: '1.5.1'
-
 	// https://mvnrepository.com/artifact/com.auth0/auth0-spring-security-api
-	compile group: 'com.auth0', name: 'auth0-spring-security-api', version: '1.0.0'
 }
+
+

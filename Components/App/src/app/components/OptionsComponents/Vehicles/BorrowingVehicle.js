@@ -25,7 +25,7 @@ type Props = {
 export default class extends Component<Props> {
   constructor(props) {
     super(props);
-    this.removeVehicle = this.removeVehicle.bind(this);
+    this.addVehicle = this.removeVehicle.bind(this);
 
     const { data } = this.props.navigation.state.params;
 
