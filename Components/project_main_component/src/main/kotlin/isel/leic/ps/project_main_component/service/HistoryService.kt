@@ -44,12 +44,8 @@ class HistoryService {
 
         try{
             val history = historyRepository.findAllByDriverId(id)
-            val history_intervener = historyRepository.findAllByIntervenerId(id)
 
-            val final_history = history
-                    .plus(history_intervener)
-
-            return final_history
+            return history
         }catch (e:Exception){
             //TODO
             throw InvalidDelegationException()

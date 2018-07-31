@@ -22,8 +22,6 @@ class History {
     var driverId: Int = 0
 
 
-    var intervenerId:Int = 0
-
     @Check(constraints = "Payment OR Delegate OR Borrow")
     lateinit var state:String
 

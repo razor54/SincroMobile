@@ -2,10 +2,7 @@ package isel.leic.ps.project_main_component.service
 
 import com.google.gson.Gson
 import com.google.gson.JsonArray
-import isel.leic.ps.project_main_component.domain.model.DelegateRequest
-import isel.leic.ps.project_main_component.domain.model.DelegateResponse
-import isel.leic.ps.project_main_component.domain.model.DelegatedVehicle
-import isel.leic.ps.project_main_component.domain.model.Vehicle
+import isel.leic.ps.project_main_component.domain.model.*
 import isel.leic.ps.project_main_component.exceptions.FailedToAddUserException
 import isel.leic.ps.project_main_component.exceptions.InvalidDelegationException
 import isel.leic.ps.project_main_component.exceptions.NoSuchUserException
@@ -21,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 import java.util.regex.Pattern
 import kotlin.reflect.full.defaultType
 
@@ -37,6 +35,8 @@ class VehicleService {
     @Autowired
     private lateinit var delegatedVehicleRepository: DelegatedVehicleRepository
 
+    @Autowired
+    private lateinit var historyService: HistoryService
 
     fun addVehicle(vehicle: Vehicle): Vehicle {
         logger.debug("Started to add vehicle")
@@ -181,6 +181,23 @@ class VehicleService {
                 delegatedVehicleRepository.save(delegatedVehicle)
 
 
+                //Create new History Entry
+                var history = History()
+                history.date = Date()
+                history.driverId = vehicle.ownerId
+                history.state = "Delegate"
+
+                //Save History of delegation
+                historyService.addHistoryElement(history)
+
+                history.state="Borrow"
+                history.driverId = delegatedVehicle.userBorrowId
+
+                //Save history of borrow
+                historyService.addHistoryElement(history)
+
+
+
             } else {
                 //change vehicle state to false
                 vehicle.delegateState = "False"
@@ -293,6 +310,29 @@ class VehicleService {
 
     }
 
+    @Transactional(rollbackFor = [(Exception::class)])
+    fun cancelDelegateRequest(vehicleId: String){
+
+        val vehicleOpt = vehicleRepository.findById(vehicleId)
+        val vehicle = vehicleOpt.get()
+
+        vehicle.delegateState = "False"
+        vehicleRepository.save(vehicle)
+
+        val delegatedVehicle = delegateRequestRepository.findByPlate(vehicleId)
+
+        if(!delegatedVehicle.isPresent){
+            //TODO create an exception
+            throw Exception()
+        }
+
+        val requestId = delegatedVehicle.get().id
+
+        delegateRequestRepository.deleteById(requestId)
+
+
+
+    }
 
     private fun isMatriculaRegex(matricula: String): Boolean {
         // pattern:

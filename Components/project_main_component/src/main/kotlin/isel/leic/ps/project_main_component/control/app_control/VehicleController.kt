@@ -126,6 +126,15 @@ class VehicleController {
 
     }
 
+    @PostMapping("/delegate/{vehicleId}/request/cancel")
+    fun cancelDelegationRequest(@PathVariable("vehicleId") vehicleId: String,auth:String){
+        val vehicle = vehicleService.getSubscribedVehicle(vehicleId)
+        verifyUser(auth,vehicle.ownerId)
+
+        vehicleService.cancelDelegateRequest(vehicleId)
+
+    }
+
     /*
      *
      *

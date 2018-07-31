@@ -9,5 +9,4 @@ interface HistoryRepository : CrudRepository<History, Int> {
 
     fun findAllByDriverId(driverId: Int): List<History>
 
-    fun findAllByIntervenerId(intervenerId: Int): List<History>
 }
