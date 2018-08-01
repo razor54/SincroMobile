@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types,react/prefer-stateless-function,no-undef,max-len */
 import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, KeyboardAvoidingView, View, Button as Button2 } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabBarBottom, TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../config/styles';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
@@ -160,6 +160,8 @@ const VehiclesTabNavigator = TabNavigator(
 
 
     },
+
+    tabBarComponent: TabBarBottom,
     tabBarPosition: 'top',
     animationEnabled: true,
   },
