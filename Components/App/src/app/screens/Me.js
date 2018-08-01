@@ -6,10 +6,10 @@ import { Button } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 import styles from '../config/styles';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
-import VehiclesList from '../components/VehiclesComponents/VehiclesList';
 import UserInfo from '../components/MeComponents/UserInfo';
-import networkSettings from '../config/serverConnectionSettings';
 import BorrowingRequest from '../components/MeComponents/BorrowingRequest';
+import RequestsList from '../components/MeComponents/RequestsList';
+import { getUser } from '../service/userService';
 
 
 type Props = {
@@ -21,7 +21,8 @@ class Profile extends Component<Props> {
     super(props);
 
     this.getBorrowingRequests = this.getBorrowingRequests.bind(this);
-    this.getUser = this.getUser.bind(this);
+    this.loadUser = this.loadUser.bind(this);
+    this.logout = this.logout.bind(this);
 
     this.state = {
       userLoaded: false,
@@ -29,35 +30,31 @@ class Profile extends Component<Props> {
     };
   }
 
-  getUser() {
+  loadUser() {
     AsyncStorage.getItem('token').then((token) => {
-      if (token == null) {
-        console.warn('null token');
-        // TODO return to login
-        throw Error('No token');
-      }
+      if (token == null) { throw Error('No token'); }
+
       return JSON.parse(token);
     }).then((token) => {
-      const myInit = {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          Authorization: `${token.token_type} ${token.access_token}`,
-        },
-      };
-      fetch(`${networkSettings.homepage}/validate`, myInit).then(res => res.json())
+      getUser(token)
+        .then(res => res.json())
         .then((user) => {
+          if (!user.id) throw Error('No valid user');
           this.setState({ user, userLoaded: true });
         });
-    });
+    }).catch(this.logout);
   }
 
   componentDidMount() {
-    this.getUser();
+    this.loadUser();
   }
 
   getBorrowingRequests() {
-    this.props.navigation.navigate('BorrowingRequests', { url: `${networkSettings.homepage}/vehicles/borrow/${this.state.user.id}/requests`, screen: 'BorrowingRequestElement' });
+    this.props.navigation.navigate('RequestsList');
+  }
+
+  logout() {
+    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
   }
 
   render() {
@@ -98,17 +95,17 @@ class Profile extends Component<Props> {
 }
 
 export default StackNavigator({
-  List: {
+  Profile: {
     screen: Profile,
     navigationOptions: navigationHeaderStyle('Profile'),
   },
-  BorrowingRequests: {
-    screen: VehiclesList,
+  RequestsList: {
+    screen: RequestsList,
     navigationOptions: navigationHeaderStyle('Requests'),
   },
   BorrowingRequestElement: {
     screen: BorrowingRequest,
-    navigationOptions: navigationHeaderStyle('Borrowing Request Element'),
+    navigationOptions: navigationHeaderStyle('Borrowing Request'),
   },
 
 });

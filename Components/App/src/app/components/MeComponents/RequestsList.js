@@ -1,10 +1,9 @@
-/* eslint-disable max-len */
 import React, { Component } from 'react';
 import { FlatList, AsyncStorage, View } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
-import EmptyCarList from './EmptyCarList';
 import styles from '../../config/styles';
-import { getDelegatedVehicles } from '../../service/vehicleService';
+import EmptyRequestsList from './EmptyRequestsList';
+import { getVehicleRequests } from '../../service/vehicleService';
 
 type Props = {
     navigation: {
@@ -15,17 +14,10 @@ type Props = {
                 screen:string,
             }
         }
-    },
-    screenProps: {
-        user: {
-            id: number,
-            email: String,
-            name: String,
-        }
     }
 }
 
-export default class DelegatedList extends Component<Props> {
+export default class RequestsList extends Component<Props> {
   constructor(props) {
     super(props);
 
@@ -49,8 +41,9 @@ export default class DelegatedList extends Component<Props> {
   }
 
   onPress(data) {
-    this.props.navigation.navigate('SubscribedVehicle', { data, callback: this.doRefresh });
+    this.props.navigation.navigate('BorrowingRequestElement', { data, callback: this.doRefresh });
   }
+
 
   doRefresh() {
     this.setState({ refreshing: true });
@@ -58,9 +51,11 @@ export default class DelegatedList extends Component<Props> {
       const token = JSON.parse(t);
 
       if (token != null) {
-        getDelegatedVehicles(token)
+        getVehicleRequests(token)
           .then(res => res.json())
-          .then(listJSON => (listJSON[0] ? this.setState({ list: listJSON }) : this.setState({ list: null })));
+          .then((listJSON) => {
+            if (listJSON[0]) this.setState({ list: listJSON });
+          });
       }
     }).finally(() => this.setState({ refreshing: false }));
   }
@@ -70,7 +65,7 @@ export default class DelegatedList extends Component<Props> {
         title={item.plate}
         subtitle=""
         onPress={() => this.onPress(item)}
-        avatar={<Avatar overlayContainerStyle={{ backgroundColor: 'transparent' }} source={require('../../../../public/image/car_delegated.png')} title={item.plate} />}
+        avatar={<Avatar overlayContainerStyle={{ backgroundColor: 'transparent' }} source={require('../../../../public/image/car.png')} title={item.plate} />}
       />);
 
 
@@ -83,7 +78,7 @@ export default class DelegatedList extends Component<Props> {
             onRefresh={this.doRefresh}
             refreshing={this.state.refreshing}
             keyExtractor={(item, index) => `${index}`}
-            ListEmptyComponent={EmptyCarList}
+            ListEmptyComponent={EmptyRequestsList}
           />
         </View>
       );

@@ -1,10 +1,10 @@
 
 import { StackNavigator } from 'react-navigation';
 
-import EventList from '../components/EventNavigator/EventList';
-import EventElement from '../components/EventNavigator/EventElement';
+import EventList from '../components/EventsComponents/EventList';
+import EventElement from '../components/EventsComponents/EventElement';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
-import PaymentForm from '../components/EventNavigator/PaymentForm';
+import PaymentForm from '../components/EventsComponents/PaymentForm';
 
 export default StackNavigator({
 

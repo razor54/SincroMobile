@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { FormInput, FormLabel } from 'react-native-elements';
 import styles from '../../config/styles';
-import networkSettings from '../../config/serverConnectionSettings';
+import { delegateVehicle } from '../../service/vehicleService';
 
 
 type Props = {
@@ -48,21 +48,7 @@ export default class extends Component<Props> {
       const token = JSON.parse(t);
 
       if (token != null) {
-        const url = `${networkSettings.homepage}/vehicles/delegate/`;
-        const data = {
-          body: JSON.stringify({
-            plate: this.state.plate,
-            ownerId: this.state.ownerId,
-            userBorrowId: this.state.borrowId,
-          }),
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `${token.token_type} ${token.access_token}`,
-          },
-        };
-
-        fetch(url, data)
+        delegateVehicle(token, this.state)
           .then((res) => {
             if (res.ok) {
               this.callback('Pending');
@@ -72,8 +58,6 @@ export default class extends Component<Props> {
               this.showErrorMessage('Not Valid User');
             }
           });
-      } else {
-        // redirect to login screen
       }
     });
   }

@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-
 import React, { Component } from 'react';
 
 import {
@@ -8,7 +7,7 @@ import {
   Button, AsyncStorage,
 } from 'react-native';
 import styles from '../../config/styles';
-import networkSettings from '../../config/serverConnectionSettings';
+import { subscribeVehicle } from '../../service/vehicleService';
 
 
 type Props = {
@@ -16,7 +15,6 @@ type Props = {
         state:{
             params:{
                 data:any,
-                callback:any,
             }
         },
         navigate: any,
@@ -31,6 +29,7 @@ export default class extends Component<Props> {
     this.addVehicle = this.addVehicle.bind(this);
 
     const { data } = this.props.navigation.state.params;
+    this.refresh = data.refresh;
 
     this.state = {
       plate: data.plate,
@@ -54,26 +53,12 @@ export default class extends Component<Props> {
       const token = JSON.parse(t);
 
       if (token != null) {
-        const data = {
-          method: 'POST',
-          body: JSON.stringify({
-            plate: this.state.plate,
-            ownerId: this.state.ownerId,
-            registryDate: this.state.date,
-            subscribed: true,
-            delegateState: 'False',
-          }),
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `${token.token_type} ${token.access_token}`,
-          },
-        };
-
-        fetch(`${networkSettings.homepage}/vehicles/subscribe`, data)
+        subscribeVehicle(token, this.state)
           .then((res) => {
             if (!res.ok) throw Error(res.statusText);
-            else this.props.navigation.pop(2);
+            else {
+              this.props.navigation.pop(2);
+            }
           })
           .catch(e => alert(e));
       }

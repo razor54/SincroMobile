@@ -1,27 +1,16 @@
-/* global fetch:false */
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import { FlatList, AsyncStorage, View } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
 import EmptyCarList from './EmptyCarList';
 import styles from '../../config/styles';
-import networkSettings from '../../config/serverConnectionSettings';
+import { getBorrowedVehicles } from '../../service/vehicleService';
 
 type Props = {
-    navigation: {
-        navigate: any,
-        state:{
-            params:{
-                url: string,
-                screen:string,
-            }
-        }
-    },
     screenProps: {
-        user: {
-            id: number,
-            email: String,
-            name: String,
-        }
+        navigation: {
+            navigate: any,
+        },
     }
 }
 
@@ -49,7 +38,7 @@ export default class SubscribedListList extends Component<Props> {
   }
 
   onPress(data) {
-    this.props.navigation.navigate('BorrowingVehicle', { data, callback: this.doRefresh });
+    this.props.screenProps.navigation.navigate('BorrowingRequestElement', { data, callback: this.doRefresh });
   }
 
   doRefresh() {
@@ -58,19 +47,9 @@ export default class SubscribedListList extends Component<Props> {
       const token = JSON.parse(t);
 
       if (token != null) {
-        const data = {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            Authorization: `${token.token_type} ${token.access_token}`,
-          },
-        };
-
-        fetch(`${networkSettings.homepage}/vehicles/borrowing/`, data)
+        getBorrowedVehicles(token)
           .then(res => res.json())
-          .then((listJSON) => {
-            if (listJSON[0]) this.setState({ list: listJSON });
-          });
+          .then(listJSON => (listJSON[0] ? this.setState({ list: listJSON }) : this.setState({ list: null })));
       }
     }).finally(() => this.setState({ refreshing: false }));
   }
@@ -80,6 +59,7 @@ export default class SubscribedListList extends Component<Props> {
         title={item.plate}
         subtitle=""
         onPress={() => this.onPress(item)}
+        avatar={<Avatar overlayContainerStyle={{ backgroundColor: 'transparent' }} source={require('../../../../public/image/car_borrowed.png')} title={item.plate} />}
       />);
 
 

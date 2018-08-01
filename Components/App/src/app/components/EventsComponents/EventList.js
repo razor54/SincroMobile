@@ -1,10 +1,11 @@
-/* global fetch:false */
 import React, { Component } from 'react';
 import { FlatList, AsyncStorage, View } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
 import settings from '../../config/serverConnectionSettings';
 import EmptyList from './EmptyList';
 import styles from '../../config/styles';
+import { getUser } from '../../service/userService';
+import { getEventList } from '../../service/eventService';
 
 
 type Props = {
@@ -36,7 +37,7 @@ export default class extends Component<Props> {
       user: null,
     };
 
-    this.getUser = this.getUser.bind(this);
+    this.loadUser = this.loadUser.bind(this);
     this.render = this.render.bind(this);
     this.onPress = this.onPress.bind(this);
     this.getList = this.getList.bind(this);
@@ -44,7 +45,7 @@ export default class extends Component<Props> {
   }
 
   componentDidMount() {
-    this.getUser();
+    this.loadUser();
   }
 
 
@@ -52,56 +53,6 @@ export default class extends Component<Props> {
     this.props.navigation.navigate('Element', { data });
   }
 
-  getUser() {
-    AsyncStorage.getItem('token').then((token) => {
-      if (token == null) {
-        // console.warn('null token');
-        // TODO return to login
-        throw Error('No token');
-      }
-      return JSON.parse(token);
-    }).then((token) => {
-      const myInit = {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          Authorization: `${token.token_type} ${token.access_token}`,
-        },
-      };
-      fetch(`${settings.homepage}/validate`, myInit).then(res => res.json())
-        .then((user) => {
-          if (user.id) {
-            this.setState({ user, id: user.id, loading: false });
-            this.getList();
-          }
-        });
-    });
-  }
-
-
-  getList() {
-    this.setState({ refreshing: true });
-    AsyncStorage.getItem('token').then((token) => {
-      if (token == null) {
-        console.warn('null token');
-        // TODO return to login
-        throw Error('No token');
-      }
-      return JSON.parse(token);
-    }).then((token) => {
-      const data = {
-        body: JSON.stringify({ id: this.state.id }),
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `${token.token_type} ${token.access_token}` },
-
-      };
-      return fetch(this.state.eventsUrl, data)
-        .then(res => res.json())
-        .then((jsonList) => {
-          if (jsonList[0]) this.setState({ list: jsonList });
-        });
-    }).finally(() => this.setState({ refreshing: false }));
-  }
 
   getAvatar(item) {
     if (item.verified) {
@@ -119,6 +70,40 @@ export default class extends Component<Props> {
     />);
   }
 
+
+  getList() {
+    this.setState({ refreshing: true });
+    AsyncStorage.getItem('token').then((t) => {
+      const token = JSON.parse(t);
+
+      if (token != null) {
+        getEventList(token, this.state)
+          .then(res => res.json())
+          .then((jsonList) => {
+            if (jsonList[0]) this.setState({ list: jsonList });
+          });
+      }
+    }).finally(() => this.setState({ refreshing: false }));
+  }
+
+
+  loadUser() {
+    AsyncStorage.getItem('token').then((token) => {
+      if (token == null) { throw Error('No token'); }
+      return JSON.parse(token);
+    }).then((token) => {
+      getUser(token).then(res => res.json())
+        .then((user) => {
+          if (!user.id) throw Error('Invalid User');
+          this.setState({ user, id: user.id, loading: false });
+          this.getList();
+        });
+    }).catch(this.logout);
+  }
+
+  logout() {
+    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
+  }
 
   renderItem = ({ item }) => (
     <ListItem

@@ -5,10 +5,10 @@ import React, { Component } from 'react';
 import {
   Text,
   KeyboardAvoidingView,
-  Button, AsyncStorage,
+  Button, AsyncStorage, Alert,
 } from 'react-native';
 import styles from '../../config/styles';
-import networkSettings from '../../config/serverConnectionSettings';
+import { delegateResponse } from '../../service/vehicleService';
 
 
 type Props = {
@@ -27,6 +27,7 @@ export default class extends Component<Props> {
     super(props);
     this.acceptVehicle = this.acceptVehicle.bind(this);
     this.denyVehicle = this.denyVehicle.bind(this);
+    this.showErrorMessage = this.showErrorMessage.bind(this);
 
 
     const { data } = this.props.navigation.state.params;
@@ -41,35 +42,28 @@ export default class extends Component<Props> {
       const token = JSON.parse(t);
 
       if (token != null) {
-        const url = `${networkSettings.homepage}/vehicles/delegate/response`;
-        const data = {
-          body: JSON.stringify({
-            plate: this.state.plate,
-            userBorrowId: this.state.request.userBorrowId,
-            accept,
-            requestId: this.state.request.id,
-
-          }),
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `${token.token_type} ${token.access_token}`,
-          },
-        };
-
-        fetch(url, data)
+        delegateResponse(token, accept, this.state)
           .then((res) => {
             if (res.ok) this.props.navigation.pop(2);
             else this.showErrorMessage('Not Valid User');
           });
-      } else {
-        // redirect to login screen
       }
     });
   }
 
+  showErrorMessage(error) {
+    Alert.alert(
+      'Error',
+      error,
+      [
+        { text: 'Try Again', onPress: () => {} },
+        { text: 'Cancel', onPress: () => this.props.navigation.pop(1, 'Share') },
+      ],
+      { cancelable: false },
+    );
+  }
+
   acceptVehicle() {
-    // todo remove from delegated_vehicles & change vehicle state
     this.handleConfirmation(true);
   }
 

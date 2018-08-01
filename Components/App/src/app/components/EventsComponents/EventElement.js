@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import React, { Component } from 'react';
-
 import {
   Text,
   KeyboardAvoidingView,
@@ -8,7 +7,7 @@ import {
 } from 'react-native';
 import { showLocation } from 'react-native-map-link';
 import styles from '../../config/styles';
-import settings from '../../config/serverConnectionSettings';
+import { responseConfirmEvent } from '../../service/eventService';
 
 
 type Props = {
@@ -77,15 +76,7 @@ export default class extends Component<Props> {
 
       if (token != null) {
         this.event.verified = true;
-        const data = {
-          body: JSON.stringify(this.event),
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json', Authorization: `${token.token_type} ${token.access_token}` },
-        };
-
-        const path = `${settings.homepage}/event`;
-
-        fetch(path, data)
+        responseConfirmEvent(token, this.event)
           .then(res => (res.ok ? this.setState({ verified: true }) : alert(res.status)))
           .catch(() => alert('No Possible to Update Event'));
       }

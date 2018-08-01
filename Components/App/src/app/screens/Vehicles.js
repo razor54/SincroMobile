@@ -1,12 +1,11 @@
-/* eslint-disable no-use-before-define,max-len,react/sort-comp */
+/* eslint-disable react/prop-types,react/prefer-stateless-function,no-undef,max-len */
 import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, KeyboardAvoidingView, View, Button as Button2 } from 'react-native';
-import { StackNavigator, TabBarBottom, TabBarTop, TabNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from '../config/styles';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
 import VehiclesList from '../components/VehiclesComponents/VehiclesList';
-import networkSettings from '../config/serverConnectionSettings';
 import Vehicle from '../components/VehiclesComponents/Vehicle';
 import SubscribedVehicle from '../components/VehiclesComponents/SubscribedVehicle';
 import BorrowingVehicle from '../components/VehiclesComponents/BorrowingVehicle';
@@ -15,6 +14,7 @@ import SubscribedList from '../components/VehiclesComponents/SubscribedList';
 import DelegatedList from '../components/VehiclesComponents/DelegatedList';
 import BorrowingList from '../components/VehiclesComponents/BorrowingList';
 import theme from '../config/theme';
+import { getUser } from '../service/userService';
 
 
 type Props = {
@@ -27,7 +27,8 @@ class Vehicles extends Component<Props> {
     super(props);
 
     this.getVehicleForm = this.getVehicleForm.bind(this);
-    this.getUser = this.getUser.bind(this);
+    this.loadUser = this.loadUser.bind(this);
+    this.logout = this.logout.bind(this);
 
     this.state = {
       userLoaded: false,
@@ -35,36 +36,32 @@ class Vehicles extends Component<Props> {
     };
   }
 
-  getUser() {
-    AsyncStorage.getItem('token').then((token) => {
-      if (token == null) {
-        console.warn('null token');
-        // TODO return to login
-        throw Error('No token');
-      }
-      return JSON.parse(token);
-    }).then((token) => {
-      const myInit = {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          Authorization: `${token.token_type} ${token.access_token}`,
-        },
-      };
-      fetch(`${networkSettings.homepage}/validate`, myInit).then(res => res.json())
-        .then((user) => {
-          this.setState({ user, userLoaded: true });
-        });
-    });
-  }
 
   componentDidMount() {
-    this.getUser();
+    this.loadUser();
+  }
+
+  getVehicleForm() {
+    this.props.navigation.navigate('RegisterVehicleList');
+  }
+
+  loadUser() {
+    AsyncStorage.getItem('token').then((token) => {
+      if (token == null) { throw Error('No token'); }
+      return JSON.parse(token);
+    }).then((token) => {
+      getUser(token)
+        .then(res => res.json())
+        .then((user) => {
+          if (!user.id) throw Error('No valid user');
+          this.setState({ user, userLoaded: true });
+        });
+    }).catch(this.logout);
   }
 
 
-  getVehicleForm() {
-    this.props.navigation.navigate('RegisterVehicleList', { url: `${networkSettings.homepage}/vehicles/${this.state.user.id}`, screen: 'Vehicle' });
+  logout() {
+    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
   }
 
   render() {
@@ -72,7 +69,9 @@ class Vehicles extends Component<Props> {
       (this.state.userLoaded ?
         (
           <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
-            <VehiclesTabNavigator />
+            <VehiclesTabNavigator
+              screenProps={{ navigation: this.props.navigation }}
+            />
             <Button2
               styles={{
                 flexDirection: 'row',

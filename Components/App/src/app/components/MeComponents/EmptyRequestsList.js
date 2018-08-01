@@ -6,7 +6,7 @@ import styles from '../../config/styles';
 export default function () {
   return (
     <KeyboardAvoidingView >
-      <Text style={styles.textStretch}> You have no vehicles! </Text>
+      <Text style={styles.textStretch}> Sorry, it seems you have no requests! </Text>
     </KeyboardAvoidingView>
   );
 }

@@ -9,9 +9,9 @@ import {
   Button as Button2, ActivityIndicator,
 } from 'react-native';
 import styles from '../config/styles';
-import networkSettings from '../config/serverConnectionSettings';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
 import About from '../components/OptionsComponents/About';
+import { getUser } from '../service/userService';
 
 type Props = {
   navigation:{
@@ -25,7 +25,7 @@ class Options extends Component<Props> {
 
 
     this.showAlertDecision = this.showAlertDecision.bind(this);
-    this.getUser = this.getUser.bind(this);
+    this.loadUser = this.loadUser.bind(this);
     this.logout = this.logout.bind(this);
     this.gotToAbout = this.gotToAbout.bind(this);
 
@@ -40,26 +40,21 @@ class Options extends Component<Props> {
     };
   }
   componentDidMount() {
-    this.getUser();
+    this.loadUser();
   }
 
-  getUser() {
+  loadUser() {
     AsyncStorage.getItem('token').then((token) => {
-      if (token == null) {
-        throw Error('No token');
-      }
+      if (token == null) { throw Error('No token'); }
+
       return JSON.parse(token);
     }).then((token) => {
-      const myInit = {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          Authorization: `${token.token_type} ${token.access_token}`,
-        },
-      };
-      fetch(`${networkSettings.homepage}/validate`, myInit).then(res => res.json())
-        .then(user => this.setState({ user, userLoaded: true }))
-        .catch((err) => { throw Error(err); });
+      getUser(token)
+        .then(res => res.json())
+        .then((user) => {
+          if (!user.id) throw Error('No valid user');
+          this.setState({ user, userLoaded: true });
+        });
     }).catch(this.logout);
   }
 

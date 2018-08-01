@@ -1,17 +1,16 @@
-/* global fetch:false */
+/* eslint-disable max-len */
 import React, { Component } from 'react';
 import { FlatList, AsyncStorage, View } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
 import EmptyCarList from './EmptyCarList';
 import styles from '../../config/styles';
+import { getUserVehicles } from '../../service/vehicleService';
 
 type Props = {
   navigation: {
     navigate: any,
     state:{
       params:{
-        url: string,
-        screen:string,
       }
     }
   }
@@ -27,12 +26,9 @@ export default class VehiclesList extends Component<Props> {
 
     this.state = {
       list: null,
-      url: props.navigation.state.params.url,
-      screen: props.navigation.state.params.screen,
       refreshing: false,
     };
   }
-
 
   componentDidMount() {
     this.doRefresh();
@@ -43,9 +39,8 @@ export default class VehiclesList extends Component<Props> {
   }
 
   onPress(data) {
-    this.props.navigation.navigate(this.state.screen, { data, callback: this.doRefresh });
+    this.props.navigation.navigate('Vehicle', { data });
   }
-
 
   doRefresh() {
     this.setState({ refreshing: true });
@@ -53,19 +48,9 @@ export default class VehiclesList extends Component<Props> {
       const token = JSON.parse(t);
 
       if (token != null) {
-        const data = {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            Authorization: `${token.token_type} ${token.access_token}`,
-          },
-        };
-
-        fetch(this.state.url, data)
+        getUserVehicles(token)
           .then(res => res.json())
-          .then((listJSON) => {
-            if (listJSON[0]) this.setState({ list: listJSON });
-          });
+          .then(listJSON => (listJSON[0] ? this.setState({ list: listJSON }) : this.setState({ list: null })));
       }
     }).finally(() => this.setState({ refreshing: false }));
   }
@@ -77,7 +62,6 @@ export default class VehiclesList extends Component<Props> {
       onPress={() => this.onPress(item)}
       avatar={<Avatar overlayContainerStyle={{ backgroundColor: 'transparent' }} source={require('../../../../public/image/car.png')} title={item.plate} />}
     />);
-
 
   render() {
     return (

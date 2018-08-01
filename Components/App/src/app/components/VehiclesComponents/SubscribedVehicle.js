@@ -8,7 +8,7 @@ import {
   Button, View, AsyncStorage,
 } from 'react-native';
 import styles from '../../config/styles';
-import networkSettings from '../../config/serverConnectionSettings';
+import { cancelBorrowVehicle, unsubscribeVehicles } from '../../service/vehicleService';
 
 
 type Props = {
@@ -75,21 +75,15 @@ export default class extends Component<Props> {
   };
 
   removeVehicle() {
-    // todo remove from vehicles
     AsyncStorage.getItem('token').then((t) => {
       const token = JSON.parse(t);
 
       if (token != null) {
-        const data = {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            Authorization: `${token.token_type} ${token.access_token}`,
-          },
-        };
-
-        fetch(`${networkSettings.homepage}/vehicles/${this.state.plate}/unsubscribe`, data)
-          .then(() => this.props.navigation.pop(2))
+        unsubscribeVehicles(token, this.state.plate)
+          .then(() => {
+            this.callback();
+            this.props.navigation.pop(2);
+          })
           .catch(e => alert(e));
       }
     });
@@ -100,15 +94,7 @@ export default class extends Component<Props> {
       const token = JSON.parse(t);
 
       if (token != null) {
-        const data = {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            Authorization: `${token.token_type} ${token.access_token}`,
-          },
-        };
-
-        fetch(`${networkSettings.homepage}/vehicles/delegated/${this.state.plate}/cancel`, data)
+        cancelBorrowVehicle(token, this.state.plate)
           .then(() => this.props.navigation.pop(2))
           .catch(e => alert(e));
       }

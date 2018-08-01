@@ -7,8 +7,7 @@ import {
   Button,
 } from 'react-native';
 import styles from '../../config/styles';
-import settings from '../../config/serverConnectionSettings';
-
+import { payEvent } from '../../service/eventService';
 
 type Props = {
     navigation:{
@@ -24,7 +23,7 @@ type Props = {
 export default class extends Component<Props> {
   constructor(props) {
     super(props);
-    this.payEvent = this.payEvent.bind(this);
+    this.pay = this.pay.bind(this);
 
     const { data } = this.props.navigation.state.params;
 
@@ -37,8 +36,9 @@ export default class extends Component<Props> {
     };
   }
 
-  payEvent() {
-    // todo request to pay here
+  pay() {
+    // todo
+    payEvent();
   }
 
   render() {
@@ -50,7 +50,7 @@ export default class extends Component<Props> {
         <Text style={styles.textStretch}> Location - {this.state.location} </Text>
         <Text style={styles.textStretch}> Price - {this.state.price} € </Text>
 
-        <Button onPress={this.payEvent} title="Confirm Payment" />
+        <Button onPress={this.pay} title="Confirm Payment" />
 
       </KeyboardAvoidingView>
 

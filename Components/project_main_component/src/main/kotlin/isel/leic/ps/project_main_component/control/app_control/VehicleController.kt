@@ -19,9 +19,9 @@ class VehicleController {
     lateinit var userService: UserService
 
 
-    @GetMapping("/{userId}")
-    fun getUserVehicles(@PathVariable("userId") userId: Int, auth: String): List<Vehicle> {
-        verifyUser(auth, userId)
+    @GetMapping("/")
+    fun getUserVehicles(auth: String): List<Vehicle> {
+        val userId = userService.getUserAuth(auth).id
 
         return vehicleService.getUserVehicles(userId)
     }
@@ -49,15 +49,15 @@ class VehicleController {
         return vehicleService.delegatedVehicles(userId)
     }
 
-    @GetMapping("/delegate/{userId}/requests")
-    fun getDelegateRequests(@PathVariable("userId") userId: Int, auth: String): List<DelegateRequest> {
-        verifyUser(auth, userId)
+    @GetMapping("/delegate/requests")
+    fun getDelegateRequests(auth: String): List<DelegateRequest> {
+        val userId = userService.getUserAuth(auth).id
         return vehicleService.delegatedRequests(userId)
     }
 
-    @GetMapping("/borrow/{userId}/requests")
-    fun getBorrowRequests(@PathVariable("userId") userId: Int, auth: String): List<DelegateRequest> {
-        verifyUser(auth, userId)
+    @GetMapping("/borrow/requests")
+    fun getBorrowRequests(auth: String): List<DelegateRequest> {
+        val userId = userService.getUserAuth(auth).id
         return vehicleService.borrowRequests(userId)
     }
 

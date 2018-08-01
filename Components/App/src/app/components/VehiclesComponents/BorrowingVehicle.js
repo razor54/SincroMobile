@@ -8,7 +8,7 @@ import {
   Button, AsyncStorage,
 } from 'react-native';
 import styles from '../../config/styles';
-import networkSettings from '../../config/serverConnectionSettings';
+import { getVehicle } from '../../service/vehicleService';
 
 
 type Props = {
@@ -25,7 +25,9 @@ type Props = {
 export default class extends Component<Props> {
   constructor(props) {
     super(props);
-    this.addVehicle = this.removeVehicle.bind(this);
+
+    this.removeVehicle = this.removeVehicle.bind(this);
+    this.callback = this.props.navigation.state.params.callback;
 
     const { data } = this.props.navigation.state.params;
 
@@ -44,16 +46,7 @@ export default class extends Component<Props> {
       const token = JSON.parse(t);
 
       if (token != null) {
-        const url = `${networkSettings.homepage}/vehicles/${this.state.plate}/info/`;
-        const data = {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            Authorization: `${token.token_type} ${token.access_token}`,
-          },
-        };
-
-        fetch(url, data)
+        getVehicle(token, this.state.plate)
           .then(res => res.json())
           .then(vehicle => this.setState({ vehicle }))
           .catch(e => alert(e));
