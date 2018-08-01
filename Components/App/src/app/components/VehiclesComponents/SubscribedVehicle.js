@@ -8,7 +8,7 @@ import {
   Button, View, AsyncStorage,
 } from 'react-native';
 import styles from '../../config/styles';
-import { cancelBorrowVehicle, unsubscribeVehicles } from '../../service/vehicleService';
+import { cancelBorrowVehicle, unsubscribeVehicles, cancelBorrowRequest } from '../../service/vehicleService';
 
 
 type Props = {
@@ -31,6 +31,7 @@ export default class extends Component<Props> {
     this.removeVehicle = this.removeVehicle.bind(this);
     this.changeBorrow = this.changeBorrow.bind(this);
     this.cancelBorrow = this.cancelBorrow.bind(this);
+    this.cancelRequest = this.cancelRequest.bind(this);
 
     this.callback = this.props.navigation.state.params.callback;
 
@@ -62,7 +63,12 @@ export default class extends Component<Props> {
         </View>
       );
 
-      case 'Pending': return <Text style={styles.textStretch}> This vehicle waiting for borrow confirmation</Text>;
+      case 'Pending': return (
+        <View>
+          <Text style={styles.textStretch}> This vehicle waiting for borrow confirmation</Text>
+          <Button onPress={this.cancelRequest} title="Cancel Request" />
+        </View>
+      );
 
       case 'False': return (
         <View>
@@ -95,6 +101,18 @@ export default class extends Component<Props> {
 
       if (token != null) {
         cancelBorrowVehicle(token, this.state.plate)
+          .then(() => this.props.navigation.pop(2))
+          .catch(e => alert(e));
+      }
+    });
+  }
+
+  cancelRequest() {
+    AsyncStorage.getItem('token').then((t) => {
+      const token = JSON.parse(t);
+
+      if (token != null) {
+        cancelBorrowRequest(token, this.state.plate)
           .then(() => this.props.navigation.pop(2))
           .catch(e => alert(e));
       }
