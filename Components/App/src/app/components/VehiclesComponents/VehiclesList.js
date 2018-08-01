@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { FlatList, AsyncStorage, View } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
 import EmptyCarList from './EmptyCarList';
-import styles from '../../../config/styles';
+import styles from '../../config/styles';
 
 type Props = {
   navigation: {
@@ -47,31 +47,6 @@ export default class VehiclesList extends Component<Props> {
   }
 
 
-  getAvatar(item) {
-    if (!item.delegateState) {
-      return (<Avatar
-        overlayContainerStyle={{ backgroundColor: 'transparent' }}
-        source={require('../../../../../public/image/car_borrowed.png')}
-        title={item.plate}
-      />);
-    }
-
-    if (item.delegateState === 'True') {
-      return (<Avatar
-        overlayContainerStyle={{ backgroundColor: 'transparent' }}
-        source={require('../../../../../public/image/car_share.png')}
-        title={item.plate}
-      />);
-    }
-
-    return (<Avatar
-      overlayContainerStyle={{ backgroundColor: 'transparent' }}
-      source={require('../../../../../public/image/car.png')}
-      title={item.plate}
-    />);
-  }
-
-
   doRefresh() {
     this.setState({ refreshing: true });
     AsyncStorage.getItem('token').then((t) => {
@@ -100,7 +75,7 @@ export default class VehiclesList extends Component<Props> {
       title={item.plate}
       subtitle=""
       onPress={() => this.onPress(item)}
-      avatar={this.getAvatar(item)}
+      avatar={<Avatar overlayContainerStyle={{ backgroundColor: 'transparent' }} source={require('../../../../public/image/car.png')} title={item.plate} />}
     />);
 
 

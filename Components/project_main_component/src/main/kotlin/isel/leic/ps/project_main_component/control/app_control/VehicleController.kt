@@ -26,11 +26,27 @@ class VehicleController {
         return vehicleService.getUserVehicles(userId)
     }
 
-    @GetMapping("/subscribed/{userId}")
-    fun getSubscribedVehicles(@PathVariable("userId") userId: Int, auth: String): List<Vehicle> {
-        verifyUser(auth, userId)
+    @GetMapping("/subscribed/")
+    fun getSubscribedVehicles( auth: String): List<Vehicle> {
 
+        val userId = userService.getUserAuth(auth).id
         return vehicleService.getUserSubscribedVehicles(userId)
+    }
+
+    @GetMapping("/borrowing")
+    fun getBorrowingVehicles(auth: String): List<DelegatedVehicle> {
+
+        val userId = userService.getUserAuth(auth).id
+
+        return vehicleService.borrowingVehicles(userId)
+    }
+
+    @GetMapping("/delegated")
+    fun getDelegatedVehicles(auth: String): List<Vehicle> {
+
+        val userId = userService.getUserAuth(auth).id
+
+        return vehicleService.delegatedVehicles(userId)
     }
 
     @GetMapping("/delegate/{userId}/requests")
@@ -47,23 +63,6 @@ class VehicleController {
 
 
 
-    @GetMapping("/borrowing/{borrowId}")
-    fun getBorrowingVehicles(@PathVariable("borrowId") borrowId: Int, auth: String): List<DelegatedVehicle> {
-
-        // user validation
-        verifyUser(auth, borrowId)
-
-        return vehicleService.borrowingVehicles(borrowId)
-    }
-
-    @GetMapping("/delegated/{userId}")
-    fun getDelegatedVehicles(@PathVariable("userId") userId: Int, auth: String): List<Vehicle> {
-
-        // user validation
-        verifyUser(auth, userId)
-
-        return vehicleService.delegatedVehicles(userId)
-    }
 
     @GetMapping("/{vehicleId}/info")
     fun getVehicle(@PathVariable("vehicleId") plate: String, auth: String): Vehicle {

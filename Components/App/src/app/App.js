@@ -9,6 +9,7 @@ import Login from './components/Authentication/Login';
 import SplashScreen from './SplashScreen';
 import NoConnectionScreen from './NoConnectionScreen';
 import theme from './config/theme';
+import Vehicles from './screens/Vehicles';
 
 
 const Application = TabNavigator(
@@ -27,6 +28,14 @@ const Application = TabNavigator(
       screen: Me,
       navigationOptions: {
         tabBarLabel: 'Me',
+        tabBarIcon: ({ tintColor }) => <Ionicons name="ios-person" size={35} color={tintColor} />,
+      },
+    },
+
+    Vehicles: {
+      screen: Vehicles,
+      navigationOptions: {
+        tabBarLabel: 'Vehicles',
         tabBarIcon: ({ tintColor }) => <Ionicons name="ios-car" size={35} color={tintColor} />,
       },
     },

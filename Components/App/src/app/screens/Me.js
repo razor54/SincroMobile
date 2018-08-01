@@ -6,11 +6,10 @@ import { Button } from 'react-native-elements';
 import { StackNavigator } from 'react-navigation';
 import styles from '../config/styles';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
-import VehiclesList from '../components/OptionsComponents/Vehicles/VehiclesList';
+import VehiclesList from '../components/VehiclesComponents/VehiclesList';
 import UserInfo from '../components/MeComponents/UserInfo';
 import networkSettings from '../config/serverConnectionSettings';
-import BorrowingRequest from '../components/MeComponents/Requests/BorrowingRequest';
-import Vehicle from '../components/MeComponents/Vehicle';
+import BorrowingRequest from '../components/MeComponents/BorrowingRequest';
 
 
 type Props = {
@@ -23,7 +22,6 @@ class Profile extends Component<Props> {
 
     this.getBorrowingRequests = this.getBorrowingRequests.bind(this);
     this.getUser = this.getUser.bind(this);
-    this.getVehicleForm = this.getVehicleForm.bind(this);
 
     this.state = {
       userLoaded: false,
@@ -61,9 +59,6 @@ class Profile extends Component<Props> {
   getBorrowingRequests() {
     this.props.navigation.navigate('BorrowingRequests', { url: `${networkSettings.homepage}/vehicles/borrow/${this.state.user.id}/requests`, screen: 'BorrowingRequestElement' });
   }
-  getVehicleForm() {
-    this.props.navigation.navigate('RegisterVehicleList', { url: `${networkSettings.homepage}/vehicles/${this.state.user.id}`, screen: 'Vehicle' });
-  }
 
   render() {
     return (
@@ -80,13 +75,6 @@ class Profile extends Component<Props> {
                     buttonStyle={styles.button2}
                     title="Requests"
                     onPress={this.getBorrowingRequests}
-                  />
-                </View>
-                <View style={{ padding: 5 }}>
-                  <Button
-                    buttonStyle={styles.button2}
-                    title="Subscribe Vehicle"
-                    onPress={this.getVehicleForm}
                   />
                 </View>
               </View>
@@ -121,14 +109,6 @@ export default StackNavigator({
   BorrowingRequestElement: {
     screen: BorrowingRequest,
     navigationOptions: navigationHeaderStyle('Borrowing Request Element'),
-  },
-  RegisterVehicleList: {
-    screen: VehiclesList,
-    navigationOptions: navigationHeaderStyle('Your Vehicles'),
-  },
-  Vehicle: {
-    screen: Vehicle,
-    navigationOptions: navigationHeaderStyle('Vehicle'),
   },
 
 });
