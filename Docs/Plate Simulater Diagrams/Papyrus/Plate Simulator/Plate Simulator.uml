@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_smujMJXoEeizTMhpvQs0yg" name="Plate Simulator">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_s95GAJXoEeizTMhpvQs0yg">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Interaction" xmi:id="_spdHEJXoEeizTMhpvQs0yg" name="Sequence">
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_z7LoQJXoEeizTMhpvQs0yg" name="SINCRO Mobile" coveredBy="_Wd088JXpEeizTMhpvQs0yg _Wf1IEZXpEeizTMhpvQs0yg _q8QwAJXpEeizTMhpvQs0yg _q8-hsZXpEeizTMhpvQs0yg _5cmM8JXpEeizTMhpvQs0yg _5dXpAZXpEeizTMhpvQs0yg _CtUKYJXqEeizTMhpvQs0yg _CuDKMZXqEeizTMhpvQs0yg"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_3ctOQJXoEeizTMhpvQs0yg" name="Simulador de Matrículas" coveredBy="_Wd1kAJXpEeizTMhpvQs0yg _Wf1IEJXpEeizTMhpvQs0yg _CtUxcJXqEeizTMhpvQs0yg _CuDKMJXqEeizTMhpvQs0yg _Wfph4JXpEeizTMhpvQs0yg _CuAG4JXqEeizTMhpvQs0yg"/>
+    <lifeline xmi:type="uml:Lifeline" xmi:id="_55VBsJXoEeizTMhpvQs0yg" name="Entidade de Autenticação" coveredBy="_q8QwAZXpEeizTMhpvQs0yg _q8-hsJXpEeizTMhpvQs0yg _5cm0AJXpEeizTMhpvQs0yg _5dXpAJXpEeizTMhpvQs0yg _q85pMJXpEeizTMhpvQs0yg _5dTXkJXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Wd088JXpEeizTMhpvQs0yg" name="Message4SendEvent" covered="_z7LoQJXoEeizTMhpvQs0yg" message="_WdrzAJXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Wd1kAJXpEeizTMhpvQs0yg" name="Message4ReceiveEvent" covered="_3ctOQJXoEeizTMhpvQs0yg" message="_WdrzAJXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_Wfph4JXpEeizTMhpvQs0yg" name="BehaviorExecutionSpecification7" covered="_3ctOQJXoEeizTMhpvQs0yg" finish="_Wf1IEJXpEeizTMhpvQs0yg" start="_Wd1kAJXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Wf1IEJXpEeizTMhpvQs0yg" name="Message9SendEvent" covered="_3ctOQJXoEeizTMhpvQs0yg" message="_Wf0hAJXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_Wf1IEZXpEeizTMhpvQs0yg" name="Message9ReceiveEvent" covered="_z7LoQJXoEeizTMhpvQs0yg" message="_Wf0hAJXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_q8QwAJXpEeizTMhpvQs0yg" name="Message11SendEvent" covered="_z7LoQJXoEeizTMhpvQs0yg" message="_q8QI8JXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_q8QwAZXpEeizTMhpvQs0yg" name="Message11ReceiveEvent" covered="_55VBsJXoEeizTMhpvQs0yg" message="_q8QI8JXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_q85pMJXpEeizTMhpvQs0yg" name="BehaviorExecutionSpecification14" covered="_55VBsJXoEeizTMhpvQs0yg" finish="_q8-hsJXpEeizTMhpvQs0yg" start="_q8QwAZXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_q8-hsJXpEeizTMhpvQs0yg" name="Message16SendEvent" covered="_55VBsJXoEeizTMhpvQs0yg" message="_q896oJXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_q8-hsZXpEeizTMhpvQs0yg" name="Message16ReceiveEvent" covered="_z7LoQJXoEeizTMhpvQs0yg" message="_q896oJXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_5cmM8JXpEeizTMhpvQs0yg" name="Message18SendEvent" covered="_z7LoQJXoEeizTMhpvQs0yg" message="_5ck-0JXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_5cm0AJXpEeizTMhpvQs0yg" name="Message18ReceiveEvent" covered="_55VBsJXoEeizTMhpvQs0yg" message="_5ck-0JXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_5dTXkJXpEeizTMhpvQs0yg" name="BehaviorExecutionSpecification21" covered="_55VBsJXoEeizTMhpvQs0yg" finish="_5dXpAJXpEeizTMhpvQs0yg" start="_5cm0AJXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_5dXpAJXpEeizTMhpvQs0yg" name="Message23SendEvent" covered="_55VBsJXoEeizTMhpvQs0yg" message="_5dXB8JXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_5dXpAZXpEeizTMhpvQs0yg" name="Message23ReceiveEvent" covered="_z7LoQJXoEeizTMhpvQs0yg" message="_5dXB8JXpEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_CtUKYJXqEeizTMhpvQs0yg" name="Message25SendEvent" covered="_z7LoQJXoEeizTMhpvQs0yg" message="_CtTjUJXqEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_CtUxcJXqEeizTMhpvQs0yg" name="Message25ReceiveEvent" covered="_3ctOQJXoEeizTMhpvQs0yg" message="_CtTjUJXqEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:BehaviorExecutionSpecification" xmi:id="_CuAG4JXqEeizTMhpvQs0yg" name="BehaviorExecutionSpecification28" covered="_3ctOQJXoEeizTMhpvQs0yg" finish="_CuDKMJXqEeizTMhpvQs0yg" start="_CtUxcJXqEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_CuDKMJXqEeizTMhpvQs0yg" name="Message30SendEvent" covered="_3ctOQJXoEeizTMhpvQs0yg" message="_CuCjIJXqEeizTMhpvQs0yg"/>
+    <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_CuDKMZXqEeizTMhpvQs0yg" name="Message30ReceiveEvent" covered="_z7LoQJXoEeizTMhpvQs0yg" message="_CuCjIJXqEeizTMhpvQs0yg"/>
+    <message xmi:type="uml:Message" xmi:id="_WdrzAJXpEeizTMhpvQs0yg" name="(1) Pedido de Matrículas do Cidadadão (NIF)" receiveEvent="_Wd1kAJXpEeizTMhpvQs0yg" sendEvent="_Wd088JXpEeizTMhpvQs0yg"/>
+    <message xmi:type="uml:Message" xmi:id="_Wf0hAJXpEeizTMhpvQs0yg" name="(2) Redirecionamento para Entidade de Autenticação" messageSort="reply" receiveEvent="_Wf1IEZXpEeizTMhpvQs0yg" sendEvent="_Wf1IEJXpEeizTMhpvQs0yg"/>
+    <message xmi:type="uml:Message" xmi:id="_q8QI8JXpEeizTMhpvQs0yg" name="(3) Pedido do Token de Acesso" receiveEvent="_q8QwAZXpEeizTMhpvQs0yg" sendEvent="_q8QwAJXpEeizTMhpvQs0yg"/>
+    <message xmi:type="uml:Message" xmi:id="_q896oJXpEeizTMhpvQs0yg" name="(4) Pedido de Autenticação " messageSort="reply" receiveEvent="_q8-hsZXpEeizTMhpvQs0yg" sendEvent="_q8-hsJXpEeizTMhpvQs0yg"/>
+    <message xmi:type="uml:Message" xmi:id="_5ck-0JXpEeizTMhpvQs0yg" name="(5) Auntenticação" receiveEvent="_5cm0AJXpEeizTMhpvQs0yg" sendEvent="_5cmM8JXpEeizTMhpvQs0yg"/>
+    <message xmi:type="uml:Message" xmi:id="_5dXB8JXpEeizTMhpvQs0yg" name="(6) Entrega do Token de Acesso" messageSort="reply" receiveEvent="_5dXpAZXpEeizTMhpvQs0yg" sendEvent="_5dXpAJXpEeizTMhpvQs0yg"/>
+    <message xmi:type="uml:Message" xmi:id="_CtTjUJXqEeizTMhpvQs0yg" name="(7) Entrega do Token de Acesso" receiveEvent="_CtUxcJXqEeizTMhpvQs0yg" sendEvent="_CtUKYJXqEeizTMhpvQs0yg"/>
+    <message xmi:type="uml:Message" xmi:id="_CuCjIJXqEeizTMhpvQs0yg" name="(8) Informação de Matrículas do Cidadão" messageSort="reply" receiveEvent="_CuDKMZXqEeizTMhpvQs0yg" sendEvent="_CuDKMJXqEeizTMhpvQs0yg"/>
+  </packagedElement>
+</uml:Model>
