@@ -47,7 +47,7 @@ function getBorrowedVehicles(token) {
     },
   };
 
-  return fetch(`${networkSettings.homepage}/vehicles/borrowed/`, data);
+  return fetch(`${networkSettings.homepage}/vehicles/borrowing/`, data);
 }
 
 
@@ -104,6 +104,18 @@ function cancelBorrowVehicle(token, plate) {
   };
 
   return fetch(`${networkSettings.homepage}/vehicles/delegated/${plate}/cancel`, data);
+}
+
+function cancelBorrowRequest(token, plate) {
+  const data = {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `${token.token_type} ${token.access_token}`,
+    },
+  };
+
+  return fetch(`${networkSettings.homepage}/vehicles/delegate/${plate}/request/cancel`, data);
 }
 
 
@@ -172,4 +184,5 @@ export {
   getDelegatedVehicles,
   getSubscribedVehicles,
   getUserVehicles,
+  cancelBorrowRequest,
 };

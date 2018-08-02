@@ -182,19 +182,22 @@ class VehicleService {
 
 
                 //Create new History Entry
-                var history = History()
+                val history = History()
                 history.date = Date()
                 history.driverId = vehicle.ownerId
                 history.state = "Delegate"
 
                 //Save History of delegation
                 historyService.addHistoryElement(history)
+                
 
-                history.state="Borrow"
-                history.driverId = delegatedVehicle.userBorrowId
+                val history2 = History()
+                history2.date = Date()
+                history2.state = "Borrow"
+                history2.driverId = delegatedVehicle.userBorrowId
 
                 //Save history of borrow
-                historyService.addHistoryElement(history)
+                historyService.addHistoryElement(history2)
 
 
 

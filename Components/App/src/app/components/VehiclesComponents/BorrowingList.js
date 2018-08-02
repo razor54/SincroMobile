@@ -38,7 +38,7 @@ export default class SubscribedListList extends Component<Props> {
   }
 
   onPress(data) {
-    this.props.screenProps.navigation.navigate('BorrowingRequestElement', { data, callback: this.doRefresh });
+    this.props.screenProps.navigation.navigate('BorrowingVehicle', { data, callback: this.doRefresh });
   }
 
   doRefresh() {
@@ -49,9 +49,9 @@ export default class SubscribedListList extends Component<Props> {
       if (token != null) {
         getBorrowedVehicles(token)
           .then(res => res.json())
-          .then(listJSON => (listJSON[0] ? this.setState({ list: listJSON }) : this.setState({ list: null })));
+          .then((listJSON) => { if (listJSON[0]) this.setState({ list: listJSON }); else this.setState({ list: null }); });
       }
-    }).finally(() => this.setState({ refreshing: false }));
+    }).finally(() => { this.setState({ refreshing: false }); });
   }
 
     renderItem = ({ item }) =>
