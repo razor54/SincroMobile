@@ -29,7 +29,7 @@
     <fragment xmi:type="uml:MessageOccurrenceSpecification" xmi:id="_CuDKMZXqEeizTMhpvQs0yg" name="Message30ReceiveEvent" covered="_z7LoQJXoEeizTMhpvQs0yg" message="_CuCjIJXqEeizTMhpvQs0yg"/>
     <message xmi:type="uml:Message" xmi:id="_WdrzAJXpEeizTMhpvQs0yg" name="(1) Pedido de Matrículas do Cidadadão (NIF)" receiveEvent="_Wd1kAJXpEeizTMhpvQs0yg" sendEvent="_Wd088JXpEeizTMhpvQs0yg"/>
     <message xmi:type="uml:Message" xmi:id="_Wf0hAJXpEeizTMhpvQs0yg" name="(2) Redirecionamento para Entidade de Autenticação" messageSort="reply" receiveEvent="_Wf1IEZXpEeizTMhpvQs0yg" sendEvent="_Wf1IEJXpEeizTMhpvQs0yg"/>
-    <message xmi:type="uml:Message" xmi:id="_q8QI8JXpEeizTMhpvQs0yg" name="(3) Pedido do Token de Acesso" receiveEvent="_q8QwAZXpEeizTMhpvQs0yg" sendEvent="_q8QwAJXpEeizTMhpvQs0yg"/>
+    <message xmi:type="uml:Message" xmi:id="_q8QI8JXpEeizTMhpvQs0yg" name="(3) Acede ao URI da Entidade de Autenticação" receiveEvent="_q8QwAZXpEeizTMhpvQs0yg" sendEvent="_q8QwAJXpEeizTMhpvQs0yg"/>
     <message xmi:type="uml:Message" xmi:id="_q896oJXpEeizTMhpvQs0yg" name="(4) Pedido de Autenticação " messageSort="reply" receiveEvent="_q8-hsZXpEeizTMhpvQs0yg" sendEvent="_q8-hsJXpEeizTMhpvQs0yg"/>
     <message xmi:type="uml:Message" xmi:id="_5ck-0JXpEeizTMhpvQs0yg" name="(5) Auntenticação" receiveEvent="_5cm0AJXpEeizTMhpvQs0yg" sendEvent="_5cmM8JXpEeizTMhpvQs0yg"/>
     <message xmi:type="uml:Message" xmi:id="_5dXB8JXpEeizTMhpvQs0yg" name="(6) Entrega do Token de Acesso" messageSort="reply" receiveEvent="_5dXpAZXpEeizTMhpvQs0yg" sendEvent="_5dXpAJXpEeizTMhpvQs0yg"/>

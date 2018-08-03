@@ -8,7 +8,7 @@
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_srZAwpXoEeizTMhpvQs0yg" type="Interaction_NameLabel"/>
     <children xmi:type="notation:BasicCompartment" xmi:id="_srZAw5XoEeizTMhpvQs0yg" type="Interaction_SubfragmentCompartment">
-      <children xmi:type="notation:Shape" xmi:id="_z7S9AJXoEeizTMhpvQs0yg" type="Lifeline_Shape" fontName=".SF NS Text" fontHeight="20">
+      <children xmi:type="notation:Shape" xmi:id="_z7S9AJXoEeizTMhpvQs0yg" type="Lifeline_Shape" fontName=".SF NS Text" fontHeight="23" lineWidth="1">
         <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_-ZT0AJXoEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
           <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_-ZUbEJXoEeizTMhpvQs0yg" key="bold" value="true"/>
           <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_-ZdlAJXoEeizTMhpvQs0yg" key="italic" value="true"/>
@@ -18,7 +18,7 @@
         <element xmi:type="uml:Lifeline" href="Plate%20Simulator.uml#_z7LoQJXoEeizTMhpvQs0yg"/>
         <layoutConstraint xmi:type="notation:Bounds" xmi:id="_z7S9AZXoEeizTMhpvQs0yg" x="13" y="10" width="281"/>
       </children>
-      <children xmi:type="notation:Shape" xmi:id="_3cyt0JXoEeizTMhpvQs0yg" type="Lifeline_Shape" fontName=".SF NS Text" fontHeight="20">
+      <children xmi:type="notation:Shape" xmi:id="_3cyt0JXoEeizTMhpvQs0yg" type="Lifeline_Shape" fontName=".SF NS Text" fontHeight="23" lineWidth="1">
         <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_-ZYFcJXoEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
           <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_-ZYsgJXoEeizTMhpvQs0yg" key="bold" value="true"/>
           <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_-ZgBQJXoEeizTMhpvQs0yg" key="italic" value="true"/>
@@ -29,7 +29,7 @@
           <styles xmi:type="notation:TitleStyle" xmi:id="_3c6CkZXoEeizTMhpvQs0yg"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3c6CkpXoEeizTMhpvQs0yg"/>
         </children>
-        <children xmi:type="notation:Shape" xmi:id="_WftzUJXpEeizTMhpvQs0yg" type="BehaviorExecutionSpecification_Shape" fontName=".SF NS Text" fontHeight="20">
+        <children xmi:type="notation:Shape" xmi:id="_WftzUJXpEeizTMhpvQs0yg" type="BehaviorExecutionSpecification_Shape" fontName=".SF NS Text" fontHeight="23" lineWidth="1">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ua5IIJXrEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
             <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ua5IIZXrEeizTMhpvQs0yg" key="bold" value="true"/>
             <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubAc4JXrEeizTMhpvQs0yg" key="italic" value="true"/>
@@ -41,7 +41,7 @@
           <element xmi:type="uml:BehaviorExecutionSpecification" href="Plate%20Simulator.uml#_Wfph4JXpEeizTMhpvQs0yg"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_WftzUZXpEeizTMhpvQs0yg" x="130" y="70" width="20" height="100"/>
         </children>
-        <children xmi:type="notation:Shape" xmi:id="_CuAt8JXqEeizTMhpvQs0yg" type="BehaviorExecutionSpecification_Shape" fontName=".SF NS Text" fontHeight="20">
+        <children xmi:type="notation:Shape" xmi:id="_CuAt8JXqEeizTMhpvQs0yg" type="BehaviorExecutionSpecification_Shape" fontName=".SF NS Text" fontHeight="23" lineWidth="1">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ua6WQJXrEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
             <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ua6WQZXrEeizTMhpvQs0yg" key="bold" value="true"/>
             <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubBD8JXrEeizTMhpvQs0yg" key="italic" value="true"/>
@@ -54,9 +54,9 @@
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CuAt8ZXqEeizTMhpvQs0yg" x="130" y="578" width="20" height="100"/>
         </children>
         <element xmi:type="uml:Lifeline" href="Plate%20Simulator.uml#_3ctOQJXoEeizTMhpvQs0yg"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3cyt0ZXoEeizTMhpvQs0yg" x="593" y="10" width="281"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3cyt0ZXoEeizTMhpvQs0yg" x="633" y="10" width="281"/>
       </children>
-      <children xmi:type="notation:Shape" xmi:id="_55cWcJXoEeizTMhpvQs0yg" type="Lifeline_Shape" fontName=".SF NS Text" fontHeight="20">
+      <children xmi:type="notation:Shape" xmi:id="_55cWcJXoEeizTMhpvQs0yg" type="Lifeline_Shape" fontName=".SF NS Text" fontHeight="23" lineWidth="1">
         <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_-ZbIwJXoEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
           <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_-ZbIwZXoEeizTMhpvQs0yg" key="bold" value="true"/>
           <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_-ZidgJXoEeizTMhpvQs0yg" key="italic" value="true"/>
@@ -67,7 +67,7 @@
           <styles xmi:type="notation:TitleStyle" xmi:id="_55jEIZXoEeizTMhpvQs0yg"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_55jEIpXoEeizTMhpvQs0yg"/>
         </children>
-        <children xmi:type="notation:Shape" xmi:id="_q87eYJXpEeizTMhpvQs0yg" type="BehaviorExecutionSpecification_Shape" fontName=".SF NS Text" fontHeight="20">
+        <children xmi:type="notation:Shape" xmi:id="_q87eYJXpEeizTMhpvQs0yg" type="BehaviorExecutionSpecification_Shape" fontName=".SF NS Text" fontHeight="23" lineWidth="1">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ua7kYJXrEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
             <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ua8LcJXrEeizTMhpvQs0yg" key="bold" value="true"/>
             <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubCSEJXrEeizTMhpvQs0yg" key="italic" value="true"/>
@@ -79,7 +79,7 @@
           <element xmi:type="uml:BehaviorExecutionSpecification" href="Plate%20Simulator.uml#_q85pMJXpEeizTMhpvQs0yg"/>
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_q87eYZXpEeizTMhpvQs0yg" x="160" y="230" width="20" height="100"/>
         </children>
-        <children xmi:type="notation:Shape" xmi:id="_5dUlsZXpEeizTMhpvQs0yg" type="BehaviorExecutionSpecification_Shape" fontName=".SF NS Text" fontHeight="20">
+        <children xmi:type="notation:Shape" xmi:id="_5dUlsZXpEeizTMhpvQs0yg" type="BehaviorExecutionSpecification_Shape" fontName=".SF NS Text" fontHeight="23" lineWidth="1">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ua8ygJXrEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
             <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ua8ygZXrEeizTMhpvQs0yg" key="bold" value="true"/>
             <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubC5IJXrEeizTMhpvQs0yg" key="italic" value="true"/>
@@ -92,7 +92,7 @@
           <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5dUlspXpEeizTMhpvQs0yg" x="160" y="421" width="20" height="100"/>
         </children>
         <element xmi:type="uml:Lifeline" href="Plate%20Simulator.uml#_55VBsJXoEeizTMhpvQs0yg"/>
-        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_55cWcZXoEeizTMhpvQs0yg" x="954" y="10" width="341"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_55cWcZXoEeizTMhpvQs0yg" x="1154" y="10" width="341"/>
       </children>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_srZAxJXoEeizTMhpvQs0yg"/>
     </children>
@@ -105,140 +105,140 @@
     <owner xmi:type="uml:Model" href="Plate%20Simulator.uml#_smujMJXoEeizTMhpvQs0yg"/>
   </styles>
   <element xmi:type="uml:Interaction" href="Plate%20Simulator.uml#_spdHEJXoEeizTMhpvQs0yg"/>
-  <edges xmi:type="notation:Connector" xmi:id="_WeCYUJXpEeizTMhpvQs0yg" type="Message_SynchEdge" source="_z7S9AJXoEeizTMhpvQs0yg" target="_3cyt0JXoEeizTMhpvQs0yg">
+  <edges xmi:type="notation:Connector" xmi:id="_WeCYUJXpEeizTMhpvQs0yg" type="Message_SynchEdge" source="_z7S9AJXoEeizTMhpvQs0yg" target="_3cyt0JXoEeizTMhpvQs0yg" lineWidth="1">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ua9ZkJXrEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ua9ZkZXrEeizTMhpvQs0yg" key="bold" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubC5IZXrEeizTMhpvQs0yg" key="italic" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubHKkZXrEeizTMhpvQs0yg" key="fontColor" value="true"/>
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_WeC_YJXpEeizTMhpvQs0yg" type="Message_SynchNameLabel">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_WeC_YZXpEeizTMhpvQs0yg" x="1" y="-13"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_WeC_YZXpEeizTMhpvQs0yg" x="-13" y="-13"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_WeDmcJXpEeizTMhpvQs0yg" type="Message_SynchStereotypeLabel">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_WeDmcZXpEeizTMhpvQs0yg" x="1" y="-33"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_WeCYUZXpEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="20"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_WeCYUZXpEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="23"/>
     <styles xmi:type="notation:LineStyle" xmi:id="_WeE0kJXpEeizTMhpvQs0yg"/>
     <element xmi:type="uml:Message" href="Plate%20Simulator.uml#_WdrzAJXpEeizTMhpvQs0yg"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WeCYUpXpEeizTMhpvQs0yg" points="[0, 0, -360, 0]$[360, 0, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WfVY0JXpEeizTMhpvQs0yg" id="(0.5,0.1)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_WfV_4JXpEeizTMhpvQs0yg" id="(0.5,0.1)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_Wf1vIJXpEeizTMhpvQs0yg" type="Message_ReplyEdge" source="_3cyt0JXoEeizTMhpvQs0yg" target="_z7S9AJXoEeizTMhpvQs0yg">
+  <edges xmi:type="notation:Connector" xmi:id="_Wf1vIJXpEeizTMhpvQs0yg" type="Message_ReplyEdge" source="_3cyt0JXoEeizTMhpvQs0yg" target="_z7S9AJXoEeizTMhpvQs0yg" lineWidth="1">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ua9ZkpXrEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ua9Zk5XrEeizTMhpvQs0yg" key="bold" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubC5IpXrEeizTMhpvQs0yg" key="italic" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubHxoJXrEeizTMhpvQs0yg" key="fontColor" value="true"/>
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_Wf2WMJXpEeizTMhpvQs0yg" type="Message_ReplyNameLabel">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_Wf2WMZXpEeizTMhpvQs0yg" x="1" y="-13"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_Wf2WMZXpEeizTMhpvQs0yg" x="2" y="-13"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_Wf2WMpXpEeizTMhpvQs0yg" type="Message_ReplyStereotypeLabel">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_Wf2WM5XpEeizTMhpvQs0yg" x="1" y="-33"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_Wf1vIZXpEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="20"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_Wf1vIZXpEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="23"/>
     <styles xmi:type="notation:LineStyle" xmi:id="_Wf2WNJXpEeizTMhpvQs0yg"/>
     <element xmi:type="uml:Message" href="Plate%20Simulator.uml#_Wf0hAJXpEeizTMhpvQs0yg"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Wf1vIpXpEeizTMhpvQs0yg" points="[0, 0, 360, 0]$[-360, 0, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Wf29QJXpEeizTMhpvQs0yg" id="(0.5,0.24285714285714285)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Wf29QZXpEeizTMhpvQs0yg" id="(0.5,0.24285714285714285)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_q8ZS4JXpEeizTMhpvQs0yg" type="Message_SynchEdge" source="_z7S9AJXoEeizTMhpvQs0yg" target="_55cWcJXoEeizTMhpvQs0yg">
+  <edges xmi:type="notation:Connector" xmi:id="_q8ZS4JXpEeizTMhpvQs0yg" type="Message_SynchEdge" source="_z7S9AJXoEeizTMhpvQs0yg" target="_55cWcJXoEeizTMhpvQs0yg" lineWidth="1">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ua9ZlJXrEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ua-AoJXrEeizTMhpvQs0yg" key="bold" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubC5I5XrEeizTMhpvQs0yg" key="italic" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubHxoZXrEeizTMhpvQs0yg" key="fontColor" value="true"/>
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_q8Z58JXpEeizTMhpvQs0yg" type="Message_SynchNameLabel">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_q8Z58ZXpEeizTMhpvQs0yg" x="246" y="11"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_q8Z58ZXpEeizTMhpvQs0yg" x="306" y="13"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_q8Z58pXpEeizTMhpvQs0yg" type="Message_SynchStereotypeLabel">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_q8Z585XpEeizTMhpvQs0yg" x="1" y="-33"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_q8ZS4ZXpEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="20"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_q8ZS4ZXpEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="23"/>
     <styles xmi:type="notation:LineStyle" xmi:id="_q8Z59JXpEeizTMhpvQs0yg"/>
     <element xmi:type="uml:Message" href="Plate%20Simulator.uml#_q8QI8JXpEeizTMhpvQs0yg"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_q8ZS4pXpEeizTMhpvQs0yg" points="[0, 0, -730, 0]$[730, 0, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_q8rmwJXpEeizTMhpvQs0yg" id="(0.5,0.32857142857142857)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_q8rmwZXpEeizTMhpvQs0yg" id="(0.5,0.32857142857142857)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_q8_IwJXpEeizTMhpvQs0yg" type="Message_ReplyEdge" source="_55cWcJXoEeizTMhpvQs0yg" target="_z7S9AJXoEeizTMhpvQs0yg">
+  <edges xmi:type="notation:Connector" xmi:id="_q8_IwJXpEeizTMhpvQs0yg" type="Message_ReplyEdge" source="_55cWcJXoEeizTMhpvQs0yg" target="_z7S9AJXoEeizTMhpvQs0yg" lineWidth="1">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ua-AoZXrEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ua-AopXrEeizTMhpvQs0yg" key="bold" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubDgMJXrEeizTMhpvQs0yg" key="italic" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubHxopXrEeizTMhpvQs0yg" key="fontColor" value="true"/>
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_q8_v0pXpEeizTMhpvQs0yg" type="Message_ReplyNameLabel">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_q8_v05XpEeizTMhpvQs0yg" x="190" y="29"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_q8_v05XpEeizTMhpvQs0yg" x="289" y="27"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_q8_v1JXpEeizTMhpvQs0yg" type="Message_ReplyStereotypeLabel">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_q8_v1ZXpEeizTMhpvQs0yg" x="1" y="-33"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_q8_v0JXpEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="20"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_q8_v0JXpEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="23"/>
     <styles xmi:type="notation:LineStyle" xmi:id="_q8_v1pXpEeizTMhpvQs0yg"/>
     <element xmi:type="uml:Message" href="Plate%20Simulator.uml#_q896oJXpEeizTMhpvQs0yg"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_q8_v0ZXpEeizTMhpvQs0yg" points="[0, 0, 730, 0]$[-730, 0, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_q9AW4JXpEeizTMhpvQs0yg" id="(0.5,0.4714285714285714)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_q9AW4ZXpEeizTMhpvQs0yg" id="(0.5,0.4714285714285714)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_5cv98JXpEeizTMhpvQs0yg" type="Message_SynchEdge" source="_z7S9AJXoEeizTMhpvQs0yg" target="_55cWcJXoEeizTMhpvQs0yg">
+  <edges xmi:type="notation:Connector" xmi:id="_5cv98JXpEeizTMhpvQs0yg" type="Message_SynchEdge" source="_z7S9AJXoEeizTMhpvQs0yg" target="_55cWcJXoEeizTMhpvQs0yg" lineWidth="1">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ua-Ao5XrEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ua-ApJXrEeizTMhpvQs0yg" key="bold" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubDgMZXrEeizTMhpvQs0yg" key="italic" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubHxo5XrEeizTMhpvQs0yg" key="fontColor" value="true"/>
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_5cv985XpEeizTMhpvQs0yg" type="Message_SynchNameLabel">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_5cv99JXpEeizTMhpvQs0yg" x="244" y="11"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5cv99JXpEeizTMhpvQs0yg" x="282" y="13"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_5cv99ZXpEeizTMhpvQs0yg" type="Message_SynchStereotypeLabel">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_5cv99pXpEeizTMhpvQs0yg" x="1" y="-33"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_5cv98ZXpEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="20"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5cv98ZXpEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="23"/>
     <styles xmi:type="notation:LineStyle" xmi:id="_5cv995XpEeizTMhpvQs0yg"/>
     <element xmi:type="uml:Message" href="Plate%20Simulator.uml#_5ck-0JXpEeizTMhpvQs0yg"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5cv98pXpEeizTMhpvQs0yg" points="[0, 0, -730, 0]$[730, 0, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5dC44JXpEeizTMhpvQs0yg" id="(0.5,0.5971428571428571)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5dC44ZXpEeizTMhpvQs0yg" id="(0.5,0.5971428571428571)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_5dYQEJXpEeizTMhpvQs0yg" type="Message_ReplyEdge" source="_55cWcJXoEeizTMhpvQs0yg" target="_z7S9AJXoEeizTMhpvQs0yg">
+  <edges xmi:type="notation:Connector" xmi:id="_5dYQEJXpEeizTMhpvQs0yg" type="Message_ReplyEdge" source="_55cWcJXoEeizTMhpvQs0yg" target="_z7S9AJXoEeizTMhpvQs0yg" lineWidth="1">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ua-nsJXrEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ua-nsZXrEeizTMhpvQs0yg" key="bold" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubDgMpXrEeizTMhpvQs0yg" key="italic" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubHxpJXrEeizTMhpvQs0yg" key="fontColor" value="true"/>
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_5dYQE5XpEeizTMhpvQs0yg" type="Message_ReplyNameLabel">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_5dYQFJXpEeizTMhpvQs0yg" x="191" y="29"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_5dYQFJXpEeizTMhpvQs0yg" x="289" y="27"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_5dYQFZXpEeizTMhpvQs0yg" type="Message_ReplyStereotypeLabel">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_5dYQFpXpEeizTMhpvQs0yg" x="1" y="-33"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_5dYQEZXpEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="20"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_5dYQEZXpEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="23"/>
     <styles xmi:type="notation:LineStyle" xmi:id="_5dYQF5XpEeizTMhpvQs0yg"/>
     <element xmi:type="uml:Message" href="Plate%20Simulator.uml#_5dXB8JXpEeizTMhpvQs0yg"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5dYQEpXpEeizTMhpvQs0yg" points="[0, 0, 730, 0]$[-730, 0, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5dY3IJXpEeizTMhpvQs0yg" id="(0.5,0.74)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5dY3IZXpEeizTMhpvQs0yg" id="(0.5,0.74)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_CtdUUJXqEeizTMhpvQs0yg" type="Message_SynchEdge" source="_z7S9AJXoEeizTMhpvQs0yg" target="_3cyt0JXoEeizTMhpvQs0yg">
+  <edges xmi:type="notation:Connector" xmi:id="_CtdUUJXqEeizTMhpvQs0yg" type="Message_SynchEdge" source="_z7S9AJXoEeizTMhpvQs0yg" target="_3cyt0JXoEeizTMhpvQs0yg" lineWidth="1">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ua-nspXrEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ua-ns5XrEeizTMhpvQs0yg" key="bold" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubDgM5XrEeizTMhpvQs0yg" key="italic" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubHxpZXrEeizTMhpvQs0yg" key="fontColor" value="true"/>
     </eAnnotations>
     <children xmi:type="notation:DecorationNode" xmi:id="_Ctd7YJXqEeizTMhpvQs0yg" type="Message_SynchNameLabel">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_Ctd7YZXqEeizTMhpvQs0yg" x="1" y="-13"/>
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_Ctd7YZXqEeizTMhpvQs0yg" x="-13" y="-13"/>
     </children>
     <children xmi:type="notation:DecorationNode" xmi:id="_Ctd7YpXqEeizTMhpvQs0yg" type="Message_SynchStereotypeLabel">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_Ctd7Y5XqEeizTMhpvQs0yg" x="1" y="-33"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_CtdUUZXqEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="20"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_CtdUUZXqEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="23"/>
     <styles xmi:type="notation:LineStyle" xmi:id="_Ctd7ZJXqEeizTMhpvQs0yg"/>
     <element xmi:type="uml:Message" href="Plate%20Simulator.uml#_CtTjUJXqEeizTMhpvQs0yg"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_CtdUUpXqEeizTMhpvQs0yg" points="[0, 0, -360, 0]$[360, 0, 0, 0]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CtwPQJXqEeizTMhpvQs0yg" id="(0.5,0.8257142857142857)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CtwPQZXqEeizTMhpvQs0yg" id="(0.5,0.8257142857142857)"/>
   </edges>
-  <edges xmi:type="notation:Connector" xmi:id="_CuDxQJXqEeizTMhpvQs0yg" type="Message_ReplyEdge" source="_3cyt0JXoEeizTMhpvQs0yg" target="_z7S9AJXoEeizTMhpvQs0yg">
+  <edges xmi:type="notation:Connector" xmi:id="_CuDxQJXqEeizTMhpvQs0yg" type="Message_ReplyEdge" source="_3cyt0JXoEeizTMhpvQs0yg" target="_z7S9AJXoEeizTMhpvQs0yg" lineWidth="1">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ua-ntJXrEeizTMhpvQs0yg" source="PapyrusCSSForceValue">
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ua-ntZXrEeizTMhpvQs0yg" key="bold" value="true"/>
       <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_ubDgNJXrEeizTMhpvQs0yg" key="italic" value="true"/>
@@ -250,7 +250,7 @@
     <children xmi:type="notation:DecorationNode" xmi:id="_CuDxRZXqEeizTMhpvQs0yg" type="Message_ReplyStereotypeLabel">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_CuDxRpXqEeizTMhpvQs0yg" x="1" y="-33"/>
     </children>
-    <styles xmi:type="notation:FontStyle" xmi:id="_CuDxQZXqEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="20"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_CuDxQZXqEeizTMhpvQs0yg" fontName=".SF NS Text" fontHeight="23"/>
     <styles xmi:type="notation:LineStyle" xmi:id="_CuEYUJXqEeizTMhpvQs0yg"/>
     <element xmi:type="uml:Message" href="Plate%20Simulator.uml#_CuCjIJXqEeizTMhpvQs0yg"/>
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_CuDxQpXqEeizTMhpvQs0yg" points="[0, 0, 360, 0]$[-360, 0, 0, 0]"/>
