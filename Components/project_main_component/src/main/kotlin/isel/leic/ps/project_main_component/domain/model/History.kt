@@ -22,7 +22,11 @@ class History {
     var driverId: Int = 0
 
 
-    @Check(constraints = "Payment OR Delegate OR Borrow")
+    @Check(constraints = "Payment OR Delegate OR Borrow OR Borrow Cancel OR Delegate Cancel")
     lateinit var state:String
+
+
+    // payment of event with actionId or vehicle plate
+    lateinit var actionId :String
 
 }

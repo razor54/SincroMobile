@@ -10,6 +10,7 @@ import UserInfo from '../components/MeComponents/UserInfo';
 import BorrowingRequest from '../components/MeComponents/BorrowingRequest';
 import RequestsList from '../components/MeComponents/RequestsList';
 import { getUser } from '../service/userService';
+import HistoryList from '../components/MeComponents/HistoryList';
 
 
 type Props = {
@@ -80,6 +81,7 @@ class Profile extends Component<Props> {
             <View style={styles.container_me_activity}>
               <Text style={styles.header_left}> Recent Activity </Text>
             </View>
+            <HistoryList user={this.state.user} />
           </View>
         )
         :

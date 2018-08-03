@@ -186,15 +186,17 @@ class VehicleService {
                 history.date = Date()
                 history.driverId = vehicle.ownerId
                 history.state = "Delegate"
+                history.actionId = vehicle.plate
 
                 //Save History of delegation
                 historyService.addHistoryElement(history)
-                
+
 
                 val history2 = History()
                 history2.date = Date()
                 history2.state = "Borrow"
                 history2.driverId = delegatedVehicle.userBorrowId
+                history2.actionId = vehicle.plate
 
                 //Save history of borrow
                 historyService.addHistoryElement(history2)
@@ -308,6 +310,26 @@ class VehicleService {
         NotificationHandler.vehicleBorrowCancelNotification(user)
 
         delegatedVehicleRepository.deleteById(delegatedVehicle.id)
+
+        //Create new History Entry
+        val history = History()
+        history.date = Date()
+        history.driverId = vehicle.ownerId
+        history.state = "Delegate Cancel"
+        history.actionId = vehicleId
+
+        //Save History of delegation
+        historyService.addHistoryElement(history)
+
+
+        val history2 = History()
+        history2.date = Date()
+        history2.state = "Borrow Cancel"
+        history2.driverId = delegatedVehicle.userBorrowId
+        history2.actionId = vehicleId
+
+        //Save history of borrow
+        historyService.addHistoryElement(history2)
 
 
 
