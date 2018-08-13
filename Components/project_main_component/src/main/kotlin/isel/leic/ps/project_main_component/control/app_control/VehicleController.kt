@@ -1,6 +1,7 @@
 package isel.leic.ps.project_main_component.control.app_control
 
 import isel.leic.ps.project_main_component.domain.model.*
+import isel.leic.ps.project_main_component.exceptions.BorrowToSameUserException
 import isel.leic.ps.project_main_component.exceptions.NoPermissionException
 import isel.leic.ps.project_main_component.handlers.NotificationHandler
 import isel.leic.ps.project_main_component.service.UserService
@@ -104,6 +105,8 @@ class VehicleController {
         //user validation
         verifyUser(auth, request.ownerId)
 
+        verifyDifferentUser(auth,userBorrow.id)
+
         vehicleService.plateDelegationRequest(request)
 
         NotificationHandler.vehicleBorrowNotification(userBorrow)
@@ -145,5 +148,15 @@ class VehicleController {
         if (user.id != userId) {
             throw NoPermissionException()
         }
+    }
+
+    private fun verifyDifferentUser(auth: String, id: Int) {
+
+        val user = userService.getUserAuth(auth)
+
+        if(user.id == id){
+            throw BorrowToSameUserException()
+        }
+
     }
 }
