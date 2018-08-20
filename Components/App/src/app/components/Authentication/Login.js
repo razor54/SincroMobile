@@ -15,6 +15,7 @@ import styl from '../../config/styles';
 import Register from './Register';
 import networkSetting from '../../config/serverConnectionSettings';
 import validateNIF from '../../util/NifVerify';
+import languages from '../../config/languages';
 
 
 type Props = {
@@ -45,7 +46,6 @@ class Login extends Component<Props> {
     this.onLogin = this.onLogin.bind(this);
     this.handleNif = this.handleNif.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
-    this.getLanguageCode = this.getLanguageCode.bind(this);
   }
 
 
@@ -103,10 +103,10 @@ class Login extends Component<Props> {
 
   render() {
     const passwordError = this.state.passwordValid ? null :
-    <FormValidationMessage>Invalid password. Insert 8 or more characters</FormValidationMessage>;
+    <FormValidationMessage>{languages(this.state.lang).invalidPassword}</FormValidationMessage>;
 
     const nifError = this.state.nifValid ?
-      null : <FormValidationMessage>Invalid NIF</FormValidationMessage>;
+      null : <FormValidationMessage>{languages(this.state.lang).invalidNif}</FormValidationMessage>;
 
     return (
       <KeyboardAvoidingView style={styles.container}>
@@ -119,7 +119,7 @@ class Login extends Component<Props> {
         {nifError}
 
 
-        <FormLabel>Password</FormLabel>
+        <FormLabel>{languages(this.state.lang).password}</FormLabel>
         <FormInput
           onChangeText={this.handlePassword}
           inputStyle={styles.inputStyle}
@@ -155,7 +155,7 @@ class Login extends Component<Props> {
         </View>
 
         <Button
-          title="Don't Have an account? Click Here"
+          title={languages(this.state.lang).accountDontHave}
           buttonStyle={styl.textBtn}
           color="rgba(78, 116, 289, 1)"
           onPress={() => this.props.navigation.navigate('Register')}
@@ -194,6 +194,8 @@ class Login extends Component<Props> {
   };
 
   componentDidMount() {
+    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
+
     AsyncStorage.getItem('token').then((t) => {
       const token = JSON.parse(t);
 
@@ -214,18 +216,10 @@ class Login extends Component<Props> {
       }
     });
     // console.warn(this.getLanguageCode());
+    // AsyncStorage.setItem('language', this.getLanguageCode());
   }
 
-  getLanguageCode() {
-    let systemLanguage = 'en';
-    if (Platform.OS === 'android') {
-      systemLanguage = NativeModules.I18nManager.localeIdentifier;
-    } else {
-      systemLanguage = NativeModules.SettingsManager.settings.AppleLocale;
-    }
-    const languageCode = systemLanguage.substring(0, 2);
-    return languageCode;
-  }
+
 }
 
 export default StackNavigator({

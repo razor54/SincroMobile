@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types,react/prefer-stateless-function */
 import React, { Component } from 'react';
-import { View, ActivityIndicator, AsyncStorage } from 'react-native';
+import { View, ActivityIndicator, AsyncStorage, NativeModules, Platform } from 'react-native';
 import OneSignal from 'react-native-onesignal';
 import styles from './config/styles';
 import networkSetting from './config/serverConnectionSettings';
@@ -26,15 +26,16 @@ export default class extends Component<Props> {
   }
 
   componentDidMount() {
-    fetch(networkSetting.homepage, { method: 'GET' })
-      .then((res) => {
-        if (res.ok) {
-          this.tryToken();
-        } else {
-          this.setState({ networkError: true });
-        }
-      })
-      .catch(() => this.setState({ networkError: true }));
+    AsyncStorage.setItem('language', this.getLanguageCode()).then(() =>
+      fetch(networkSetting.homepage, { method: 'GET' })
+        .then((res) => {
+          if (res.ok) {
+            this.tryToken();
+          } else {
+            this.setState({ networkError: true });
+          }
+        })
+        .catch(() => this.setState({ networkError: true })));
 
     this.oneSignalStart();
   }
@@ -105,6 +106,16 @@ export default class extends Component<Props> {
     this.navigation.navigate('Application');
   }
 
+  getLanguageCode() {
+    let systemLanguage = 'en';
+    if (Platform.OS === 'android') {
+      systemLanguage = NativeModules.I18nManager.localeIdentifier;
+    } else {
+      systemLanguage = NativeModules.SettingsManager.settings.AppleLocale;
+    }
+    const languageCode = systemLanguage.substring(0, 2);
+    return languageCode;
+  }
 
   tryToken() {
     AsyncStorage.getItem('token').then((t) => {

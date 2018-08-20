@@ -71,6 +71,9 @@ class VehiclesControllerTests {
         Mockito.`when`(vehicleRepository.findById(sirocco.plate))
                 .thenReturn(Optional.of(sirocco))
 
+        Mockito.`when`(vehicleService.getSubscribedVehicle(sirocco.plate))
+                .thenReturn(sirocco)
+
     }
 
 
