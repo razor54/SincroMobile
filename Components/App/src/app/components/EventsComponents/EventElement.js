@@ -8,6 +8,7 @@ import {
 import { showLocation } from 'react-native-map-link';
 import styles from '../../config/styles';
 import { responseConfirmEvent } from '../../service/eventService';
+import languages from '../../config/languages';
 
 
 type Props = {
@@ -47,6 +48,10 @@ export default class extends Component<Props> {
     };
   }
 
+  componentDidMount() {
+    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
+  }
+
   getMap() {
     showLocation({
       latitude: this.state.latitude,
@@ -60,11 +65,11 @@ export default class extends Component<Props> {
 
   confirmation() {
     Alert.alert(
-      'Confirmation',
-      'Are you sure?',
+      languages(this.state.lang).confirmation,
+      languages(this.state.lang).areSure,
       [
-        { text: 'Yes', onPress: () => { this.confirmEvent(); } },
-        { text: 'No', onPress: () => {} },
+        { text: languages(this.state.lang).yes, onPress: () => { this.confirmEvent(); } },
+        { text: languages(this.state.lang).no, onPress: () => {} },
       ],
       { cancelable: false },
     );
@@ -78,7 +83,7 @@ export default class extends Component<Props> {
         this.event.verified = true;
         responseConfirmEvent(token, this.event)
           .then(res => (res.ok ? this.setState({ verified: true }) : alert(res.status)))
-          .catch(() => alert('No Possible to Update Event'));
+          .catch(() => alert(languages(this.state.lang).noPossibleToUpdateEvent));
       }
     });
   }
@@ -86,14 +91,18 @@ export default class extends Component<Props> {
   checkVerified() {
     if (!this.state.verified) {
       return (
-        <Button style={styles.textStretch} onPress={this.confirmation} title="Confirm that it was you?" />
+        <Button
+          style={styles.textStretch}
+          onPress={this.confirmation}
+          title={languages(this.state.lang).confirmItWasYou}
+        />
       );
     }
 
     return (
       <View>
-        <Text style={styles.textStretch}> This event is verified </Text>
-        <Button onPress={this.getPayment} title="Pay Event" />
+        <Text style={styles.textStretch}> {languages(this.state.lang).eventVerified} </Text>
+        <Button onPress={this.getPayment} title={languages(this.state.lang).payEvent} />
       </View>);
   }
 
@@ -101,11 +110,11 @@ export default class extends Component<Props> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
         <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> This event occurred on {this.state.date.split('T')[0]} </Text>
-        <Text style={styles.textStretch}> Hours - {this.state.date.split('T')[1].split('.')[0]} </Text>
-        <Text style={styles.textStretch}> Location - {this.state.location} </Text>
+        <Text style={styles.textStretch}> {languages(this.state.lang).eventOccurred} {this.state.date.split('T')[0]} </Text>
+        <Text style={styles.textStretch}> {languages(this.state.lang).hours} - {this.state.date.split('T')[1].split('.')[0]} </Text>
+        <Text style={styles.textStretch}> {languages(this.state.lang).location} - {this.state.location} </Text>
         {this.checkVerified()}
-        <Button onPress={this.getMap} title="Show Map Location" />
+        <Button onPress={this.getMap} title={languages(this.state.lang).showMap} />
 
 
       </KeyboardAvoidingView>

@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import styles from '../../config/styles';
 import { delegateResponse } from '../../service/vehicleService';
+import languages from '../../config/languages';
 
 
 type Props = {
@@ -37,6 +38,10 @@ export default class extends Component<Props> {
     };
   }
 
+  componentDidMount() {
+    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
+  }
+
   handleConfirmation(accept) {
     AsyncStorage.getItem('token').then((t) => {
       const token = JSON.parse(t);
@@ -45,7 +50,7 @@ export default class extends Component<Props> {
         delegateResponse(token, accept, this.state)
           .then((res) => {
             if (res.ok) this.props.navigation.pop(2);
-            else this.showErrorMessage('Not Valid User');
+            else this.showErrorMessage(languages(this.state.lang).notValidUser);
           });
       }
     });
@@ -53,11 +58,11 @@ export default class extends Component<Props> {
 
   showErrorMessage(error) {
     Alert.alert(
-      'Error',
+      languages(this.state.lang).error,
       error,
       [
-        { text: 'Try Again', onPress: () => {} },
-        { text: 'Cancel', onPress: () => this.props.navigation.pop(1, 'Share') },
+        { text: languages(this.state.lang).tryAgain, onPress: () => {} },
+        { text: languages(this.state.lang).cancel, onPress: () => this.props.navigation.pop(1, 'Share') },
       ],
       { cancelable: false },
     );
@@ -75,11 +80,11 @@ export default class extends Component<Props> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
         <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> Owner Identification - {this.state.request.ownerId} </Text>
+        <Text style={styles.textStretch}> {languages(this.state.lang).ownerIdentification} - {this.state.request.ownerId} </Text>
 
-        <Button onPress={this.acceptVehicle} title="Accept" />
+        <Button onPress={this.acceptVehicle} title={languages(this.state.lang).accept} />
 
-        <Button onPress={this.denyVehicle} title="Deny" />
+        <Button onPress={this.denyVehicle} title={languages(this.state.lang).deny} />
       </KeyboardAvoidingView>
 
     );

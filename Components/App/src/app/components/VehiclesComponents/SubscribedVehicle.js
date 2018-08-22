@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import styles from '../../config/styles';
 import { cancelBorrowVehicle, unsubscribeVehicles, cancelBorrowRequest } from '../../service/vehicleService';
+import languages from "../../config/languages";
 
 
 type Props = {
@@ -45,6 +46,10 @@ export default class extends Component<Props> {
     };
   }
 
+  componentDidMount() {
+    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
+  }
+
   borrow() {
     this.props.navigation.navigate('Share', { data: { plate: this.state.plate, ownerId: this.state.ownerId }, callback: this.changeBorrow });
   }
@@ -58,22 +63,22 @@ export default class extends Component<Props> {
     switch (this.state.delegateState) {
       case 'True': return (
         <View>
-          <Text style={styles.textStretch}> This vehicle is borrowed </Text>
-          <Button onPress={this.cancelBorrow} title="Cancel Delegation" />
+          <Text style={styles.textStretch}> {languages(this.state.lang).vehicleBorrowed} </Text>
+          <Button onPress={this.cancelBorrow} title={languages(this.state.lang).cancelDelegation} />
         </View>
       );
 
       case 'Pending': return (
         <View>
-          <Text style={styles.textStretch}> This vehicle waiting for borrow confirmation</Text>
-          <Button onPress={this.cancelRequest} title="Cancel Request" />
+          <Text style={styles.textStretch}> {languages(this.state.lang).waitingBorrowConfirmation } </Text>
+          <Button onPress={this.cancelRequest} title={languages(this.state.lang).cancelRequest} />
         </View>
       );
 
       case 'False': return (
         <View>
-          <Text style={styles.textStretch}> This vehicle is not borrowed </Text>
-          <Button onPress={this.borrow} title="Share Vehicle" />
+          <Text style={styles.textStretch}> {languages(this.state.lang).notBorrowed} </Text>
+          <Button onPress={this.borrow} title={languages(this.state.lang).shareVehicle} />
         </View>
       );
       default: return null;
@@ -123,10 +128,10 @@ export default class extends Component<Props> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
         <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> Owner Identification - {this.state.ownerId} </Text>
-        <Text style={styles.textStretch}> This vehicle was registered on {this.state.date.split('T')[0]} </Text>
+        <Text style={styles.textStretch}> {languages(this.state.lang).ownerIdentification} - {this.state.ownerId} </Text>
+        <Text style={styles.textStretch}> {languages(this.state.lang).vehicleRegistered} on {this.state.date.split('T')[0]} </Text>
         {this.checkBorrow()}
-        <Button onPress={this.removeVehicle} title="Unsubscribe Vehicle" />
+        <Button onPress={this.removeVehicle} title={languages(this.state.lang).unsubscribe} />
       </KeyboardAvoidingView>
 
 

@@ -4,10 +4,11 @@ import React, { Component } from 'react';
 import {
   Text,
   KeyboardAvoidingView,
-  Button,
+  Button, AsyncStorage,
 } from 'react-native';
 import styles from '../../config/styles';
 import { payEvent } from '../../service/eventService';
+import languages from '../../config/languages';
 
 type Props = {
     navigation:{
@@ -36,6 +37,10 @@ export default class extends Component<Props> {
     };
   }
 
+  componentDidMount() {
+    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
+  }
+
   pay() {
     // todo
     payEvent();
@@ -45,12 +50,12 @@ export default class extends Component<Props> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
         <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> This event occurred on {this.state.date.split('T')[0]} </Text>
-        <Text style={styles.textStretch}> Hours - {this.state.date.split('T')[1].split('.')[0]} </Text>
-        <Text style={styles.textStretch}> Location - {this.state.location} </Text>
-        <Text style={styles.textStretch}> Price - {this.state.price} € </Text>
+        <Text style={styles.textStretch}> {languages(this.state.lang).eventOccurred} {this.state.date.split('T')[0]} </Text>
+        <Text style={styles.textStretch}> {languages(this.state.lang).hours} - {this.state.date.split('T')[1].split('.')[0]} </Text>
+        <Text style={styles.textStretch}> {languages(this.state.lang).location} - {this.state.location} </Text>
+        <Text style={styles.textStretch}> {languages(this.state.lang).price} - {this.state.price} € </Text>
 
-        <Button onPress={this.pay} title="Confirm Payment" />
+        <Button onPress={this.pay} title={languages(this.state.lang).confirmPayment} />
 
       </KeyboardAvoidingView>
 

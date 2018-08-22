@@ -9,6 +9,7 @@ import {
 import { FormInput, FormLabel } from 'react-native-elements';
 import styles from '../../config/styles';
 import { delegateVehicle } from '../../service/vehicleService';
+import languages from '../../config/languages';
 
 
 type Props = {
@@ -43,6 +44,10 @@ export default class extends Component<Props> {
     };
   }
 
+  componentDidMount() {
+    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
+  }
+
   borrow() {
     AsyncStorage.getItem('token').then((t) => {
       const token = JSON.parse(t);
@@ -64,11 +69,11 @@ export default class extends Component<Props> {
 
   showErrorMessage(error) {
     Alert.alert(
-      'Error',
+      languages(this.state.lang).error,
       error,
       [
-        { text: 'Try Again', onPress: () => {} },
-        { text: 'Cancel', onPress: () => this.props.navigation.pop(1, 'Share') },
+        { text: languages(this.state.lang).tryAgain, onPress: () => {} },
+        { text: languages(this.state.lang).cancel, onPress: () => this.props.navigation.pop(1, 'Share') },
       ],
       { cancelable: false },
     );
@@ -77,16 +82,16 @@ export default class extends Component<Props> {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
-        <Text style={styles.textStretch}> Your Identification - {this.state.ownerId} </Text>
-        <Text style={styles.textStretch}> Vehicle Plate - {this.state.plate} </Text>
-        <FormLabel>Sharing user identification</FormLabel>
+        <Text style={styles.textStretch}> {languages(this.state.lang).yourId} - {this.state.ownerId} </Text>
+        <Text style={styles.textStretch}> {languages(this.state.lang).vehiclePlate} - {this.state.plate} </Text>
+        <FormLabel>{languages(this.state.lang).sharingUserIdentification}</FormLabel>
         <FormInput
           onChangeText={borrowId => this.setState({ borrowId })}
           value={this.state.borrowId}
           inputStyle={styles.inputStyle}
         />
-        <Button onPress={this.borrow} title="Share Vehicle" />
-        <Text style={styles.textStretch}>This process needs to be accepted by the pretended user, and can be canceled any time!</Text>
+        <Button onPress={this.borrow} title={languages(this.state.lang).shareVehicle} />
+        <Text style={styles.textStretch}>{languages(this.state.lang).acceptProcessTerms}</Text>
       </KeyboardAvoidingView>
 
     );

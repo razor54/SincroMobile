@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import styles from '../../config/styles';
 import { getVehicle } from '../../service/vehicleService';
+import languages from "../../config/languages";
 
 
 type Props = {
@@ -51,7 +52,7 @@ export default class extends Component<Props> {
           .then(vehicle => this.setState({ vehicle }))
           .catch(e => alert(e));
       }
-    });
+    }).finally(() => AsyncStorage.getItem('language').then(l => this.setState({ lang: l })));
   }
 
   removeVehicle() {
@@ -62,9 +63,9 @@ export default class extends Component<Props> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
         <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> Owner Identification - {this.state.vehicle.ownerId} </Text>
-        <Text style={styles.textStretch}> This vehicle was registered on {this.state.vehicle.registryDate.split('T')[0]} </Text>
-        <Button onPress={this.removeVehicle} title="Remove Vehicle" />
+        <Text style={styles.textStretch}> {languages(this.state.lang).ownerIdentification} - {this.state.vehicle.ownerId} </Text>
+        <Text style={styles.textStretch}> {languages(this.state.lang).vehicleRegistered} on {this.state.vehicle.registryDate.split('T')[0]} </Text>
+        <Button onPress={this.removeVehicle} title={languages(this.state.lang).removeVehicle} />
       </KeyboardAvoidingView>
 
     );
