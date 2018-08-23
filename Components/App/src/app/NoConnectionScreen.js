@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, KeyboardAvoidingView, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import styles from './config/styles';
+import languages from './config/languages';
 
 
 const buttonIcon = {
@@ -36,7 +37,7 @@ export default class extends Component<Props> {
             onPress={this.reloadHome}
           />
           <Text style={styles.textCenter}>
-                No Internet Connection
+            {languages().noInternet}
           </Text>
         </View>
       </KeyboardAvoidingView>

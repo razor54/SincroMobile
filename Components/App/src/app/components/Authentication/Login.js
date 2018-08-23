@@ -48,10 +48,33 @@ class Login extends Component<Props> {
     this.handlePassword = this.handlePassword.bind(this);
   }
 
+  componentDidMount() {
+    AsyncStorage.getItem('token').then((t) => {
+      const token = JSON.parse(t);
 
-  handleNif(nif) {
-    const test = /^[0-9]{7,10}$/;
-    this.setState({ nif, nifValid: test.test(nif) && validateNIF(nif) });
+      if (token != null) {
+        const myInit = {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            Authorization: `${token.token_type} ${token.access_token}`,
+          },
+        };
+        fetch(`${networkSetting.homepage}/validate`, myInit).then(res => res.json())
+          .then((user) => {
+            if (user.id) {
+              this.onLogin();
+            }
+          });
+      }
+    });
+    // console.warn(this.getLanguageCode());
+    // AsyncStorage.setItem('language', this.getLanguageCode());
+  }
+
+
+  onLogin() {
+    this.props.navigation.navigate('Application');
   }
 
   handlePassword(password) {
@@ -59,8 +82,9 @@ class Login extends Component<Props> {
     this.setState({ password, passwordValid: test.test(password) });
   }
 
-  onLogin() {
-    this.props.navigation.navigate('Application');
+  handleNif(nif) {
+    const test = /^[0-9]{7,10}$/;
+    this.setState({ nif, nifValid: test.test(nif) && validateNIF(nif) });
   }
 
   login = () => {
@@ -100,37 +124,62 @@ class Login extends Component<Props> {
       .done();
   };
 
+  // Create response callback.
+    _responseInfoCallback = (error, result) => {
+      if (error) {
+        alert(`Error fetching data: ${error.toString()}`);
+      } else {
+        // alert(`Result Name: ${result.name}`);
 
-  render() {
-    const passwordError = this.state.passwordValid ? null :
-    <FormValidationMessage>{languages(this.state.lang).invalidPassword}</FormValidationMessage>;
+        const myInit = {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+          },
+        };
+        fetch(`${networkSetting.homepage}/user/${result.email}`, myInit)
+          .then(data => data.json())
+          .then((user) => {
+            if (user.id) {
+              // this.props.screenProps.onLogin(user);
+              this.onLogin();
+            } else {
+              this.props.navigation.navigate('Register', { userProps: { name: result.name, email: result.email } });
+            }
+          }).catch(() => alert('Network error'));
+      }
+    };
 
-    const nifError = this.state.nifValid ?
-      null : <FormValidationMessage>{languages(this.state.lang).invalidNif}</FormValidationMessage>;
+    render() {
+      const passwordError = this.state.passwordValid ? null :
+      <FormValidationMessage>{languages().invalidPassword}</FormValidationMessage>;
 
-    return (
-      <KeyboardAvoidingView style={styles.container}>
+      const nifError = this.state.nifValid ?
+        null : <FormValidationMessage>{languages().invalidNif}</FormValidationMessage>;
 
-        <FormLabel>NIF</FormLabel>
-        <FormInput
-          onChangeText={this.handleNif}
-          inputStyle={styles.inputStyle}
-        />
-        {nifError}
+      return (
+        <KeyboardAvoidingView style={styles.container}>
 
-
-        <FormLabel>{languages(this.state.lang).password}</FormLabel>
-        <FormInput
-          onChangeText={this.handlePassword}
-          inputStyle={styles.inputStyle}
-          secureTextEntry
-        />
-        {passwordError}
+          <FormLabel>NIF</FormLabel>
+          <FormInput
+            onChangeText={this.handleNif}
+            inputStyle={styles.inputStyle}
+          />
+          {nifError}
 
 
-        <View />
-        <View style={{ marginTop: 50 }}>
-          {
+          <FormLabel>{languages().password}</FormLabel>
+          <FormInput
+            onChangeText={this.handlePassword}
+            inputStyle={styles.inputStyle}
+            secureTextEntry
+          />
+          {passwordError}
+
+
+          <View />
+          <View style={{ marginTop: 50 }}>
+            {
 
 
             this.state.isLoading ?
@@ -152,74 +201,20 @@ class Login extends Component<Props> {
 
 
           }
-        </View>
+          </View>
 
-        <Button
-          title={languages(this.state.lang).accountDontHave}
-          buttonStyle={styl.textBtn}
-          color="rgba(78, 116, 289, 1)"
-          onPress={() => this.props.navigation.navigate('Register')}
-        >
+          <Button
+            title={languages().accountDontHave}
+            buttonStyle={styl.textBtn}
+            color="rgba(78, 116, 289, 1)"
+            onPress={() => this.props.navigation.navigate('Register')}
+          >
           Info
-        </Button>
+          </Button>
 
-      </KeyboardAvoidingView>
-    );
-  }
-
-  // Create response callback.
-  _responseInfoCallback = (error, result) => {
-    if (error) {
-      alert(`Error fetching data: ${error.toString()}`);
-    } else {
-      // alert(`Result Name: ${result.name}`);
-
-      const myInit = {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-        },
-      };
-      fetch(`${networkSetting.homepage}/user/${result.email}`, myInit)
-        .then(data => data.json())
-        .then((user) => {
-          if (user.id) {
-            // this.props.screenProps.onLogin(user);
-            this.onLogin();
-          } else {
-            this.props.navigation.navigate('Register', { userProps: { name: result.name, email: result.email } });
-          }
-        }).catch(() => alert('Network error'));
+        </KeyboardAvoidingView>
+      );
     }
-  };
-
-  componentDidMount() {
-    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
-
-    AsyncStorage.getItem('token').then((t) => {
-      const token = JSON.parse(t);
-
-      if (token != null) {
-        const myInit = {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            Authorization: `${token.token_type} ${token.access_token}`,
-          },
-        };
-        fetch(`${networkSetting.homepage}/validate`, myInit).then(res => res.json())
-          .then((user) => {
-            if (user.id) {
-              this.onLogin();
-            }
-          });
-      }
-    });
-    // console.warn(this.getLanguageCode());
-    // AsyncStorage.setItem('language', this.getLanguageCode());
-  }
-
-
 }
 
 export default StackNavigator({

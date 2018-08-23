@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import styles from '../../config/styles';
 import { subscribeVehicle } from '../../service/vehicleService';
-import languages from "../../config/languages";
+import languages from '../../config/languages';
 
 
 type Props = {
@@ -40,15 +40,11 @@ export default class extends Component<Props> {
     };
   }
 
-  componentDidMount() {
-    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
-  }
-
   checkSubscription = () => {
     if (this.state.subscribed) {
-      return <Text style={styles.textStretch}> {languages(this.state.lang).alreadySubscribed} </Text>;
+      return <Text style={styles.textStretch}> {languages().alreadySubscribed} </Text>;
     }
-    return <Button onPress={this.addVehicle} title={languages(this.state.lang).subscribe} />;
+    return <Button onPress={this.addVehicle} title={languages().subscribe} />;
   };
 
 
@@ -73,8 +69,8 @@ export default class extends Component<Props> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
         <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).ownerIdentification} - {this.state.ownerId} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).vehicleRegistered} {this.state.date.split('T')[0]} </Text>
+        <Text style={styles.textStretch}> {languages().ownerIdentification} - {this.state.ownerId} </Text>
+        <Text style={styles.textStretch}> {languages().vehicleRegistered} {this.state.date.split('T')[0]} </Text>
         {this.checkSubscription()}
       </KeyboardAvoidingView>
 

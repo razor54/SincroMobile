@@ -37,9 +37,6 @@ export default class extends Component<Props> {
     };
   }
 
-  componentDidMount() {
-    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
-  }
 
   pay() {
     // todo
@@ -50,12 +47,12 @@ export default class extends Component<Props> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
         <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).eventOccurred} {this.state.date.split('T')[0]} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).hours} - {this.state.date.split('T')[1].split('.')[0]} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).location} - {this.state.location} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).price} - {this.state.price} € </Text>
+        <Text style={styles.textStretch}> {languages().eventOccurred} {this.state.date.split('T')[0]} </Text>
+        <Text style={styles.textStretch}> {languages().hours} - {this.state.date.split('T')[1].split('.')[0]} </Text>
+        <Text style={styles.textStretch}> {languages().location} - {this.state.location} </Text>
+        <Text style={styles.textStretch}> {languages().price} - {this.state.price} € </Text>
 
-        <Button onPress={this.pay} title={languages(this.state.lang).confirmPayment} />
+        <Button onPress={this.pay} title={languages().confirmPayment} />
 
       </KeyboardAvoidingView>
 

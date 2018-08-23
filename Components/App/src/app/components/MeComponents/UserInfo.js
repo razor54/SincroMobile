@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import Modal from 'react-native-modal';
 import styles from '../../config/styles';
+import languages from "../../config/languages";
 
 
 type Props = {
@@ -37,7 +38,7 @@ export default class UserInfo extends Component<Props> {
 
 
   responseInfoCallback = (error, result) => {
-    if (error) alert('An error fetching user image');
+    if (error) alert(languages().errorFetchingUserImage);
     else this.setState({ userImage: result.picture.data.url });
   };
 

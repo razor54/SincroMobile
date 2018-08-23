@@ -38,9 +38,6 @@ export default class extends Component<Props> {
     };
   }
 
-  componentDidMount() {
-    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
-  }
 
   handleConfirmation(accept) {
     AsyncStorage.getItem('token').then((t) => {
@@ -50,7 +47,7 @@ export default class extends Component<Props> {
         delegateResponse(token, accept, this.state)
           .then((res) => {
             if (res.ok) this.props.navigation.pop(2);
-            else this.showErrorMessage(languages(this.state.lang).notValidUser);
+            else this.showErrorMessage(languages().notValidUser);
           });
       }
     });
@@ -58,11 +55,11 @@ export default class extends Component<Props> {
 
   showErrorMessage(error) {
     Alert.alert(
-      languages(this.state.lang).error,
+      languages().error,
       error,
       [
-        { text: languages(this.state.lang).tryAgain, onPress: () => {} },
-        { text: languages(this.state.lang).cancel, onPress: () => this.props.navigation.pop(1, 'Share') },
+        { text: languages().tryAgain, onPress: () => {} },
+        { text: languages().cancel, onPress: () => this.props.navigation.pop(1, 'Share') },
       ],
       { cancelable: false },
     );
@@ -80,11 +77,11 @@ export default class extends Component<Props> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
         <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).ownerIdentification} - {this.state.request.ownerId} </Text>
+        <Text style={styles.textStretch}> {languages().ownerIdentification} - {this.state.request.ownerId} </Text>
 
-        <Button onPress={this.acceptVehicle} title={languages(this.state.lang).accept} />
+        <Button onPress={this.acceptVehicle} title={languages().accept} />
 
-        <Button onPress={this.denyVehicle} title={languages(this.state.lang).deny} />
+        <Button onPress={this.denyVehicle} title={languages().deny} />
       </KeyboardAvoidingView>
 
     );

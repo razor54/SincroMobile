@@ -15,6 +15,7 @@ import DelegatedList from '../components/VehiclesComponents/DelegatedList';
 import BorrowingList from '../components/VehiclesComponents/BorrowingList';
 import theme from '../config/theme';
 import { getUser } from '../service/userService';
+import languages from "../config/languages";
 
 
 type Props = {
@@ -79,7 +80,7 @@ class Vehicles extends Component<Props> {
                   alignItems: 'flex-end',
               }}
               onPress={this.getVehicleForm}
-              title="Subscribe New Vehicle"
+              title={languages().subscribeNewVehicle}
             />
           </KeyboardAvoidingView>
         )
@@ -98,27 +99,27 @@ class Vehicles extends Component<Props> {
 export default StackNavigator({
   List: {
     screen: Vehicles,
-    navigationOptions: navigationHeaderStyle('Vehicles'),
+    navigationOptions: navigationHeaderStyle(languages().vehicles),
   },
   RegisterVehicleList: {
     screen: VehiclesList,
-    navigationOptions: navigationHeaderStyle('Your Vehicles'),
+    navigationOptions: navigationHeaderStyle(languages().yourVehicles),
   },
   Vehicle: {
     screen: Vehicle,
-    navigationOptions: navigationHeaderStyle('Vehicle'),
+    navigationOptions: navigationHeaderStyle(languages().vehicle),
   },
   SubscribedVehicle: {
     screen: SubscribedVehicle,
-    navigationOptions: navigationHeaderStyle('Vehicle'),
+    navigationOptions: navigationHeaderStyle(languages().vehicle),
   },
   BorrowingVehicle: {
     screen: BorrowingVehicle,
-    navigationOptions: navigationHeaderStyle('Vehicle'),
+    navigationOptions: navigationHeaderStyle(languages().vehicle),
   },
   Share: {
     screen: ShareForm,
-    navigationOptions: navigationHeaderStyle('Share'),
+    navigationOptions: navigationHeaderStyle(languages().share),
   },
 });
 
@@ -128,21 +129,21 @@ const VehiclesTabNavigator = TabNavigator(
     Subscribed: {
       screen: SubscribedList,
       navigationOptions: {
-        tabBarLabel: 'Subscribed',
+        tabBarLabel: languages().subscribed,
         tabBarIcon: ({ tintColor }) => <Ionicons name="ios-swap" size={35} color={tintColor} />,
       },
     },
     Delegated: {
       screen: DelegatedList,
       navigationOptions: {
-        tabBarLabel: 'Delegated',
+        tabBarLabel: languages().delegated,
         tabBarIcon: ({ tintColor }) => <Ionicons name="ios-arrow-round-up" size={35} color={tintColor} />,
       },
     },
     Borrowed: {
       screen: BorrowingList,
       navigationOptions: {
-        tabBarLabel: 'Borrowed',
+        tabBarLabel: languages().borrowed,
         tabBarIcon: ({ tintColor }) => <Ionicons name="ios-arrow-round-down" size={35} color={tintColor} />,
       },
     },

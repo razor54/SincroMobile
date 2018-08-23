@@ -48,9 +48,6 @@ export default class extends Component<Props> {
     };
   }
 
-  componentDidMount() {
-    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
-  }
 
   getMap() {
     showLocation({
@@ -65,11 +62,11 @@ export default class extends Component<Props> {
 
   confirmation() {
     Alert.alert(
-      languages(this.state.lang).confirmation,
-      languages(this.state.lang).areSure,
+      languages().confirmation,
+      languages().areSure,
       [
-        { text: languages(this.state.lang).yes, onPress: () => { this.confirmEvent(); } },
-        { text: languages(this.state.lang).no, onPress: () => {} },
+        { text: languages().yes, onPress: () => { this.confirmEvent(); } },
+        { text: languages().no, onPress: () => {} },
       ],
       { cancelable: false },
     );
@@ -83,7 +80,7 @@ export default class extends Component<Props> {
         this.event.verified = true;
         responseConfirmEvent(token, this.event)
           .then(res => (res.ok ? this.setState({ verified: true }) : alert(res.status)))
-          .catch(() => alert(languages(this.state.lang).noPossibleToUpdateEvent));
+          .catch(() => alert(languages().noPossibleToUpdateEvent));
       }
     });
   }
@@ -94,15 +91,15 @@ export default class extends Component<Props> {
         <Button
           style={styles.textStretch}
           onPress={this.confirmation}
-          title={languages(this.state.lang).confirmItWasYou}
+          title={languages().confirmItWasYou}
         />
       );
     }
 
     return (
       <View>
-        <Text style={styles.textStretch}> {languages(this.state.lang).eventVerified} </Text>
-        <Button onPress={this.getPayment} title={languages(this.state.lang).payEvent} />
+        <Text style={styles.textStretch}> {languages().eventVerified} </Text>
+        <Button onPress={this.getPayment} title={languages().payEvent} />
       </View>);
   }
 
@@ -110,11 +107,11 @@ export default class extends Component<Props> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
         <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).eventOccurred} {this.state.date.split('T')[0]} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).hours} - {this.state.date.split('T')[1].split('.')[0]} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).location} - {this.state.location} </Text>
+        <Text style={styles.textStretch}> {languages().eventOccurred} {this.state.date.split('T')[0]} </Text>
+        <Text style={styles.textStretch}> {languages().hours} - {this.state.date.split('T')[1].split('.')[0]} </Text>
+        <Text style={styles.textStretch}> {languages().location} - {this.state.location} </Text>
         {this.checkVerified()}
-        <Button onPress={this.getMap} title={languages(this.state.lang).showMap} />
+        <Button onPress={this.getMap} title={languages().showMap} />
 
 
       </KeyboardAvoidingView>

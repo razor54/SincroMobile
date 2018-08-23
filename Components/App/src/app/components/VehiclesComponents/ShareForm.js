@@ -44,9 +44,6 @@ export default class extends Component<Props> {
     };
   }
 
-  componentDidMount() {
-    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
-  }
 
   borrow() {
     AsyncStorage.getItem('token').then((t) => {
@@ -60,7 +57,7 @@ export default class extends Component<Props> {
               this.props.navigation.pop(1, 'Share');
             } else {
               this.callback('False');
-              this.showErrorMessage('Not Valid User');
+              this.showErrorMessage(languages().notValidUser);
             }
           });
       }
@@ -69,11 +66,11 @@ export default class extends Component<Props> {
 
   showErrorMessage(error) {
     Alert.alert(
-      languages(this.state.lang).error,
+      languages().error,
       error,
       [
-        { text: languages(this.state.lang).tryAgain, onPress: () => {} },
-        { text: languages(this.state.lang).cancel, onPress: () => this.props.navigation.pop(1, 'Share') },
+        { text: languages().tryAgain, onPress: () => {} },
+        { text: languages().cancel, onPress: () => this.props.navigation.pop(1, 'Share') },
       ],
       { cancelable: false },
     );
@@ -82,16 +79,16 @@ export default class extends Component<Props> {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
-        <Text style={styles.textStretch}> {languages(this.state.lang).yourId} - {this.state.ownerId} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).vehiclePlate} - {this.state.plate} </Text>
-        <FormLabel>{languages(this.state.lang).sharingUserIdentification}</FormLabel>
+        <Text style={styles.textStretch}> {languages().yourId} - {this.state.ownerId} </Text>
+        <Text style={styles.textStretch}> {languages().vehiclePlate} - {this.state.plate} </Text>
+        <FormLabel>{languages().sharingUserIdentification}</FormLabel>
         <FormInput
           onChangeText={borrowId => this.setState({ borrowId })}
           value={this.state.borrowId}
           inputStyle={styles.inputStyle}
         />
-        <Button onPress={this.borrow} title={languages(this.state.lang).shareVehicle} />
-        <Text style={styles.textStretch}>{languages(this.state.lang).acceptProcessTerms}</Text>
+        <Button onPress={this.borrow} title={languages().shareVehicle} />
+        <Text style={styles.textStretch}>{languages().acceptProcessTerms}</Text>
       </KeyboardAvoidingView>
 
     );

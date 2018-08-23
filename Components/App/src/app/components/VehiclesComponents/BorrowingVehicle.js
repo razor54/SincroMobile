@@ -52,7 +52,7 @@ export default class extends Component<Props> {
           .then(vehicle => this.setState({ vehicle }))
           .catch(e => alert(e));
       }
-    }).finally(() => AsyncStorage.getItem('language').then(l => this.setState({ lang: l })));
+    });
   }
 
   removeVehicle() {
@@ -63,9 +63,9 @@ export default class extends Component<Props> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
         <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).ownerIdentification} - {this.state.vehicle.ownerId} </Text>
-        <Text style={styles.textStretch}> {languages(this.state.lang).vehicleRegistered} on {this.state.vehicle.registryDate.split('T')[0]} </Text>
-        <Button onPress={this.removeVehicle} title={languages(this.state.lang).removeVehicle} />
+        <Text style={styles.textStretch}> {languages().ownerIdentification} - {this.state.vehicle.ownerId} </Text>
+        <Text style={styles.textStretch}> {languages().vehicleRegistered} {this.state.vehicle.registryDate.split('T')[0]} </Text>
+        <Button onPress={this.removeVehicle} title={languages().removeVehicle} />
       </KeyboardAvoidingView>
 
     );

@@ -5,6 +5,7 @@ import EventList from '../components/EventsComponents/EventList';
 import EventElement from '../components/EventsComponents/EventElement';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
 import PaymentForm from '../components/EventsComponents/PaymentForm';
+import languages from '../config/languages';
 
 export default StackNavigator({
 
@@ -12,18 +13,18 @@ export default StackNavigator({
   List: {
     screen: EventList,
 
-    navigationOptions: navigationHeaderStyle('Events List'),
+    navigationOptions: navigationHeaderStyle(languages().eventsList),
   },
 
   Element: {
     screen: EventElement,
-    navigationOptions: navigationHeaderStyle('Event Detail'),
+    navigationOptions: navigationHeaderStyle(languages().eventDetail),
 
   },
 
   Payment: {
     screen: PaymentForm,
-    navigationOptions: navigationHeaderStyle('Event Payment'),
+    navigationOptions: navigationHeaderStyle(languages().eventPayment),
 
   },
 

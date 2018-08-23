@@ -65,9 +65,6 @@ export default class Register extends Component<Props> {
     this.saveUser = this.saveUser.bind(this);
   }
 
-  componentDidMount() {
-    AsyncStorage.getItem('language').then(l => this.setState({ lang: l }));
-  }
 
   handleEmail(receivedEmail) {
     const email = receivedEmail.toLowerCase();
@@ -95,7 +92,7 @@ export default class Register extends Component<Props> {
   login = () => {
     if (!this.state.nifValid || !this.state.passwordValid || !this.state.emailValid
       || !this.state.usernameValid) {
-      return alert(languages(this.state.lang).insertValidParams);
+      return alert(languages().insertValidParams);
     }
     this.setState({ isLoading: true });
     AsyncStorage.getItem('playerId').then(this.saveUser)
@@ -126,13 +123,13 @@ export default class Register extends Component<Props> {
           AsyncStorage.setItem('token', JSON.stringify(res.token)).then(() =>
             this.props.navigation.navigate('Application'));
         } else {
-          alert(languages(languages(this.state.lang)).thereWasAnError);
+          alert(languages().thereWasAnError);
           this.setState({ isLoading: false });
         }
         // else shake button
       })
       .catch(() => {
-        alert(languages(languages(this.state.lang)).thereWasAnError);
+        alert(languages().thereWasAnError);
         this.setState({ isLoading: false });
       })
       .done();
@@ -141,22 +138,22 @@ export default class Register extends Component<Props> {
   render() {
     const emailError =
       this.state.emailValid ? null :
-      <FormValidationMessage>{languages(this.state.lang).invalidEmail}</FormValidationMessage>;
+      <FormValidationMessage>{languages().invalidEmail}</FormValidationMessage>;
 
     const nameError = this.state.usernameValid ?
       null
       :
-      <FormValidationMessage>{languages(this.state.lang).invalidUsername}</FormValidationMessage>;
+      <FormValidationMessage>{languages().invalidUsername}</FormValidationMessage>;
 
     const passwordError = this.state.passwordValid ?
       null
       :
-      <FormValidationMessage>{languages(this.state.lang).invalidPassword}</FormValidationMessage>;
+      <FormValidationMessage>{languages().invalidPassword}</FormValidationMessage>;
 
     const nifError = this.state.nifValid ?
       null
       :
-      <FormValidationMessage>{languages(this.state.lang).invalidNif}</FormValidationMessage>;
+      <FormValidationMessage>{languages().invalidNif}</FormValidationMessage>;
 
     let userProps = null;
     if (this.props.navigation.state.params) {
@@ -179,7 +176,7 @@ export default class Register extends Component<Props> {
 
           {emailError}
 
-          <FormLabel>{languages(this.state.lang).name}</FormLabel>
+          <FormLabel>{languages().name}</FormLabel>
           <FormInput
             value={userProps ? userProps.name : this.state.username}
             onChangeText={this.handleUserName}
@@ -197,7 +194,7 @@ export default class Register extends Component<Props> {
           />
           {nifError}
 
-          <FormLabel>{languages(this.state.lang).password}</FormLabel>
+          <FormLabel>{languages().password}</FormLabel>
           <FormInput
             onChangeText={this.handlePassword}
           // containerStyle={{ width: '60%' }}
@@ -233,7 +230,7 @@ export default class Register extends Component<Props> {
           </View>
 
           <Button
-            title={languages(this.state.lang).accountHave}
+            title={languages().accountHave}
             buttonStyle={styl.textBtn}
             color="rgba(78, 116, 289, 1)"
             onPress={() => this.props.navigation.pop(1, 'Login')}

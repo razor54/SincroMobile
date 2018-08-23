@@ -11,6 +11,7 @@ import BorrowingRequest from '../components/MeComponents/BorrowingRequest';
 import RequestsList from '../components/MeComponents/RequestsList';
 import { getUser } from '../service/userService';
 import HistoryList from '../components/MeComponents/HistoryList';
+import languages from "../config/languages";
 
 
 type Props = {
@@ -71,7 +72,7 @@ class Profile extends Component<Props> {
                 <View style={{ padding: 5 }}>
                   <Button
                     buttonStyle={styles.button2}
-                    title="Requests"
+                    title={languages().requests}
                     onPress={this.getBorrowingRequests}
                   />
                 </View>
@@ -79,7 +80,7 @@ class Profile extends Component<Props> {
             </View>
 
             <View style={styles.container_me_activity}>
-              <Text style={styles.header_left}> Recent Activity </Text>
+              <Text style={styles.header_left}> {languages().recentActivity} </Text>
             </View>
             <HistoryList user={this.state.user} />
           </View>
@@ -99,15 +100,15 @@ class Profile extends Component<Props> {
 export default StackNavigator({
   Profile: {
     screen: Profile,
-    navigationOptions: navigationHeaderStyle('Profile'),
+    navigationOptions: navigationHeaderStyle(languages().profile),
   },
   RequestsList: {
     screen: RequestsList,
-    navigationOptions: navigationHeaderStyle('Requests'),
+    navigationOptions: navigationHeaderStyle(languages().requests),
   },
   BorrowingRequestElement: {
     screen: BorrowingRequest,
-    navigationOptions: navigationHeaderStyle('Borrowing Request'),
+    navigationOptions: navigationHeaderStyle(languages().borrowingRequest),
   },
 
 });

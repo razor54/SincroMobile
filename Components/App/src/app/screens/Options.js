@@ -12,6 +12,7 @@ import styles from '../config/styles';
 import navigationHeaderStyle from '../config/NavigationOptionsThemed';
 import About from '../components/OptionsComponents/About';
 import { getUser } from '../service/userService';
+import languages from '../config/languages';
 
 type Props = {
   navigation:{
@@ -110,7 +111,12 @@ class Options extends Component<Props> {
             <Text style={{ ...styles.btnText }}>{this.state.user.email}</Text>
 
             <View style={{ alignItems: 'center', justifyContent: 'flex-end', padding: 5 }}>
-              <Button buttonStyle={styles.button2} rounded onPress={this.gotToAbout} title="About Us" />
+              <Button
+                buttonStyle={styles.button2}
+                rounded
+                onPress={this.gotToAbout}
+                title={languages().aboutUs}
+              />
             </View>
 
           </View>
@@ -129,11 +135,11 @@ class Options extends Component<Props> {
 export default StackNavigator({
   Options: {
     screen: Options,
-    navigationOptions: navigationHeaderStyle('Options'),
+    navigationOptions: navigationHeaderStyle(languages().options),
   },
   About: {
     screen: About,
-    navigationOptions: navigationHeaderStyle('About'),
+    navigationOptions: navigationHeaderStyle(languages().about),
   },
 
 });

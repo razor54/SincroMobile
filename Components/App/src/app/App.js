@@ -10,6 +10,7 @@ import SplashScreen from './SplashScreen';
 import NoConnectionScreen from './NoConnectionScreen';
 import theme from './config/theme';
 import Vehicles from './screens/Vehicles';
+import languages from './config/languages';
 
 
 const Application = TabNavigator(
@@ -18,7 +19,7 @@ const Application = TabNavigator(
     Events: {
       screen: Events,
       navigationOptions: {
-        tabBarLabel: 'Events',
+        tabBarLabel: languages().events,
         tabBarIcon: ({ tintColor }) => <Ionicons name="ios-list" size={35} color={tintColor} />,
       },
     },
@@ -27,7 +28,7 @@ const Application = TabNavigator(
     Me: {
       screen: Me,
       navigationOptions: {
-        tabBarLabel: 'Me',
+        tabBarLabel: languages().me,
         tabBarIcon: ({ tintColor }) => <Ionicons name="ios-person" size={35} color={tintColor} />,
       },
     },
@@ -35,7 +36,7 @@ const Application = TabNavigator(
     Vehicles: {
       screen: Vehicles,
       navigationOptions: {
-        tabBarLabel: 'Vehicles',
+        tabBarLabel: languages().vehicles,
         tabBarIcon: ({ tintColor }) => <Ionicons name="ios-car" size={35} color={tintColor} />,
       },
     },
@@ -43,7 +44,7 @@ const Application = TabNavigator(
     About: {
       screen: About,
       navigationOptions: {
-        tabBarLabel: 'Options',
+        tabBarLabel: languages().options,
         tabBarIcon: ({ tintColor }) => <Ionicons name="ios-settings" size={35} color={tintColor} />,
       },
     },

@@ -1,7 +1,21 @@
+import { NativeModules, Platform } from 'react-native';
 
+
+function getLanguageCode() {
+  let systemLanguage = 'en';
+  if (Platform.OS === 'android') {
+    systemLanguage = NativeModules.I18nManager.localeIdentifier;
+  } else {
+    systemLanguage = NativeModules.SettingsManager.settings.AppleLocale;
+  }
+  const languageCode = systemLanguage.substring(0, 2);
+  return languageCode;
+}
 
 export default function (lang) {
-  if (lang === 'pt') {
+  const l = getLanguageCode();
+
+  if (l === 'pt') {
     return {
       mobile: 'Mobile',
       accountDontHave: 'Não tem uma conta? pressione aqui',
@@ -52,6 +66,32 @@ export default function (lang) {
       unsubscribe: 'Cancelar subscrição do veículo',
       alreadySubscribed: 'O veículo já se encontra subscrito',
       subscribe: 'Subscrever veículo',
+      eventsList: 'Lista de eventos',
+      eventDetail: 'Detalhes do evento',
+      eventPayment: 'Pagamento do evento',
+      profile: 'Perfil',
+      requests: 'Pedidos',
+      borrowingRequest: 'Pedido de empréstimo',
+      aboutUs: 'Sobre nós',
+      options: 'Opções',
+      about: 'Acerca Do SINCRO Mobile',
+      subscribeNewVehicle: 'Subscrever Novo Veículo',
+      vehicles: 'Veículos',
+      yourVehicles: 'Os Seus Veículos',
+      vehicle: 'Veículo',
+      share: 'Partilhar',
+      subscribed: 'Veículos Subscritos',
+      delegated: 'Veículos Delegados',
+      borrowed: 'Veículos Emprestados',
+      events: 'Eventos',
+      me: 'Sobre mim',
+      noInternet: 'Sem ligação à internet',
+      congratz: 'Parabéns, não tem nenhum evento!',
+      noRequests: 'Neste momento não tem nenhum pedido de empréstimo',
+      errorFetchingUserImage: 'Ocurreu um erro ao carregar a imagem de utilizador',
+      recentActivity: 'Atividade Recente',
+      noVehicles: 'Neste momento não tem nenhum veículo associado',
+
     };
   }
   return {
@@ -104,6 +144,33 @@ export default function (lang) {
     unsubscribe: 'Unsubscribe vehicle',
     alreadySubscribed: 'This vehicle is already subscribed',
     subscribe: 'Subscribe vehicle',
+    eventsList: 'Event List',
+    eventDetail: 'Event Detail',
+    eventPayment: 'Event Payment',
+    profile: 'Profile',
+    requests: 'Requests List',
+    borrowingRequest: 'Borrowing Request',
+    aboutUs: 'About us',
+    options: 'Options',
+    about: 'About',
+    subscribeNewVehicle: 'Subscribe New Vehicle',
+    vehicles: 'Vehicles',
+    yourVehicles: 'Your Vehicles',
+    vehicle: 'Vehicle',
+    share: 'Share',
+    subscribed: 'Subscribed',
+    delegated: 'Delegated',
+    borrowed: 'Borrowed',
+    events: 'Events',
+    me: 'Me',
+    noInternet: 'No Internet Connection',
+    congratz: 'Congrats, you have no events!',
+    noRequests: 'Sorry, it seems you have no requests!',
+    errorFetchingUserImage: 'An error fetching user image',
+    recentActivity: 'Recent Activity',
+    noVehicles: 'You have no vehicles!',
+
+
   };
 }
 
