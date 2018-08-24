@@ -60,7 +60,7 @@ export default class DelegatedList extends Component<Props> {
 
       if (token != null) {
         getDelegatedVehicles(token)
-          .then((res) => { if (res.status === 403) throw Error('Invalid token'); return res.json(); })
+          .then((res) => { if (res.status === 401) throw Error('Invalid token'); return res.json(); })
           .then(listJSON => (listJSON[0] ? this.setState({ list: listJSON }) : this.setState({ list: null })))
           .catch(this.logout);
       }

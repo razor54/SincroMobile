@@ -46,7 +46,7 @@ export default class extends Component<Props> {
       if (token != null) {
         delegateResponse(token, accept, this.state)
           .then((res) => {
-            if (res.status === 403) throw Error('Invalid Token');
+            if (res.status === 401) throw Error('Invalid Token');
             if (res.ok) this.props.navigation.pop(2);
             else {
               this.showErrorMessage(languages().notValidUser);

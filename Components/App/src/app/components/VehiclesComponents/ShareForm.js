@@ -53,7 +53,7 @@ export default class extends Component<Props> {
       if (token != null) {
         delegateVehicle(token, this.state)
           .then((res) => {
-            if (res.status === 403) throw Error('invalid token');
+            if (res.status === 401) throw Error('invalid token');
             if (res.ok) {
               this.callback('Pending');
               this.props.navigation.pop(1, 'Share');

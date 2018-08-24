@@ -53,7 +53,7 @@ export default class RequestsList extends Component<Props> {
 
       if (token != null) {
         getVehicleRequests(token)
-          .then((res) => { if (res.status === 403) throw Error('Invalid token'); return res.json(); })
+          .then((res) => { if (res.status === 401) throw Error('Invalid token'); return res.json(); })
           .then((listJSON) => {
             if (listJSON[0]) this.setState({ list: listJSON });
           }).catch(this.logout);

@@ -87,7 +87,7 @@ export default class extends Component<Props> {
 
       if (token != null) {
         getEventList(token, this.state)
-          .then((res) => { if (res.status === 403) throw Error('Invalid token'); return res.json(); })
+          .then((res) => { if (res.status === 401) throw Error('Invalid token'); return res.json(); })
           .then((jsonList) => {
             if (jsonList[0]) this.setState({ list: jsonList });
           }).catch(this.logout);

@@ -50,7 +50,7 @@ export default class extends Component<Props> {
 
       if (token != null) {
         getVehicle(token, this.state.plate)
-          .then((res) => { if (res.status === 403) throw Error('Invalid token'); return res.json(); })
+          .then((res) => { if (res.status === 401) throw Error('Invalid token'); return res.json(); })
           .then(vehicle => this.setState({ vehicle }))
           .catch(this.logout);
       }
