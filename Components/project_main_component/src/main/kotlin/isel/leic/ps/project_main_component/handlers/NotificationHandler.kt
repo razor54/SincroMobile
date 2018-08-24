@@ -58,19 +58,21 @@ object NotificationHandler {
             headings.put("en", "New Event")
             app_id.put("headings", headings)
 
-            val buttons = JSONArray()
-            val button1 = JSONObject()
-            button1.put("id", "id1")
-            button1.put("text", "Click here for details")
-            button1.put("icon", "ic_menu_share")
+            /*  val buttons = JSONArray()
+              val button1 = JSONObject()
+              button1.put("id", "id1")
+              button1.put("text", "Click here for details")
+              button1.put("icon", "ic_menu_share")
 
-            val button2 = JSONObject()
-            button2.put("id", "id2")
-            button2.put("text", "Click here for even more details")
+              val button2 = JSONObject()
+              button2.put("id", "id2")
+              button2.put("text", "Click here for even more details")
 
-            buttons.put(button1)
-            buttons.put(button2)
-            app_id.put("buttons", buttons)
+              buttons.put(button1)
+              buttons.put(button2)
+              */
+
+            // app_id.put("buttons", buttons)
 
             val wr = OutputStreamWriter(con.outputStream)
             wr.write(app_id.toString())
@@ -135,7 +137,7 @@ object NotificationHandler {
             headings.put("en", "Vehicle Borrow")
             app_id.put("headings", headings)
 
-            val buttons = JSONArray()
+            /*val buttons = JSONArray()
             val button1 = JSONObject()
             button1.put("id", "id1")
             button1.put("text", "Accept")
@@ -148,6 +150,7 @@ object NotificationHandler {
             buttons.put(button1)
             buttons.put(button2)
             app_id.put("buttons", buttons)
+            */
 
             val wr = OutputStreamWriter(con.outputStream)
             wr.write(app_id.toString())

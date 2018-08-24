@@ -64,6 +64,14 @@ export default class extends Component<Props> {
       />);
     }
 
+    if (item.driverId !== this.state.user.id) {
+      return (<Avatar
+        overlayContainerStyle={{ backgroundColor: 'transparent' }}
+        source={require('../../../../public/image/car_owner-512.png')}
+        title={item.plate}
+      />);
+    }
+
     return (<Avatar
       overlayContainerStyle={{ backgroundColor: 'transparent' }}
       source={require('../../../../public/image/red_car.png')}

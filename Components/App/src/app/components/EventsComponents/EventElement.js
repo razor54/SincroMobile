@@ -3,12 +3,13 @@ import React, { Component } from 'react';
 import {
   Text,
   KeyboardAvoidingView,
-  Button, Alert, AsyncStorage, View,
+  Button, Alert, AsyncStorage, View, ActivityIndicator,
 } from 'react-native';
 import { showLocation } from 'react-native-map-link';
 import styles from '../../config/styles';
 import { responseConfirmEvent } from '../../service/eventService';
 import languages from '../../config/languages';
+import { getUser } from '../../service/userService';
 
 
 type Props = {
@@ -36,9 +37,13 @@ export default class extends Component<Props> {
     this.confirmEvent = this.confirmEvent.bind(this);
     this.checkVerified = this.checkVerified.bind(this);
     this.getPayment = this.getPayment.bind(this);
+    this.loadUser = this.loadUser.bind(this);
 
 
     this.state = {
+      user: {},
+      refreshing: true,
+      userId: data.driverId,
       plate: data.plate,
       location: data.location,
       date: data.date,
@@ -46,6 +51,10 @@ export default class extends Component<Props> {
       latitude: data.gpsLatitude,
       verified: data.verified,
     };
+  }
+
+  componentDidMount() {
+    this.loadUser();
   }
 
 
@@ -86,6 +95,15 @@ export default class extends Component<Props> {
   }
 
   checkVerified() {
+    if (this.state.user.id !== this.state.userId) {
+      return (
+        <Text
+          style={styles.textStretch}
+        >
+          {languages().driverEventBelongs} {this.state.userId}
+        </Text>);
+    }
+
     if (!this.state.verified) {
       return (
         <Button
@@ -96,6 +114,7 @@ export default class extends Component<Props> {
       );
     }
 
+
     return (
       <View>
         <Text style={styles.textStretch}> {languages().eventVerified} </Text>
@@ -103,18 +122,40 @@ export default class extends Component<Props> {
       </View>);
   }
 
+  loadUser() {
+    AsyncStorage.getItem('token').then((token) => {
+      if (token == null) { throw Error('No token'); }
+      return JSON.parse(token);
+    }).then((token) => {
+      getUser(token)
+        .then((res) => { if (!res.ok) throw Error('Invalid token'); return res.json(); })
+        .then((user) => {
+          if (!user.id) throw Error('Invalid User');
+          this.setState({ user, refreshing: false });
+        });
+    });
+  }
+
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
-        <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> {languages().eventOccurred} {this.state.date.split('T')[0]} </Text>
-        <Text style={styles.textStretch}> {languages().hours} - {this.state.date.split('T')[1].split('.')[0]} </Text>
-        <Text style={styles.textStretch}> {languages().location} - {this.state.location} </Text>
-        {this.checkVerified()}
-        <Button onPress={this.getMap} title={languages().showMap} />
+      !this.state.refreshing ? (
+
+        <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
+          <Text style={styles.header}> {this.state.plate} </Text>
+          <Text style={styles.textStretch}> {languages().eventOccurred} {this.state.date.split('T')[0]} </Text>
+          <Text style={styles.textStretch}> {languages().hours} - {this.state.date.split('T')[1].split('.')[0]} </Text>
+          <Text style={styles.textStretch}> {languages().location} - {this.state.location} </Text>
+          {this.checkVerified()}
+          <Button onPress={this.getMap} title={languages().showMap} />
 
 
-      </KeyboardAvoidingView>
+        </KeyboardAvoidingView>
+      ) :
+        (
+          <View style={styles.container}>
+            <ActivityIndicator size="large" />
+          </View>
+        )
 
     );
   }

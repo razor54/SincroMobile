@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository
 interface EventRepository : CrudRepository<Event,Int> {
 
     fun findAllByDriverId(driverId:Int):List<Event>
+
+    fun findAllByPlate(plate:String):List<Event>
 }
