@@ -11,7 +11,7 @@ import BorrowingRequest from '../components/MeComponents/BorrowingRequest';
 import RequestsList from '../components/MeComponents/RequestsList';
 import { getUser } from '../service/userService';
 import HistoryList from '../components/MeComponents/HistoryList';
-import languages from "../config/languages";
+import languages from '../config/languages';
 
 
 type Props = {
@@ -39,11 +39,11 @@ class Profile extends Component<Props> {
       return JSON.parse(token);
     }).then((token) => {
       getUser(token)
-        .then(res => res.json())
+        .then((res) => { if (!res.ok) throw Error('Invalid token'); return res.json(); })
         .then((user) => {
           if (!user.id) throw Error('No valid user');
           this.setState({ user, userLoaded: true });
-        });
+        }).catch(this.logout);
     }).catch(this.logout);
   }
 

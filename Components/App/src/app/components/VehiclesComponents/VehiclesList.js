@@ -23,6 +23,7 @@ export default class VehiclesList extends Component<Props> {
     this.doRefresh = this.doRefresh.bind(this);
     this.onPress = this.onPress.bind(this);
     this.renderItem = this.renderItem.bind(this);
+    this.logout = this.logout.bind(this);
 
     this.state = {
       list: null,
@@ -49,10 +50,15 @@ export default class VehiclesList extends Component<Props> {
 
       if (token != null) {
         getUserVehicles(token)
-          .then(res => res.json())
-          .then(listJSON => (listJSON[0] ? this.setState({ list: listJSON }) : this.setState({ list: null })));
+          .then((res) => { if (res.status === 403) throw Error('Invalid token'); return res.json(); })
+          .then(listJSON => (listJSON[0] ? this.setState({ list: listJSON }) : this.setState({ list: null }))).catch(this.logout);
       }
     }).finally(() => this.setState({ refreshing: false }));
+  }
+
+
+  logout() {
+    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
   }
 
   renderItem = ({ item }) =>

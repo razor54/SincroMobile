@@ -34,6 +34,7 @@ export default class extends Component<Props> {
 
     this.showErrorMessage = this.showErrorMessage.bind(this);
     this.borrow = this.borrow.bind(this);
+    this.logout = this.logout.bind(this);
 
     this.callback = this.props.navigation.state.params.callback;
 
@@ -52,6 +53,7 @@ export default class extends Component<Props> {
       if (token != null) {
         delegateVehicle(token, this.state)
           .then((res) => {
+            if (res.status === 403) throw Error('invalid token');
             if (res.ok) {
               this.callback('Pending');
               this.props.navigation.pop(1, 'Share');
@@ -59,9 +61,13 @@ export default class extends Component<Props> {
               this.callback('False');
               this.showErrorMessage(languages().notValidUser);
             }
-          });
+          }).catch(this.logout);
       }
     });
+  }
+
+  logout() {
+    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
   }
 
   showErrorMessage(error) {

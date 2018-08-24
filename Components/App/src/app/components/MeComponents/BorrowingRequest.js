@@ -29,7 +29,7 @@ export default class extends Component<Props> {
     this.acceptVehicle = this.acceptVehicle.bind(this);
     this.denyVehicle = this.denyVehicle.bind(this);
     this.showErrorMessage = this.showErrorMessage.bind(this);
-
+    this.logout = this.logout.bind(this);
 
     const { data } = this.props.navigation.state.params;
     this.state = {
@@ -46,11 +46,18 @@ export default class extends Component<Props> {
       if (token != null) {
         delegateResponse(token, accept, this.state)
           .then((res) => {
+            if (res.status === 403) throw Error('Invalid Token');
             if (res.ok) this.props.navigation.pop(2);
-            else this.showErrorMessage(languages().notValidUser);
-          });
+            else {
+              this.showErrorMessage(languages().notValidUser);
+            }
+          }).catch(this.logout);
       }
     });
+  }
+
+  logout() {
+    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
   }
 
   showErrorMessage(error) {

@@ -28,6 +28,7 @@ export default class extends Component<Props> {
 
     this.checkSubscription = this.checkSubscription.bind(this);
     this.addVehicle = this.addVehicle.bind(this);
+    this.logout.bind(this);
 
     const { data } = this.props.navigation.state.params;
     this.refresh = data.refresh;
@@ -60,9 +61,14 @@ export default class extends Component<Props> {
               this.props.navigation.pop(2);
             }
           })
-          .catch(e => alert(e));
+          .catch(this.logout);
       }
     });
+  }
+
+
+  logout() {
+    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
   }
 
   render() {

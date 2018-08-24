@@ -21,6 +21,7 @@ export default class SubscribedList extends Component<Props> {
     this.doRefresh = this.doRefresh.bind(this);
     this.onPress = this.onPress.bind(this);
     this.renderItem = this.renderItem.bind(this);
+    this.logout = this.logout.bind(this);
 
     this.state = {
       list: null,
@@ -41,6 +42,9 @@ export default class SubscribedList extends Component<Props> {
     this.props.screenProps.navigation.navigate('SubscribedVehicle', { data, callback: this.doRefresh });
   }
 
+  logout() {
+    AsyncStorage.removeItem('token').then(() => this.props.screenProps.navigation.navigate('Auth'));
+  }
 
   doRefresh() {
     this.setState({ refreshing: true });
@@ -49,7 +53,7 @@ export default class SubscribedList extends Component<Props> {
 
       if (token != null) {
         getSubscribedVehicles(token)
-          .then(res => res.json())
+          .then((res) => { if (res.status === 403) throw Error('Invalid token'); return res.json(); })
           .then(listJSON => (listJSON[0] ? this.setState({ list: listJSON }) : this.setState({ list: null })));
       }
     }).finally(() => this.setState({ refreshing: false }));

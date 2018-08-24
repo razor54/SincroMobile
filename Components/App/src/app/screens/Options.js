@@ -51,11 +51,11 @@ class Options extends Component<Props> {
       return JSON.parse(token);
     }).then((token) => {
       getUser(token)
-        .then(res => res.json())
+        .then((res) => { if (!res.ok) throw Error('Invalid token'); return res.json(); })
         .then((user) => {
           if (!user.id) throw Error('No valid user');
           this.setState({ user, userLoaded: true });
-        });
+        }).catch(this.logout);
     }).catch(this.logout);
   }
 

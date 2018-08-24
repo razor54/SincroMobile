@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import styles from '../../config/styles';
 import { getVehicle } from '../../service/vehicleService';
-import languages from "../../config/languages";
+import languages from '../../config/languages';
 
 
 type Props = {
@@ -29,6 +29,8 @@ export default class extends Component<Props> {
 
     this.removeVehicle = this.removeVehicle.bind(this);
     this.callback = this.props.navigation.state.params.callback;
+    this.logout = this.logout.bind(this);
+
 
     const { data } = this.props.navigation.state.params;
 
@@ -48,11 +50,15 @@ export default class extends Component<Props> {
 
       if (token != null) {
         getVehicle(token, this.state.plate)
-          .then(res => res.json())
+          .then((res) => { if (res.status === 403) throw Error('Invalid token'); return res.json(); })
           .then(vehicle => this.setState({ vehicle }))
-          .catch(e => alert(e));
+          .catch(this.logout);
       }
     });
+  }
+
+  logout() {
+    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
   }
 
   removeVehicle() {

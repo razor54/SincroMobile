@@ -15,7 +15,7 @@ import DelegatedList from '../components/VehiclesComponents/DelegatedList';
 import BorrowingList from '../components/VehiclesComponents/BorrowingList';
 import theme from '../config/theme';
 import { getUser } from '../service/userService';
-import languages from "../config/languages";
+import languages from '../config/languages';
 
 
 type Props = {
@@ -52,11 +52,11 @@ class Vehicles extends Component<Props> {
       return JSON.parse(token);
     }).then((token) => {
       getUser(token)
-        .then(res => res.json())
+        .then((res) => { if (!res.ok) throw Error('Invalid token'); return res.json(); })
         .then((user) => {
           if (!user.id) throw Error('No valid user');
           this.setState({ user, userLoaded: true });
-        });
+        }).catch(this.logout);
     }).catch(this.logout);
   }
 

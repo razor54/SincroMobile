@@ -24,6 +24,7 @@ export default class RequestsList extends Component<Props> {
     this.doRefresh = this.doRefresh.bind(this);
     this.onPress = this.onPress.bind(this);
     this.renderItem = this.renderItem.bind(this);
+    this.logout = this.logout.bind(this);
 
     this.state = {
       list: null,
@@ -52,12 +53,17 @@ export default class RequestsList extends Component<Props> {
 
       if (token != null) {
         getVehicleRequests(token)
-          .then(res => res.json())
+          .then((res) => { if (res.status === 403) throw Error('Invalid token'); return res.json(); })
           .then((listJSON) => {
             if (listJSON[0]) this.setState({ list: listJSON });
-          });
+          }).catch(this.logout);
       }
     }).finally(() => this.setState({ refreshing: false }));
+  }
+
+
+  logout() {
+    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
   }
 
     renderItem = ({ item }) =>

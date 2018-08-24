@@ -42,6 +42,7 @@ export default class extends Component<Props> {
     this.onPress = this.onPress.bind(this);
     this.getList = this.getList.bind(this);
     this.onPress = this.onPress.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -78,10 +79,10 @@ export default class extends Component<Props> {
 
       if (token != null) {
         getEventList(token, this.state)
-          .then(res => res.json())
+          .then((res) => { if (res.status === 403) throw Error('Invalid token'); return res.json(); })
           .then((jsonList) => {
             if (jsonList[0]) this.setState({ list: jsonList });
-          });
+          }).catch(this.logout);
       }
     }).finally(() => this.setState({ refreshing: false }));
   }
@@ -92,12 +93,13 @@ export default class extends Component<Props> {
       if (token == null) { throw Error('No token'); }
       return JSON.parse(token);
     }).then((token) => {
-      getUser(token).then(res => res.json())
+      getUser(token)
+        .then((res) => { if (!res.ok) throw Error('Invalid token'); return res.json(); })
         .then((user) => {
           if (!user.id) throw Error('Invalid User');
           this.setState({ user, id: user.id, loading: false });
           this.getList();
-        });
+        }).catch(this.logout);
     }).catch(this.logout);
   }
 
