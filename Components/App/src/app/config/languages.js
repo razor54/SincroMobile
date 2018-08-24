@@ -91,6 +91,8 @@ export default function (lang) {
       errorFetchingUserImage: 'Ocurreu um erro ao carregar a imagem de utilizador',
       recentActivity: 'Atividade Recente',
       noVehicles: 'Neste momento não tem nenhum veículo associado',
+      register: 'Registar',
+      driverEventBelongs: 'O evento corresponde ao condutor',
 
     };
   }
@@ -169,6 +171,8 @@ export default function (lang) {
     errorFetchingUserImage: 'An error fetching user image',
     recentActivity: 'Recent Activity',
     noVehicles: 'You have no vehicles!',
+    register: 'Register',
+    driverEventBelongs: 'The driver this event belongs to is',
 
 
   };
