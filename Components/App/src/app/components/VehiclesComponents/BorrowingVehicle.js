@@ -27,7 +27,6 @@ export default class extends Component<Props> {
   constructor(props) {
     super(props);
 
-    this.removeVehicle = this.removeVehicle.bind(this);
     this.callback = this.props.navigation.state.params.callback;
     this.logout = this.logout.bind(this);
 
@@ -61,17 +60,12 @@ export default class extends Component<Props> {
     AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
   }
 
-  removeVehicle() {
-    // todo remove from delegated_vehicles & change vehicle state
-  }
-
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
         <Text style={styles.header}> {this.state.plate} </Text>
         <Text style={styles.textStretch}> {languages().ownerIdentification} - {this.state.vehicle.ownerId} </Text>
         <Text style={styles.textStretch}> {languages().vehicleRegistered} {this.state.vehicle.registryDate.split('T')[0]} </Text>
-        <Button onPress={this.removeVehicle} title={languages().removeVehicle} />
       </KeyboardAvoidingView>
 
     );

@@ -7,21 +7,10 @@ import styles from '../../config/styles';
 import { getDelegatedVehicles } from '../../service/vehicleService';
 
 type Props = {
-    navigation: {
-        navigate: any,
-        state:{
-            params:{
-                url: string,
-                screen:string,
-            }
-        }
-    },
     screenProps: {
-        user: {
-            id: number,
-            email: String,
-            name: String,
-        }
+        navigation: {
+            navigate: any,
+        },
     }
 }
 
@@ -50,7 +39,7 @@ export default class DelegatedList extends Component<Props> {
   }
 
   onPress(data) {
-    this.props.navigation.navigate('SubscribedVehicle', { data, callback: this.doRefresh });
+    this.props.screenProps.navigation.navigate('SubscribedVehicle', { data, callback: this.doRefresh });
   }
 
   doRefresh() {
