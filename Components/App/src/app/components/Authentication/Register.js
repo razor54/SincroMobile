@@ -212,7 +212,7 @@ export default class Register extends Component<Props> {
 
               <Button
                 onPress={this.login}
-                title={languages.register}
+                title={languages().register}
                 loading
                 buttonStyle={styl.button}
               />
@@ -221,7 +221,7 @@ export default class Register extends Component<Props> {
 
               <Button
                 onPress={this.login}
-                title={languages.register}
+                title={languages().register}
                 buttonStyle={styl.button}
               />
 
