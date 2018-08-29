@@ -32,3 +32,5 @@ Docs/.idea
 Components/App/yarn.lock
 Components/App/yarn.lock
 Components/simulator/.idea/workspace.xml
+Components/simulator/.gradle
+Components/simulator/.idea
