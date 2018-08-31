@@ -49,6 +49,8 @@ class AuthController {
 
         var loggedUser = userService.verifyUserPassword(user.id, user.password)
 
+        userService.updateDeviceId(user.id,user.playerId)
+
         System.out.println("USER Logged")
         return resolveAuthToken(loggedUser)
 

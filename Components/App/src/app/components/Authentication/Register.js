@@ -95,8 +95,8 @@ export default class Register extends Component<Props> {
       return alert(languages().insertValidParams);
     }
     this.setState({ isLoading: true });
-    AsyncStorage.getItem('playerId').then(this.saveUser)
-      .finally(() => AsyncStorage.removeItem('playerId'));
+    AsyncStorage.getItem('playerId').then(this.saveUser);
+      //.finally(() => AsyncStorage.removeItem('playerId'));
 
     // this.props.navigation.navigate('Home');
   };

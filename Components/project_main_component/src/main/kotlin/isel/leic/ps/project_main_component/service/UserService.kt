@@ -282,4 +282,23 @@ class UserService {
         throw InvalidCredentialsException()
     }
 
+    fun updateDeviceId(userId:Int, deviceId:String?){
+
+        var user = getUser(userId)
+
+        if(deviceId!=null){
+            user.playerId = deviceId
+
+            try{
+                userRepository.save(user)
+            }
+            catch(e:Exception){
+                throw FailedToAddUserException()
+            }
+
+        }
+
+
+    }
+
 }

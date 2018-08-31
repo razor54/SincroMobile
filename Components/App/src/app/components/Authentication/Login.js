@@ -93,35 +93,37 @@ class Login extends Component<Props> {
     }
     this.setState({ isLoading: true });
 
-    fetch(`${networkSetting.homepage}/login`, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        password: this.state.password,
-        id: this.state.nif,
-      }),
-    })
-      .then(response => response.json())
-      .then((res) => {
-        if (res.user) {
-          AsyncStorage.setItem('token', JSON.stringify(res.token)).then(() => {
-            // this.props.screenProps.onLogin(res.user);
-            this.onLogin();
-          });
-        } else {
-          alert('error');
+    AsyncStorage.getItem('playerId').then(playerId =>
+      fetch(`${networkSetting.homepage}/login`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          password: this.state.password,
+          id: this.state.nif,
+          playerId,
+        }),
+      })
+        .then(response => response.json())
+        .then((res) => {
+          if (res.user) {
+            AsyncStorage.setItem('token', JSON.stringify(res.token)).then(() => {
+              // this.props.screenProps.onLogin(res.user);
+              this.onLogin();
+            });
+          } else {
+            alert('error');
+            this.setState({ isLoading: false });
+          }
+          // else shake button
+        })
+        .catch(() => {
           this.setState({ isLoading: false });
-        }
-        // else shake button
-      })
-      .catch(() => {
-        this.setState({ isLoading: false });
-        alert('There was an error');
-      })
-      .done();
+          alert('There was an error');
+        })
+        .done());
   };
 
   // Create response callback.
