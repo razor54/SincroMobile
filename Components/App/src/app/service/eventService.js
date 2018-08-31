@@ -25,7 +25,13 @@ function getEventList(token, state) {
 }
 
 function payEvent(token, state) {
-  // todo
+  const data = {
+    body: JSON.stringify(state),
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `${token.token_type} ${token.access_token}` },
+
+  };
+  return fetch(`${networkSettings.homepage}/event/payment`, data);
 }
 
 export {

@@ -17,7 +17,8 @@ type Props = {
                 data:any
             }
         },
-        navigate: any
+        navigate: any,
+        pop:any
     }
 };
 
@@ -34,13 +35,27 @@ export default class extends Component<Props> {
       location: data.location,
       date: data.date,
       price: 0,
+      id: data.id,
     };
   }
 
 
   pay() {
-    // todo
-    payEvent();
+    AsyncStorage.getItem('token').then((t) => {
+      const token = JSON.parse(t);
+
+      if (token != null) {
+        payEvent(token, this.state)
+          .then((res) => {
+            if (res.status === 401) throw Error('Invalid token');
+            return res.json();
+          })
+          .then(() => {
+            this.props.navigation.pop(2);
+          })
+          .catch(this.logout);
+      }
+    });
   }
 
   render() {

@@ -18,4 +18,8 @@ class EventController {
 
     @PutMapping("/event")
     fun updateEvent(@RequestBody event: Event) = eventService.updateEvent(event)
+
+    @PostMapping("/event/payment")
+    fun payEvent(@RequestBody event: Event) = eventService.payEvent(event)
+
 }

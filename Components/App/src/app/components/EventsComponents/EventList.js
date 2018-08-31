@@ -56,10 +56,10 @@ export default class extends Component<Props> {
 
 
   getAvatar(item) {
-    if (item.verified) {
+    if (item.state === 'Paid') {
       return (<Avatar
         overlayContainerStyle={{ backgroundColor: 'transparent' }}
-        source={require('../../../../public/image/green_car.png')}
+        source={require('../../../../public/image/practical-test.png')}
         title={item.plate}
       />);
     }
@@ -71,6 +71,15 @@ export default class extends Component<Props> {
         title={item.plate}
       />);
     }
+
+    if (item.verified) {
+      return (<Avatar
+        overlayContainerStyle={{ backgroundColor: 'transparent' }}
+        source={require('../../../../public/image/green_car.png')}
+        title={item.plate}
+      />);
+    }
+
 
     return (<Avatar
       overlayContainerStyle={{ backgroundColor: 'transparent' }}

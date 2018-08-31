@@ -93,6 +93,9 @@ export default class HistoryList extends Component<Props> {
         return (<Avatar overlayContainerStyle={{ backgroundColor: 'transparent' }} source={require('../../../../public/image/car_delegated_cancel.png')} title={item.plate} />);
       }
 
+      if (item.state === 'Payment') {
+        return (<Avatar overlayContainerStyle={{ backgroundColor: 'transparent' }} source={require('../../../../public/image/img_60377.png')} title={item.plate} />);
+      }
 
       return (<Avatar overlayContainerStyle={{ backgroundColor: 'transparent' }} source={require('../../../../public/image/car.png')} title={item.plate} />);
     }

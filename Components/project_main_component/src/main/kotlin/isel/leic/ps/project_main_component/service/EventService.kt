@@ -2,15 +2,14 @@ package isel.leic.ps.project_main_component.service
 
 import isel.leic.ps.project_main_component.handlers.NotificationHandler
 import isel.leic.ps.project_main_component.domain.model.Event
-import isel.leic.ps.project_main_component.exceptions.EventAlreadyExistsException
-import isel.leic.ps.project_main_component.exceptions.FailedToAddEventException
-import isel.leic.ps.project_main_component.exceptions.FailedToUpdateEventException
-import isel.leic.ps.project_main_component.exceptions.NoSuchUserException
+import isel.leic.ps.project_main_component.domain.model.History
+import isel.leic.ps.project_main_component.exceptions.*
 import isel.leic.ps.project_main_component.repository.EventRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.util.*
 
 
 @Service
@@ -25,6 +24,9 @@ class EventService {
 
     @Autowired
     lateinit var vehicleService: VehicleService
+
+    @Autowired
+    private lateinit var historyService: HistoryService
 
 
     fun addEvent(event: Event): Event {
@@ -158,6 +160,36 @@ class EventService {
         } catch (e: Exception) {
             logger.warn("Method \"{}\" EventId \"{}\" ", "Update Event", event.id)
             throw FailedToUpdateEventException()
+        }
+
+    }
+
+    fun payEvent(event: Event):Event {
+        logger.debug("Started to pay event")
+
+
+        var ev = getEvent(event.id)
+
+
+        try {
+
+            ev.state = "Paid"
+
+            var history = History()
+
+            history.driverId = ev.driverId
+            history.date = Date()
+            history.state = "Payment"
+            history.actionId = ev.plate
+            historyService.addHistoryElement(history)
+
+            logger.info("Method \"{}\" EventId \"{}\" ", "Pay Event", ev.id)
+
+            return ev
+
+        } catch (e: Exception) {
+            logger.warn("Method \"{}\" EventId \"{}\" ", "Pay Event", ev.id)
+            throw NoSuchEventException()
         }
 
     }

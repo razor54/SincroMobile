@@ -93,6 +93,7 @@ export default function (lang) {
       noVehicles: 'Neste momento não tem nenhum veículo associado',
       register: 'Registar',
       driverEventBelongs: 'O evento corresponde ao condutor',
+      paidEvent: 'Este evento já foi Pago.',
 
     };
   }
@@ -173,6 +174,7 @@ export default function (lang) {
     noVehicles: 'You have no vehicles!',
     register: 'Register',
     driverEventBelongs: 'The driver this event belongs to is',
+    paidEvent: 'This event was already paid.',
 
 
   };

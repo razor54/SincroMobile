@@ -1,5 +1,6 @@
 package isel.leic.ps.project_main_component.domain.model
 
+import org.hibernate.annotations.Check
 import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -19,6 +20,9 @@ class Event {
 
     @NotNull
     var verified: Boolean = false
+
+    @Check(constraints = "Waiting Payment or Paid")
+    var state :String = "Waiting Payment"
 
     @NotNull
     lateinit var plate: String

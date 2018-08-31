@@ -50,6 +50,8 @@ export default class extends Component<Props> {
       longitude: data.gpsLongitude,
       latitude: data.gpsLatitude,
       verified: data.verified,
+      paid: data.state,
+      id: data.id,
     };
   }
 
@@ -95,6 +97,15 @@ export default class extends Component<Props> {
   }
 
   checkVerified() {
+    if (this.state.paid === 'Paid') {
+      return (
+        <Text
+          style={styles.textStretch}
+        >
+          {languages().paidEvent}
+        </Text>);
+    }
+
     if (this.state.user.id !== this.state.userId) {
       return (
         <Text
