@@ -11,13 +11,8 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/vehicles")
-class VehicleController {
+class VehicleController(val vehicleService: VehicleService, val userService: UserService) {
 
-    @Autowired
-    lateinit var vehicleService: VehicleService
-
-    @Autowired
-    lateinit var userService: UserService
 
 
     @GetMapping("/")

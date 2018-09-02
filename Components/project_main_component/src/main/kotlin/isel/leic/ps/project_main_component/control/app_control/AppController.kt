@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-class AppController {
+class AppController(val userService: UserService) {
 
-    @Autowired
-    lateinit var userService: UserService
+
 
     @GetMapping("/")
     fun getHomePage(): String {

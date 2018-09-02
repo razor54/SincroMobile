@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-class EventController {
+class EventController(val eventService: EventService) {
 
-    @Autowired
-    lateinit var eventService: EventService
 
     @PostMapping("/user/event")
     fun getEvent(@RequestBody user: User) = eventService.getUserEvents(user.id)

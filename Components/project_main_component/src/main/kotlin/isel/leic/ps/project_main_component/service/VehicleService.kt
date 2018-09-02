@@ -23,23 +23,18 @@ import java.util.regex.Pattern
 
 @Service
 @PropertySource(ignoreResourceNotFound = true, value = ["classpath:connection.properties"])
-class VehicleService {
+class VehicleService(val vehicleRepository: VehicleRepository,
+                     val  userService: UserService,
+                     val delegateRequestRepository: DelegateRequestRepository,
+                     val delegatedVehicleRepository: DelegatedVehicleRepository,
+                     val historyService: HistoryService
+                     ){
+
     var logger: Logger = LoggerFactory.getLogger(EventService::class.simpleName)
 
     @Value("\${connection.plate}")
     private lateinit var plateVerifierUrl: String
 
-    @Autowired
-    private lateinit var vehicleRepository: VehicleRepository
-    @Autowired
-    private lateinit var userService: UserService
-    @Autowired
-    private lateinit var delegateRequestRepository: DelegateRequestRepository
-    @Autowired
-    private lateinit var delegatedVehicleRepository: DelegatedVehicleRepository
-
-    @Autowired
-    private lateinit var historyService: HistoryService
 
     fun addVehicle(vehicle: Vehicle): Vehicle {
         logger.debug("Started to add vehicle")

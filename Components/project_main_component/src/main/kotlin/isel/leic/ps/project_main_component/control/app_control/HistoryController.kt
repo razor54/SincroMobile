@@ -12,13 +12,9 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-class HistoryController {
+class HistoryController(val historyService: HistoryService,
+                        val userService: UserService) {
 
-    @Autowired
-    lateinit var historyService: HistoryService
-
-    @Autowired
-    lateinit var userService: UserService
 
     @GetMapping("/history")
     fun getHistory(auth: String) =

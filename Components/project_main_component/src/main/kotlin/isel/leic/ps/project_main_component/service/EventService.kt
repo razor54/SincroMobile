@@ -14,20 +14,13 @@ import java.util.*
 
 
 @Service
-class EventService {
+class EventService(val eventRepository: EventRepository,
+                   val userService: UserService,
+                   val vehicleService: VehicleService,
+                   val historyService: HistoryService) {
 
     var logger: Logger = LoggerFactory.getLogger(EventService::class.simpleName)
 
-    @Autowired
-    lateinit var eventRepository: EventRepository
-    @Autowired
-    lateinit var userService: UserService
-
-    @Autowired
-    lateinit var vehicleService: VehicleService
-
-    @Autowired
-    private lateinit var historyService: HistoryService
 
     @Transactional(rollbackFor = [(Exception::class)])
     fun addEvent(event: Event): Event {

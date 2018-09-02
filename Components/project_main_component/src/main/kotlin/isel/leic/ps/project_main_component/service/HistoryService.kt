@@ -11,12 +11,9 @@ import org.springframework.stereotype.Service
 
 
 @Service
-class HistoryService {
+class HistoryService(val historyRepository: HistoryRepository) {
 
     var logger: Logger = LoggerFactory.getLogger(EventService::class.simpleName)
-
-    @Autowired
-    lateinit var historyRepository: HistoryRepository
 
 
     fun addHistoryElement(history: History) {

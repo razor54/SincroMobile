@@ -26,7 +26,7 @@ import java.io.*
 
 @PropertySource(ignoreResourceNotFound = true, value = ["classpath:auth0.properties"])
 @Service
-class UserService {
+class UserService(val userRepository: UserRepository) {
 
     var logger: Logger = LoggerFactory.getLogger(EventService::class.simpleName)
 
@@ -50,8 +50,7 @@ class UserService {
     @Value("\${auth0.userInfo}")
     private lateinit var userInfo: String
 
-    @Autowired
-    lateinit var userRepository: UserRepository
+
 
     @Transactional(rollbackFor = [(Exception::class)])
     fun addUser(user: User): User {
@@ -95,7 +94,7 @@ class UserService {
             val user : User = getUser(userS.email)
 
             logger.info("Method \"{}\"  UserID \"{}\" ", "Authenticate User" ,user.id)
-            return user;
+            return user
 
         } else {
             logger.warn("Method \"{}\" UserID \"{}\" ", "Authenticate User", "Invalid User")
