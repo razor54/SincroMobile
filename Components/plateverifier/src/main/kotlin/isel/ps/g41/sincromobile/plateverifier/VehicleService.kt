@@ -16,6 +16,6 @@ class VehicleService {
 
     fun getUserVehicles(id: Int) : List<Vehicle>{
 
-        return vehicleRepository.findAllByOwnerId(id);
+        return vehicleRepository.findAllByOwnerId(id)
     }
 }

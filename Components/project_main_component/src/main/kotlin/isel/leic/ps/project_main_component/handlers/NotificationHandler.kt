@@ -16,20 +16,20 @@ object NotificationHandler {
 
     var logger: Logger = LoggerFactory.getLogger(NotificationHandler::class.simpleName)
 
+    var onesignalUrl = "https://onesignal.com/api/v1/notifications"
     fun sendNotification(user: User) {
 
         logger.debug("Started to send notification")
 
+        val playerId = user.playerId
+
+        if (playerId == null || playerId.isEmpty())
+            return
+
         var con: HttpsURLConnection? = null
         try {
 
-
-            val playerId = user.playerId
-
-            if (playerId == null || playerId.isEmpty())
-                return
-
-            val url = URL("https://onesignal.com/api/v1/notifications")
+            val url = URL(onesignalUrl)
             con = url.openConnection() as HttpsURLConnection
             con.requestMethod = "POST"
             con.doInput = true
@@ -99,16 +99,16 @@ object NotificationHandler {
 
     fun vehicleBorrowNotification(user: User) {
         logger.debug("Started to send borrow notification")
+
+        val playerId = user.playerId
+
+        if (playerId == null || playerId.isEmpty())
+            return
+
         var con: HttpsURLConnection? = null
         try {
 
-
-            val playerId = user.playerId
-
-            if (playerId == null || playerId.isEmpty())
-                return
-
-            val url = URL("https://onesignal.com/api/v1/notifications")
+            val url = URL(onesignalUrl)
             con = url.openConnection() as HttpsURLConnection
             con.requestMethod = "POST"
             con.doInput = true
@@ -176,16 +176,17 @@ object NotificationHandler {
 
     fun vehicleBorrowCancelNotification(user: User) {
         logger.debug("Started to send borrow notification")
+
+
+        val playerId = user.playerId
+
+        if (playerId == null || playerId.isEmpty())
+            return
+
         var con: HttpsURLConnection? = null
         try {
 
-
-            val playerId = user.playerId
-
-            if (playerId == null || playerId.isEmpty())
-                return
-
-            val url = URL("https://onesignal.com/api/v1/notifications")
+            val url = URL(onesignalUrl)
             con = url.openConnection() as HttpsURLConnection
             con.requestMethod = "POST"
             con.doInput = true

@@ -1,7 +1,6 @@
 package isel.leic.ps.project_main_component.service
 
 import com.google.gson.Gson
-import com.google.gson.JsonArray
 import isel.leic.ps.project_main_component.domain.model.*
 import isel.leic.ps.project_main_component.exceptions.FailedToAddUserException
 import isel.leic.ps.project_main_component.exceptions.InvalidDelegationException
@@ -15,16 +14,20 @@ import khttp.responses.Response
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.PropertySource
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
 import java.util.regex.Pattern
-import kotlin.reflect.full.defaultType
 
 @Service
+@PropertySource(ignoreResourceNotFound = true, value = ["classpath:connection.properties"])
 class VehicleService {
     var logger: Logger = LoggerFactory.getLogger(EventService::class.simpleName)
+
+    @Value("\${connection.plate}")
+    private lateinit var plateVerifierUrl: String
 
     @Autowired
     private lateinit var vehicleRepository: VehicleRepository
@@ -61,7 +64,7 @@ class VehicleService {
             throw NoSuchUserException()
         }
 
-        val response : Response = khttp.get("http://localhost:9001/user/$id/vehicles")
+        val response : Response = khttp.get("$plateVerifierUrl/$id/vehicles")
         if(response.statusCode!=200){
             logger.warn("Method \"{}\" UserId \"{}\" ", "Get User Vehicles", id)
             throw NoSuchUserException()
@@ -135,8 +138,7 @@ class VehicleService {
         }
     }
 
-    //TODO transaction
-    @Transactional
+    @Transactional(rollbackFor = [(Exception::class)])
     fun plateDelegationRequest(request: DelegateRequest) {
 
         val vehicle = getSubscribedVehicle(request.plate)
@@ -158,7 +160,7 @@ class VehicleService {
 
     }
 
-    @Transactional
+    @Transactional(rollbackFor = [(Exception::class)])
     fun plateDelegationResponse(response: DelegateResponse) {
 
 

@@ -1,16 +1,13 @@
 package isel.leic.ps.project_main_component.service
 
-import isel.leic.ps.project_main_component.domain.model.Event
 import isel.leic.ps.project_main_component.domain.model.History
-import isel.leic.ps.project_main_component.exceptions.*
-import isel.leic.ps.project_main_component.handlers.NotificationHandler
-import isel.leic.ps.project_main_component.repository.EventRepository
+import isel.leic.ps.project_main_component.exceptions.FailedToAddEventException
+import isel.leic.ps.project_main_component.exceptions.InvalidDelegationException
 import isel.leic.ps.project_main_component.repository.HistoryRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.stream.Collectors
 
 
 @Service
@@ -45,7 +42,7 @@ class HistoryService {
         try{
             val history = historyRepository.findAllByDriverId(id)
 
-            return history
+            return history.sortedBy { it.date }.reversed()
         }catch (e:Exception){
             //TODO
             throw InvalidDelegationException()

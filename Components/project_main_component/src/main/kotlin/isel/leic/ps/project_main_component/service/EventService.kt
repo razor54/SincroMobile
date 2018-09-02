@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 
@@ -28,7 +29,7 @@ class EventService {
     @Autowired
     private lateinit var historyService: HistoryService
 
-
+    @Transactional(rollbackFor = [(Exception::class)])
     fun addEvent(event: Event): Event {
         // TODO maybe based on vehicle and then get driver Id
 
@@ -143,6 +144,7 @@ class EventService {
         }
     }
 
+    @Transactional(rollbackFor = [(Exception::class)])
     fun updateEvent(event: Event) {
         logger.debug("Started to update event")
 
@@ -164,6 +166,7 @@ class EventService {
 
     }
 
+    @Transactional(rollbackFor = [(Exception::class)])
     fun payEvent(event: Event):Event {
         logger.debug("Started to pay event")
 
