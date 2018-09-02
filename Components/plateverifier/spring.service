@@ -1,0 +1,13 @@
+[Unit]
+Description=The DAW HTTP API
+After=syslog.target
+
+[Service]
+User=spring
+Type=idle
+ExecStart=/usr/bin/java -jar /var/spring/plateverifier-0.0.1-SNAPSHOT.jar 
+SuccessExitStatus=143
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

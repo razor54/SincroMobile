@@ -2,5 +2,5 @@ import { Platform } from 'react-native';
 
 
 export default {
-  homepage: Platform.OS === 'ios' ? 'http://192.168.1.3:9000' : 'http://10.0.2.2:9000',
+  homepage: 'http://35.204.172.246:9000', // Platform.OS === 'ios' ? 'http://localhost:9000' : 'http://10.0.2.2:9000',
 };

@@ -1,0 +1,11 @@
+gcloud sql connect plateverifier-db --user=postgres
+
+\c plate_verifier_database
+
+
+Insert into vehicle(plate, owner_id, registry_date) 
+values ('AB-00-CD', 256556504, '2018-01-01') ;
+
+
+Insert into vehicle(plate, owner_id, registry_date) 
+values ('AB-01-CD', 256556504, '2012-01-01'), ('00-EF-PP',260051560,'1998-01-01');
