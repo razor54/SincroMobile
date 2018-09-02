@@ -96,7 +96,7 @@ export default class Register extends Component<Props> {
     }
     this.setState({ isLoading: true });
     AsyncStorage.getItem('playerId').then(this.saveUser);
-      //.finally(() => AsyncStorage.removeItem('playerId'));
+    // .finally(() => AsyncStorage.removeItem('playerId'));
 
     // this.props.navigation.navigate('Home');
   };
@@ -120,8 +120,10 @@ export default class Register extends Component<Props> {
       .then(response => response.json())
       .then((res) => {
         if (res.user) {
-          AsyncStorage.setItem('token', JSON.stringify(res.token)).then(() =>
-            this.props.navigation.navigate('Application'));
+          AsyncStorage.setItem('token', JSON.stringify(res.token))
+            .then(AsyncStorage.setItem('user', JSON.stringify(res.user)))
+            .then(() =>
+              this.props.navigation.navigate('Application'));
         } else {
           alert(languages().thereWasAnError);
           this.setState({ isLoading: false });

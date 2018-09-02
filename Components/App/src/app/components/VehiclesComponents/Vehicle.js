@@ -56,7 +56,7 @@ export default class extends Component<Props> {
       if (token != null) {
         subscribeVehicle(token, this.state)
           .then((res) => {
-            if (!res.ok) throw Error(res.statusText);
+            if (res.status === 401) throw Error(res.statusText);
             else {
               this.props.navigation.pop(2);
             }
@@ -68,7 +68,8 @@ export default class extends Component<Props> {
 
 
   logout() {
-    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
+    AsyncStorage.removeItem('token').then(() => AsyncStorage.removeItem('user'))
+      .then(() => this.props.navigation.navigate('Auth'));
   }
 
   render() {

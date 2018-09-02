@@ -43,9 +43,9 @@ export default class SubscribedList extends Component<Props> {
   }
 
   logout() {
-    AsyncStorage.removeItem('token').then(() => this.props.screenProps.navigation.navigate('Auth'));
+    AsyncStorage.removeItem('token').then(() => AsyncStorage.removeItem('user'))
+      .then(() => this.props.navigation.navigate('Auth'));
   }
-
   doRefresh() {
     this.setState({ refreshing: true });
     AsyncStorage.getItem('token').then((t) => {

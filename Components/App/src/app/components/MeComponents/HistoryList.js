@@ -63,7 +63,8 @@ export default class HistoryList extends Component<Props> {
 
 
   logout() {
-    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
+    AsyncStorage.removeItem('token').then(() => AsyncStorage.removeItem('user'))
+      .then(() => this.props.navigation.navigate('Auth'));
   }
 
     renderItem = ({ item }) =>

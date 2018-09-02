@@ -26,6 +26,7 @@ export default class extends Component<Props> {
   constructor(props) {
     super(props);
     this.pay = this.pay.bind(this);
+    this.logout = this.logout.bind(this);
 
     const { data } = this.props.navigation.state.params;
 
@@ -56,6 +57,11 @@ export default class extends Component<Props> {
           .catch(this.logout);
       }
     });
+  }
+
+  logout() {
+    AsyncStorage.removeItem('token').then(() => AsyncStorage.removeItem('user'))
+      .then(() => this.props.navigation.navigate('Auth'));
   }
 
   render() {

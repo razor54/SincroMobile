@@ -38,6 +38,7 @@ export default class extends Component<Props> {
     this.checkVerified = this.checkVerified.bind(this);
     this.getPayment = this.getPayment.bind(this);
     this.loadUser = this.loadUser.bind(this);
+    this.logout = this.logout.bind(this);
 
 
     this.state = {
@@ -56,7 +57,10 @@ export default class extends Component<Props> {
   }
 
   componentDidMount() {
-    this.loadUser();
+    AsyncStorage.getItem('user').then(JSON.parse).then((user) => {
+      if (!user.id) throw Error('Invalid User');
+      this.setState({ user, refreshing: false });
+    }).catch(this.loadUser);
   }
 
 
@@ -144,7 +148,12 @@ export default class extends Component<Props> {
           if (!user.id) throw Error('Invalid User');
           this.setState({ user, refreshing: false });
         });
-    });
+    }).catch(this.logout);
+  }
+
+  logout() {
+    AsyncStorage.removeItem('token').then(() => AsyncStorage.removeItem('user'))
+      .then(() => this.props.navigation.navigate('Auth'));
   }
 
   render() {

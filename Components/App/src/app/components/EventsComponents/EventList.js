@@ -46,9 +46,12 @@ export default class extends Component<Props> {
   }
 
   componentDidMount() {
-    this.loadUser();
+    AsyncStorage.getItem('user').then(JSON.parse).then((user) => {
+      if (!user.id) throw Error('Invalid User');
+      this.setState({ user, id: user.id, loading: false });
+      this.getList();
+    }).catch(this.loadUser);
   }
-
 
   onPress(data) {
     this.props.navigation.navigate('Element', { data });
@@ -121,7 +124,8 @@ export default class extends Component<Props> {
   }
 
   logout() {
-    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
+    AsyncStorage.removeItem('token').then(() => AsyncStorage.removeItem('user'))
+      .then(() => this.props.navigation.navigate('Auth'));
   }
 
   renderItem = ({ item }) => (

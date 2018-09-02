@@ -57,9 +57,9 @@ export default class extends Component<Props> {
   }
 
   logout() {
-    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
+    AsyncStorage.removeItem('token').then(() => AsyncStorage.removeItem('user'))
+      .then(() => this.props.navigation.navigate('Auth'));
   }
-
   showErrorMessage(error) {
     Alert.alert(
       languages().error,

@@ -109,10 +109,11 @@ class Login extends Component<Props> {
         .then(response => response.json())
         .then((res) => {
           if (res.user) {
-            AsyncStorage.setItem('token', JSON.stringify(res.token)).then(() => {
-              // this.props.screenProps.onLogin(res.user);
-              this.onLogin();
-            });
+            AsyncStorage.setItem('token', JSON.stringify(res.token))
+              .then(() => AsyncStorage.setItem('user', JSON.stringify(res.user)))
+              .then(() => {
+                this.onLogin();
+              });
           } else {
             alert('error');
             this.setState({ isLoading: false });
@@ -126,62 +127,36 @@ class Login extends Component<Props> {
         .done());
   };
 
-  // Create response callback.
-    _responseInfoCallback = (error, result) => {
-      if (error) {
-        alert(`Error fetching data: ${error.toString()}`);
-      } else {
-        // alert(`Result Name: ${result.name}`);
+  render() {
+    const passwordError = this.state.passwordValid ? null :
+    <FormValidationMessage>{languages().invalidPassword}</FormValidationMessage>;
 
-        const myInit = {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-          },
-        };
-        fetch(`${networkSetting.homepage}/user/${result.email}`, myInit)
-          .then(data => data.json())
-          .then((user) => {
-            if (user.id) {
-              // this.props.screenProps.onLogin(user);
-              this.onLogin();
-            } else {
-              this.props.navigation.navigate('Register', { userProps: { name: result.name, email: result.email } });
-            }
-          }).catch(() => alert('Network error'));
-      }
-    };
+    const nifError = this.state.nifValid ?
+      null : <FormValidationMessage>{languages().invalidNif}</FormValidationMessage>;
 
-    render() {
-      const passwordError = this.state.passwordValid ? null :
-      <FormValidationMessage>{languages().invalidPassword}</FormValidationMessage>;
+    return (
+      <KeyboardAvoidingView style={styles.container}>
 
-      const nifError = this.state.nifValid ?
-        null : <FormValidationMessage>{languages().invalidNif}</FormValidationMessage>;
-
-      return (
-        <KeyboardAvoidingView style={styles.container}>
-
-          <FormLabel>NIF</FormLabel>
-          <FormInput
-            onChangeText={this.handleNif}
-            inputStyle={styles.inputStyle}
-          />
-          {nifError}
+        <FormLabel>NIF</FormLabel>
+        <FormInput
+          onChangeText={this.handleNif}
+          inputStyle={styles.inputStyle}
+        />
+        {nifError}
 
 
-          <FormLabel>{languages().password}</FormLabel>
-          <FormInput
-            onChangeText={this.handlePassword}
-            inputStyle={styles.inputStyle}
-            secureTextEntry
-          />
-          {passwordError}
+        <FormLabel>{languages().password}</FormLabel>
+        <FormInput
+          onChangeText={this.handlePassword}
+          inputStyle={styles.inputStyle}
+          secureTextEntry
+        />
+        {passwordError}
 
 
-          <View />
-          <View style={{ marginTop: 50 }}>
-            {
+        <View />
+        <View style={{ marginTop: 50 }}>
+          {
 
 
             this.state.isLoading ?
@@ -203,20 +178,20 @@ class Login extends Component<Props> {
 
 
           }
-          </View>
+        </View>
 
-          <Button
-            title={languages().accountDontHave}
-            buttonStyle={styl.textBtn}
-            color="rgba(78, 116, 289, 1)"
-            onPress={() => this.props.navigation.navigate('Register')}
-          >
+        <Button
+          title={languages().accountDontHave}
+          buttonStyle={styl.textBtn}
+          color="rgba(78, 116, 289, 1)"
+          onPress={() => this.props.navigation.navigate('Register')}
+        >
           Info
-          </Button>
+        </Button>
 
-        </KeyboardAvoidingView>
-      );
-    }
+      </KeyboardAvoidingView>
+    );
+  }
 }
 
 export default StackNavigator({

@@ -39,7 +39,7 @@ class Profile extends Component<Props> {
       return JSON.parse(token);
     }).then((token) => {
       getUser(token)
-        .then((res) => { if (!res.ok) throw Error('Invalid token'); return res.json(); })
+        .then((res) => { if (res.status === 401) throw Error('Invalid token'); return res.json(); })
         .then((user) => {
           if (!user.id) throw Error('No valid user');
           this.setState({ user, userLoaded: true });
@@ -48,7 +48,10 @@ class Profile extends Component<Props> {
   }
 
   componentDidMount() {
-    this.loadUser();
+    AsyncStorage.getItem('user').then(JSON.parse).then((user) => {
+      if (!user.id) throw Error('No valid user');
+      this.setState({ user, userLoaded: true });
+    }).catch(this.loadUser);
   }
 
   getBorrowingRequests() {
@@ -56,7 +59,8 @@ class Profile extends Component<Props> {
   }
 
   logout() {
-    AsyncStorage.removeItem('token').then(() => this.props.navigation.navigate('Auth'));
+    AsyncStorage.removeItem('token').then(() => AsyncStorage.removeItem('user'))
+      .then(() => this.props.navigation.navigate('Auth'));
   }
 
   render() {
