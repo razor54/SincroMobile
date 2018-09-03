@@ -32,7 +32,7 @@ public class Start {
     private JTextField gpsLatitude;
     private JTextField gpsLongitude;
 
-    private URI eventPostUri = URI.create("http://localhost:9000/api/sincro/event");
+    private URI eventPostUri = URI.create("http://35.204.172.246:9000/api/sincro/event");
     private int counterId = 270;
 
     public Start() {
