@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {
   Text,
   KeyboardAvoidingView,
-  Button, AsyncStorage,
+  Button, AsyncStorage, ScrollView,
 } from 'react-native';
 import styles from '../../config/styles';
 import { payEvent } from '../../service/eventService';
@@ -14,7 +14,8 @@ type Props = {
     navigation:{
         state:{
             params:{
-                data:any
+                data:any,
+                refreshCallback:any,
             }
         },
         navigate: any,
@@ -28,8 +29,8 @@ export default class extends Component<Props> {
     this.pay = this.pay.bind(this);
     this.logout = this.logout.bind(this);
 
+    this.refreshCallback = this.props.navigation.state.params.refreshCallback;
     const { data } = this.props.navigation.state.params;
-
 
     this.state = {
       plate: data.plate,
@@ -52,6 +53,7 @@ export default class extends Component<Props> {
             return res.json();
           })
           .then(() => {
+            this.refreshCallback();
             this.props.navigation.pop(2);
           })
           .catch(this.logout);
@@ -67,14 +69,14 @@ export default class extends Component<Props> {
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
-        <Text style={styles.header}> {this.state.plate} </Text>
-        <Text style={styles.textStretch}> {languages().eventOccurred} {this.state.date.split('T')[0]} </Text>
-        <Text style={styles.textStretch}> {languages().hours} - {this.state.date.split('T')[1].split('.')[0]} </Text>
-        <Text style={styles.textStretch}> {languages().location} - {this.state.location} </Text>
-        <Text style={styles.textStretch}> {languages().price} - {this.state.price} € </Text>
-
-        <Button onPress={this.pay} title={languages().confirmPayment} />
-
+        <ScrollView>
+          <Text style={styles.header}> {this.state.plate} </Text>
+          <Text style={styles.textStretch}> {languages().eventOccurred} {this.state.date.split('T')[0]} </Text>
+          <Text style={styles.textStretch}> {languages().hours} - {this.state.date.split('T')[1].split('.')[0]} </Text>
+          <Text style={styles.textStretch}> {languages().location} - {this.state.location} </Text>
+          <Text style={styles.textStretch}> {languages().price} - {this.state.price} € </Text>
+          <Button onPress={this.pay} title={languages().confirmPayment} />
+        </ScrollView>
       </KeyboardAvoidingView>
 
     );

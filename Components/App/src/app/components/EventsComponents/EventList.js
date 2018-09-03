@@ -54,7 +54,7 @@ export default class extends Component<Props> {
   }
 
   onPress(data) {
-    this.props.navigation.navigate('Element', { data });
+    this.props.navigation.navigate('Element', { data, refreshCallback: this.getList });
   }
 
 

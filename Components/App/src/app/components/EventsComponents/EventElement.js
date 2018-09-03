@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {
   Text,
   KeyboardAvoidingView,
-  Button, Alert, AsyncStorage, View, ActivityIndicator,
+  Button, Alert, AsyncStorage, View, ActivityIndicator, ScrollView,
 } from 'react-native';
 import { showLocation } from 'react-native-map-link';
 import styles from '../../config/styles';
@@ -16,7 +16,8 @@ type Props = {
     navigation:{
         state:{
             params:{
-                data:any
+                data:any,
+                refreshCallback:any,
             }
         },
         navigate: any
@@ -26,13 +27,13 @@ type Props = {
 export default class extends Component<Props> {
   constructor(props) {
     super(props);
-    this.getMap = this.getMap.bind(this);
-    this.confirmation = this.confirmation.bind(this);
 
-
+    this.refreshCallback = this.props.navigation.state.params.refreshCallback;
     const { data } = this.props.navigation.state.params;
     this.event = data;
 
+    this.getMap = this.getMap.bind(this);
+    this.confirmation = this.confirmation.bind(this);
     this.confirmation = this.confirmation.bind(this);
     this.confirmEvent = this.confirmEvent.bind(this);
     this.checkVerified = this.checkVerified.bind(this);
@@ -72,7 +73,7 @@ export default class extends Component<Props> {
   }
 
   getPayment() {
-    this.props.navigation.navigate('Payment', { data: this.state });
+    this.props.navigation.navigate('Payment', { data: this.state, refreshCallback: this.refreshCallback });
   }
 
   confirmation() {
@@ -94,7 +95,12 @@ export default class extends Component<Props> {
       if (token != null) {
         this.event.verified = true;
         responseConfirmEvent(token, this.event)
-          .then(res => (res.ok ? this.setState({ verified: true }) : alert(res.status)))
+          .then((res) => {
+            if (res.ok) {
+              this.setState({ verified: true });
+              this.refreshCallback();
+            } else alert(res.status);
+          })
           .catch(() => alert(languages().noPossibleToUpdateEvent));
       }
     });
@@ -161,14 +167,14 @@ export default class extends Component<Props> {
       !this.state.refreshing ? (
 
         <KeyboardAvoidingView behavior="padding" style={styles.wrapper}>
-          <Text style={styles.header}> {this.state.plate} </Text>
-          <Text style={styles.textStretch}> {languages().eventOccurred} {this.state.date.split('T')[0]} </Text>
-          <Text style={styles.textStretch}> {languages().hours} - {this.state.date.split('T')[1].split('.')[0]} </Text>
-          <Text style={styles.textStretch}> {languages().location} - {this.state.location} </Text>
-          {this.checkVerified()}
-          <Button onPress={this.getMap} title={languages().showMap} />
-
-
+          <ScrollView>
+            <Text style={styles.header}> {this.state.plate} </Text>
+            <Text style={styles.textStretch}> {languages().eventOccurred} {this.state.date.split('T')[0]} </Text>
+            <Text style={styles.textStretch}> {languages().hours} - {this.state.date.split('T')[1].split('.')[0]} </Text>
+            <Text style={styles.textStretch}> {languages().location} - {this.state.location} </Text>
+            {this.checkVerified()}
+            <Button onPress={this.getMap} title={languages().showMap} />
+          </ScrollView>
         </KeyboardAvoidingView>
       ) :
         (
