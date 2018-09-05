@@ -5,9 +5,9 @@ import org.springframework.http.HttpStatus
 class FailedToAddEventException : MyException() {
 
     override val message: String
-        get() = "We have found an error in our server database, please try again"
+        get() = "Failed to add event"
 
-    override fun error() = HttpStatus.INTERNAL_SERVER_ERROR
+    override fun error() = HttpStatus.BAD_REQUEST
 
 
     override fun type() = "event-not-added"

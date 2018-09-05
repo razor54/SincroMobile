@@ -14,7 +14,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -31,8 +35,10 @@ public class Start {
     private JButton simulate;
     private JTextField gpsLatitude;
     private JTextField gpsLongitude;
+    private JTextArea result;
 
-    private URI eventPostUri = URI.create("http://35.204.172.246:9000/api/sincro/event");
+    private String u = "http://35.204.172.246:9000/api/sincro/event";
+    private URI eventPostUri = URI.create(u);
     private int counterId = 270;
 
     public Start() {
@@ -43,6 +49,7 @@ public class Start {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
+                    result.append("start");
                     Map<String, String> map = new HashMap<>();
                     map.put("id", idTextField.getText());
                     map.put("date", dateTextBox.getText());
@@ -87,13 +94,14 @@ public class Start {
         simulate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ev) {
+                result.append("start");
 
                 InputStream inJson = EventListDto.class.getResourceAsStream("/events.json");
                 EventListDto sample = null;
                 try {
                     sample = new ObjectMapper().readValue(inJson, EventListDto.class);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    result.append(e.getMessage());
                 }
 
                 if (sample != null) {
@@ -105,13 +113,14 @@ public class Start {
 
 
     private void handleSimulateObj(EventDto eventListDto){
+        result.append("start");
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json = null;
         try {
             eventListDto.setId(++counterId);
             json = ow.writeValueAsString(eventListDto);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            result.append(e.getMessage());
         }
 
         postRequest(eventPostUri,json);
@@ -131,15 +140,51 @@ public class Start {
     }
 
     private CompletableFuture<Void> postRequest(URI uri, String requestBody) {
-        HttpRequest request = HttpRequest.newBuilder(uri)
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyProcessor.fromString(requestBody))
-                .build();
+        HttpURLConnection con=null;
+        try {
+            URL url = new URL(u);
+            con = (HttpURLConnection) url.openConnection();
 
-        return HttpClient.newHttpClient()
-                .sendAsync(request, HttpResponse.BodyHandler.asString())
-                .thenApply(HttpResponse::statusCode)
-                .thenAccept(System.out::println);
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            con.setDoInput( true);
+            con.setDoOutput( true);
+
+            OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+            wr.write(requestBody);
+            wr.flush();
+
+            result.append(con.getResponseCode() + " --"  + con.getResponseMessage());
+
+        } catch (IOException e) {
+            result.append(e.getMessage());
+        }finally {
+            if(con!=null)
+                con.disconnect();
+        }
+
+
+        return CompletableFuture.completedFuture(null);
+/*
+        result.append("start request");
+        try{
+            HttpRequest request = HttpRequest.newBuilder(uri)
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyProcessor.fromString(requestBody))
+                    .build();
+
+            return HttpClient.newHttpClient()
+                    .sendAsync(request, HttpResponse.BodyHandler.asString())
+                    .thenApply(HttpResponse::statusCode)
+                    .thenAccept((ev)-> result.append("\n" + ev.toString()));
+        }
+        catch (Exception e){
+            result.append("\n"+e.getMessage());
+            throw e;
+        }
+
+        */
+
     }
 
     public static void main(String... args) {

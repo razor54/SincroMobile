@@ -76,7 +76,6 @@ class EventService(val eventRepository: EventRepository,
 
             logger.warn("Method \"{}\" EventId \"{}\" ", "Add Event", event.id)
 
-            eventRepository.delete(savedEvent)
             throw FailedToAddEventException()
         }
     }
