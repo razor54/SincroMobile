@@ -1,0 +1,4 @@
+Para poder executar devera ter instalado o postgresql e ter criado uma base de dados com o nome plate_verifier_database
+
+Após isso para executar basta abrir uma janela de comandos e introduzir:
+Java -jar plateverifier-0.0.1-SNAPSHOT.jar

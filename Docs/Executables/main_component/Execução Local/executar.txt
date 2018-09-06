@@ -1,0 +1,5 @@
+Para poder executar é necessário ter o postgresql instalado e ter criado uma base de dados com o nome sincro_mobile_database
+
+Abrir linha de comandos,
+
+java -jar project_main_component-0.0.1-SNAPSHOT.jar
