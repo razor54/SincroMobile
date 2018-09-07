@@ -74,6 +74,7 @@ export default class HistoryList extends Component<Props> {
         rightTitle={item.driverId.toString()}
         // onPress={() => this.onPress(item)}
         avatar={this.renderAvatar(item)}
+        hideChevron
       />);
 
 

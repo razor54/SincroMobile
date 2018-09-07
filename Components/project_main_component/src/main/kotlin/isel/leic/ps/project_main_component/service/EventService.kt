@@ -118,8 +118,7 @@ class EventService(val eventRepository: EventRepository,
 
         var events = vehicles.flatMap { eventRepository.findAllByPlate(it.plate) }
 
-        return events.filter { it.driverId != id }
-
+        return events.filter { it.driverId != id }.sortedBy { it.date }.reversed()
 
     }
 
