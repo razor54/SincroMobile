@@ -1,11 +1,9 @@
-Api Documentation
-=================
-Api Documentation
+Documentation of Main Component
+===============================
+Documentation of Main Component
 
 **Version:** 1.0
 
-**Terms of service:**  
-urn:tos
 
 
 **License:** [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)
