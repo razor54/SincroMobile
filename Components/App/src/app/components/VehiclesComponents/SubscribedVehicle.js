@@ -103,7 +103,10 @@ export default class extends Component<Props> {
 
       if (token != null) {
         cancelBorrowVehicle(token, this.state.plate)
-          .then(() => this.props.navigation.pop(2))
+          .then(() => {
+            this.callback();
+            this.props.navigation.pop(2);
+          })
           .catch(e => alert(e));
       }
     });
@@ -115,7 +118,10 @@ export default class extends Component<Props> {
 
       if (token != null) {
         cancelBorrowRequest(token, this.state.plate)
-          .then(() => this.props.navigation.pop(2))
+          .then(() => {
+            this.callback();
+            this.props.navigation.pop(2);
+          })
           .catch(e => alert(e));
       }
     });
