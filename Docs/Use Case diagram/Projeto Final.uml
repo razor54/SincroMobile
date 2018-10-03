@@ -62,39 +62,4 @@
     <ownedEnd xmi:type="uml:Property" xmi:id="_AlItAjkQEeiWFa1h7zijnA" name="pay event" type="_7YwuwDkPEeiWFa1h7zijnA" association="_AlIF8DkQEeiWFa1h7zijnA"/>
     <ownedEnd xmi:type="uml:Property" xmi:id="_AlItAzkQEeiWFa1h7zijnA" name="citizen" type="_Kh4tUDUbEeiOQ9nGrchEdg" association="_AlIF8DkQEeiWFa1h7zijnA"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_W6Hn0EWOEeiUarBWwYHWww" memberEnd="_W6QKsEWOEeiUarBWwYHWww _W6QKsUWOEeiUarBWwYHWww">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_W6OVgEWOEeiUarBWwYHWww" source="org.eclipse.papyrus">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_W6O8kEWOEeiUarBWwYHWww" key="nature" value="UML_Nature"/>
-    </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_W6QKsEWOEeiUarBWwYHWww" name="sincro" type="_VuYlgDUcEeiOQ9nGrchEdg" association="_W6Hn0EWOEeiUarBWwYHWww"/>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_W6QKsUWOEeiUarBWwYHWww" name="rf04 - histórico de contraordenações" type="_dPAOcDa1Eei6r4Ko5QkWdQ" association="_W6Hn0EWOEeiUarBWwYHWww"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_Xn-zYEWOEeiUarBWwYHWww" memberEnd="_XoABgUWOEeiUarBWwYHWww _XoABgkWOEeiUarBWwYHWww">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Xn_acEWOEeiUarBWwYHWww" source="org.eclipse.papyrus">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XoABgEWOEeiUarBWwYHWww" key="nature" value="UML_Nature"/>
-    </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_XoABgUWOEeiUarBWwYHWww" name="sincro" type="_VuYlgDUcEeiOQ9nGrchEdg" association="_Xn-zYEWOEeiUarBWwYHWww"/>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_XoABgkWOEeiUarBWwYHWww" name="rf05 - registar cidadão" type="_WSvcYDa0Eei6r4Ko5QkWdQ" association="_Xn-zYEWOEeiUarBWwYHWww"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_Z6N7wEWOEeiUarBWwYHWww" memberEnd="_Z6Pw8EWOEeiUarBWwYHWww _Z6Pw8UWOEeiUarBWwYHWww">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Z6PJ4EWOEeiUarBWwYHWww" source="org.eclipse.papyrus">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Z6PJ4UWOEeiUarBWwYHWww" key="nature" value="UML_Nature"/>
-    </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_Z6Pw8EWOEeiUarBWwYHWww" name="sincro" type="_VuYlgDUcEeiOQ9nGrchEdg" association="_Z6N7wEWOEeiUarBWwYHWww"/>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_Z6Pw8UWOEeiUarBWwYHWww" name="rf03 - subscrever veículo&#xA;" type="_eZp5IDa0Eei6r4Ko5QkWdQ" association="_Z6N7wEWOEeiUarBWwYHWww"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_bB4HYEWOEeiUarBWwYHWww" memberEnd="_bB4uckWOEeiUarBWwYHWww _bB4uc0WOEeiUarBWwYHWww">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_bB4ucEWOEeiUarBWwYHWww" source="org.eclipse.papyrus">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_bB4ucUWOEeiUarBWwYHWww" key="nature" value="UML_Nature"/>
-    </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_bB4uckWOEeiUarBWwYHWww" name="sincro" type="_VuYlgDUcEeiOQ9nGrchEdg" association="_bB4HYEWOEeiUarBWwYHWww"/>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_bB4uc0WOEeiUarBWwYHWww" name="rf02 - delegar matrícula&#xA;" type="__P_dADa0Eei6r4Ko5QkWdQ" association="_bB4HYEWOEeiUarBWwYHWww"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_cKXZcEWOEeiUarBWwYHWww" memberEnd="_cKYAgkWOEeiUarBWwYHWww _cKYAg0WOEeiUarBWwYHWww">
-    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_cKYAgEWOEeiUarBWwYHWww" source="org.eclipse.papyrus">
-      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_cKYAgUWOEeiUarBWwYHWww" key="nature" value="UML_Nature"/>
-    </eAnnotations>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_cKYAgkWOEeiUarBWwYHWww" name="sincro" type="_VuYlgDUcEeiOQ9nGrchEdg" association="_cKXZcEWOEeiUarBWwYHWww"/>
-    <ownedEnd xmi:type="uml:Property" xmi:id="_cKYAg0WOEeiUarBWwYHWww" name="rf06 - pagamento de contraordenações" type="_7YwuwDkPEeiWFa1h7zijnA" association="_cKXZcEWOEeiUarBWwYHWww"/>
-  </packagedElement>
 </uml:Model>
